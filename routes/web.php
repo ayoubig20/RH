@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\AdminCategoryProject;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\AdminHomeController;
@@ -65,7 +66,15 @@ Route::middleware('auth')->group(function () {
         'edit' => 'admin.tasks.edit',
         'update' => 'admin.tasks.update',
         'destroy' => 'admin.tasks.destroy',
-    ]);      
+    ]); Route::resource('/admin/category', AdminCategoryProject::class)->names([
+        'index' => 'admin.category.index',
+        'create' => 'admin.category.create',
+        'store' => 'admin.category.store',
+        'show' => 'admin.category.show',
+        'edit' => 'admin.category.edit',
+        'update' => 'admin.category.update',
+        'destroy' => 'admin.category.destroy',
+    ]);       
 });
 Auth::routes();
 

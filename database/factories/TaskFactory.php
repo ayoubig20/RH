@@ -21,9 +21,9 @@ class TaskFactory extends Factory
         return [
             'name' => $this->faker->sentence,
             'description' => $this->faker->paragraph,
-           'assigned_to' => Employee::factory()->create(),
+            'assigned_to' => Employee::factory()->create(),
             'project_id' => Project::factory()->create(),
-            'status' => $this->faker->randomElement(['Not Started', 'In Progress', 'Completed']),
+            'status' => $this->faker->randomElement(['Panding', 'In Progress', 'Completed']),
             'start_date' => $this->faker->dateTimeBetween('-1 month', 'now'),
             'end_date' => $this->faker->dateTimeBetween('now', '+1 month'),
         ];

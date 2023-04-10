@@ -92,7 +92,7 @@
             <div class="menu-title">Projects</div>
         </a>
         <ul>
-            <li> <a href="{{ url('icons-line-icons') }}"><i class="bx bx-right-arrow-alt"></i>Line Icons</a>
+            <li> <a href="{{ route('admin.projects.index') }}"><i class="bx bx-right-arrow-alt"></i>Project create</a>
             </li>
             <li> <a href="{{ url('icons-boxicons') }}"><i class="bx bx-right-arrow-alt"></i>Boxicons</a>
             </li>
@@ -109,7 +109,7 @@
         <ul>
             <li> <a href="{{ route('admin.department.index') }}"><i class="bx bx-right-arrow-alt"></i><i class='bx bx-buildings' ></i>Departement</a>
             </li>
-            <li> <a href="{{ url('icons-boxicons') }}"><i class="bx bx-right-arrow-alt"></i><i class='bx bxs-briefcase'></i></i>Project Category</a>
+            <li> <a href="{{route('admin.category.index') }}"><i class="bx bx-right-arrow-alt"></i><i class='bx bxs-briefcase'></i></i>Project Category</a>
             </li>
             <li> <a href="{{ url('icons-feather-icons') }}"><i class="bx bx-right-arrow-alt"></i>Feather Icons</a>
             </li>

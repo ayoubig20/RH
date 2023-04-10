@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\CategoryProject;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,10 +20,10 @@ class ProjectFactory extends Factory
         return [
             //
             'name' => $this->faker->name(),
-            'category' => $this->faker->word(),
+            'category' =>  function() {
+                return CategoryProject::factory()->create()->id;},
             'start_date' => $this->faker->dateTimeBetween('-1 year', '+1 year'),
             'end_date' => $this->faker->dateTimeBetween('now', '+2 years'),
-            'budget' => $this->faker->numberBetween(1000, 100000),
             'description' => $this->faker->paragraph(),
         ];
     }

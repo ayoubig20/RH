@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\CategoryProject;
 use Intervention\Image\Facades\Image;
 
 
@@ -15,6 +16,7 @@ class AdminProjectController extends Controller
         $viewData = [];
         $viewData["title"] = "List projects";
         $projects = Project::all();
+        $viewData['categorys']=CategoryProject::all();
         return view('admin.projects.index', compact('projects', 'viewData'));
     }
 
@@ -47,7 +49,6 @@ class AdminProjectController extends Controller
         $project->category = $request->category;
         $project->start_date = $request->start_date;
         $project->end_date = $request->end_date;
-        $project->budget = $request->budget;
         $project->description = $request->description;
         $project->setImage("1.png");
         $project->save();

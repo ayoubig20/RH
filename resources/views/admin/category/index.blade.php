@@ -1,7 +1,5 @@
 @extends('layouts.admin')
-
 @section('title', 'Employees')
-
 @section('wrapper')
     <!--start page wrapper -->
     <div class="page-wrapper">
@@ -51,9 +49,7 @@
                 @if (session()->has('Add'))
                     <div class="alert alert-success alert-dismissible fade show" role="alert" id="success-alert">
                         <strong>{{ session()->get('Add') }}</strong>
-                        {{-- <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button> --}}
+                    
                     </div>
                     <script>
                         // Set a timer to hide the success message after 5 seconds
@@ -68,50 +64,41 @@
                 @if (session()->has('delete'))
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         <strong>{{ session()->get('delete') }}</strong>
-                        {{-- <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button> --}}
+                    
                     </div>
                 @endif
 
                 @if (session()->has('edit'))
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         <strong>{{ session()->get('edit') }}</strong>
-                        {{-- <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button> --}}
+                       
                     </div>
                 @endif
                 <!-- Button trigger modal -->
                 <button style="    color: #FFF;
                 background-color: #4F46E5;" type="button" class="btn btn"
                     data-bs-toggle="modal" data-bs-target="#exampleModal">add
-                    Departement</button>
+                    Project Category</button>
                 <!-- Modal -->
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">add Departement</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">add Project Category</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
 
-                                <form action="{{ route('admin.department.store') }}" method="POST">
+                                <form action="{{ route('admin.category.store') }}" method="POST">
                                     @csrf
                                     <div class="form-group">
                                         <input type="hidden" name="id" id="id" value="">
-                                        <label for="name">Name departement:</label>
+                                        <label for="name">category</label>
                                         <input type="text" id="name" name="name" class="form-control">
                                     </div>
-                                    <div class="form-group">
-                                        <label for="description">Description:</label>
-                                        <textarea name="description" id="description" cols="30" rows="10" class="form-control"></textarea>
-                                    </div>
-                                    {{-- <button type="submit" class="btn btn-success">Submit</button> --}}
-
+                
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Close</button>
@@ -130,55 +117,50 @@
                     <table class="table">
                         <thead class=" text-primary">
                             <th>#</th>
-                            <th>department name</th>
-                            <th>description</th>
+                            <th>Category </th>
                             <th>Action</th>
 
                         </thead>
                         <tbody>
                             <?php $i = 0; ?>
-                            @foreach ($viewData['departments'] as $department)
+                            @foreach ($viewData['categorys'] as $category)
                                 <?php $i++; ?>
 
                                 <tr>
                                     <td>{{ $i }}</td>
-                                    <td>{{ $department->getName() }}</td>
-                                    <td>{{ $department->getDescription() }}</td>
+                                    <td>{{ $category->getName() }}</td>
                                     <td>
                                         <div class="d-flex flex-row">
                                             <button type="button" class="btn btn-outline-success btn-sm"
                                                 data-bs-toggle="modal"
-                                                data-bs-target="#editDepartment{{ $department->getId() }}">
+                                                data-bs-target="#editDepartment{{ $category->getId() }}">
                                                 <i class="bx bxs-edit"></i> Edit
                                             </button>
-                                            <div class="modal fade" id="editDepartment{{ $department->getId() }}"
-                                                tabindex="-1" aria-labelledby="editDepartment{{ $department->getId() }}"
+                                            <div class="modal fade" id="editDepartment{{ $category->getId() }}"
+                                                tabindex="-1" aria-labelledby="editDepartment{{ $category->getId() }}"
                                                 aria-hidden="true">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <h5 class="modal-title"
-                                                                id="editDepartment{{ $department->getId() }}">Edit
-                                                                Department</h5>
+                                                                id="editDepartment{{ $category->getId() }}">Edit
+                                                                Project Category</h5>
                                                             <button type="button" class="btn-close"
                                                                 data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <form
-                                                            action="{{ route('admin.department.update', $department->getId()) }}"
+                                                            action="{{ route('admin.category.update', $category->getId()) }}"
                                                             method="POST">
                                                             @csrf
                                                             @method('PUT')
                                                             <div class="modal-body">
                                                                 <div class="form-group">
-                                                                    <label for="name">Name:</label>
+                                                                    <label for="name">name:</label>
                                                                     <input type="text" class="form-control"
                                                                         id="name" name="name"
-                                                                        value="{{ $department->getName() }}" required>
+                                                                        value="{{ $category->getName() }}" required>
                                                                 </div>
-                                                                <div class="form-group">
-                                                                    <label for="description">Description:</label>
-                                                                    <textarea class="form-control" id="description" name="description">{{ $department->getDescription() }}</textarea>
-                                                                </div>
+                                                               
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary"
@@ -193,30 +175,30 @@
 
 
                                             <button type="button" class="btn btn-outline-danger btn-sm"
-                                                data-bs-toggle="modal" data-bs-target="#deleteDepartement{{ $department->getId() }}">
+                                                data-bs-toggle="modal" data-bs-target="#deleteDepartement">
                                                 <i class="bx bxs-trash"></i> Delete
                                             </button>
-                                            <div class="modal fade" id="deleteDepartement{{ $department->getId() }}" tabindex="-1"
+                                            <div class="modal fade" id="deleteDepartement" tabindex="-1"
                                                 aria-labelledby="deleteDepartement" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id="deleteDepartement{{ $department->getId() }}">
-                                                                Confirm Delete Departement</h5>
-                                                            <button type="button" class="btn-close"
-                                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            <h5 class="modal-title" id="deleteDepartement">
+                                                                Confirm Delete Project Category</h5>
+                                                                
                                                         </div>
                                                         <div class="modal-body">
-                                                            <p>Are you sure you want to delete this Departement?</p>
+                                                            <p>Are you sure you want to delete this Project Category?</p>
                                                             <input type="text" class="form-control"
-                                                            id="name" name="name"
-                                                            value="{{ $department->getName() }}" readonly>
+                                                                id="name" name="name"
+                                                                value="{{ $category->getName() }}" disabled>
+                                                        
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary"
                                                                 data-bs-dismiss="modal">Cancel</button>
                                                             <form
-                                                                action="{{ route('admin.department.destroy', $department->getId()) }}"
+                                                                action="{{ route('admin.category.destroy', $category->getId()) }}"
                                                                 method="POST">
                                                                 @csrf
                                                                 @method('DELETE')
@@ -236,31 +218,8 @@
                             @endforeach
                         </tbody>
                     </table>
-
-
                 </div>
             </div>
         </div>
-        <script>
-          
-
-            // Show notification function
-            function showNotification(message, type) {
-                // Get the notification element
-                var notification = document.getElementById("notification");
-
-                // Set the message and type
-                notification.innerHTML = message;
-                notification.classList.add(type);
-
-                // Show the notification for 3 seconds
-                setTimeout(function() {
-                    notification.innerHTML = "";
-                    notification.classList.remove(type);
-                }, 3000);
-            }
-
-           
-        </script>
 
     @endsection

@@ -5,19 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Department extends Model
+class CategoryProject extends Model
 {
     use HasFactory;
-
-    protected $fillable = ['name','description'];
+    protected $fillable = ['name'];
     public static function validate($request)
     {
         $request->validate([
-            "name" => "required|unique:departments|max:255", 
+            "name" => "required|unique:category_projects|max:255", 
         ],[
 
-            'name.required' => 'Please enter the department name.',
-            'name.unique' => 'The department name has already been taken.'
+            'name.required' => 'Please enter the Category Project name.',
+            'name.unique' => 'The Category Project name has already been taken.'
         ]);
     } 
     public function getId()
@@ -36,14 +35,9 @@ class Department extends Model
     {
         $this->attributes["name"] = $name;
     } 
-    public function getDescription() {
-        return $this->attributes["description"];
-    }
-    public function setDescription($description) {
-        $this->attributes["description"] = $description;
-    }
-    public function employees()
+   
+    public function projects()
     {
-        return $this->belongsToMany(Employee::class);
+        return $this->belongsToMany(Project::class);
     }
 }

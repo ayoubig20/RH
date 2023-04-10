@@ -35,6 +35,7 @@
             </div>
             <!--end breadcrumb-->
             <h6 class="mb-0 text-uppercase">Employees Import</h6>
+    
             <hr />
             <div class="card">
                 <div class="card-body">
@@ -56,10 +57,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-
+                                <?php $i = 0; ?>
                                 @foreach ($viewData['employees'] as $employee)
+                                    <?php $i++; ?>
                                     <tr>
-                                        <td>{{ $employee->getId() }}</td>
+                                        <td>{{ $i }}</td>
                                         <td>
                                             <img src="{{ $employee->getImage() }}" class="user-img" alt="user avatar">
                                         </td>
@@ -75,16 +77,16 @@
                                         <td>
                                             <div class="row">
                                                 <div class="col">
-                                                    <button type="button" class="btn btn-sm-success">
-                                                        <a href="{{ route('admin.employees.edit', $employee->getId()) }}"><i
-                                                                class='bx bx-edit me-0'></i> Edit</a>
+                                                    <button type="button" class="btn btn-outline-success btn-sm">
+                                                        <a style="text-decoration: none;color:rgb(34, 178, 65)" href="{{ route('admin.employees.edit', $employee->getId()) }}">
+                                                            <i class='bx bxs-edit bx-rotate-180' ></i> Edit</a>
                                                     </button>
-                                                
-                                                    <button type="button" class="btn btn-sm-primary">
-                                                        <a href="{{ route('admin.employees.show', $employee->getId()) }}"><i
+
+                                                    <button type="button" class="btn btn-outline-primary btn-sm">
+                                                        <a style="text-decoration: none;color:rgb(25, 40, 154)" href="{{ route('admin.employees.show', $employee->getId()) }}"><i
                                                                 class='bx bxs-show me-0'></i> Show</a>
                                                     </button>
-                                                
+
                                                     <button type="button" class="btn btn-outline-danger"
                                                         data-bs-toggle="modal"
                                                         data-bs-target="#deleteEmployeeModal{{ $employee->getId() }}"><i
@@ -92,15 +94,6 @@
                                                     </button>
                                                 </div>
                                             </div>
-
-                                            {{-- <a href="{{ route('admin.employees.edit', $employee->getId()) }}"
-                                                    class="btn btn-primary mr-2"><i class='bx bx-edit'></i>Edit</a>
-                                                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                                    data-bs-target="#deleteEmployeeModal{{ $employee->getId() }}">
-                                                    <i class="bx bxs-trash"></i> Delete
-                                                </button>
-                                                <a href="{{ route('admin.employees.edit', $employee->getId()) }}"
-                                                    class="btn btn-primary mr-2"><i class='bx bxs-show'></i>Show</a> --}}
 
                                         </td>
                                     </tr>
