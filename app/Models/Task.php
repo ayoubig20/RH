@@ -14,6 +14,7 @@ class Task extends Model
         'status',
         'start_date',
         'end_date',
+        'created_by'
     ];
     public static function validate($request){
         $request->validate([

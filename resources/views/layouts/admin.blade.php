@@ -2,54 +2,57 @@
 <html lang="en">
 
 <head>
-	<!-- Required meta tags -->
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!--favicon-->
-	<link rel="icon" href="{{URL::asset('assets/images/logo-purple.png')}}" type="image/png" />
-	<!--plugins-->
-	@yield("style")
-	<link href="{{URL::asset('assets/plugins/simplebar/css/simplebar.css')}}" rel="stylesheet" />
-	<link href="{{URL::asset('assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css')}}" rel="stylesheet" />
-	<link href="{{URL::asset('assets/plugins/metismenu/css/metisMenu.min.css')}}" rel="stylesheet" />
-	<!-- loader-->
-	<link href="{{URL::asset('assets/css/pace.min.css')}}" rel="stylesheet" />
-	<script src="{{URL::asset('assets/js/pace.min.js')}}"></script>
-	<!-- Bootstrap CSS -->
-	<link href="{{URL::asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-	<link href="{{URL::asset('assets/css/app.css')}}" rel="stylesheet">
-	<link href="{{URL::asset('assets/css/icons.css')}}" rel="stylesheet">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--favicon-->
+    <link rel="icon" href="{{ URL::asset('assets/images/logo-purple.png') }}" type="image/png" />
+    <!--plugins-->
+    {{-- <script src="{{asset('https://code.jquery.com/jquery-3.6.0.min.js')}}"></script> --}}
+
+    @yield('style')
+    <link href="{{ URL::asset('assets/plugins/simplebar/css/simplebar.css') }}" rel="stylesheet" />
+    <link href="{{ URL::asset('assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css') }}" rel="stylesheet" />
+    <link href="{{ URL::asset('assets/plugins/metismenu/css/metisMenu.min.css') }}" rel="stylesheet" />
+    <!-- loader-->
+    <link href="{{ URL::asset('assets/css/pace.min.css') }}" rel="stylesheet" />
+    <script src="{{ URL::asset('assets/js/pace.min.js') }}"></script>
+    <!-- Bootstrap CSS -->
+    <link href="{{ URL::asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link href="{{ URL::asset('assets/css/app.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('assets/css/icons.css') }}" rel="stylesheet">
 
     <!-- Theme Style CSS -->
-    <link rel="stylesheet" href="{{URL::asset('assets/css/dark-theme.css')}}" />
-    <link rel="stylesheet" href="{{URL::asset('assets/css/semi-dark.css')}}" />
-    <link rel="stylesheet" href="{{URL::asset('assets/css/header-colors.css')}}" />
+    <link rel="stylesheet" href="{{ URL::asset('assets/css/dark-theme.css') }}" />
+    <link rel="stylesheet" href="{{ URL::asset('assets/css/semi-dark.css') }}" />
+    <link rel="stylesheet" href="{{ URL::asset('assets/css/header-colors.css') }}" />
     <title> @yield('title')</title>
 </head>
 
 <body>
-	<!--wrapper-->
-	<div class="wrapper">
-		<!--start header -->
-		@include("layouts.header")
-		<!--end header -->
-		<!--navigation-->
-		@include("layouts.nav")
-		<!--end navigation-->
-		<!--start page wrapper -->
-		@yield("wrapper")
-		<!--end page wrapper -->
-		<!--start overlay-->
-		<div class="overlay toggle-icon"></div>
-		<!--end overlay-->
-		<!--Start Back To Top Button--> <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
-		<!--End Back To Top Button-->
-		<footer class="page-footer">
-			<p class="mb-0">Copyright © 2023. All right reserved.</p>
-		</footer>
-	</div>
-	<!--end wrapper-->
+    <!--wrapper-->
+    <div class="wrapper">
+        <!--start header -->
+        @include('layouts.header')
+        <!--end header -->
+        <!--navigation-->
+        @include('layouts.nav')
+        <!--end navigation-->
+        <!--start page wrapper -->
+        @yield('wrapper')
+        <!--end page wrapper -->
+        <!--start overlay-->
+        <div class="overlay toggle-icon"></div>
+        <!--end overlay-->
+        <!--Start Back To Top Button--> <a href="javaScript:;" class="back-to-top"><i
+                class='bx bxs-up-arrow-alt'></i></a>
+        <!--End Back To Top Button-->
+        <footer class="page-footer">
+            <p class="mb-0">Copyright © 2023. All right reserved.</p>
+        </footer>
+    </div>
+    <!--end wrapper-->
     <!--start switcher-->
     <div class="switcher-wrapper">
         <div class="switcher-btn"> <i class='bx bx-cog bx-spin'></i>
@@ -59,16 +62,18 @@
                 <h5 class="mb-0 text-uppercase">Theme Customizer</h5>
                 <button type="button" class="btn-close ms-auto close-switcher" aria-label="Close"></button>
             </div>
-            <hr/>
+            <hr />
             <h6 class="mb-0">Theme Styles</h6>
-            <hr/>
+            <hr />
             <div class="d-flex align-items-center justify-content-between">
                 <div class="form-check">
-                    <input class="form-check-input" type="radio"addEventListener() name="flexRadioDefault" id="lightmode" checked>
+                    <input class="form-check-input" type="radio"addEventListener() name="flexRadioDefault"
+                        id="lightmode" checked>
                     <label class="form-check-label" for="lightmode">Light</label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" addEventListener ()name="flexRadioDefault" id="darkmode">
+                    <input class="form-check-input" type="radio" addEventListener ()name="flexRadioDefault"
+                        id="darkmode">
                     <label class="form-check-label" for="darkmode">Dark</label>
                 </div>
                 <div class="form-check">
@@ -76,14 +81,14 @@
                     <label class="form-check-label" for="semidark">Semi Dark</label>
                 </div>
             </div>
-            <hr/>
+            <hr />
             <div class="form-check">
                 <input class="form-check-input" type="radio" id="minimaltheme" name="flexRadioDefault">
                 <label class="form-check-label" for="minimaltheme">Minimal Theme</label>
             </div>
-            <hr/>
+            <hr />
             <h6 class="mb-0">Header Colors</h6>
-            <hr/>
+            <hr />
             <div class="header-colors-indigators">
                 <div class="row row-cols-auto g-3">
                     <div class="col">
@@ -112,9 +117,9 @@
                     </div>
                 </div>
             </div>
-            <hr/>
+            <hr />
             <h6 class="mb-0">Sidebar Colors</h6>
-            <hr/>
+            <hr />
             <div class="header-colors-indigators">
                 <div class="row row-cols-auto g-3">
                     <div class="col">
@@ -141,130 +146,52 @@
                     <div class="col">
                         <div class="indigator sidebarcolor8" id="sidebarcolor8"></div>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
     </div>
     <!--end switcher-->
-	<!-- Bootstrap JS -->
-	<script src="{{URL::asset('assets/js/bootstrap.bundle.min.js')}}"></script>
-	<!--plugins-->
-	<script src="{{URL::asset('assets/js/jquery.min.js')}}"></script>
-	<script src="{{URL::asset('assets/plugins/simplebar/js/simplebar.min.js')}}"></script>
-	<script src="{{URL::asset('assets/plugins/metismenu/js/metisMenu.min.js')}}"></script>
-	<script src="{{URL::asset('assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js')}}"></script>
+    <!-- Bootstrap JS -->
+    <script src="{{ URL::asset('assets/js/bootstrap.bundle.min.js') }}"></script>
+    <!--plugins-->
+    <script src="{{ URL::asset('assets/js/jquery.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/simplebar/js/simplebar.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/metismenu/js/metisMenu.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js') }}"></script>
+    <script src="{{ URL::asset('assets/js/app.js') }}"></script>
+
     <script>
-// Select all the color indicators
-const headerIndicators = $('.header-colors-indicators .indicator');
-const sidebarIndicators = $('.sidebar-colors-indicators .indicator');
+        // Cache DOM elements
+        const $header = $('.header');
+        const $sidebar = $('.sidebar');
+        const $headerIndicators = $('.header-colors-indicators .indicator');
+        const $sidebarIndicators = $('.sidebar-colors-indicators .indicator');
 
-// Attach a click event listener to each color indicator
-headerIndicators.add(sidebarIndicators).on('click', function() {
-  // Get the selected color
-  const selectedColor = $(this).attr('class').split(' ')[1];
-  
-  // Set the background color of the header and sidebar
-  $('.header').css('background-color', selectedColor);
-  $('.sidebar').css('background-color', selectedColor);
-  
-  // Store the selected color in a cookie that expires in 1 day
-  document.cookie = `selectedColor=${selectedColor};expires=${new Date(Date.now() + 86400000).toUTCString()};path=/`;
-});
+        // Attach a click event listener to each color indicator
+        $headerIndicators.add($sidebarIndicators).on('click', function() {
+            // Get the selected color
+            const selectedColor = $(this).attr('class').split(' ')[1];
 
-// Retrieve the selected color from a cookie when the page loads
-const storedColor = document.cookie.replace(/(?:(?:^|.*;\s*)selectedColor\s*\=\s*([^;]*).*$)|^.*$/, '$1');
-if (storedColor) {
-  // Set the background color of the header and sidebar to the stored color
-  $('.header').css('background-color', storedColor);
-  $('.sidebar').css('background-color', storedColor);
-}
+            // Set the background color of the header and sidebar
+            $header.toggleClass(selectedColor);
+            $sidebar.toggleClass(selectedColor);
 
+            // Store the selected color in localStorage
+            localStorage.setItem('selectedColor', selectedColor);
+        });
+
+        // Retrieve the selected color from localStorage when the page loads
+        const storedColor = localStorage.getItem('selectedColor');
+        if (storedColor) {
+            // Set the background color of the header and sidebar to the stored color
+            $header.toggleClass(storedColor);
+            $sidebar.toggleClass(storedColor);
+        }
     </script>
-	<!--app JS-->
-	<script src="{{URL::asset('assets/js/app.js')}}"></script>
-    <script>
-        // get all the radio buttons and color indicators
-const lightModeRadio = document.getElementById('lightmode');
-const darkModeRadio = document.getElementById('darkmode');
-const semiDarkRadio = document.getElementById('semidark');
-const minimalThemeRadio = document.getElementById('minimaltheme');
-const headerColorIndicators = document.querySelectorAll('.headercolor');
-const sidebarColorIndicators = document.querySelectorAll('.sidebarcolor');
-
-// add event listeners to the radio buttons
-lightModeRadio.addEventListener('click', function() {
-  localStorage.setItem('theme', 'light');
-  applyTheme();
-});
-darkModeRadio.addEventListener('click', function() {
-  localStorage.setItem('theme', 'dark');
-  applyTheme();
-});
-semiDarkRadio.addEventListener('click', function() {
-  localStorage.setItem('theme', 'semi-dark');
-  applyTheme();
-});
-minimalThemeRadio.addEventListener('click', function() {
-  localStorage.setItem('theme', 'minimal');
-  applyTheme();
-});
-
-// add event listeners to the color indicators
-headerColorIndicators.forEach(function(color) {
-  color.addEventListener('click', function() {
-    localStorage.setItem('header-color', color.id);
-    applyTheme();
-  });
-});
-sidebarColorIndicators.forEach(function(color) {
-  color.addEventListener('click', function() {
-    localStorage.setItem('sidebar-color', color.id);
-    applyTheme();
-  });
-});
-
-// apply the selected theme and colors
-function applyTheme() {
-  const theme = localStorage.getItem('theme');
-  const headerColor = localStorage.getItem('header-color');
-  const sidebarColor = localStorage.getItem('sidebar-color');
-
-  // apply theme
-  if (theme === 'dark') {
-    document.body.classList.add('dark-theme');
-  } else if (theme === 'semi-dark') {
-    document.body.classList.add('semi-dark-theme');
-  } else if (theme === 'minimal') {
-    document.body.classList.add('minimal-theme');
-  } else {
-    document.body.classList.remove('dark-theme', 'semi-dark-theme', 'minimal-theme');
-  }
-
-  // apply header color
-  headerColorIndicators.forEach(function(color) {
-    if (color.id === headerColor) {
-      color.classList.add('selected');
-    } else {
-      color.classList.remove('selected');
-    }
-  });
-
-  // apply sidebar color
-  sidebarColorIndicators.forEach(function(color) {
-    if (color.id === sidebarColor) {
-      color.classList.add('selected');
-    } else {
-      color.classList.remove('selected');
-    }
-  });
-}
-
-// on page load, apply the selected theme and colors
-applyTheme();
-
-    </script>
-	@yield("script")
+    
+    <!--app JS-->
+    @yield('script')
 </body>
 
 </html>
