@@ -70,35 +70,9 @@
                                             <div class="d-flex align-items-center">
                                                 <div class="notify bg-light-primary text-primary"><i class="bx bx-group"></i>
                                                 </div>
-                                                <div class="flex-grow-1">
-                                                    <h6 class="msg-name">New Customers<span class="msg-time float-end">14 Sec
-                                                ago</span></h6>
-                                                    <p class="msg-info">5 new user registered</p>
-                                                </div>
+                                                
                                             </div>
-                                        </a>
-                                        <a class="dropdown-item" href="javascript:;">
-                                            <div class="d-flex align-items-center">
-                                                <div class="notify bg-light-danger text-danger"><i class="bx bx-cart-alt"></i>
-                                                </div>
-                                                <div class="flex-grow-1">
-                                                    <h6 class="msg-name">New Orders <span class="msg-time float-end">2 min
-                                                ago</span></h6>
-                                                    <p class="msg-info">You have recived new orders</p>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <a class="dropdown-item" href="javascript:;">
-                                            <div class="d-flex align-items-center">
-                                                <div class="notify bg-light-success text-success"><i class="bx bx-file"></i>
-                                                </div>
-                                                <div class="flex-grow-1">
-                                                    <h6 class="msg-name">24 PDF File<span class="msg-time float-end">19 min
-                                                ago</span></h6>
-                                                    <p class="msg-info">The pdf files generated</p>
-                                                </div>
-                                            </div>
-                                        </a>
+                                        
                                         <a class="dropdown-item" href="javascript:;">
                                             <div class="d-flex align-items-center">
                                                 <div class="notify bg-light-warning text-warning"><i class="bx bx-send"></i>
@@ -325,7 +299,7 @@
                     </div>
                     <div class="user-box dropdown">
                         <a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="{{URL::asset('assets/images/avatars/avatar-2.png')}}" class="user-img" alt="user avatar">
+                            <img src="{{URL::asset('assets/images/avatars/avatar-4.png')}}" class="user-img" alt="user avatar">
                             <div class="user-info ps-3">
                                 <p class="user-name mb-0">{{Auth::user()->name}}</p>
                                 <p class="designattion mb-0">{{Auth::user()->email}}</p>

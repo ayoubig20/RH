@@ -17,9 +17,12 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->unsignedBigInteger('assigned_to');
             $table->foreignId('project_id')->nullable()->constrained()->onDelete('cascade');
-            $table->string('status')->default('to_do');
+            $table->string('status')->default('To do');
+            // $table->integer('value_status');
             $table->date('start_date');
             $table->date('end_date')->nullable();
+            $table->softDeletes();
+
             $table->timestamps();
         });
     }

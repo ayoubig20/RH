@@ -1,10 +1,4 @@
 
-/*
-Template Name: Rocker Admin
-Author: codervent
-Email: codervent@gmail.com
-File: app.css
-*/
 
 body {
 	font-size: 14px;
@@ -77,7 +71,7 @@ a {
 	left: 250px;
 	right: 0;
 	height: 60px;
-	background: #fff;
+	background: #673ab7!important;
 	border-bottom: 1px solid rgb(228 228 228 / 0%);
 	z-index: 10;
 	-webkit-box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 0px 6px 0 rgb(206 206 238 / 54%);
@@ -1463,7 +1457,7 @@ a {
 	border-radius: 2px;
 	background-color: rgb(255 255 255 / 0%)
 }
-
+feBlend
 .compose-mail-close:hover {
 	background-color: rgb(255 255 255 / 20%)
 }
@@ -2070,7 +2064,7 @@ input.search-control-2::placeholder {
 .topbar .navbar .navbar-nav .nav-link {
 	padding-right: .8rem;
 	padding-left: .8rem;
-	color: #252323;
+	color: white;
 	font-size: 22px
 }
 
@@ -2105,12 +2099,12 @@ input.search-control-2::placeholder {
 .user-info .user-name {
 	font-size: 15px;
 	font-weight: 500;
-	color: #413c3c
+	color:white;
 }
 
 .user-info .designattion {
 	font-size: 13px;
-	color: #a9a8a8
+	color: #fff;
 }
 
 .user-box {

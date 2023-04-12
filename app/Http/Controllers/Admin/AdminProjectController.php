@@ -61,7 +61,7 @@ class AdminProjectController extends Controller
             // generate unique filename
             $filename = uniqid() . '.' . $image->getClientOriginalExtension();
             // save image to disk
-            $image->storeAs('public/images/projectsImages', $filename);
+            $image->storeAs('public/storage/images/projectsImages', $filename);
             // create new image record for the project
             $project->setImage($filename);
         }

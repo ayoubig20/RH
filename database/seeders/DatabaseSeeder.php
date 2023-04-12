@@ -55,8 +55,8 @@ class DatabaseSeeder extends Seeder
         Project::factory()
         ->count(10)
         ->create();
-        // Task::factory()
-        // ->count(10)
-        // ->create();
+        Task::factory()
+        ->count(10)
+        ->create();
 }
     }

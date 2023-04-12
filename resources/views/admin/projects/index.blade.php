@@ -97,13 +97,7 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="page-title-box">
-                                        <div class="page-title-right">
-                                            <ol class="breadcrumb m-0">
-                                                <li class="breadcrumb-item"><a href="javascript: void(0);">Hyper</a></li>
-                                                <li class="breadcrumb-item"><a href="javascript: void(0);">Projects</a></li>
-                                                <li class="breadcrumb-item active">Projects List</li>
-                                            </ol>
-                                        </div>
+
                                         <h4 class="page-title">Projects List</h4>
                                     </div>
                                 </div>
@@ -176,8 +170,7 @@
                                                         </div>
                                                     </div>
 
-                                                    <div
-                                                        class="form-group{{ $errors->has('image') ? ' has-error' : '' }}">
+                                                    <div class="form-group{{ $errors->has('image') ? ' has-error' : '' }}">
                                                         <label for="image" class="col-md-4 control-label">Image</label>
 
                                                         <div class="col-md-6">
@@ -310,49 +303,48 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-8">
-                                <div class="text-sm-end">
-                                    <div class="btn-group mb-3">
-                                        <button type="button" class="btn btn-primary">All</button>
-                                    </div>
-                                    <div class="btn-group mb-3 ms-1">
-                                        <button type="button" class="btn btn-light">Ongoing</button>
-                                        <button type="button" class="btn btn-light">Finished</button>
-                                    </div>
-                                    <div class="btn-group mb-3 ms-2 d-none d-sm-inline-block">
-                                        <button type="button" class="btn btn-secondary"><i
-                                                class="ri-function-line"></i></button>
-                                    </div>
-                                    <div class="btn-group mb-3 d-none d-sm-inline-block">
-                                        <button type="button" class="btn btn-link text-muted"><i
-                                                class="ri-list-check-2"></i></button>
-                                    </div>
+                            <div class="text-sm-end">
+                                <div class="btn-group mb-3">
+                                    <button type="button" class="btn btn-primary">All</button>
+                                </div>
+                                <div class="btn-group mb-3 ms-1">
+                                    <button type="button" class="btn btn-light">In progress</button>
+                                    <button type="button" class="btn btn-light">Done</button>
+                                </div>
+                                <div class="btn-group mb-3 ms-2 d-none d-sm-inline-block">
+                                    <button type="button" class="btn btn-secondary"><i
+                                            class='bx bx-list-ul'></i></button>
+                                </div>
+                                <div class="btn-group mb-3 d-none d-sm-inline-block">
+                                    <button type="button" class="btn btn-link text-muted"><i
+                                            class='bx bxs-grid-alt'></i></button>
                                 </div>
                             </div><!-- end col-->
                         </div>
                         <!-- end row-->
-                        <div class="row">
+                        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-4">
                             @foreach ($projects as $project)
-                                <div class="col-md-6 col-xxl-3">
+                                <div class="col-md-6 col-xxl-3 mb-4">
                                     <!-- project card -->
-                                    <div class="card d-block">
+                                    <div class="card d-block h-100">
                                         <?php
                                         $imagePath = asset($project->image); // Get the path to the image
-                                    
-                                        if (file_exists($imagePath)) { // Check if the image exists
+                                        
+                                        if (file_exists($imagePath)) {
+                                            // Check if the image exists
                                             $imageSrc = $imagePath; // If the image exists, set the source to the image path
                                         } else {
-                                            $imageSrc = "assets/images/gallery/09.png"; // If the image does not exist, set the source to a default image path
+                                            $imageSrc = 'assets/images/gallery/09.png'; // If the image does not exist, set the source to a default image path
                                         }
                                         ?>
-                                    
+
                                         <img class="card-img-top" src="<?php echo asset($imageSrc); ?>" alt="project image cap">
                                         <div class="card-img-overlay">
                                             <div class="badge bg-success p-1">Finished</div>
-                                        </div>                              
+                                        </div>
                                         <div class="card-body position-relative">
-                                           
-                                            
+
+
                                             <!-- project title-->
                                             <h4 class="mt-0">
                                                 <a href="apps-projects-details.html"
@@ -372,50 +364,68 @@
                                             <p class="mb-1">
                                                 <span class="pe-2 text-nowrap mb-2 d-inline-block">
                                                     <i class="mdi mdi-format-list-bulleted-type text-muted"></i>
-                                                    <b>21</b> Tasks
+                                                    <b>{{ $project->totalTasks() }}</b> Tasks
                                                 </span>
 
                                             </p>
                                             <div id="tooltip-container">
-                                                <a href="javascript:void(0);" data-bs-container="#tooltip-container"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Mat Helme"
-                                                    class="d-inline-block">
-                                                    <img src="assets/images/users/avatar-6.jpg"
-                                                        class="rounded-circle avatar-xs" alt="friend">
-                                                </a>
-                                                <a href="javascript:void(0);"
-                                                    class="d-inline-block text-muted fw-bold ms-2">
-                                                    +7 more
-                                                </a>
+                                                @foreach ($project->tasks as $task)
+                                                    <a href="#" class="d-inline-block avatar-tooltip"
+                                                        data-bs-toggle="tooltip" data-bs-placement="top"
+                                                        data-bs-original-title="{{ $task->employee ? $task->employee->firstName . ' ' . $task->employee->lastName : '' }}">
+                                                        <img src="{{ $task->employee->image }}" width="40"
+                                                            height="30" class="rounded-circle avatar-xs"
+                                                            alt="{{ $task->employee->name }}">
+                                                    </a>
+                                                @endforeach
+                                                @if ($project->tasks->count() > 3)
+                                                    <a href="javascript:void(0);"
+                                                        class="d-inline-block text-muted fw-bold ms-2"
+                                                        onclick="updateHeading('')">
+                                                        +{{ $project->tasks->count() - 3 }} more
+                                                    </a>
+                                                @endif
                                             </div>
+                                            <div id="image-heading"></div>
                                         </div> <!-- end card-body-->
                                         <ul class="list-group list-group-flush">
                                             <li class="list-group-item p-3">
                                                 <!-- project progress-->
-                                                <p class="mb-2 fw-bold">Progress <span class="float-end">100%</span>
-                                                </p>
+                                                <p class="mb-2 fw-bold">Progress <span
+                                                        class="float-end">{!! $project->progression() !!}%</span></p>
                                                 <div class="progress progress-sm">
-                                                    <div class="progress-bar" role="progressbar" aria-valuenow="100"
-                                                        aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                                                    <div class="progress-bar
+                                                        @if ($project->progression() < 50) bg-warning
+                                                        @elseif ($project->progression() >= 50 && $project->progression() < 75)
+                                                            bg-info
+                                                        @else
+                                                            bg-success @endif
+                                                        "
+                                                        role="progressbar" aria-valuenow="{!! $project->progression() !!}"
+                                                        aria-valuemin="0" aria-valuemax="100"
+                                                        style="width: {!! $project->progression() !!}%;">
                                                     </div><!-- /.progress-bar -->
-                                                </div><!-- /.progress -->
+                                                </div>
                                             </li>
                                         </ul>
+
+
                                     </div> <!-- end card-->
                                 </div> <!-- container -->
                             @endforeach
 
                         </div> <!-- end col -->
+                    </div> <!-- end col -->
 
-                    </div> <!-- content -->
+                </div> <!-- content -->
 
 
 
-                </div>
             </div>
+        </div>
 
-            {{-- issue i didnit fixed to make javascript work css issue --}}
-            {{-- <script>
+        {{-- issue i didnit fixed to make javascript work css issue --}}
+        {{-- <script>
                     $('.view-more').click(function() {
                         $(this).closest('.project-description').hide();
                         $(this).closest('.project-description').next('.hidden-content').slideDown();
@@ -426,4 +436,27 @@
                         $(this).closest('.hidden-content').prev('.project-description').show();
                     });
                 </script> --}}
-        @endsection
+        <script>
+            // Initialize all tooltips with default settings
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('.avatar-tooltip'))
+            var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+            })
+
+            // Change the background color of the tooltip
+            var tooltipEl = document.querySelector('.avatar-tooltip')
+            tooltipEl.style.backgroundColor = 'red'
+
+            // Update the tooltip content dynamically
+            var tooltipTriggerEl = document.querySelector('.avatar-tooltip')
+            tooltipTriggerEl.setAttribute('data-bs-original-title', 'New tooltip content')
+
+            // Add a custom function to be called when the tooltip is shown
+            var tooltipTriggerEl = document.querySelector('.avatar-tooltip')
+            tooltipTriggerEl.addEventListener('shown.bs.tooltip', function() {
+                console.log('The tooltip was shown')
+            })
+        </script>
+
+
+    @endsection

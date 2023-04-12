@@ -25,6 +25,8 @@ class ProjectFactory extends Factory
             'start_date' => $this->faker->dateTimeBetween('-1 year', '+1 year'),
             'end_date' => $this->faker->dateTimeBetween('now', '+2 years'),
             'description' => $this->faker->paragraph(),
+            'image' => $this->faker->imageUrl(),
+
         ];
     }
 }

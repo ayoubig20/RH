@@ -39,8 +39,10 @@ class AdminTaskController extends Controller
         $viewData['projects']=Project::all();
         return redirect()->route('admin.tasks.index')->with([
             'success' => 'Task created successfully!',
-            'viewData' => $viewData // Passing $viewData to the redirected route
-        ]);
+            'viewData' => $viewData 
+       
+    ]);
+        // return  $request ;
     }
     
     

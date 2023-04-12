@@ -2,14 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * Summary of Project
  */
 class Project extends Model
-{
+{ 
+    use SoftDeletes;
+
     use HasFactory;
 
     protected $fillable = [
@@ -54,31 +57,6 @@ class Project extends Model
     {
         $this->attributes['document'] = $document;
     }
-
-    /**
-     * Summary of users
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    // public function users()
-    // {
-    //     return $this->belongsToMany(Employee::class, 'project_user', 'project_id', 'Employee_id');
-    // }
-    // public function team()
-    // {
-    //     return $this->hasMany(Item::class);
-    // }
-    // public function getItems()
-    // {
-    //     return $this->items;
-    // }
-    // public function setItems($items)
-    // {
-    //     $this->items = $items;
-    // }
-    // public function team()
-    // {
-    //     return $this->belongsTo(Team::class);
-    // }
     public function getId()
     {
         return $this->attributes["id"];
@@ -165,5 +143,38 @@ class Project extends Model
     public function setProgression($value)
     {
         $this->attributes['progression'] = $value;
+    }
+    public function progression()
+    {
+        $totalTasks = $this->tasks()->count();
+        $doneTasks = $this->tasks()->where('status', '=', 'done')->count();
+        $inProgressTasks = $this->tasks()->where('status', '=', 'in progress')->count();
+        $todoTasks = $this->tasks()->where('status', '=', 'to do')->count();
+        
+        if ($totalTasks == 0) {
+            return 0;
+        }
+        
+        return ($doneTasks + $inProgressTasks / 2) / $totalTasks * 100;
+    }
+    public function Totaltasks(){
+
+        $totalTasks = $this->tasks()->count();
+    return $totalTasks;
+    }
+    public function TotalEmployees(){
+
+        $totalEmployees = 0;
+
+        // Retrieve all tasks for this project
+        $tasks = $this->tasks;
+    
+        // Loop through each task and count the employees assigned to it
+        foreach ($tasks as $task) {
+            $employees = $task->employee()->count();
+            $totalEmployees += $employees;
+        }
+    
+        return $totalEmployees;
     }
 }

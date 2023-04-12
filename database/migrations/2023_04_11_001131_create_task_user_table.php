@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Schema::table("projects", function(Blueprint $table) {
-        //     $table->unsignedBigInteger("team_id")->nullable();
-
-        // });
+        Schema::create('task_user', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('task_id')->ondelete('cascade');
+            $table->unsignedBigInteger('user_id')->ondelete('cascade');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -22,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('task_user');
     }
 };

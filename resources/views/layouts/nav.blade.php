@@ -21,7 +21,6 @@
             <ul>
                 <li> <a href="{{ url('index') }}"><i class="bx bx-right-arrow-alt"></i>Default</a>
                 </li>
-                <li> <a href="{{ url('dashboard-alternate') }}"><i class="bx bx-right-arrow-alt"></i>Alternate</a>
                 </li>
             </ul>
         </li>
@@ -34,15 +33,13 @@
             <ul>
                 <li> <a href="{{ url('app-emailbox') }}"><i class="bx bx-right-arrow-alt"></i>Email</a>
                 </li>
-                <li> <a href="{{ url('app-chat-box') }}"><i class="bx bx-right-arrow-alt"></i>Chat Box</a>
                 </li>
                 <li> <a href="{{ url('app-file-manager') }}"><i class="bx bx-right-arrow-alt"></i>File Manager</a>
                 </li>
-                <li> <a href="{{ url('app-contact-list') }}"><i class="bx bx-right-arrow-alt"></i>Contatcs</a>
                 </li>
                 <li> <a href="{{ url('app-to-do') }}"><i class="bx bx-right-arrow-alt"></i>Todo List</a>
                 </li>
-                <li> <a href="{{ url('app-invoice') }}"><i class="bx bx-right-arrow-alt"></i>Invoice</a>
+                {{-- <li> <a href="{{ url('app-invoice') }}"><i class="bx bx-right-arrow-alt"></i>Invoice</a> --}}
                 </li>
                 <li> <a href="{{ url('app-fullcalender') }}"><i class="bx bx-right-arrow-alt"></i>Calendar</a>
                 </li>
@@ -77,7 +74,7 @@
             <div class="menu-title">Tasks</div>
         </a>
         <ul>
-            <li> <a href="{{ url('icons-line-icons') }}"><i class="bx bx-right-arrow-alt"></i> pr</a>
+            <li> <a href="{{route('admin.tasks.index')}}"><i class="bx bx-right-arrow-alt"></i> <i class="bx bx-task"></i>Tasks</a>
             </li>
             <li> <a href="{{ url('icons-boxicons') }}"><i class="bx bx-right-arrow-alt"></i>Boxicons</a>
             </li>
@@ -111,26 +108,18 @@
             </li>
             <li> <a href="{{route('admin.category.index') }}"><i class="bx bx-right-arrow-alt"></i><i class='bx bxs-briefcase'></i></i>Project Category</a>
             </li>
-            <li> <a href="{{ url('icons-feather-icons') }}"><i class="bx bx-right-arrow-alt"></i>Feather Icons</a>
+            <li> <a href="{{ url('icons-feather-icons') }}"><i class="bx bx-right-arrow-alt"></i>Job</a>
             </li>
         </ul>
     </li>
     <li>
-
-        <a href="https://codervent.com/rocker/documentation/" target="_blank">
-            <div class="parent-icon"><i class="bx bx-folder"></i>
+        <a class="has-arrow" href="{{ route('admin.employees.create') }}">
+            <div class="parent-icon"> <i class='bx bxs-archive'></i>
             </div>
-            <div class="menu-title">Documentation</div>
+            <div class="menu-title">Archive</div>
         </a>
     </li>
-    <li>
-        <a href="https://themeforest.net/user/codervent" target="_blank">
-            <div class="parent-icon"><i class="bx bx-support"></i>
-            </div>
-            <div class="menu-title">Support</div>
-        </a>
     </li>
-    </ul>
     <!--end navigation-->
 </div>
 <!--end sidebar wrapper -->

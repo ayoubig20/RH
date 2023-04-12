@@ -77,47 +77,104 @@
                 @if (session()->has('edit'))
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         <strong>{{ session()->get('edit') }}</strong>
-                        {{-- <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button> --}}
+                       
                     </div>
                 @endif
+                <div class="text-sm-end">
+                    <div class="btn-group mb-3">
+                        <button type="button" class="btn btn-primary">All</button>
+                    </div>
+                    <div class="btn-group mb-3 ms-1">
+                        <button type="button" class="btn btn-light">In progress</button>
+                        <button type="button" class="btn btn-light">Done</button>
+                    </div>
+                    <div class="btn-group mb-3 ms-2 d-none d-sm-inline-block">
+                        <button type="button" class="btn btn-secondary"><i class='bx bx-list-ul'></i></button>
+                    </div>
+                    <div class="btn-group mb-3 d-none d-sm-inline-block">
+                        <button type="button" class="btn btn-link text-muted"><i class='bx bxs-grid-alt'></i></button>
+                    </div>
+                </div>
                 <!-- Button trigger modal -->
                 <button style="    color: #FFF;
                 background-color: #4F46E5;" type="button" class="btn btn"
                     data-bs-toggle="modal" data-bs-target="#exampleModal">add
-                    Departement</button>
+                    Task</button>
                 <!-- Modal -->
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">add Departement</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">add Task</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
 
-                                <form action="{{ route('admin.department.store') }}" method="POST">
+                                <form action="{{ route('admin.tasks.store') }}" method="POST">
                                     @csrf
                                     <div class="form-group">
                                         <input type="hidden" name="id" id="id" value="">
-                                        <label for="name">Name departement:</label>
+                                        <label for="name">Name Tasks:</label>
                                         <input type="text" id="name" name="name" class="form-control">
                                     </div>
+
+                                    <div class="form-group">
+                                        <label for="project_id">Project:</label>
+                                        <select name="project_id" id="project_id" class="form-control">
+                                            <option value="">project refernce</option>
+
+                                            @foreach ($viewData['projects'] as $project)
+                                                <option value="{{ $project->id }}">{{ $project->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="assigned_to">Assigned To:</label>
+                                        <select name="assigned_to" id="assigned_to" class="form-control" required>
+                                            <option value="">assigned_to</option>
+
+                                            @foreach ($viewData['employees'] as $employee)
+                                                <option value="{{ $employee->id }}">{{ $employee->firstName }}
+                                                    {{ $employee->lastName }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="status">Status:</label>
+                                        <select name="status" id="status" class="form-control">
+                                            <option value="">Select a Status</option>
+                                            <option value="to do" selected class="text-light">To do</option>
+                                            <option value="in progress" class="text-info">In progress</option>
+                                            <option value="waiting" class="text-warning">Waiting</option>
+                                            <option value="done" class="text-success">Done</option>
+                                            <option value="cancelled" class="text-danger">Cancelled</option>
+
+                                        </select>
+                                    </div>
+
+
+
+                                    <div class="form-group">
+                                        <label for="start_date">Start Date:</label>
+                                        <input type="date" name="start_date" id="start_date" class="form-control">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="end_date">End Date:</label>
+                                        <input type="date" name="end_date" id="end_date" class="form-control">
+                                    </div>
+
                                     <div class="form-group">
                                         <label for="description">Description:</label>
-                                        <textarea name="description" id="description" cols="30" rows="10" class="form-control"></textarea>
+                                        <textarea name="description" id="description" cols="10" rows="10" class="form-control"></textarea>
                                     </div>
-                                    {{-- <button type="submit" class="btn btn-success">Submit</button> --}}
-
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Close</button>
                                         <button type="submit" class="btn btn-primary">Save</button>
                                     </div>
-
                                 </form>
 
                             </div>
@@ -130,41 +187,56 @@
                     <table class="table">
                         <thead class=" text-primary">
                             <th>#</th>
-                            <th>department name</th>
-                            <th>description</th>
-                            <th>Action</th>
+                            <th>Name</th>
+                            {{-- <th>Description</th> --}}
+                            <th>Image</th>
+                            <th>Assigned To</th>
+                            <th>Project</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>status</th>
+                            <th>Actions</th>
 
                         </thead>
                         <tbody>
                             <?php $i = 0; ?>
-                            @foreach ($viewData['departments'] as $department)
+                            @foreach ($viewData['tasks'] as $task)
                                 <?php $i++; ?>
 
                                 <tr>
                                     <td>{{ $i }}</td>
-                                    <td>{{ $department->getName() }}</td>
-                                    <td>{{ $department->getDescription() }}</td>
+                                    <td>{{ $task->name }}</td>
+                                    {{-- <td>{{ $task->description }}</td> --}}
+                                    <td>
+                                        @if ($task->employee)
+                                          <img src="{{ $task->employee->image }}" class="user-img" alt="user avatar">
+                                        @endif
+                                      </td>
+                                    <td>{{ $task->employee ? $task->employee->firstName . ' ' . $task->employee->lastName : '' }}
+                                    </td>
+                                    
+                                    <td>{{ $task->project->name }}</td>
+                                    <td>{{ $task->start_date }}</td>
+                                    <td>{{ $task->end_date }}</td>
+                                    <td class="{{ $task->status === 'to do' ? 'text-info text-center' : ($task->status === 'in progress' ? 'text-primary text-center' : ($task->status === 'waiting' ? 'text-warning text-center' : ($task->status === 'done' ? 'text-success text-center' : 'text-danger text-center'))) }}">{{ $task->status }}</td>
                                     <td>
                                         <div class="d-flex flex-row">
                                             <button type="button" class="btn btn-outline-success btn-sm"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#editDepartment{{ $department->getId() }}">
+                                                data-bs-toggle="modal" data-bs-target="#editTask{{ $task->getId() }}">
                                                 <i class="bx bxs-edit"></i> Edit
                                             </button>
-                                            <div class="modal fade" id="editDepartment{{ $department->getId() }}"
-                                                tabindex="-1" aria-labelledby="editDepartment{{ $department->getId() }}"
-                                                aria-hidden="true">
+                                            <div class="modal fade" id="editTask{{ $task->getId() }}" tabindex="-1"
+                                                aria-labelledby="editTask{{ $task->getId() }}" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title"
-                                                                id="editDepartment{{ $department->getId() }}">Edit
-                                                                Department</h5>
+                                                            <h5 class="modal-title" id="editTask{{ $task->getId() }}">
+                                                                Edit
+                                                                Task</h5>
                                                             <button type="button" class="btn-close"
                                                                 data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
-                                                        <form
-                                                            action="{{ route('admin.department.update', $department->getId()) }}"
+                                                        <form action="{{ route('admin.tasks.update', $task->getId()) }}"
                                                             method="POST">
                                                             @csrf
                                                             @method('PUT')
@@ -173,11 +245,76 @@
                                                                     <label for="name">Name:</label>
                                                                     <input type="text" class="form-control"
                                                                         id="name" name="name"
-                                                                        value="{{ $department->getName() }}" required>
+                                                                        value="{{ $task->getName() }}" required>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="project_id">Project:</label>
+                                                                    <select name="project_id" id="project_id"
+                                                                        class="form-control">
+                                                                        <option value="">Select a project</option>
+
+                                                                        @foreach ($viewData['projects'] as $project)
+                                                                            <option value="{{ $project->id }}"
+                                                                                {{ $task->project_id == $project->id ? 'selected' : '' }}>
+                                                                                {{ $project->name }}
+                                                                            </option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="assigned_to">Assigned To:</label>
+                                                                    <select name="assigned_to" id="assigned_to"
+                                                                        class="form-control" required>
+                                                                        <option value="">Select an employee</option>
+
+                                                                        @foreach ($viewData['employees'] as $employee)
+                                                                            <option value="{{ $employee->id }}"
+                                                                                {{ $task->assigned_to == $employee->id ? 'selected' : '' }}>
+                                                                                {{ $employee->firstName }}
+                                                                                {{ $employee->lastName }}
+                                                                            </option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="status">Status:</label>
+                                                                    <select name="status" id="status"
+                                                                        class="form-control">
+                                                                        <option value="">Select a Status</option>
+                                                                        <option value="to do"
+                                                                            {{ old('status', $task->status) == 'to do' ? 'selected' : '' }}
+                                                                            class="text-info">To do</option>
+                                                                        <option value="in progress"
+                                                                            {{ old('status', $task->status) == 'in progress' ? 'selected' : '' }}
+                                                                            class="text-primary">In progress</option>
+                                                                      
+                                                                        <option value="done"
+                                                                            {{ old('status', $task->status) == 'done' ? 'selected' : '' }}
+                                                                            class="text-success">Done</option>
+                                                                        <option value="cancelled"
+                                                                            {{ old('status', $task->status) == 'cancelled' ? 'selected' : '' }}
+                                                                            class="text-danger">Cancelled</option>
+                                                                    </select>
+
+                                                                </div>
+
+
+                                                                <div class="form-group">
+                                                                    <label for="start_date">Start Date:</label>
+                                                                    <input type="date" name="start_date"
+                                                                        id="start_date" class="form-control"
+                                                                        value="{{ $task->start_date }}">
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label for="end_date">End Date:</label>
+                                                                    <input type="date" name="end_date" id="end_date"
+                                                                        class="form-control"
+                                                                        value="{{ $task->end_date }}">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="description">Description:</label>
-                                                                    <textarea class="form-control" id="description" name="description">{{ $department->getDescription() }}</textarea>
+                                                                    <textarea class="form-control" id="description" name="description">{{ $task->getDescription() }}</textarea>
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">
@@ -193,30 +330,29 @@
 
 
                                             <button type="button" class="btn btn-outline-danger btn-sm"
-                                                data-bs-toggle="modal" data-bs-target="#deleteDepartement{{ $department->getId() }}">
+                                                data-bs-toggle="modal" data-bs-target="#deleteTask{{ $task->getId() }}">
                                                 <i class="bx bxs-trash"></i> Delete
                                             </button>
-                                            <div class="modal fade" id="deleteDepartement{{ $department->getId() }}" tabindex="-1"
-                                                aria-labelledby="deleteDepartement" aria-hidden="true">
+                                            <div class="modal fade" id="deleteTask{{ $task->getId() }}" tabindex="-1"
+                                                aria-labelledby="deleteTask" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id="deleteDepartement{{ $department->getId() }}">
-                                                                Confirm Delete Departement</h5>
+                                                            <h5 class="modal-title" id="deleteTask{{ $task->getId() }}">
+                                                                Confirm Delete Task</h5>
                                                             <button type="button" class="btn-close"
                                                                 data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <p>Are you sure you want to delete this Departement?</p>
-                                                            <input type="text" class="form-control"
-                                                            id="name" name="name"
-                                                            value="{{ $department->getName() }}" readonly>
+                                                            <p>Are you sure you want to delete this Task?</p>
+                                                            <input type="text" class="form-control" id="name"
+                                                                name="name" value="{{ $task->getName() }}" readonly>
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary"
                                                                 data-bs-dismiss="modal">Cancel</button>
                                                             <form
-                                                                action="{{ route('admin.department.destroy', $department->getId()) }}"
+                                                                action="{{ route('admin.tasks.destroy', $task->getId()) }}"
                                                                 method="POST">
                                                                 @csrf
                                                                 @method('DELETE')
@@ -242,8 +378,6 @@
             </div>
         </div>
         <script>
-          
-
             // Show notification function
             function showNotification(message, type) {
                 // Get the notification element
@@ -259,8 +393,6 @@
                     notification.classList.remove(type);
                 }, 3000);
             }
-
-           
         </script>
 
     @endsection
