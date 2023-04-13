@@ -34,9 +34,18 @@
                 </div>
             </div>
             <!--end breadcrumb-->
-            <h6 class="mb-0 text-uppercase">Employees Import</h6>
-    
-            <hr />
+            <div class="text-sm-end">
+                <div class="col-auto float-right ml-auto">
+                    <div class="btn-group mb-3 d-none d-sm-inline-block">
+                        <a href="{{ route('admin.employees.index', ['view' => 'card']) }}"
+                            class="btn btn-muted {{ request()->get('view') == 'card' ? 'active' : '' }}"><i
+                                class='bx bxs-grid-alt'></i></a>
+                        <a href="{{ route('admin.employees.index', ['view' => 'list']) }}"
+                            class="btn btn-muted {{ request()->get('view') != 'card' ? 'active' : '' }}"><i
+                                class='bx bx-list-ul'></i></a>
+                    </div>
+                </div>
+            </div>
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">
@@ -63,7 +72,7 @@
                                     <tr>
                                         <td>{{ $i }}</td>
                                         <td>
-                                            <img src="{{ $employee->getImage() }}" class="user-img" alt="user avatar">
+                                            <img src="{{asset('storage/assets/users/'.$employee->image)}}" class="user-img" alt="user avatar">
                                         </td>
 
                                         <td>{{ $employee->getFirstName() }} {{ $employee->getLastName() }}</td>

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Task extends Model
 {
-    
+
     use SoftDeletes;
 
     use HasFactory;
@@ -23,7 +23,8 @@ class Task extends Model
         'end_date',
         'created_by'
     ];
-    public static function validate($request){
+    public static function validate($request)
+    {
         $request->validate([
             'name' => 'required|max:255',
             'description' => 'required',
@@ -39,6 +40,13 @@ class Task extends Model
     {
         return $this->belongsTo(Project::class);
     }
+
+    public function employee()
+    {
+        return $this->belongsTo(Employee::class, 'assigned_to');
+    }
+ 
+
     public function getId()
     {
         return $this->attributes["id"];
@@ -46,11 +54,8 @@ class Task extends Model
     public function setId($id)
     {
         $this->attributes["id"] = $id;
-    }  
-    public function employee()
-    {
-        return $this->belongsTo(Employee::class,'assigned_to');
     }
+
     public function getEndDate()
     {
         return $this->attributes['end_date'];
@@ -105,12 +110,12 @@ class Task extends Model
     {
         $this->attributes['start_date'] = $value;
     }
-//     public function assignedUsers()
-// {
-//     return $this->belongsToMany(User::class, 'task_user', 'task_id', 'user_id');
-// }
-// public function other_employees()
-//     {
-//         return $this->project->tasks()->employee()->where('id', '<>', $this->employee->id)->get();
-//     }
+    //     public function assignedUsers()
+    // {
+    //     return $this->belongsToMany(User::class, 'task_user', 'task_id', 'user_id');
+    // }
+    // public function other_employees()
+    //     {
+    //         return $this->project->tasks()->employee()->where('id', '<>', $this->employee->id)->get();
+    //     }
 }

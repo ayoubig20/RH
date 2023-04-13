@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\Department;
+use App\Models\Project;
+use App\Models\Task;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -37,7 +39,9 @@ class EmployeeFactory extends Factory
             'salary' => $this->faker->numberBetween(1000, 5000),
             'department_id' => function() {
                 return Department::factory()->create()->id;
-            },
+            }, 
+            'project_id' => Project::factory()->create()->id,
+            'task_id' =>  Task::factory()->create()->id,
             'status' =>$this->faker->randomElement(['full-time','intern','seasonal','part-time','contarctor']),
             'image' => $this->faker->imageUrl(),
             'password' => bcrypt('admin1234'),

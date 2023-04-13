@@ -58,7 +58,7 @@
                             <label for="firstName" class="form-label">First Name:</label>
                             <div class="input-group">
                                 <span class="input-group-text"><i class="bx bx-user"></i></span>
-                                <input type="text" class="form-control" id="firstName" name="firstName" required>
+                                <input type="text" class="form-control" id="firstName" name="firstName" value="{{ old('firstName') }}" required>
                             </div>
                         </div>
                         <div class="col-md-6">

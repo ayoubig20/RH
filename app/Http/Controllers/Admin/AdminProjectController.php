@@ -11,15 +11,21 @@ use Intervention\Image\Facades\Image;
 
 class AdminProjectController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $viewData = [];
         $viewData["title"] = "List projects";
         $projects = Project::all();
         $viewData['categorys']=CategoryProject::all();
-        return view('admin.projects.index', compact('projects', 'viewData'));
-    }
+        //  return view('admin.projects.index', compact('projects', 'viewData'));
+        if($request->has('view') && $request->get('view') == 'card') {
+            return view('admin.projects.indexCards', ['viewData' => $viewData,'projects'=>$projects]);
+        } else {
+            return view('admin.projects.indexList', ['viewData' => $viewData,'projects'=>$projects]);
+        }  
+      }
 
+    
     public function show(Project $project)
     {
         $viewData = [];

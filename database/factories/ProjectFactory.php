@@ -24,7 +24,7 @@ class ProjectFactory extends Factory
                 return CategoryProject::factory()->create()->id;},
             'start_date' => $this->faker->dateTimeBetween('-1 year', '+1 year'),
             'end_date' => $this->faker->dateTimeBetween('now', '+2 years'),
-            'description' => $this->faker->paragraph(),
+            'description' => $this->faker->paragraph(3),
             'image' => $this->faker->imageUrl(),
 
         ];

@@ -51,9 +51,7 @@
                 @if (session()->has('Add'))
                     <div class="alert alert-success alert-dismissible fade show" role="alert" id="success-alert">
                         <strong>{{ session()->get('Add') }}</strong>
-                        {{-- <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button> --}}
+
                     </div>
                     <script>
                         // Set a timer to hide the success message after 5 seconds
@@ -68,32 +66,27 @@
                 @if (session()->has('delete'))
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         <strong>{{ session()->get('delete') }}</strong>
-                        {{-- <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button> --}}
+
                     </div>
                 @endif
 
                 @if (session()->has('edit'))
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         <strong>{{ session()->get('edit') }}</strong>
-                       
                     </div>
                 @endif
                 <div class="text-sm-end">
-                    <div class="btn-group mb-3">
-                        <button type="button" class="btn btn-primary">All</button>
+                    <div class="col-auto float-right ml-auto">
+                        <div class="btn-group mb-3 d-none d-sm-inline-block">
+                            <a href="{{ route('admin.tasks.index', ['view' => 'card']) }}"
+                                class="btn btn-muted {{ request()->get('view') == 'card' ? 'active' : '' }}"><i
+                                    class='bx bxs-grid-alt'></i></a>
+                            <a href="{{ route('admin.tasks.index', ['view' => 'list']) }}"
+                                class="btn btn-muted {{ request()->get('view') != 'card' ? 'active' : '' }}"><i
+                                    class='bx bx-list-ul'></i></a>
+                        </div>
                     </div>
-                    <div class="btn-group mb-3 ms-1">
-                        <button type="button" class="btn btn-light">In progress</button>
-                        <button type="button" class="btn btn-light">Done</button>
-                    </div>
-                    <div class="btn-group mb-3 ms-2 d-none d-sm-inline-block">
-                        <button type="button" class="btn btn-secondary"><i class='bx bx-list-ul'></i></button>
-                    </div>
-                    <div class="btn-group mb-3 d-none d-sm-inline-block">
-                        <button type="button" class="btn btn-link text-muted"><i class='bx bxs-grid-alt'></i></button>
-                    </div>
+                </div>  
                 </div>
                 <!-- Button trigger modal -->
                 <button style="    color: #FFF;
@@ -149,14 +142,10 @@
                                             <option value="in progress" class="text-info">In progress</option>
                                             <option value="waiting" class="text-warning">Waiting</option>
                                             <option value="done" class="text-success">Done</option>
-                                            <option value="cancelled" class="text-danger">Cancelled</option>
 
                                         </select>
                                     </div>
-
-
-
-                                    <div class="form-group">
+    <div class="form-group">
                                         <label for="start_date">Start Date:</label>
                                         <input type="date" name="start_date" id="start_date" class="form-control">
                                     </div>
@@ -196,29 +185,29 @@
                             <th>End Date</th>
                             <th>status</th>
                             <th>Actions</th>
-
                         </thead>
                         <tbody>
                             <?php $i = 0; ?>
                             @foreach ($viewData['tasks'] as $task)
                                 <?php $i++; ?>
-
                                 <tr>
                                     <td>{{ $i }}</td>
                                     <td>{{ $task->name }}</td>
                                     {{-- <td>{{ $task->description }}</td> --}}
                                     <td>
                                         @if ($task->employee)
-                                          <img src="{{ $task->employee->image }}" class="user-img" alt="user avatar">
-                                        @endif
-                                      </td>
+                                        <img src="{{ asset('storage/assets/users/'.$task->employee->image) }}" class="user-img" alt="user avatar">
+                                    @endif
+                                    </td>
                                     <td>{{ $task->employee ? $task->employee->firstName . ' ' . $task->employee->lastName : '' }}
                                     </td>
-                                    
+
                                     <td>{{ $task->project->name }}</td>
                                     <td>{{ $task->start_date }}</td>
                                     <td>{{ $task->end_date }}</td>
-                                    <td class="{{ $task->status === 'to do' ? 'text-info text-center' : ($task->status === 'in progress' ? 'text-primary text-center' : ($task->status === 'waiting' ? 'text-warning text-center' : ($task->status === 'done' ? 'text-success text-center' : 'text-danger text-center'))) }}">{{ $task->status }}</td>
+                                    <td
+                                        class="{{ $task->status === 'to do' ? 'text-info text-center' : ($task->status === 'in progress' ? 'text-primary text-center' : ($task->status === 'waiting' ? 'text-warning text-center' : ($task->status === 'done' ? 'text-success text-center' : 'text-danger text-center'))) }}">
+                                        {{ $task->status }}</td>
                                     <td>
                                         <div class="d-flex flex-row">
                                             <button type="button" class="btn btn-outline-success btn-sm"
@@ -251,7 +240,8 @@
                                                                     <label for="project_id">Project:</label>
                                                                     <select name="project_id" id="project_id"
                                                                         class="form-control">
-                                                                        <option value="">Select a project</option>
+                                                                        <option value="">Select a project
+                                                                        </option>
 
                                                                         @foreach ($viewData['projects'] as $project)
                                                                             <option value="{{ $project->id }}"
@@ -265,7 +255,8 @@
                                                                     <label for="assigned_to">Assigned To:</label>
                                                                     <select name="assigned_to" id="assigned_to"
                                                                         class="form-control" required>
-                                                                        <option value="">Select an employee</option>
+                                                                        <option value="">Select an employee
+                                                                        </option>
 
                                                                         @foreach ($viewData['employees'] as $employee)
                                                                             <option value="{{ $employee->id }}"
@@ -287,7 +278,6 @@
                                                                         <option value="in progress"
                                                                             {{ old('status', $task->status) == 'in progress' ? 'selected' : '' }}
                                                                             class="text-primary">In progress</option>
-                                                                      
                                                                         <option value="done"
                                                                             {{ old('status', $task->status) == 'done' ? 'selected' : '' }}
                                                                             class="text-success">Done</option>
@@ -295,22 +285,19 @@
                                                                             {{ old('status', $task->status) == 'cancelled' ? 'selected' : '' }}
                                                                             class="text-danger">Cancelled</option>
                                                                     </select>
-
                                                                 </div>
-
-
                                                                 <div class="form-group">
                                                                     <label for="start_date">Start Date:</label>
                                                                     <input type="date" name="start_date"
                                                                         id="start_date" class="form-control"
-                                                                        value="{{ $task->start_date }}">
+                                                                        value="{{ $task->start_date}}">
                                                                 </div>
 
                                                                 <div class="form-group">
                                                                     <label for="end_date">End Date:</label>
                                                                     <input type="date" name="end_date" id="end_date"
                                                                         class="form-control"
-                                                                        value="{{ $task->end_date }}">
+                                                                        value="{{ $task->end_date}}">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="description">Description:</label>
@@ -324,11 +311,10 @@
                                                                     changes</button>
                                                             </div>
                                                         </form>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-
-
+    
                                             <button type="button" class="btn btn-outline-danger btn-sm"
                                                 data-bs-toggle="modal" data-bs-target="#deleteTask{{ $task->getId() }}">
                                                 <i class="bx bxs-trash"></i> Delete
@@ -363,36 +349,33 @@
                                                     </div>
                                                 </div>
                                             </div>
-
                                         </div>
-
-
                                     </td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
-
-
                 </div>
             </div>
         </div>
-        <script>
-            // Show notification function
-            function showNotification(message, type) {
-                // Get the notification element
-                var notification = document.getElementById("notification");
+    </div>
+    <script>
+        // Show notification function
+        function showNotification(message, type) {
+            // Get the notification element
+            var notification = document.getElementById("notification");
 
-                // Set the message and type
-                notification.innerHTML = message;
-                notification.classList.add(type);
+            // Set the message and type
+            notification.innerHTML = message;
+            notification.classList.add(type);
 
-                // Show the notification for 3 seconds
-                setTimeout(function() {
-                    notification.innerHTML = "";
-                    notification.classList.remove(type);
-                }, 3000);
-            }
-        </script>
+            // Show the notification for 3 seconds
+            setTimeout(function() {
+                notification.innerHTML = "";
+                notification.classList.remove(type);
+            }, 3000);
+        }
+    </script>
+    
 
-    @endsection
+@endsection

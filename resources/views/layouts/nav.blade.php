@@ -19,7 +19,7 @@
                 <div class="menu-title">Dashboard</div>
             </a>
             <ul>
-                <li> <a href="{{ url('index') }}"><i class="bx bx-right-arrow-alt"></i>Default</a>
+                <li> <a href="{{ url('index') }}"><i class="bx bx-right-arrow-alt"></i><i class='bx bx-bar-chart-alt-2'></i>Statistical</a>
                 </li>
                 </li>
             </ul>
@@ -62,8 +62,6 @@
                 <li> <a href="{{ route('admin.employees.create') }}"><i class="bx bx-right-arrow-alt"></i><i class='bx bx-user-plus' ></i>Add New
                         Employes</a>
                 </li> 
-                <li> <a href="{{ route('admin.employees.create') }}"><i class="bx bx-right-arrow-alt"></i><i class='bx bxs-archive' ></i></i>Archivist</a>
-                </li>
         </li>
 
     </ul>
@@ -108,7 +106,7 @@
             </li>
             <li> <a href="{{route('admin.category.index') }}"><i class="bx bx-right-arrow-alt"></i><i class='bx bxs-briefcase'></i></i>Project Category</a>
             </li>
-            <li> <a href="{{ url('icons-feather-icons') }}"><i class="bx bx-right-arrow-alt"></i>Job</a>
+            <li> <a href="{{ url('icons-feather-icons') }}"><i class="bx bx-right-arrow-alt"></i><i class='bx bxs-briefcase-alt-2'></i>list job</a>
             </li>
         </ul>
     </li>

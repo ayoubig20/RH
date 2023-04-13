@@ -155,7 +155,7 @@ class Project extends Model
             return 0;
         }
         
-        return ($doneTasks + $inProgressTasks / 2) / $totalTasks * 100;
+        return intval(($doneTasks + $inProgressTasks / 2) / $totalTasks * 100);
     }
     public function Totaltasks(){
 

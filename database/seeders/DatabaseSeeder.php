@@ -46,17 +46,18 @@ class DatabaseSeeder extends Seeder
         //         )
         // )
         // ->create();
-        Department::factory()
-        ->count(10)
-        ->create();
-        Employee::factory()
-        ->count(10)
-        ->create();
+        // Department::factory()
+        // ->count(2)
+        // ->create();
         Project::factory()
-        ->count(10)
+        ->count(6)
         ->create();
-        Task::factory()
-        ->count(10)
-        ->create();
+        // Task::factory()
+        // ->count(7)
+        // ->create();
+        // Employee::factory()
+        // ->count(10)
+        // ->create();
+        
 }
     }

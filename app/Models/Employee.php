@@ -16,7 +16,7 @@ class Employee extends Model
     use SoftDeletes;
 
     use HasFactory;
-        protected $fillable = [
+    protected $fillable = [
         'firstName', 'lastName', 'gender', 'email', 'phone', 'address', 'job', 'fatteningDate', 'department_id', 'martialStatus', 'salary', 'DateOfBirth', 'status', 'image', 'password', 'role'
     ];
     protected $hidden = [
@@ -41,8 +41,7 @@ class Employee extends Model
             'salary' => 'required|numeric|gt:0',
             'department_id' => 'required',
             'role' => 'required',
-            'image' => 'image',
-            // 'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'password' => 'required|min:8',
             'password_confirmation' => 'required|same:password',
         ]);
@@ -199,7 +198,22 @@ class Employee extends Model
     }
     public function projects()
     {
-        return $this->hasMany(Projet::class);
+        return $this->belongsToMany(Project::class, 'employee_projects');
+    }
+
+    public function tasks()
+    {
+        return $this->belongsToMany(Task::class, 'employee_tasks');
+    }
+
+
+    public function getTasks()
+    {
+        return $this->tasks;
+    }
+    public function setTasks($items)
+    {
+        $this->tasks = $items;
     }
     public function getProjectsId()
     {
@@ -208,6 +222,10 @@ class Employee extends Model
     public function setProjectsId($id)
     {
         $this->attributes['project_id'] = $id;
+    }
+    public static function setTaskForEmployee($EmpolyeeId, $taskId)
+    {
+        Employee::where('id', $EmpolyeeId)->update(['task_id' => $taskId]);
     }
     /**
      * Summary of teams

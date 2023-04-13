@@ -304,22 +304,17 @@
                                 </div>
                             </div>
                             <div class="text-sm-end">
-                                <div class="btn-group mb-3">
-                                    <button type="button" class="btn btn-primary">All</button>
+                                <div class="col-auto float-right ml-auto">
+                                    <div class="btn-group mb-3 d-none d-sm-inline-block">
+                                        <a href="{{ route('admin.projects.index', ['view' => 'card']) }}"
+                                            class="btn btn-muted {{ request()->get('view') == 'card' ? 'active' : '' }}"><i
+                                                class='bx bxs-grid-alt'></i></a>
+                                        <a href="{{ route('admin.projects.index', ['view' => 'list']) }}"
+                                            class="btn btn-muted {{ request()->get('view') != 'card' ? 'active' : '' }}"><i
+                                                class='bx bx-list-ul'></i></a>
+                                    </div>
                                 </div>
-                                <div class="btn-group mb-3 ms-1">
-                                    <button type="button" class="btn btn-light">In progress</button>
-                                    <button type="button" class="btn btn-light">Done</button>
-                                </div>
-                                <div class="btn-group mb-3 ms-2 d-none d-sm-inline-block">
-                                    <button type="button" class="btn btn-secondary"><i
-                                            class='bx bx-list-ul'></i></button>
-                                </div>
-                                <div class="btn-group mb-3 d-none d-sm-inline-block">
-                                    <button type="button" class="btn btn-link text-muted"><i
-                                            class='bx bxs-grid-alt'></i></button>
-                                </div>
-                            </div><!-- end col-->
+                            </div>
                         </div>
                         <!-- end row-->
                         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-4">
@@ -373,9 +368,12 @@
                                                     <a href="#" class="d-inline-block avatar-tooltip"
                                                         data-bs-toggle="tooltip" data-bs-placement="top"
                                                         data-bs-original-title="{{ $task->employee ? $task->employee->firstName . ' ' . $task->employee->lastName : '' }}">
-                                                        <img src="{{ $task->employee->image }}" width="40"
-                                                            height="30" class="rounded-circle avatar-xs"
-                                                            alt="{{ $task->employee->name }}">
+                                                        <div style="position: relative; display: inline-block; margin-right: 10px;">
+                                                            <img src="{{ asset('storage/assets/users/'.$task->employee->image) }}" class="user-img" alt="user avatar">
+                                                            {{-- <div style="position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%); text-align: center; width: 100%;"> --}}
+                                                                {{ $task->employee->firstName }} 
+                                                            {{-- </div> --}}
+                                                        </div>
                                                     </a>
                                                 @endforeach
                                                 @if ($project->tasks->count() > 3)
@@ -391,6 +389,7 @@
                                         <ul class="list-group list-group-flush">
                                             <li class="list-group-item p-3">
                                                 <!-- project progress-->
+                                                
                                                 <p class="mb-2 fw-bold">Progress <span
                                                         class="float-end">{!! $project->progression() !!}%</span></p>
                                                 <div class="progress progress-sm">

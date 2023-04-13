@@ -181,6 +181,8 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        Laravolt\Avatar\ServiceProvider::class,
+
 
         /*
          * Package Service Providers...

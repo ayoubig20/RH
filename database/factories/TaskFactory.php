@@ -20,12 +20,13 @@ class TaskFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
-            'description' => $this->faker->paragraph,
-            'assigned_to' => Employee::factory()->create(),
-            'project_id' => Project::factory()->create(),
+            'description' => $this->faker->paragraph(3),
+            'assigned_to' => Employee::factory()->create()->id,
             'status' => $this->faker->randomElement(['to do', 'in progress', 'done']),
             'start_date' => $this->faker->dateTimeBetween('-1 month', 'now'),
             'end_date' => $this->faker->dateTimeBetween('now', '+1 month'),
+            'project_id' => Project::factory()->create()->id,
+
         ];
     }
 }
