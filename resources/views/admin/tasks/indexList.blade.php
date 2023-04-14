@@ -76,18 +76,31 @@
                     </div>
                 @endif
                 <div class="text-sm-end">
-                    <div class="col-auto float-right ml-auto">
-                        <div class="btn-group mb-3 d-none d-sm-inline-block">
-                            <a href="{{ route('admin.tasks.index', ['view' => 'card']) }}"
-                                class="btn btn-muted {{ request()->get('view') == 'card' ? 'active' : '' }}"><i
-                                    class='bx bxs-grid-alt'></i></a>
-                            <a href="{{ route('admin.tasks.index', ['view' => 'list']) }}"
-                                class="btn btn-muted {{ request()->get('view') != 'card' ? 'active' : '' }}"><i
-                                    class='bx bx-list-ul'></i></a>
-                        </div>
+                    <div class="btn-group mb-3">
+                        <a href="{{ route('admin.tasks.index') }}"
+                            class="btn btn-primary{{ !request()->has('status') && !request()->has('view') ? ' active' : '' }}"
+                            style="{{ !request()->has('status') && !request()->has('view') ? 'background-color: #0d6efd;' : 'background-color: transparent;border-color: #0d6efd;color: #0d6efd;' }}">All</a>
                     </div>
-                </div>  
+                    <div class="btn-group mb-3 ms-1">
+                        <a href="{{ route('admin.tasks.index', ['status' => 'to do']) }}" class="btn btn-light"
+                            style="{{ request()->get('status') == 'to do' ? 'background-color: #0d6efd;border-color: #0d6efd;color: #fff;font-weight: bold;' : 'background-color: transparent;border-color: #0d6efd;color: #0d6efd;' }}">
+                            To do</a>
+                        <a href="{{ route('admin.tasks.index', ['status' => 'in_progress']) }}" class="btn btn-light"
+                            style="{{ request()->get('status') == 'in_progress' ? 'background-color: #0d6efd;border-color: #0d6efd;color: #fff;font-weight: bold;' : 'background-color: transparent;border-color: #0d6efd;color: #0d6efd;' }}">In
+                            Progress</a>
+                        <a href="{{ route('admin.tasks.index', ['status' => 'done']) }}" class="btn btn-light"
+                            style="{{ request()->get('status') == 'done' ? 'background-color: #0d6efd;border-color: #0d6efd;color: #fff;font-weight: bold;' : 'background-color: transparent;border-color: #0d6efd;color: #0d6efd;' }}">Done</a>
+                    </div>
+                    <div class="btn-group mb-3 d-none d-sm-inline-block">
+                        <a href="{{ route('admin.tasks.index', ['view' => 'card']) }}" class="btn btn-muted"
+                            style="{{ request()->get('view') == 'card' ? 'background-color: #6c757d;border-color: #6c757d;color: #fff;font-weight: bold;' : 'background-color: transparent;border-color: #6c757d;color: #6c757d;' }}"><i
+                                class='bx bxs-grid-alt'></i></a>
+                        <a href="{{ route('admin.tasks.index', ['view' => 'list']) }}" class="btn btn-muted"
+                            style="{{ request()->get('view') != 'card' ? 'background-color: #6c757d;border-color: #6c757d;color: #fff;font-weight: bold;' : 'background-color: transparent;border-color: #6c757d;color: #6c757d;' }}"><i
+                                class='bx bx-list-ul'></i></a>
+                    </div>
                 </div>
+
                 <!-- Button trigger modal -->
                 <button style="    color: #FFF;
                 background-color: #4F46E5;" type="button" class="btn btn"
@@ -145,7 +158,7 @@
 
                                         </select>
                                     </div>
-    <div class="form-group">
+                                    <div class="form-group">
                                         <label for="start_date">Start Date:</label>
                                         <input type="date" name="start_date" id="start_date" class="form-control">
                                     </div>
@@ -196,8 +209,9 @@
                                     {{-- <td>{{ $task->description }}</td> --}}
                                     <td>
                                         @if ($task->employee)
-                                        <img src="{{ asset('storage/assets/users/'.$task->employee->image) }}" class="user-img" alt="user avatar">
-                                    @endif
+                                            <img src="{{ asset('storage/assets/users/' . $task->employee->image) }}"
+                                                class="user-img" alt="user avatar">
+                                        @endif
                                     </td>
                                     <td>{{ $task->employee ? $task->employee->firstName . ' ' . $task->employee->lastName : '' }}
                                     </td>
@@ -290,14 +304,14 @@
                                                                     <label for="start_date">Start Date:</label>
                                                                     <input type="date" name="start_date"
                                                                         id="start_date" class="form-control"
-                                                                        value="{{ $task->start_date}}">
+                                                                        value="{{ $task->start_date }}">
                                                                 </div>
 
                                                                 <div class="form-group">
                                                                     <label for="end_date">End Date:</label>
                                                                     <input type="date" name="end_date" id="end_date"
                                                                         class="form-control"
-                                                                        value="{{ $task->end_date}}">
+                                                                        value="{{ $task->end_date }}">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="description">Description:</label>
@@ -311,10 +325,10 @@
                                                                     changes</button>
                                                             </div>
                                                         </form>
-                                                        </div>
                                                     </div>
                                                 </div>
-    
+                                            </div>
+
                                             <button type="button" class="btn btn-outline-danger btn-sm"
                                                 data-bs-toggle="modal" data-bs-target="#deleteTask{{ $task->getId() }}">
                                                 <i class="bx bxs-trash"></i> Delete
@@ -376,6 +390,6 @@
             }, 3000);
         }
     </script>
-    
+
 
 @endsection

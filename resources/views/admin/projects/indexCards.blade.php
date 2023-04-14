@@ -323,13 +323,13 @@
                                     <!-- project card -->
                                     <div class="card d-block h-100">
                                         <?php
-                                        $imagePath = asset($project->image); // Get the path to the image
-                                        
+                                        $imagePath = 'storage/assets/projects/'.$project->image; // Get the path to the image
+
                                         if (file_exists($imagePath)) {
                                             // Check if the image exists
                                             $imageSrc = $imagePath; // If the image exists, set the source to the image path
                                         } else {
-                                            $imageSrc = 'assets/images/gallery/09.png'; // If the image does not exist, set the source to a default image path
+                                            $imageSrc = 'storage/assets/projects/project-4.jpg'; // If the image does not exist, set the source to a default image path
                                         }
                                         ?>
 

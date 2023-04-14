@@ -10,72 +10,85 @@ use App\Models\Project;
 
 class AdminTaskController extends Controller
 {
-    public function index($status='all')
+    public function index(Request $request, $status = 'all')
     {
-        $viewData=[];
-        if ($status === 'all') {
-            $viewData['tasks'] = Task::all();
-        } else {
-            $viewData['tasks'] = Task::where('status','=', $status)->get();
+        $viewData = [];
+        $viewData['tasks']  = Task::all();
+
+        if ($request->has('status')) {
+            $status = $request->input('status');
+            if ($status === 'to do') {
+                $viewData['tasks']  = $viewData['tasks']->where('status', 'to do');
+            } elseif ($status === 'in_progress') {
+                $viewData['tasks']  = $viewData['tasks']->where('status', 'in progress');
+            } elseif ($status === 'done') {
+                $viewData['tasks']  = $viewData['tasks']->where('status', 'done');
+            }
         }
         $viewData['employees'] = Employee::all();
         $viewData['projects'] = Project::all();
-        return view('admin.tasks.indexList', compact('viewData', 'status')); 
+
+        // return view('admin.tasks.indexList', compact('viewData', 'status')); 
+        if ($request->has('view') && $request->get('view') == 'card') {
+            return view('admin.tasks.indexCards', ['viewData' => $viewData]);
+        } else {
+            return view('admin.tasks.indexList', ['viewData' => $viewData]);
+        }
     }
-    
-    
+
+
 
     public function create()
     {
-        $viewData=[];
-        $viewData['employees']= Employee::all();
-        $viewData['projects']=Project::all();
+        $viewData = [];
+        $viewData['employees'] = Employee::all();
+        $viewData['projects'] = Project::all();
         return view('admin.tasks.create', compact('viewData'));
     }
 
     public function store(Request $request)
     {
         Task::validate($request);
-    
+
         $creationData = $request->all();
         $task = Task::create($creationData);
-    
+
         // Get the employee and project IDs from the request
         $employeeId = $request->input('assigned_to');
         $projectId = $request->input('project_id');
-    
+
         // Attach the task to the employee and project using the pivot table
         $employee = Employee::findOrFail($employeeId);
         $employee->projects()->attach($projectId, ['created_at' => now(), 'updated_at' => now()]);
         $employee->tasks()->attach($task->id, ['created_at' => now(), 'updated_at' => now()]);
-    
+
         $viewData['employees'] = Employee::all();
         $viewData['projects'] = Project::all();
-    
+
         return redirect()->route('admin.tasks.index')->with([
             'success' => 'Task created successfully!',
-            'viewData' => $viewData 
+            'viewData' => $viewData
         ]);
-    
+
         // return  $request ;
     }
-    
-    
+
+
     public function show(Task $task)
     {
-        $viewData=[];
+        $viewData = [];
         $viewData['task'] = $task; // Pass $task variable to the view
-        $viewData['employees']= Employee::all();
-        $viewData['projects']=Project::all();
+        $viewData['employees'] = Employee::all();
+        $viewData['projects'] = Project::all();
         return view('admin.tasks.show', compact('viewData'));
     }
 
     public function edit(Task $task)
     {
-        $viewData=[];
-        $viewData['employees']= Employee::all();
-        $viewData['projects']= Project::all();
-        return view('admin.tasks.edit', compact(['task','viewData']));
+        $viewData = [];
+        $viewData['employees'] = Employee::all();
+        $viewData['projects'] = Project::all();
+        return view('admin.tasks.edit', compact(['task', 'viewData']));
     }
 
     public function update(Request $request, Task $task)
@@ -83,18 +96,18 @@ class AdminTaskController extends Controller
         Task::validate($request);
         $updatedData = $request->all();
         $task->update($updatedData);
-    
+
         // Update project ID for task
         $projectId = $request->input('project_id');
-        $task->projects()->sync([$projectId=> ['updated_at' => now()]]);
-    
+        $task->projects()->sync([$projectId => ['updated_at' => now()]]);
+
         // Update employee ID for task
         $employeeId = $request->input('assigned_to');
-        $task->employees()->sync([$employeeId=> ['updated_at' => now()]]);
-    
+        $task->employees()->sync([$employeeId => ['updated_at' => now()]]);
+
         return redirect()->route('admin.tasks.index')->with('success', 'Task updated successfully!');
     }
-    
+
 
     public function destroy(Task $task)
     {
@@ -103,4 +116,3 @@ class AdminTaskController extends Controller
         return redirect()->route('admin.tasks.index')->with('success', 'Task deleted successfully!');
     }
 }
-

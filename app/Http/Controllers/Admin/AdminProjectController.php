@@ -4,9 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Project;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\CategoryProject;
+use App\Http\Controllers\Controller;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Storage;
 
 
 class AdminProjectController extends Controller
@@ -56,20 +57,31 @@ class AdminProjectController extends Controller
         $project->start_date = $request->start_date;
         $project->end_date = $request->end_date;
         $project->description = $request->description;
-        $project->setImage("1.png");
+        // $project->setImage("1.png");
         $project->save();
 
         $project->save();
 
         // process uploaded image
-        if ($request->hasFile('image')) {
-            $image = $request->file('image'); // get the uploaded file
-            // generate unique filename
-            $filename = uniqid() . '.' . $image->getClientOriginalExtension();
-            // save image to disk
-            $image->storeAs('public/storage/images/projectsImages', $filename);
-            // create new image record for the project
-            $project->setImage($filename);
+        // if ($request->hasFile('image')) {
+        //     $image = $request->file('image'); // get the uploaded file
+        //     // generate unique filename
+        //     $filename = uniqid() . '.' . $image->getClientOriginalExtension();
+        //     // save image to disk
+        //     $image->storeAs('images/projectsImages', $filename);
+        //     // create new image record for the project
+        //     $project->setImage($filename);
+        // }
+        if (!$request->hasFile('image')) {
+            $project->image = 'project-2.png';
+        } else {
+            // Save the uploaded image to storage
+            $imageName = uniqid() . '.' . $request->file('image')->extension();
+            Storage::disk('public')->put(
+                'assets/projects/' . $imageName,
+                file_get_contents($request->file('image')->getRealPath())
+            );
+            $project->image  = $imageName;
         }
         $project->save();
 
