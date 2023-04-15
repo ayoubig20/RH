@@ -342,7 +342,7 @@
 
                                             <!-- project title-->
                                             <h4 class="mt-0">
-                                                <a href="apps-projects-details.html"
+                                                <a href="{{route('admin.projects.show',$project->id)}}"
                                                     class="text-title">{{ $project->name }}</a>
                                             </h4>
                                             <p class="text-muted font-13 my-3 project-description">

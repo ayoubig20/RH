@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Task;
+use App\Models\Project;
+use App\Models\Employee;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Employee;
-use App\Models\Project;
+use Illuminate\Support\Facades\Auth;
 
 class AdminTaskController extends Controller
 {
@@ -59,8 +60,9 @@ class AdminTaskController extends Controller
 
         // Attach the task to the employee and project using the pivot table
         $employee = Employee::findOrFail($employeeId);
-        $employee->projects()->attach($projectId, ['created_at' => now(), 'updated_at' => now()]);
-        $employee->tasks()->attach($task->id, ['created_at' => now(), 'updated_at' => now()]);
+        $employee->projects()->attach($projectId, ['created_at' => now(), 'updated_at' => now(),'created_by'=>(Auth::user()->name)]);
+        $employee->tasks()->attach($task->id, ['created_at' => now(), 'updated_at' => now(),'created_by'=>(Auth::user()->name),
+        ]);
 
         $viewData['employees'] = Employee::all();
         $viewData['projects'] = Project::all();
@@ -99,11 +101,11 @@ class AdminTaskController extends Controller
 
         // Update project ID for task
         $projectId = $request->input('project_id');
-        $task->projects()->sync([$projectId => ['updated_at' => now()]]);
+        $task->projects()->sync([$projectId => ['updated_at' => now(),'created_by'=>(Auth::user()->name)]]);
 
         // Update employee ID for task
         $employeeId = $request->input('assigned_to');
-        $task->employees()->sync([$employeeId => ['updated_at' => now()]]);
+        $task->employees()->sync([$employeeId => ['updated_at' => now(),'created_by'=>(Auth::user()->name)]]);
 
         return redirect()->route('admin.tasks.index')->with('success', 'Task updated successfully!');
     }

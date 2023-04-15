@@ -13,8 +13,8 @@ return new class extends Migration
     {
         //
         Schema::table("projects",function(Blueprint $table){
-            $table->unsignedBigInteger('category');
-            $table->foreign("category")->references('id')->on("category_projects")->onDelete('cascade');
+            $table->unsignedBigInteger('category_id');
+            $table->foreign("category_id")->references('id')->on("category_projects")->onDelete('cascade');
 });
     }
 

@@ -15,6 +15,6 @@ class ProjectSeeder extends Seeder
     {
         //
         Project::factory()
-        ->count(3)
+        ->count(3);
     }
 }

@@ -20,7 +20,7 @@ class ProjectFactory extends Factory
         return [
             //
             'name' => $this->faker->name(),
-            'category' =>  function() {
+            'category_id' =>  function() {
                 return CategoryProject::factory()->create()->id;},
             'start_date' => $this->faker->dateTimeBetween('-1 year', '+1 year'),
             'end_date' => $this->faker->dateTimeBetween('now', '+2 years'),

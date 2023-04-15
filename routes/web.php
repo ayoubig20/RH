@@ -21,9 +21,9 @@ use App\Http\Controllers\Admin\AdminDepartmentController;
 |
 */
 
-Route::get('/', [HomeController::class,'index'])->name("home.index");
-Route::get('/about', [HomeController::class,'about'])->name("home.about");
-Route::get('/admin',[AdminHomeController::class,'index'])->name("admin.home.index");
+Route::get('/', [HomeController::class, 'index'])->name("home.index");
+Route::get('/about', [HomeController::class, 'about'])->name("home.about");
+Route::get('/admin', [AdminHomeController::class, 'index'])->name("admin.home.index");
 // Route::get('/phpinfo', function() {
 //     return phpinfo();
 // });
@@ -36,7 +36,8 @@ Route::middleware('auth')->group(function () {
         'edit' => 'admin.employees.edit',
         'update' => 'admin.employees.update',
         'destroy' => 'admin.employees.destroy',
-    ]);   Route::resource('/admin/department', AdminDepartmentController::class)->names([
+    ]);
+    Route::resource('/admin/department', AdminDepartmentController::class)->names([
         'index' => 'admin.department.index',
         'create' => 'admin.department.create',
         'store' => 'admin.department.store',
@@ -44,7 +45,8 @@ Route::middleware('auth')->group(function () {
         'edit' => 'admin.department.edit',
         'update' => 'admin.department.update',
         'destroy' => 'admin.department.destroy',
-    ]);  Route::resource('/admin/projects', AdminProjectController::class)->names([
+    ]);
+    Route::resource('/admin/projects', AdminProjectController::class)->names([
         'index' => 'admin.projects.index',
         'create' => 'admin.projects.create',
         'store' => 'admin.projects.store',
@@ -52,7 +54,9 @@ Route::middleware('auth')->group(function () {
         'edit' => 'admin.projects.edit',
         'update' => 'admin.projects.update',
         'destroy' => 'admin.projects.destroy',
-    ]);Route::resource('/admin/holidays', AdminHolidaysController::class)->names([
+    ]);
+    Route::post('/admin/projects/{id}', [AdminProjectController::class, 'destroy'])->name('admin.projects.destroy');;
+    Route::resource('/admin/holidays', AdminHolidaysController::class)->names([
         'index' => 'admin.holidays.index',
         'create' => 'admin.holidays.create',
         'store' => 'admin.holidays.store',
@@ -60,7 +64,8 @@ Route::middleware('auth')->group(function () {
         'edit' => 'admin.holidays.edit',
         'update' => 'admin.holidays.update',
         'destroy' => 'admin.holidays.destroy',
-    ]);     ;Route::resource('/admin/tasks', AdminTaskController::class)->names([
+    ]);;
+    Route::resource('/admin/tasks', AdminTaskController::class)->names([
         'index' => 'admin.tasks.index',
         'create' => 'admin.tasks.create',
         'store' => 'admin.tasks.store',
@@ -68,7 +73,8 @@ Route::middleware('auth')->group(function () {
         'edit' => 'admin.tasks.edit',
         'update' => 'admin.tasks.update',
         'destroy' => 'admin.tasks.destroy',
-    ]); Route::resource('/admin/category', AdminCategoryProject::class)->names([
+    ]);
+    Route::resource('/admin/category', AdminCategoryProject::class)->names([
         'index' => 'admin.category.index',
         'create' => 'admin.category.create',
         'store' => 'admin.category.store',
@@ -76,7 +82,9 @@ Route::middleware('auth')->group(function () {
         'edit' => 'admin.category.edit',
         'update' => 'admin.category.update',
         'destroy' => 'admin.category.destroy',
-    ]);       
+    ]);
+    Route::get('download/{id}/{file_name}', [AdminProjectController::class, 'get_file']);
+
+    Route::get('View_file/{id}/{file_name}', [AdminProjectController::class, 'open_file']);
 });
 Auth::routes();
-

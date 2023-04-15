@@ -3,21 +3,24 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use File;
+
 
 /**
  * Summary of Project
  */
 class Project extends Model
-{ 
+{
     use SoftDeletes;
 
     use HasFactory;
 
     protected $fillable = [
         'name',
-        'category',
+        'category_id',
         'image',
         'document',
         'start_date',
@@ -25,7 +28,8 @@ class Project extends Model
         'budget',
         'priority',
         'description',
-        'progression'
+        'progression',
+        'status'
     ];
 
     protected $casts = [
@@ -33,12 +37,12 @@ class Project extends Model
         'end_date' => 'datetime',
     ];
 
-  
+
     public function tasks()
     {
         return $this->hasMany(Task::class);
     }
-  
+
     public function getImage()
     {
         return $this->attributes['image'];
@@ -48,7 +52,7 @@ class Project extends Model
     {
         $this->attributes['image'] = $image;
     }
-     public function getDocument()
+    public function getDocument()
     {
         return $this->attributes['document'];
     }
@@ -64,7 +68,15 @@ class Project extends Model
     public function setId($id)
     {
         $this->attributes["id"] = $id;
-    }  
+    }
+    public function getStatus()
+    {
+        return $this->attributes["status"];
+    }
+    public function setStatus($status)
+    {
+        $this->attributes["status"] = $status;
+    }
     public function getName()
     {
         return $this->attributes["name"];
@@ -72,17 +84,21 @@ class Project extends Model
     public function setName($name)
     {
         $this->attributes["name"] = $name;
-    } 
-   
+    }
 
+    public function category()
+    {
+
+        return $this->belongsTo(CategoryProject::class, 'category_id');
+    }
     public function getCategory()
     {
-        return $this->attributes['category'];
+        return $this->category;
     }
 
     public function setCategory($value)
     {
-        $this->attributes['category'] = $value;
+        $this->attributes['category_id'] = $value;
     }
 
     public function getStartDate()
@@ -125,7 +141,7 @@ class Project extends Model
         $this->attributes['priority'] = $value;
     }
 
-    public function getDescription ()
+    public function getDescription()
     {
         return $this->attributes['description'];
     }
@@ -150,31 +166,35 @@ class Project extends Model
         $doneTasks = $this->tasks()->where('status', '=', 'done')->count();
         $inProgressTasks = $this->tasks()->where('status', '=', 'in progress')->count();
         $todoTasks = $this->tasks()->where('status', '=', 'to do')->count();
-        
+
         if ($totalTasks == 0) {
             return 0;
         }
-        
+
         return intval(($doneTasks + $inProgressTasks / 2) / $totalTasks * 100);
     }
-    public function Totaltasks(){
+    public function Totaltasks()
+    {
 
         $totalTasks = $this->tasks()->count();
-    return $totalTasks;
+        return $totalTasks;
     }
-    public function TotalEmployees(){
+    public function TotalEmployees()
+    {
 
         $totalEmployees = 0;
 
         // Retrieve all tasks for this project
         $tasks = $this->tasks;
-    
+
         // Loop through each task and count the employees assigned to it
         foreach ($tasks as $task) {
             $employees = $task->employee()->count();
             $totalEmployees += $employees;
         }
-    
+
         return $totalEmployees;
     }
+ 
+
 }

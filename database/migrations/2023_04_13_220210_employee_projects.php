@@ -19,6 +19,7 @@ return new class extends Migration
             $table->timestamps();
             $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');
             $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
+            $table->string('created_by',300);
         });
     }
 

@@ -157,14 +157,14 @@
                                                     </div>
 
                                                     <div
-                                                        class="form-group{{ $errors->has('category') ? ' has-error' : '' }}">
-                                                        <label for="category"
-                                                            class="col-md-4 control-label">Category</label>
+                                                        class="form-group{{ $errors->has('category_id') ? ' has-error' : '' }}">
+                                                        <label for="category_id" class="col-md-4 control-label">category
+                                                        </label>
 
                                                         <div class="col">
-                                                            <select id="category" class="form-control" name="category"
+                                                            <select id="category_id" class="form-control" name="category_id"
                                                                 required>
-                                                                <option value="">Select a category</option>
+                                                                <option value="">Select a category </option>
                                                                 @foreach ($viewData['categorys'] as $category)
                                                                     <option value="{{ $category->getId() }}"
                                                                         {{ $category->getId() == $category->getName() ? 'selected' : '' }}>
@@ -172,9 +172,9 @@
                                                                 @endforeach
                                                             </select>
 
-                                                            @if ($errors->has('category'))
+                                                            @if ($errors->has('category_id'))
                                                                 <span class="help-block">
-                                                                    <strong>{{ $errors->first('category') }}</strong>
+                                                                    <strong>{{ $errors->first('category_id') }}</strong>
                                                                 </span>
                                                             @endif
                                                         </div>
@@ -356,16 +356,18 @@
                                                     <td>{{ $project->Totaltasks() }}</td>
                                                     <td>
                                                         @foreach ($project->tasks as $task)
-                                                            <div style="position: relative; display: inline-block; margin-right: 10px;">
-                                                                <img src="{{ asset('storage/assets/users/'.$task->employee->image) }}" class="user-img" alt="user avatar">
+                                                            <div
+                                                                style="position: relative; display: inline-block; margin-right: 10px;">
+                                                                <img src="{{ asset('storage/assets/users/' . $task->employee->image) }}"
+                                                                    class="user-img" alt="user avatar">
                                                                 {{-- <div style="position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%); text-align: center; width: 100%;"> --}}
-                                                                    {{ $task->employee->firstName }} 
-                                                                    {{ $task->employee->lastName }} 
+                                                                {{ $task->employee->firstName }}
+                                                                {{ $task->employee->lastName }}
                                                                 {{-- </div> --}}
                                                             </div>
                                                         @endforeach
                                                     </td>
-                                                    
+
                                                     {{-- <td>{{ $project->getDescription() }}</td> --}}
                                                     <td>
                                                         <div class="d-flex flex-row">
@@ -400,22 +402,20 @@
                                                                                         required>
                                                                                 </div>
                                                                                 <div class="form-group">
-                                                                                    <label for="category">Category:</label>
-                                                                                    <select id="category"
+                                                                                    <label for="category_id">category
+                                                                                        :</label>
+                                                                                    <select id="category_id"
                                                                                         class="form-control"
-                                                                                        name="category" required>
-                                                                                        <option value="web"
-                                                                                            {{ $project->category == 'web' ? 'selected' : '' }}>
-                                                                                            Web</option>
-                                                                                        <option value="mobile"
-                                                                                            {{ $project->category == 'mobile' ? 'selected' : '' }}>
-                                                                                            Mobile</option>
-                                                                                        <option value="desktop"
-                                                                                            {{ $project->category == 'desktop' ? 'selected' : '' }}>
-                                                                                            Desktop</option>
-                                                                                        <option value="other"
-                                                                                            {{ $project->category == 'other' ? 'selected' : '' }}>
-                                                                                            Other</option>
+                                                                                        name="category_id" required>
+                                                                                        <option value="">Select a
+                                                                                            category </option>
+                                                                                        @foreach ($viewData['categorys'] as $category)
+                                                                                            <option
+                                                                                                value="{{ $category->getId() }}"
+                                                                                                {{ $category->getId() == $category->getName() ? 'selected' : '' }}>
+                                                                                                {{ $category->getName() }}
+                                                                                            </option>
+                                                                                        @endforeach
                                                                                     </select>
                                                                                 </div>
                                                                                 <div class="form-group">
@@ -573,9 +573,9 @@
                             }, 3000);
                         }
                     </script>
-                    
+
                 </div>
             </div>
         </div>
-        </div>
-    @endsection
+    </div>
+@endsection

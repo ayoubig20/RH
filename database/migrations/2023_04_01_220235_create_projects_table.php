@@ -21,8 +21,10 @@ return new class extends Migration
             $table->unsignedBigInteger('budget')->nullable();
             $table->enum('priority', ['highest', 'medium', 'low', 'lowest']);
             $table->text('description')->nullable();
-            $table->integer('progression')->default(0);
+            $table->string('status')->default("Panding");
             $table->softDeletes();
+            // $table->string('user',300);
+
             $table->timestamps();
         });
     }
