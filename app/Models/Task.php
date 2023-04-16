@@ -36,16 +36,23 @@ class Task extends Model
         ]);
     }
 
-    public function project()
-    {
-        return $this->belongsTo(Project::class);
-    }
-
     public function employee()
     {
         return $this->belongsTo(Employee::class, 'assigned_to');
     }
  
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
+    }
+    public function getProject()
+    {
+        return $this->project;
+    }
+     public function setProject($project)
+    {
+        return $this->project=$project;
+    }
 
     public function getId()
     {

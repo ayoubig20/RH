@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+{{-- @extends('layouts.admin')
 
 @section('content')
     <h1>Edit Task</h1>
@@ -55,4 +55,4 @@
 
         <button type="submit" class="btn btn-primary">Update
     </form>
-@endsection
+@endsection --}}

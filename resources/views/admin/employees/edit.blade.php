@@ -53,9 +53,10 @@
                         <h3 class="mb-0 text-dark">{{ $employee->firstName }} {{ $employee->lastName }} Update</h3>
                     </div>
                     <hr>
-                    <form method="POST" action="{{ route('admin.employees.store') }}" enctype="multipart/form-data"
+                    <form method="POST" action="{{ route('admin.employees.update',$employee->id) }}" enctype="multipart/form-data"
                         class="row g-3">
                         @csrf
+                        @method('PATCH')
                         <div class="col-md-6">
                             <label for="firstName" class="form-label">First Name:</label>
                             <div class="input-group">
@@ -197,12 +198,15 @@
                         </div>
                         <div> </div>
                         <div class="col-md-6">
-                            <label for="password" class="form-label">Password:</label>
+
+                            <label for="password" class="form-label">Password: <span class="badge rounded-pill bg-warning">If you dont wante change old password late empty</span>
+                            </label>
                             <div class="input-group">
                                 <span class="input-group-text"><i class="bx bx-lock"></i></span>
                                 <input type="password" class="form-control @error('password') is-invalid @enderror"
-                                    id="password" name="password" required>
+                                    id="password" name="password" >
                             </div>
+
                             @error('password')
                                 <span class="invalid-feedback" role="alert">
                                     {{ $message }}
@@ -215,7 +219,7 @@
                                 <span class="input-group-text"><i class="bx bx-lock"></i></span>
                                 <input type="password"
                                     class="form-control @error('password_confirmation') is-invalid @enderror"
-                                    id="password_confirmation" name="password_confirmation" required>
+                                    id="password_confirmation" name="password_confirmation" >
                             </div>
                             @error('password_confirmation')
                                 <span class="invalid-feedback" role="alert">
@@ -251,7 +255,7 @@
                         
                         
                         <div class="col">
-                            <button type="submit" class="btn btn-primary btn-lg float-right" style="background-color: #8027d4;">Update</button>
+                            <button type="submit" class="btn btn-success px-5" >Update</button>
                         </div>
                     </form>
                 </div>

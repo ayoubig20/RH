@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+{{-- @extends('layouts.admin')
 
 @section('content')
     <h1>Create New Task</h1>
@@ -47,14 +47,14 @@
             <label for="end_date">End Date:</label>
             <input type="date" name="end_date" id="end_date" class="form-control">
         </div>
-        {{-- <div class="form-group">
+        <div class="form-group">
             <label for="status">Status:</label>
             <select name="status" id="status" class="form-control" required>
                 <option value="incomplete">Incomplete</option>
                 <option value="in_progress">In Progress</option>
                 <option value="complete">Complete</option>
             </select>
-        </div> --}}
+        </div>
         <button type="submit" class="btn btn-primary">Create Task</button>
     </form>
-@endsection
+@endsection --}}

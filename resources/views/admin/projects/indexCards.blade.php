@@ -1,14 +1,5 @@
 @extends('layouts.admin')
-{{-- @section('style')
-{.hidden-content {
-    display: none !important;
-}
 
-.view-more,
-.view-less {
-    display: block !important;
-    margin-top: 10px !important;
-}} --}}
 
 @section('title', 'Employees')
 
@@ -98,7 +89,7 @@
                                 <div class="col-12">
                                     <div class="page-title-box">
 
-                                        <h4 class="page-title">Projects List</h4>
+                                        <h4 class="page-title">Projects Card</h4>
                                     </div>
                                 </div>
                             </div>
@@ -147,12 +138,12 @@
                                                     </div>
 
                                                     <div
-                                                        class="form-group{{ $errors->has('category') ? ' has-error' : '' }}">
-                                                        <label for="category"
+                                                        class="form-group{{ $errors->has('category_id') ? ' has-error' : '' }}">
+                                                        <label for="category_id"
                                                             class="col-md-4 control-label">Category</label>
 
                                                         <div class="col">
-                                                            <select id="category" class="form-control" name="category"
+                                                            <select id="category_id" class="form-control" name="category_id"
                                                                 required>
                                                                 <option value="">Select a category</option>
                                                                 @foreach ($viewData['categorys'] as $category)
@@ -162,9 +153,9 @@
                                                                 @endforeach
                                                             </select>
 
-                                                            @if ($errors->has('category'))
+                                                            @if ($errors->has('category_id'))
                                                                 <span class="help-block">
-                                                                    <strong>{{ $errors->first('category') }}</strong>
+                                                                    <strong>{{ $errors->first('category_id') }}</strong>
                                                                 </span>
                                                             @endif
                                                         </div>

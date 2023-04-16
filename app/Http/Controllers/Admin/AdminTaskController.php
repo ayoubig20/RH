@@ -60,8 +60,9 @@ class AdminTaskController extends Controller
 
         // Attach the task to the employee and project using the pivot table
         $employee = Employee::findOrFail($employeeId);
-        $employee->projects()->attach($projectId, ['created_at' => now(), 'updated_at' => now(),'created_by'=>(Auth::user()->name)]);
-        $employee->tasks()->attach($task->id, ['created_at' => now(), 'updated_at' => now(),'created_by'=>(Auth::user()->name),
+        $employee->projects()->attach($projectId, ['created_at' => now(), 'updated_at' => now(), 'created_by' => (Auth::user()->name)]);
+        $employee->tasks()->attach($task->id, [
+            'created_at' => now(), 'updated_at' => now(), 'created_by' => (Auth::user()->name),
         ]);
 
         $viewData['employees'] = Employee::all();
@@ -98,18 +99,28 @@ class AdminTaskController extends Controller
         Task::validate($request);
         $updatedData = $request->all();
         $task->update($updatedData);
+        // Update employee ID for task
+        $employeeId = $request->input('assigned_to');
+        $employee = Employee::findOrFail($employeeId);
 
         // Update project ID for task
         $projectId = $request->input('project_id');
-        $task->projects()->sync([$projectId => ['updated_at' => now(),'created_by'=>(Auth::user()->name)]]);
+        $task->project()->associate($projectId);
+        $employee->projects()->attach($projectId, ['created_at' => now(), 'updated_at' => now(), 'created_by' => (Auth::user()->name)]);
+        $task->save();
 
-        // Update employee ID for task
-        $employeeId = $request->input('assigned_to');
-        $task->employees()->sync([$employeeId => ['updated_at' => now(),'created_by'=>(Auth::user()->name)]]);
+        // Dissociate old employee from task
+        $task->employee()->disassociate();
+
+        // Associate new employee with task
+        $task->employee()->associate($employeeId);
+        $employee->tasks()->attach($task->id, [
+            'created_at' => now(), 'updated_at' => now(), 'created_by' => (Auth::user()->name),
+        ]);
+        $task->save();
 
         return redirect()->route('admin.tasks.index')->with('success', 'Task updated successfully!');
     }
-
 
     public function destroy(Task $task)
     {

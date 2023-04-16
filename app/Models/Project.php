@@ -42,7 +42,14 @@ class Project extends Model
     {
         return $this->hasMany(Task::class);
     }
-
+    public function getTasks()
+    {
+    return $this->tasks;
+    } 
+    public function setTasks($tasks)
+    {
+    $this->tasks = $tasks;
+    }
     public function getImage()
     {
         return $this->attributes['image'];

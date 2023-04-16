@@ -9,6 +9,7 @@ use App\Models\ProjectsAttachmnets;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
+
 use Illuminate\Support\Facades\Storage;
 
 
@@ -92,7 +93,6 @@ class AdminProjectController extends Controller
 
         //     // redirect to projects index page
         // }
-        if ($request->hasFile('document')) {
             if ($request->hasFile('document')) {
                 $project_id = Project::latest()->first()->id;
                 $document = $request->file('document');
@@ -108,10 +108,16 @@ class AdminProjectController extends Controller
                     $attachments->save();
                 }
             };
-            return redirect()->route('admin.projects.index');
+            $projects = Project::all();
+            $viewData['categorys'] = CategoryProject::all();
+            //  return view('admin.projects.index', compact('projects', 'viewData'));
+            if ($request->has('view') && $request->get('view') == 'card') {
+                return view('admin.projects.indexCards', ['viewData' => $viewData, 'projects' => $projects]);
+            } else {
+                return view('admin.projects.indexList', ['viewData' => $viewData, 'projects' => $projects]);
+            }
             // return $request;
         }
-    }
 
     public function edit(Project $project)
     {

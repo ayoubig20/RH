@@ -44,11 +44,11 @@
                 </div>
             @endif
 
-            <div class="card border-top border-0 border-4 border-info">
+            <div class="card border-top border-0 border-5 border-dark">
                 <div class="card-body p-5">
                     <div class="card-title d-flex align-items-center">
-                        <div><i class="bx bxs-user me-1 font-22 text-info"></i></div>
-                        <h5 class="mb-0 text-info">Empolyee Registration</h5>
+                        <div><i class="bx bxs-user me-1 font-22 text-dark"></i></div>
+                        <h4 class="mb-8 text-dark">Empolyee Registration</h4>
                     </div>
                     <hr>
                     <form method="POST" action="{{ route('admin.employees.store') }}" enctype="multipart/form-data"
@@ -130,7 +130,7 @@
                         <div class="col-md-6">
                             <label for="job" class="form-label">Job:</label>
                             <div class="input-group">
-                                <span class="input-group-text"><i class="bx bx-map"></i></span>
+                                <span class="input-group-text"><i class='bx bxs-briefcase-alt-2'></i></span>
                                 <input type="text" class="form-control" id="job" name="job" required>
                             </div>
                         </div>
@@ -230,7 +230,7 @@
                             </div>
                         </div>
                         <div class="col-12">
-                            <button type="submit" class="btn btn-info">Register</button>
+                            <button type="submit" class="btn btn-success">Register</button>
                         </div>
                     </form>
                 </div>

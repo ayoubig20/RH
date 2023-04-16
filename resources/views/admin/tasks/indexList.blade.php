@@ -216,7 +216,7 @@
                                     <td>{{ $task->employee ? $task->employee->firstName . ' ' . $task->employee->lastName : '' }}
                                     </td>
 
-                                    <td>{{ $task->project->name }}</td>
+                                    <td>{{ $task->getProject()->name }}</td>
                                     <td>{{ $task->start_date }}</td>
                                     <td>{{ $task->end_date }}</td>
                                     <td
@@ -242,7 +242,7 @@
                                                         <form action="{{ route('admin.tasks.update', $task->getId()) }}"
                                                             method="POST">
                                                             @csrf
-                                                            @method('PUT')
+                                                            @method('PATCH')
                                                             <div class="modal-body">
                                                                 <div class="form-group">
                                                                     <label for="name">Name:</label>
