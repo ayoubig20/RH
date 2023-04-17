@@ -173,7 +173,7 @@
                                             <option value="">choice Priority</option>
                                             <option value="highest" {{ old('priority') == 'highest' ? 'selected' : '' }}>
                                                 highest</option>
-                                            <option value="medium" {{ old('priority') == 'medium' ? 'selected' : '' }}>
+                                            <option value="Medium" {{ old('priority') == 'Medium' ? 'selected' : '' }}>
                                                 Medium
                                             </option>
                                             <option value="low" {{ old('priority') == 'low' ? 'selected' : '' }}>low
@@ -239,17 +239,14 @@
                                     <td>{{ $task->getProject()->name }}</td>
                                     <td style="padding: 5px;">
                                         @if ($task->priority == 'highest')
-                                                    <span
-                                                        class="badge bg-danger ">{{ $task->priority }}</span>
-                                                @elseif ($task->priority == 'medium')
-                                                    <span
-                                                        class="badge bg-warning ">{{ $task->priority }}</span>
-                                                @else
-                                                    <span
-                                                        class="badge bg-info ">{{ $task->priority }}</span>
-                                                @endif
+                                            <span class="badge bg-danger ">{{ $task->priority }}</span>
+                                        @elseif ($task->priority == 'Medium')
+                                            <span class="badge bg-warning ">{{ $task->priority }}</span>
+                                        @else
+                                            <span class="badge bg-info ">{{ $task->priority }}</span>
+                                        @endif
                                     </td>
-                                                                     
+
                                     <td>{{ $task->start_date->format('Y-m-d') }}</td>
                                     <td>{{ $task->end_date->format('Y-m-d') }}</td>
 
@@ -338,14 +335,14 @@
                                                                     <label for="start_date">Start Date:</label>
                                                                     <input type="date" name="start_date"
                                                                         id="start_date" class="form-control"
-                                                                        value="{{old('start_date',$task->start_date->format('Y-m-d')) }}">
+                                                                        value="{{ old('start_date', $task->start_date->format('Y-m-d')) }}">
                                                                 </div>
 
                                                                 <div class="form-group">
                                                                     <label for="end_date">End Date:</label>
                                                                     <input type="date" name="end_date" id="end_date"
                                                                         class="form-control"
-                                                                        value="{{old('end_date',$task->end_date->format('Y-m-d')) }}">
+                                                                        value="{{ old('end_date', $task->end_date->format('Y-m-d')) }}">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="priority">Priority</label>
@@ -353,14 +350,14 @@
                                                                         name="priority" required>
                                                                         <option value="">choice Priority</option>
                                                                         <option value="highest"
-                                                                            {{ old('priority',$task->priority) == 'highest' ? 'selected' : '' }}>
+                                                                            {{ old('priority', $task->priority) == 'highest' ? 'selected' : '' }}>
                                                                             highest</option>
-                                                                        <option value="medium"
-                                                                            {{ old('priority',$task->priority) == 'medium' ? 'selected' : '' }}>
+                                                                        <option value="Medium"
+                                                                            {{ old('priority', $task->priority) == 'Medium' ? 'selected' : '' }}>
                                                                             Medium
                                                                         </option>
                                                                         <option value="low"
-                                                                            {{ old('priority',$task->priority) == 'low' ? 'selected' : '' }}>
+                                                                            {{ old('priority', $task->priority) == 'low' ? 'selected' : '' }}>
                                                                             low
                                                                         </option>
 

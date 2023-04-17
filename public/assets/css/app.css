@@ -2626,7 +2626,35 @@ input.search-control-2::placeholder {
 	position: fixed !important;
 	margin: 0 !important;
 	z-index: 9999 !important;
-	opacity: .8
+	opacity: 0.8;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+	filter: alpha(opacity=80);
+}
+
+.gu-hide {
+	display: none !important;
+}
+
+.gu-unselectable {
+	-webkit-user-select: none !important;
+	-moz-user-select: none !important;
+	-ms-user-select: none !important;
+	user-select: none !important;
+}
+
+.gu-transit {
+	opacity: 0.2;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
+	filter: alpha(opacity=20);
+}
+
+.gu-mirror {
+	position: fixed !important;
+	margin: 0 !important;
+	z-index: 9999 !important;
+	opacity: .8;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+	filter: alpha(opacity=80)
 }
 
 .gu-hide {
@@ -2641,13 +2669,7 @@ input.search-control-2::placeholder {
 }
 
 .gu-transit {
-	opacity: .2
+	opacity: .2;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
+	filter: alpha(opacity=20)
 }
-/* .task-list-items:before {
-    content: "No Tasks";
-    position: absolute;
-    line-height: 110px;
-    width: 100%;
-    text-align: center;
-    font-weight: 600;
-} */

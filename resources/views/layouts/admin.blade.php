@@ -5,6 +5,9 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+
     <!--favicon-->
     <link rel="icon" href="{{ URL::asset('assets/images/logo-purple.png') }}" type="image/png" />
     <!--plugins-->

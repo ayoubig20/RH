@@ -210,9 +210,9 @@
                         <div class="board">
 
                             <div class="tasks" data-plugin="dragula"
-                                data-containers='["task-list-one", "task-list-two", "task-list-three"]'>
-                                <h4 class="card-header  task-header bg-primary">To Do</h4>
-                                <div id="task-list-one" class="task-list-items">
+                            data-containers='["task-list-to do", "task-list-in progress", "task-list-done"]'>
+                            <h4 class="card-header  task-header bg-primary">To Do</h4>
+                                <div id="task-list-to do" class="task-list-items">
                                     @if ($viewData['tasks']->where('status', 'to do')->isEmpty())
                                         <!-- Render an empty div when there are no tasks -->
                                         <div class="card ">
@@ -222,190 +222,195 @@
                                         </div>
                                     @else
                                         @foreach ($viewData['tasks']->where('status', 'to do') as $task)
-                                            <div class="card ">
-                                                <div class="card-body p-3">
-                                                    <small
-                                                        class="float-end text-muted">{{ $task->created_at->format('d M Y') }}</small>
-                                                    {{-- <span class="badge bg-danger">High</span> --}}
-                                                    @if ($task->priority == 'highest')
-                                                        <span class="badge bg-danger ">{{ $task->priority }}</span>
-                                                    @elseif ($task->priority == 'medium')
-                                                        <span class="badge bg-warning ">{{ $task->priority }}</span>
-                                                    @else
-                                                        <span class="badge bg-info ">{{ $task->priority }}</span>
-                                                    @endif
-                                                    <h5 class="mt-2 mb-2">
-                                                        <a href="#" data-bs-toggle="modal"
-                                                            data-bs-target="#task-detail-modal"
-                                                            class="text-body">{{ $task->name }}</a>
-                                                    </h5>
-                                                    <p class="mb-0">
-                                                        <span
-                                                            class="badge bg-secondary">{{ ucfirst($task->status) }}</span>
-                                                    </p>
+                                            <div class="card" data-task-id="{{ $task->id }} ">
+                                                                <div class="card-body p-3">
+                                                                    <small
+                                                                        class="float-end text-muted">{{ $task->created_at->format('d M Y') }}</small>
+                                                                    {{-- <span class="badge bg-danger">High</span> --}}
+                                                                        @if ($task->priority == 'highest')
+                                                <span class="badge bg-danger ">{{ $task->priority }}</span>
+                                            @elseif ($task->priority == 'Medium')
+                                                <span class="badge bg-warning ">{{ $task->priority }}</span>
+                                            @else
+                                                <span class="badge bg-info ">{{ $task->priority }}</span>
+                                        @endif
+                                        <h5 class="mt-2 mb-2">
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="#task-detail-modal"
+                                                class="text-body">{{ $task->name }}</a>
+                                        </h5>
+                                        <p class="mb-0">
+                                            <span class="badge bg-secondary">{{ ucfirst($task->status) }}</span>
+                                        </p>
 
-                                                    <div class="dropdown float-end">
-                                                        <a href="#" class="dropdown-toggle text-muted arrow-none"
-                                                            data-bs-toggle="dropdown" aria-expanded="false">
-                                                            <i class="mdi mdi-dots-vertical font-18"></i>
-                                                        </a>
-                                                        <div class="dropdown-menu dropdown-menu-end">
-                                                            <!-- item-->
-                                                            <a href="javascript:void(0);" class="dropdown-item"><i
-                                                                    class="mdi mdi-pencil me-1"></i>Edit</a>
-                                                            <!-- item-->
-                                                            <a href="javascript:void(0);" class="dropdown-item"><i
-                                                                    class="mdi mdi-delete me-1"></i>Delete</a>
+                                        <div class="dropdown float-end">
+                                            <a href="#" class="dropdown-toggle text-muted arrow-none"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                <i class="mdi mdi-dots-vertical font-18"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-end">
+                                                <!-- item-->
+                                                <a href="javascript:void(0);" class="dropdown-item"><i
+                                                        class="mdi mdi-pencil me-1"></i>Edit</a>
+                                                <!-- item-->
+                                                <a href="javascript:void(0);" class="dropdown-item"><i
+                                                        class="mdi mdi-delete me-1"></i>Delete</a>
 
-                                                        </div>
-                                                    </div>
-                                                    <p class="mb-0">
-                                                        @if ($task->employee)
-                                                            <img src="{{ asset('storage/assets/users/' . $task->employee->image) }}"
-                                                                class="user-img" alt="user avatar">
-                                                        @endif
-                                                        <span
-                                                            class="align-middle">{{ $task->employee ? $task->employee->firstName . ' ' . $task->employee->lastName : '' }}</span>
-                                                    </p>
-                                                    <p class="card-text"><strong>Description:</strong>
-                                                        {{ $task->description }}
-                                                </div>
                                             </div>
-                                        @endforeach
-                                    @endif
-
+                                        </div>
+                                        <p class="mb-0">
+                                            @if ($task->employee)
+                                                <img src="{{ asset('storage/assets/users/' . $task->employee->image) }}"
+                                                    class="user-img" alt="user avatar">
+                                            @endif
+                                            <span
+                                                class="align-middle">{{ $task->employee ? $task->employee->firstName . ' ' . $task->employee->lastName : '' }}</span>
+                                        </p>
+                                        <p class="card-text"><strong>Description:</strong>
+                                            {{ $task->description }}
                                 </div>
                             </div>
-                        </div>
-                    </div>
-
-
-                    <div class="tasks" data-plugin="dragula"
-                        data-containers='["task-list-one", "task-list-two", "task-list-three"]'>
-                        <div class="col-md-4 float-start">
-                            <h4 class="card-header  task-header bg-warning">In progress</h4>
-                            <div id="task-list-two" class="task-list-items">
-                                @if ($viewData['tasks']->where('status', 'in progress')->isEmpty())
-                                    <!-- Render an empty div when there are no tasks -->
-                                    <div class="card ">
-                                        <div class="card-body ">
-                                            No tasks
-                                        </div>
-                                    </div>
-                                @else
-                                    @foreach ($viewData['tasks']->where('status', 'in progress') as $task)
-                                        <div class="card  ">
-                                            <div class="card-body ">
-                                                <small
-                                                    class="float-end text-muted">{{ $task->created_at->format('d M Y') }}</small>
-                                                <span class="badge bg-danger">High</span>
-
-                                                <h5 class="mt-2 mb-2">
-                                                    <a href="#" data-bs-toggle="modal"
-                                                        data-bs-target="#task-detail-modal"
-                                                        class="text-body">{{ $task->name }}</a>
-                                                </h5>
-                                                <p class="mb-0">
-                                                    <span class="badge bg-warning">{{ ucfirst($task->status) }}</span>
-                                                </p>
-
-                                                <div class="dropdown float-end">
-                                                    <a href="#" class="dropdown-toggle text-muted arrow-none"
-                                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                                        <i class="mdi mdi-dots-vertical font-18"></i>
-                                                    </a>
-                                                    <div class="dropdown-menu dropdown-menu-end">
-                                                        <!-- item-->
-                                                        <a href="javascript:void(0);" class="dropdown-item"><i
-                                                                class="mdi mdi-pencil me-1"></i>Edit</a>
-                                                        <!-- item-->
-                                                        <a href="javascript:void(0);" class="dropdown-item"><i
-                                                                class="mdi mdi-delete me-1"></i>Delete</a>
-
-                                                    </div>
-                                                </div>
-                                                <p class="mb-0">
-                                                    @if ($task->employee)
-                                                        <img src="{{ asset('storage/assets/users/' . $task->employee->image) }}"
-                                                            class="user-img" alt="user avatar">
-                                                    @endif
-                                                    <span
-                                                        class="align-middle">{{ $task->employee ? $task->employee->firstName . ' ' . $task->employee->lastName : '' }}</span>
-                                                </p>
-                                                <p class="card-text"><strong>Description:</strong>
-                                                    {{ $task->description }}
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tasks" data-plugin="dragula"
-                    data-containers='["task-list-one", "task-list-two", "task-list-three"]'>
-                    <div class="col-md-4 float-start">
-                        <h4 class="card-header  task-header bg-success">Done</h4>
-                        <div id="task-list-three" class="task-list-items">
-                            @if ($viewData['tasks']->where('status', 'done')->isEmpty())
-                                <!-- Render an empty div when there are no tasks -->
-                                <div class="card ms-2">
-                                    <div class="card-body p-3">
-                                        No tasks
-                                    </div>
-                                </div>
-                            @else
-                                @foreach ($viewData['tasks']->where('status', 'done') as $task)
-                                    <div class="card ">
-                                        <div class="card-body ">
-                                            <small
-                                                class="float-end text-muted">{{ $task->created_at->format('d M Y') }}</small>
-                                            <span class="badge bg-danger">High</span>
-
-                                            <h5 class="mt-2 mb-2">
-                                                <a href="#" data-bs-toggle="modal"
-                                                    data-bs-target="#task-detail-modal"
-                                                    class="text-body">{{ $task->name }}</a>
-                                            </h5>
-                                            <p class="mb-0">
-                                                <span class="badge bg-success">{{ ucfirst($task->status) }}</span>
-                                            </p>
-
-                                            <div class="dropdown float-end">
-                                                <a href="#" class="dropdown-toggle text-muted arrow-none"
-                                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <i class="mdi mdi-dots-vertical font-18"></i>
-                                                </a>
-                                                <div class="dropdown-menu dropdown-menu-end">
-                                                    <!-- item-->
-                                                    <a href="javascript:void(0);" class="dropdown-item"><i
-                                                            class="mdi mdi-pencil me-1"></i>Edit</a>
-                                                    <!-- item-->
-                                                    <a href="javascript:void(0);" class="dropdown-item"><i
-                                                            class="mdi mdi-delete me-1"></i>Delete</a>
-
-                                                </div>
-                                            </div>
-                                            <p class="mb-0">
-                                                @if ($task->employee)
-                                                    <img src="{{ asset('storage/assets/users/' . $task->employee->image) }}"
-                                                        class="user-img" alt="user avatar">
-                                                @endif
-                                                <span
-                                                    class="align-middle">{{ $task->employee ? $task->employee->firstName . ' ' . $task->employee->lastName : '' }}</span>
-                                            </p>
-                                            <p class="card-text"><strong>Description:</strong>
-                                                {{ $task->description }}
-                                        </div>
-                                    </div>
-                                @endforeach
+                            @endforeach
                             @endif
+
                         </div>
                     </div>
                 </div>
-
             </div>
+
+
+            <div class="tasks" data-plugin="dragula"
+            data-containers='["task-list-to do", "task-list-in progress", "task-list-done"]'>
+            <div class="col-md-4 float-start">
+                    <h4 class="card-header task-header bg-warning">In progress</h4>
+                    <div id="task-list-in progress" class="task-list-items">
+                        @if ($viewData['tasks']->where('status', 'in progress')->isEmpty())
+                            <!-- Render an empty div when there are no tasks -->
+                            <div class="card">
+                                <div class="card-body">
+                                    No tasks
+                                </div>
+                            </div>
+                        @else
+                            @foreach ($viewData['tasks']->where('status', 'in progress') as $task)
+                                <div class="card" data-task-id="{{ $task->id }}">
+                                    <div class="card-body ">
+                                        <small
+                                            class="float-end text-muted">{{ $task->created_at->format('d M Y') }}</small>
+                                        @if ($task->priority == 'highest')
+                                            <span class="badge bg-danger ">{{ $task->priority }}</span>
+                                        @elseif ($task->priority == 'Medium')
+                                            <span class="badge bg-warning ">{{ $task->priority }}</span>
+                                        @else
+                                            <span class="badge bg-info ">{{ $task->priority }}</span>
+                                        @endif
+                                        <h5 class="mt-2 mb-2">
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="#task-detail-modal"
+                                                class="text-body">{{ $task->name }}</a>
+                                        </h5>
+                                        <p class="mb-0">
+                                            <span class="badge bg-success">{{ ucfirst($task->status) }}</span>
+                                        </p>
+
+                                        <div class="dropdown float-end">
+                                            <a href="#" class="dropdown-toggle text-muted arrow-none"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                <i class="mdi mdi-dots-vertical font-18"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-end">
+                                                <!-- item-->
+                                                <a href="javascript:void(0);" class="dropdown-item"><i
+                                                        class="mdi mdi-pencil me-1"></i>Edit</a>
+                                                <!-- item-->
+                                                <a href="javascript:void(0);" class="dropdown-item"><i
+                                                        class="mdi mdi-delete me-1"></i>Delete</a>
+
+                                            </div>
+                                        </div>
+                                        <p class="mb-0">
+                                            @if ($task->employee)
+                                                <img src="{{ asset('storage/assets/users/' . $task->employee->image) }}"
+                                                    class="user-img" alt="user avatar">
+                                            @endif
+                                            <span
+                                                class="align-middle">{{ $task->employee ? $task->employee->firstName . ' ' . $task->employee->lastName : '' }}</span>
+                                        </p>
+                                        <p class="card-text"><strong>Description:</strong>
+                                            {{ $task->description }}
+                                    </div>
+                                </div>
+                            @endforeach
+                        @endif
+                    </div>
+                </div>
+            </div>
+            <div class="tasks" data-plugin="dragula"
+                data-containers='["task-list-to do", "task-list-in progress", "task-list-done"]'>
+                <div class="col-md-4 float-start">
+                    <h4 class="card-header  task-header bg-success">Done</h4>
+                    <div id="task-list-done" class="task-list-items">
+                        @if ($viewData['tasks']->where('status', 'done')->isEmpty())
+                            <!-- Render an empty div when there are no tasks -->
+                            <div class="card ms-2">
+                                <div class="card-body p-3">
+                                    No tasks
+                                </div>
+                            </div>
+                        @else
+                            @foreach ($viewData['tasks']->where('status', 'done') as $task)
+                                <div class="card" data-task-id="{{ $task->id }}">
+                                    <div class="card-body ">
+                                        <small
+                                            class="float-end text-muted">{{ $task->created_at->format('d M Y') }}</small>
+                                        @if ($task->priority == 'highest')
+                                            <span class="badge bg-danger ">{{ $task->priority }}</span>
+                                        @elseif ($task->priority == 'Medium')
+                                            <span class="badge bg-warning ">{{ $task->priority }}</span>
+                                        @else
+                                            <span class="badge bg-info ">{{ $task->priority }}</span>
+                                        @endif
+                                        <h5 class="mt-2 mb-2">
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="#task-detail-modal"
+                                                class="text-body">{{ $task->name }}</a>
+                                        </h5>
+                                        <p class="mb-0">
+                                            <span class="badge bg-success">{{ ucfirst($task->status) }}</span>
+                                        </p>
+
+                                        <div class="dropdown float-end">
+                                            <a href="#" class="dropdown-toggle text-muted arrow-none"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                <i class="mdi mdi-dots-vertical font-18"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-end">
+                                                <!-- item-->
+                                                <a href="javascript:void(0);" class="dropdown-item"><i
+                                                        class="mdi mdi-pencil me-1"></i>Edit</a>
+                                                <!-- item-->
+                                                <a href="javascript:void(0);" class="dropdown-item"><i
+                                                        class="mdi mdi-delete me-1"></i>Delete</a>
+
+                                            </div>
+                                        </div>
+                                        <p class="mb-0">
+                                            @if ($task->employee)
+                                                <img src="{{ asset('storage/assets/users/' . $task->employee->image) }}"
+                                                    class="user-img" alt="user avatar">
+                                            @endif
+                                            <span
+                                                class="align-middle">{{ $task->employee ? $task->employee->firstName . ' ' . $task->employee->lastName : '' }}</span>
+                                        </p>
+                                        <p class="card-text"><strong>Description:</strong>
+                                            {{ $task->description }}
+                                    </div>
+                                </div>
+                            @endforeach
+                        @endif
+                    </div>
+                </div>
+            </div>
+
         </div>
+    </div>
     </div>
 
     </div>
@@ -422,37 +427,54 @@
         });
     </script>
     <script src="{{ asset('assets/js/vendor.min.js') }}"></script>
-
     <!-- dragula js-->
     <script src="{{ asset('assets/vendor/dragula/dragula.min.js') }}"></script>
-
     <!-- demo js -->
     <script src="{{ asset('assets/js/ui/component.dragula.js') }}"></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/dragula/3.6.6/dragula.min.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/dragula/3.6.6/dragula.css'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/dragula/3.6.6/dragula.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/dragula/3.6.6/dragula.min.css'></script>
+
+
     <script>
-        // Initialize drag and drop
-        dragula([].slice.apply(document.querySelectorAll('.tasks')), {
-            isContainer: function(el) {
-                return true; // only elements in drake.containers will be taken into account
-            },
-            moves: function(el, source, handle, sibling) {
-                return true; // elements are always draggable by default
-            },
-            accepts: function(el, target, source, sibling) {
-                return true; // elements can be dropped in any container by default
-            },
-            invalid: function(el, handle) {
-                return true; // don't prevent any drags from initiating by default
-            },
-            direction: 'vertical', // Y axis is considered when determining where an element would be dropped
-            copy: false, // elements are moved by default, not copied
-            revertOnSpill: false, // spilling will put the element back where it was dragged from, if this is true
-            removeOnSpill: false, // spilling will `.remove` the element, if this is true
+        $(function() {
+            // Initialize dragula containers
+            var drake = dragula($('.task-list-items').toArray(), {
+                revertOnSpill: true
+            });
+
+            // Add event listener for "drop" event on each container
+            drake.on('drop', function(el, target, source, sibling) {
+                // Get the task ID and new status after a drop event
+                var taskId = $(el).data('task-id');
+    
+                var status = target.id.replace('task-list-', '');
+                console.log(taskId);
+                console.log(status);
+                // Send an AJAX request to update the task status in the database
+                $.ajax({
+                    url: '/admin/tasks/' + taskId + '/status',
+                    type: 'PUT',
+                    data: {
+                        status: status
+                    },
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(response) {
+                        // Show a success message
+                        console.log('Task status updated successfully');
+                        console.log(response); // Display the response in the console
+
+                    },
+                    error: function(xhr, status, error) {
+                        // Show an error message
+                        console.log('Error updating task status: ' + error);
+
+                    }
+                });
+            });
         });
     </script>
+
     </div>
     </div>
 @endsection

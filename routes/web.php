@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\AdminProjectController;
 use App\Http\Controllers\Admin\AdminEmployeeController;
 use App\Http\Controllers\Admin\AdminHolidaysController;
 use App\Http\Controllers\Admin\AdminDepartmentController;
+use App\Http\Controllers\Admin\AdminKanbanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -86,5 +87,7 @@ Route::middleware('auth')->group(function () {
     Route::get('download/{id}/{file_name}', [AdminProjectController::class, 'get_file']);
 
     Route::get('View_file/{id}/{file_name}', [AdminProjectController::class, 'open_file']);
+    Route::put('/admin/tasks/{id}/status', [AdminKanbanController::class, 'updateStatus'])->name('admin.tasks.updateStatus');
+
 });
 Auth::routes();
