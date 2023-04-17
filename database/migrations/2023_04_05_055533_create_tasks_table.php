@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('assigned_to')->nullable()->constrained('employees')->onDelete('cascade');
             $table->foreignId('project_id')->nullable()->constrained('projects')->onDelete('cascade');
             $table->string('status')->default('To do');
-            // $table->integer('value_status');
+            $table->string('priority');
             $table->date('start_date');
             $table->date('end_date')->nullable();
             $table->softDeletes();

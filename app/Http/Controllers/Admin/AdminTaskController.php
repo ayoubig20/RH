@@ -73,7 +73,6 @@ class AdminTaskController extends Controller
             'viewData' => $viewData
         ]);
 
-        // return  $request ;
     }
 
 

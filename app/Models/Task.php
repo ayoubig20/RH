@@ -21,8 +21,14 @@ class Task extends Model
         'value_status',
         'start_date',
         'end_date',
-        'created_by'
+        'created_by',
+       'priority'
     ];
+    protected $casts = [
+        'start_date' => 'datetime',
+        'end_date' => 'datetime',
+    ];
+
     public static function validate($request)
     {
         $request->validate([
@@ -32,8 +38,10 @@ class Task extends Model
             'project_id' => 'nullable|exists:projects,id',
             'status' => 'required',
             'start_date' => 'required|date',
-            'end_date' => 'required|date'
+            'end_date' => 'required|date|after:start_date',
+            'priority'=> 'required',
         ]);
+
     }
 
     public function employee()

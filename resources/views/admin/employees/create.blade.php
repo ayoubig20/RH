@@ -146,7 +146,7 @@
                             <label for="salary" class="form-label">Salary:</label>
                             <div class="input-group">
                                 <span class="input-group-text"><i class="bx bx-money"></i></span>
-                                <input type="text" class="form-control" id="salary" name="salary" required>
+                                <input type="number" class="form-control" id="salary" name="salary" required>
                             </div>
                         </div>
                         <div class="col-md-6">

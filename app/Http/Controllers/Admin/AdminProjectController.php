@@ -54,6 +54,7 @@ class AdminProjectController extends Controller
             'document' => 'file|mimes:doc,pdf|max:2048', // validate single document
             'start_date' => 'required|date|before:end_date',
             'end_date' => 'required|date|after:start_date',
+    
         ]);
 
         // create new project
@@ -63,6 +64,7 @@ class AdminProjectController extends Controller
         $project->start_date = $request->start_date;
         $project->end_date = $request->end_date;
         $project->description = $request->description;
+        $project->budget = $request->budget;
         $project->save();
 
         $project->save();
@@ -119,13 +121,17 @@ class AdminProjectController extends Controller
             // return $request;
         }
 
-    public function edit(Project $project)
+    public function edit(Request $request,Project $project,$id)
     {
+        // $project = Project::findOrFail($id);
+
         return view('admin.projects.edit', compact('project'));
+        //  return $request;
+
     }
 
 
-    public function update(Request $request, Project $id)
+    public function update(Request $request, Project $project)
     {
         // Validate form input
         $validatedData = $request->validate([
@@ -139,8 +145,8 @@ class AdminProjectController extends Controller
             'description' => 'nullable',
         ]);
 
-        // Find the project 
-        $project = Project::findOrFail($id);
+        // // Find the project 
+        // $project = Project::findOrFail($project);
 
         // Update project data
         $project->name = $request->input('name');
@@ -159,12 +165,18 @@ class AdminProjectController extends Controller
 
         // Handle document upload
         if ($request->hasFile('document')) {
+            $project_id = Project::latest()->first()->id;
             $document = $request->file('document');
             if ($document->isValid()) {
-                $filename = time() . '_' . $document->getClientOriginalName();
-                $document->move(public_path('documents'), $filename);
-                $project->documents()->delete(); // delete existing documents
-                $project->setDocument($filename);
+                $extension = $document->getClientOriginalExtension();
+                $filename = time() . '_' . uniqid() . '.' . $extension;
+                $document->move(public_path('Attachments/' . $project_id), $filename);
+
+                $attachments = new ProjectsAttachmnets();
+                $attachments->file_name = $filename; // use the new filename instead of the original filename
+                $attachments->Created_by = Auth::user()->name;
+                $attachments->project_id = $project_id;
+                $attachments->save();
             }
         }
 
@@ -178,12 +190,13 @@ class AdminProjectController extends Controller
     public function destroy(Project $project, Request $request)
     {
         if ($request->has('id_file')) {
-            $attachment = ProjectsAttachmnets::where('project_id', $project->id)->first();
+            $attachment = ProjectsAttachmnets::find($request->id_file);
             if ($attachment) {
                 $file_path = $project->id . '/' . $attachment->file_name;
                 Storage::disk('public_uploads')->delete($file_path);
                 $attachment->delete();
                 session()->flash('delete', "attachment file deleted successfully");
+                return redirect()->route('admin.projects.index');
             }
         } else {
             $attachment = ProjectsAttachmnets::where('project_id', $project->id)->first();
@@ -194,10 +207,9 @@ class AdminProjectController extends Controller
             }
             $project->delete();
             session()->flash('delete', "project and its associated file deleted successfully");
+            return redirect()->route('admin.projects.index')->with('success', 'Project deleted successfully.');
         }
-    
-        return redirect()->route('admin.projects.index')->with('success', 'Project deleted successfully.');
-            // return $request;
+                    // return $request;
     }
     
     

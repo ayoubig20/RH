@@ -36,7 +36,7 @@
                 </div>
             </div>
             <!--end breadcrumb-->
-           
+
             <div class="col">
                 @if ($errors->any())
                     <div class="alert alert-danger">
@@ -85,7 +85,7 @@
                         <a href="{{ route('admin.tasks.index', ['status' => 'to do']) }}" class="btn btn-light"
                             style="{{ request()->get('status') == 'to do' ? 'background-color: #0d6efd;border-color: #0d6efd;color: #fff;font-weight: bold;' : 'background-color: transparent;border-color: #0d6efd;color: #0d6efd;' }}">
                             To do</a>
-                            <a href="{{ route('admin.tasks.index', ['status' => 'in_progress']) }}" class="btn btn-light"
+                        <a href="{{ route('admin.tasks.index', ['status' => 'in_progress']) }}" class="btn btn-light"
                             style="{{ request()->get('status') == 'in_progress' ? 'background-color: #0d6efd;border-color: #0d6efd;color: #fff;font-weight: bold;' : 'background-color: transparent;border-color: #0d6efd;color: #0d6efd;' }}">In
                             Progress</a>
                         <a href="{{ route('admin.tasks.index', ['status' => 'done']) }}" class="btn btn-light"
@@ -165,15 +165,35 @@
                                     <label for="end_date">End Date:</label>
                                     <input type="date" name="end_date" id="end_date" class="form-control">
                                 </div>
+                                <div class="form-group">
+                                    <label for="priority">Priority</label>
+                                    <select class="form-control" id="priority" name="priority" required>
+                                        <option value="">choice Priority</option>
+                                        <option value="highest" {{ old('priority') == 'highest' ? 'selected' : '' }}>
+                                            highest</option>
+                                        <option value="Medium" {{ old('priority') == 'medium' ? 'selected' : '' }}>
+                                            Medium
+                                        </option>
+                                        <option value="High" {{ old('priority') == 'low' ? 'selected' : '' }}>low
+                                        </option>
+
+                                    </select>
+                                </div>
+
+                                @if ($errors->has('priority'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('priority') }}</strong>
+                                    </span>
+                                @endif
 
                                 <div class="form-group">
                                     <label for="description">Description:</label>
-                                    <textarea name="description" id="description" cols="10" rows="10" class="form-control"></textarea>
+                                    <textarea name="description" id="description" class="form-control"></textarea>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary"
                                         data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary">Save</button>
+                                    <button type="submit" class="btn btn-success">Save</button>
                                 </div>
                             </form>
 
@@ -188,13 +208,94 @@
                 <div class="container-fluid">
                     <div class="col-md-4 float-start">
                         <div class="board">
+
                             <div class="tasks" data-plugin="dragula"
                                 data-containers='["task-list-one", "task-list-two", "task-list-three"]'>
                                 <h4 class="card-header  task-header bg-primary">To Do</h4>
                                 <div id="task-list-one" class="task-list-items">
-                                    @foreach ($viewData['tasks']->where('status', 'to do') as $task)
-                                        <div class="card ms-2">
+                                    @if ($viewData['tasks']->where('status', 'to do')->isEmpty())
+                                        <!-- Render an empty div when there are no tasks -->
+                                        <div class="card ">
                                             <div class="card-body p-3">
+                                                No tasks
+                                            </div>
+                                        </div>
+                                    @else
+                                        @foreach ($viewData['tasks']->where('status', 'to do') as $task)
+                                            <div class="card ">
+                                                <div class="card-body p-3">
+                                                    <small
+                                                        class="float-end text-muted">{{ $task->created_at->format('d M Y') }}</small>
+                                                    {{-- <span class="badge bg-danger">High</span> --}}
+                                                    @if ($task->priority == 'highest')
+                                                        <span class="badge bg-danger ">{{ $task->priority }}</span>
+                                                    @elseif ($task->priority == 'medium')
+                                                        <span class="badge bg-warning ">{{ $task->priority }}</span>
+                                                    @else
+                                                        <span class="badge bg-info ">{{ $task->priority }}</span>
+                                                    @endif
+                                                    <h5 class="mt-2 mb-2">
+                                                        <a href="#" data-bs-toggle="modal"
+                                                            data-bs-target="#task-detail-modal"
+                                                            class="text-body">{{ $task->name }}</a>
+                                                    </h5>
+                                                    <p class="mb-0">
+                                                        <span
+                                                            class="badge bg-secondary">{{ ucfirst($task->status) }}</span>
+                                                    </p>
+
+                                                    <div class="dropdown float-end">
+                                                        <a href="#" class="dropdown-toggle text-muted arrow-none"
+                                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                                            <i class="mdi mdi-dots-vertical font-18"></i>
+                                                        </a>
+                                                        <div class="dropdown-menu dropdown-menu-end">
+                                                            <!-- item-->
+                                                            <a href="javascript:void(0);" class="dropdown-item"><i
+                                                                    class="mdi mdi-pencil me-1"></i>Edit</a>
+                                                            <!-- item-->
+                                                            <a href="javascript:void(0);" class="dropdown-item"><i
+                                                                    class="mdi mdi-delete me-1"></i>Delete</a>
+
+                                                        </div>
+                                                    </div>
+                                                    <p class="mb-0">
+                                                        @if ($task->employee)
+                                                            <img src="{{ asset('storage/assets/users/' . $task->employee->image) }}"
+                                                                class="user-img" alt="user avatar">
+                                                        @endif
+                                                        <span
+                                                            class="align-middle">{{ $task->employee ? $task->employee->firstName . ' ' . $task->employee->lastName : '' }}</span>
+                                                    </p>
+                                                    <p class="card-text"><strong>Description:</strong>
+                                                        {{ $task->description }}
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    @endif
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="tasks" data-plugin="dragula"
+                        data-containers='["task-list-one", "task-list-two", "task-list-three"]'>
+                        <div class="col-md-4 float-start">
+                            <h4 class="card-header  task-header bg-warning">In progress</h4>
+                            <div id="task-list-two" class="task-list-items">
+                                @if ($viewData['tasks']->where('status', 'in progress')->isEmpty())
+                                    <!-- Render an empty div when there are no tasks -->
+                                    <div class="card ">
+                                        <div class="card-body ">
+                                            No tasks
+                                        </div>
+                                    </div>
+                                @else
+                                    @foreach ($viewData['tasks']->where('status', 'in progress') as $task)
+                                        <div class="card  ">
+                                            <div class="card-body ">
                                                 <small
                                                     class="float-end text-muted">{{ $task->created_at->format('d M Y') }}</small>
                                                 <span class="badge bg-danger">High</span>
@@ -205,7 +306,7 @@
                                                         class="text-body">{{ $task->name }}</a>
                                                 </h5>
                                                 <p class="mb-0">
-                                                    <span class="badge bg-secondary">{{ ucfirst($task->status) }}</span>
+                                                    <span class="badge bg-warning">{{ ucfirst($task->status) }}</span>
                                                 </p>
 
                                                 <div class="dropdown float-end">
@@ -236,20 +337,27 @@
                                             </div>
                                         </div>
                                     @endforeach
-                                </div>
+                                @endif
                             </div>
                         </div>
                     </div>
-
-
-                    <div class="tasks" data-plugin="dragula"
-                        data-containers='["task-list-one", "task-list-two", "task-list-three"]'>
-                        <div class="col-md-4 float-start">
-                            <h4 class="card-header  task-header bg-warning">In progress</h4>
-                            <div id="task-list-two" class="task-list-items">
-                                @foreach ($viewData['tasks']->where('status', 'in progress') as $task)
-                                    <div class="card  ms-2">
-                                        <div class="card-body p-3">
+                </div>
+                <div class="tasks" data-plugin="dragula"
+                    data-containers='["task-list-one", "task-list-two", "task-list-three"]'>
+                    <div class="col-md-4 float-start">
+                        <h4 class="card-header  task-header bg-success">Done</h4>
+                        <div id="task-list-three" class="task-list-items">
+                            @if ($viewData['tasks']->where('status', 'done')->isEmpty())
+                                <!-- Render an empty div when there are no tasks -->
+                                <div class="card ms-2">
+                                    <div class="card-body p-3">
+                                        No tasks
+                                    </div>
+                                </div>
+                            @else
+                                @foreach ($viewData['tasks']->where('status', 'done') as $task)
+                                    <div class="card ">
+                                        <div class="card-body ">
                                             <small
                                                 class="float-end text-muted">{{ $task->created_at->format('d M Y') }}</small>
                                             <span class="badge bg-danger">High</span>
@@ -260,7 +368,7 @@
                                                     class="text-body">{{ $task->name }}</a>
                                             </h5>
                                             <p class="mb-0">
-                                                <span class="badge bg-warning">{{ ucfirst($task->status) }}</span>
+                                                <span class="badge bg-success">{{ ucfirst($task->status) }}</span>
                                             </p>
 
                                             <div class="dropdown float-end">
@@ -291,58 +399,7 @@
                                         </div>
                                     </div>
                                 @endforeach
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tasks" data-plugin="dragula"
-                    data-containers='["task-list-one", "task-list-two", "task-list-three"]'>
-                    <div class="col-md-4 float-start">
-                        <h4 class="card-header  task-header bg-success">Done</h4>
-                        <div id="task-list-three" class="task-list-items">
-                            @foreach ($viewData['tasks']->where('status', 'done') as $task)
-                                <div class="card ms-2">
-                                    <div class="card-body p-3">
-                                        <small
-                                            class="float-end text-muted">{{ $task->created_at->format('d M Y') }}</small>
-                                        <span class="badge bg-danger">High</span>
-
-                                        <h5 class="mt-2 mb-2">
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#task-detail-modal"
-                                                class="text-body">{{ $task->name }}</a>
-                                        </h5>
-                                        <p class="mb-0">
-                                            <span class="badge bg-success">{{ ucfirst($task->status) }}</span>
-                                        </p>
-
-                                        <div class="dropdown float-end">
-                                            <a href="#" class="dropdown-toggle text-muted arrow-none"
-                                                data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="mdi mdi-dots-vertical font-18"></i>
-                                            </a>
-                                            <div class="dropdown-menu dropdown-menu-end">
-                                                <!-- item-->
-                                                <a href="javascript:void(0);" class="dropdown-item"><i
-                                                        class="mdi mdi-pencil me-1"></i>Edit</a>
-                                                <!-- item-->
-                                                <a href="javascript:void(0);" class="dropdown-item"><i
-                                                        class="mdi mdi-delete me-1"></i>Delete</a>
-
-                                            </div>
-                                        </div>
-                                        <p class="mb-0">
-                                            @if ($task->employee)
-                                                <img src="{{ asset('storage/assets/users/' . $task->employee->image) }}"
-                                                    class="user-img" alt="user avatar">
-                                            @endif
-                                            <span
-                                                class="align-middle">{{ $task->employee ? $task->employee->firstName . ' ' . $task->employee->lastName : '' }}</span>
-                                        </p>
-                                        <p class="card-text"><strong>Description:</strong>
-                                            {{ $task->description }}
-                                    </div>
-                                </div>
-                            @endforeach
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -356,14 +413,14 @@
     </div>
 
     <script>
-                    $(document).ready(function() {
-                        $('.dropdown-toggle').on('click', function(e) {
-                            e.preventDefault();
-                            var menu = $(this).next('.dropdown-menu');
-                            menu.toggleClass('show');
-                        });
-                    });
-                </script>
+        $(document).ready(function() {
+            $('.dropdown-toggle').on('click', function(e) {
+                e.preventDefault();
+                var menu = $(this).next('.dropdown-menu');
+                menu.toggleClass('show');
+            });
+        });
+    </script>
     <script src="{{ asset('assets/js/vendor.min.js') }}"></script>
 
     <!-- dragula js-->

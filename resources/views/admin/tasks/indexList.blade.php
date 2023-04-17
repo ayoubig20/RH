@@ -167,15 +167,34 @@
                                         <label for="end_date">End Date:</label>
                                         <input type="date" name="end_date" id="end_date" class="form-control">
                                     </div>
+                                    <div class="form-group">
+                                        <label for="priority">Priority</label>
+                                        <select class="form-control" id="priority" name="priority" required>
+                                            <option value="">choice Priority</option>
+                                            <option value="highest" {{ old('priority') == 'highest' ? 'selected' : '' }}>
+                                                highest</option>
+                                            <option value="medium" {{ old('priority') == 'medium' ? 'selected' : '' }}>
+                                                Medium
+                                            </option>
+                                            <option value="low" {{ old('priority') == 'low' ? 'selected' : '' }}>low
+                                            </option>
 
+                                        </select>
+                                    </div>
+
+                                    @if ($errors->has('priority'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('priority') }}</strong>
+                                        </span>
+                                    @endif
                                     <div class="form-group">
                                         <label for="description">Description:</label>
-                                        <textarea name="description" id="description" cols="10" rows="10" class="form-control"></textarea>
+                                        <textarea name="description" id="description" class="form-control"></textarea>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-primary">Save</button>
+                                        <button type="submit" class="btn btn-success">Save</button>
                                     </div>
                                 </form>
 
@@ -194,6 +213,7 @@
                             <th>Image</th>
                             <th>Assigned To</th>
                             <th>Project</th>
+                            <th>Priority</th>
                             <th>Start Date</th>
                             <th>End Date</th>
                             <th>status</th>
@@ -217,8 +237,22 @@
                                     </td>
 
                                     <td>{{ $task->getProject()->name }}</td>
-                                    <td>{{ $task->start_date }}</td>
-                                    <td>{{ $task->end_date }}</td>
+                                    <td style="padding: 5px;">
+                                        @if ($task->priority == 'highest')
+                                                    <span
+                                                        class="badge bg-danger ">{{ $task->priority }}</span>
+                                                @elseif ($task->priority == 'medium')
+                                                    <span
+                                                        class="badge bg-warning ">{{ $task->priority }}</span>
+                                                @else
+                                                    <span
+                                                        class="badge bg-info ">{{ $task->priority }}</span>
+                                                @endif
+                                    </td>
+                                                                     
+                                    <td>{{ $task->start_date->format('Y-m-d') }}</td>
+                                    <td>{{ $task->end_date->format('Y-m-d') }}</td>
+
                                     <td
                                         class="{{ $task->status === 'to do' ? 'text-info text-center' : ($task->status === 'in progress' ? 'text-primary text-center' : ($task->status === 'waiting' ? 'text-warning text-center' : ($task->status === 'done' ? 'text-success text-center' : 'text-danger text-center'))) }}">
                                         {{ $task->status }}</td>
@@ -304,15 +338,41 @@
                                                                     <label for="start_date">Start Date:</label>
                                                                     <input type="date" name="start_date"
                                                                         id="start_date" class="form-control"
-                                                                        value="{{ $task->start_date }}">
+                                                                        value="{{old('start_date',$task->start_date->format('Y-m-d')) }}">
                                                                 </div>
 
                                                                 <div class="form-group">
                                                                     <label for="end_date">End Date:</label>
                                                                     <input type="date" name="end_date" id="end_date"
                                                                         class="form-control"
-                                                                        value="{{ $task->end_date }}">
+                                                                        value="{{old('end_date',$task->end_date->format('Y-m-d')) }}">
                                                                 </div>
+                                                                <div class="form-group">
+                                                                    <label for="priority">Priority</label>
+                                                                    <select class="form-control" id="priority"
+                                                                        name="priority" required>
+                                                                        <option value="">choice Priority</option>
+                                                                        <option value="highest"
+                                                                            {{ old('priority',$task->priority) == 'highest' ? 'selected' : '' }}>
+                                                                            highest</option>
+                                                                        <option value="medium"
+                                                                            {{ old('priority',$task->priority) == 'medium' ? 'selected' : '' }}>
+                                                                            Medium
+                                                                        </option>
+                                                                        <option value="low"
+                                                                            {{ old('priority',$task->priority) == 'low' ? 'selected' : '' }}>
+                                                                            low
+                                                                        </option>
+
+                                                                    </select>
+                                                                </div>
+
+                                                                @if ($errors->has('priority'))
+                                                                    <span class="help-block">
+                                                                        <strong>{{ $errors->first('priority') }}</strong>
+                                                                    </span>
+                                                                @endif
+
                                                                 <div class="form-group">
                                                                     <label for="description">Description:</label>
                                                                     <textarea class="form-control" id="description" name="description">{{ $task->getDescription() }}</textarea>
@@ -321,7 +381,7 @@
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary"
                                                                     data-bs-dismiss="modal">Cancel</button>
-                                                                <button type="submit" class="btn btn-primary">Save
+                                                                <button type="submit" class="btn btn-success">Save
                                                                     changes</button>
                                                             </div>
                                                         </form>

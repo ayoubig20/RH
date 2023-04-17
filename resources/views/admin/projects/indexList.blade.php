@@ -245,7 +245,22 @@
                                                             @endif
                                                         </div>
                                                     </div>
+                                                    <div
+                                                        class="form-group{{ $errors->has('budget') ? ' has-error' : '' }}">
+                                                        <label for="budget"
+                                                            class="col-md-4 control-label">Budget</label>
 
+                                                        <div class="col">
+                                                            <input id="budget" type="number" class="form-control"
+                                                                name="budget">
+
+                                                            @if ($errors->has('budget'))
+                                                                <span class="help-block">
+                                                                    <strong>{{ $errors->first('budget') }}</strong>
+                                                                </span>
+                                                            @endif
+                                                        </div>
+                                                    </div>
 
                                                     <div
                                                         class="form-group{{ $errors->has('priority') ? ' has-error' : '' }}">
@@ -302,7 +317,7 @@
 
                                                     <div class="form-group">
                                                         <div class="col col-md-offset-4">
-                                                            <button type="submit" class="btn btn-primary">
+                                                            <button type="submit" class="btn btn-success">
                                                                 create project </button>
                                                         </div>
                                                     </div>
@@ -412,10 +427,11 @@
                                                                                         @foreach ($viewData['categorys'] as $category)
                                                                                             <option
                                                                                                 value="{{ $category->getId() }}"
-                                                                                                {{ $category->getId() == $category->getName() ? 'selected' : '' }}>
+                                                                                                {{ old('category_id', $project->category_id) == $category->getId() ? 'selected' : '' }}>
                                                                                                 {{ $category->getName() }}
                                                                                             </option>
                                                                                         @endforeach
+
                                                                                     </select>
                                                                                 </div>
                                                                                 <div class="form-group">
@@ -431,28 +447,26 @@
                                                                                         name="document">
                                                                                 </div>
                                                                                 <div class="form-group">
-                                                                                    <label for="start_date">Start
+                                                                                    <label for="start_date">Starte
                                                                                         Date:</label>
-                                                                                    <input type="date"
-                                                                                        name="start_date" id="start_date"
-                                                                                        class="form-control"
-                                                                                        value="{{ old($project->getStartDate()) }}">
+                                                                                        <input type="date" name="start_date" id="start_date" class="form-control"
+                                                                                        value="{{old('start_date',$project->start_date->format('Y-m-d')) }}">
                                                                                 </div>
+
                                                                                 <div class="form-group">
-                                                                                    <label for="end_date">End date:</label>
-                                                                                    <input id="end_date" type="date"
+                                                                                    <label for="end_date">End Date:</label>
+                                                                                    <input type="date" name="end_date"
+                                                                                        id="end_date"
                                                                                         class="form-control"
-                                                                                        name="end_date"
-                                                                                        value="{{ $project->end_date }}"
-                                                                                        required>
+                                                                                        value="{{ old('end_date', $project->end_date->format('Y-m-d')) }}">
                                                                                 </div>
                                                                                 <div class="form-group">
                                                                                     <label for="budget">Budget:</label>
                                                                                     <input id="budget" type="number"
                                                                                         class="form-control"
                                                                                         name="budget"
-                                                                                        value="{{ $project->budget }}"
-                                                                                        required>
+                                                                                        value="{{ old('budget', $project->budget) }}"
+                                                                                        >
                                                                                 </div>
                                                                                 <div class="form-group">
                                                                                     <label for="priority">Priority:</label>
@@ -488,7 +502,7 @@
                                                                                     class="btn btn-secondary"
                                                                                     data-bs-dismiss="modal">Cancel</button>
                                                                                 <button type="submit"
-                                                                                    class="btn btn-primary">Save
+                                                                                    class="btn btn-success">Save
                                                                                     changes</button>
                                                                                 <button type="button" class="btn-close"
                                                                                     data-bs-dismiss="modal"
@@ -543,39 +557,34 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-
-                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
                                 </div>
-
-
-                                </td>
-                                </tr>
-                                @endforeach
-                                </tbody>
-                                </table>
                             </div>
                         </div>
+                        <script>
+                            // Show notification function
+                            function showNotification(message, type) {
+                                // Get the notification element
+                                var notification = document.getElementById("notification");
+
+                                // Set the message and type
+                                notification.innerHTML = message;
+                                notification.classList.add(type);
+
+                                // Show the notification for 3 seconds
+                                setTimeout(function() {
+                                    notification.innerHTML = "";
+                                    notification.classList.remove(type);
+                                }, 3000);
+                            }
+                        </script>
+
                     </div>
-                    <script>
-                        // Show notification function
-                        function showNotification(message, type) {
-                            // Get the notification element
-                            var notification = document.getElementById("notification");
-
-                            // Set the message and type
-                            notification.innerHTML = message;
-                            notification.classList.add(type);
-
-                            // Show the notification for 3 seconds
-                            setTimeout(function() {
-                                notification.innerHTML = "";
-                                notification.classList.remove(type);
-                            }, 3000);
-                        }
-                    </script>
-
                 </div>
             </div>
         </div>
-    </div>
-@endsection
+    @endsection
