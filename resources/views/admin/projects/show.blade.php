@@ -78,13 +78,14 @@
                 @endif
                 <nav>
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                        <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home"
+                        <button class="nav-link active " id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home"
                             type="button" role="tab" aria-controls="nav-home" aria-selected="true">Project</button>
-                        <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile"
+                        <button class="nav-link " id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile"
                             type="button" role="tab" aria-controls="nav-profile"
-                            aria-selected="false">Attachemnets</button>
+                            aria-selected="false">Attachments</button>
                     </div>
                 </nav>
+                
                 <div class="tab-content" id="nav-tabContent">
 
                     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
@@ -125,16 +126,14 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="table-responsive mt-15">
-                            <!-- Tableau des projets -->
-                            <table class="table table-hover mb-0 text-center">
-                                <thead>
-                                    <tr class="text-dark">
-                                        <th scope="col">project name</th>
+                        <div class="table-responsive mt-5 border-dark ">
+                            <table class="table table-hover mb-0 text-center border-dark ">
+                                <thead class="bg-light text-dark">
+                                    <tr>
+                                        <th scope="col">Project Name</th>
                                         <th scope="col">Progression</th>
-                                        <th scope="col">number of task</th>
-                                        <th scope="col">Team</th>
-                                        <th scope="col">Name of tasks</th>
+                                        <th scope="col">Number of Tasks</th>
+                                        <th scope="col">Task and Assigned Person</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -146,36 +145,81 @@
                                                     role="progressbar" style="width: {{ $project->progression() }}%"
                                                     aria-valuenow="{{ $project->progression() }}" aria-valuemin="0"
                                                     aria-valuemax="100">
-                                                    {{ $project->progression() }}%</div>
+                                                    {{ $project->progression() }}%
+                                                </div>
                                             </div>
                                         </td>
                                         <td>{{ $project->Totaltasks() }}</td>
                                         <td>
-                                            @foreach ($project->tasks as $task)
-                                                <div class="user-info">
-                                                    <img src="{{ asset('storage/assets/users/' . $task->employee->image) }}"
-                                                        class="user-img" alt="user avatar">
-                                                    <div class="user-name bg-warning">
-                                                        {{ $task->employee->firstName }}
-                                                        {{ $task->employee->lastName }}
-                                                    </div>
-                                                </div>
-                                            @endforeach
-                                        </td>
-                                        <td>
-                                            @foreach ($project->tasks as $task)
-                                                <span class="d-block mb-2">{{ $task->name }}</span>
-                                            @endforeach
+                                            <div class="table-responsive border-dark -my-5">
+                                                <table class="table table-hover mb-0 text-black border-dark">
+                                                    <tbody>
+                                                        @foreach ($project->tasks as $task)
+                                                            <tr>
+                                                                <td>
+                                                                    <strong>{{ $task->name }}</strong>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="d-flex align-items-center">
+                                                                        <img src="{{ asset('storage/assets/users/' . $task->employee->image) }}"
+                                                                            class="rounded-circle user-img mr-2"
+                                                                            alt="user avatar">
+                                                                        <div class="user-name">
+                                                                            <strong>{{ $task->employee->firstName }}
+                                                                                {{ $task->employee->lastName }}</strong>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+
+                                                                <td style="padding: 5px;">
+                                                                    @if ($task->status == 'to do')
+                                                                        <span
+                                                                            class="badge bg-secondary ">{{ $task->status }}</span>
+                                                                    @elseif ($task->status == 'in progress')
+                                                                        <span
+                                                                            class="badge bg-warning">{{ $task->status }}</span>
+                                                                    @else
+                                                                        <span
+                                                                            class="badge bg-success">{{ $task->status }}</span>
+                                                                    @endif
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
 
-                        <div class="table-responsive mt-15">
-                            <table class="table center-aligned-table mb-0 table table-hover" style="text-align:center">
+                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                        <div class="card-body">
+                            <h3 class="card-title text-center">Add Attachments</h3>
+
+                            <p class="text-danger">* Attachment format: pdf, jpeg, .jpg, png</p>
+                            <form method="post" action="{{ url('/ProjectAttachments') }}"
+                                enctype="multipart/form-data">
+                                {{ csrf_field() }}
+                                <div class="form-group">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="customFile" name="file_name"
+                                            required>
+                                        <label class="custom-file-label" for="customFile">Choose File</label>
+                                    </div>
+                                </div>
+                                <input type="hidden" id="project_id" name="project_id" value="{{ $project->id }}">
+                                <button type="submit" class="btn btn-primary btn-sm mt-3"
+                                    name="uploadedFile">Confirm</button>
+                            </form>
+                        </div>
+
+                        <div class="table-responsive table-bordered border-dark  my-5">
+
+
+                            <table class="table center-aligned-table mb-0 table table-hover text-black border-dark " style="text-align:center">
                                 <thead>
                                     <tr class="text-dark">
                                         <th scope="col">#</th>
@@ -198,18 +242,17 @@
 
                                                 <a class="btn btn-outline-success btn-sm"
                                                     href="{{ url('View_file') }}/{{ $project->id }}/{{ $attachment->file_name }}"
-                                                    role="button"><i class="fas fa-eye"></i>&nbsp; Show</a>
+                                                    role="button"><i class='bx bx-show'></i>&nbsp; Show</a>
 
                                                 <a class="btn btn-outline-info btn-sm"
                                                     href="{{ url('download') }}/{{ $project->id }}/{{ $attachment->file_name }}"
-                                                    role="button"><i class="fas fa-download"></i>&nbsp; Download</a>
+                                                    role="button"><i class='bx bx-download'></i>&nbsp; Download</a>
 
 
-                                                <button type="button" class="btn btn-danger"
+                                                <button type="button" class="btn btn-outline-danger btn-sm"
                                                     onclick="openDeleteModal({{ $attachment->id }}, '{{ $attachment->file_name }}')">
-                                                    Delete Attachment
+                                                    <i class='bx bx-trash-alt'></i> &nbsp;Delete
                                                 </button>
-
                                             </td>
                                         </tr>
                                     @endforeach
@@ -228,7 +271,8 @@
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <form action="{{ route('admin.projects.destroy', $project->getId()) }}" method="post">
+                                    <form action="{{ route('admin.projects.destroy', $project->getId()) }}"
+                                        method="post">
                                         {{ csrf_field() }}
                                         <div class="modal-body">
                                             <p class="text-center">
@@ -258,4 +302,4 @@
                             }
                         </script>
 
- @endsection
+                    @endsection

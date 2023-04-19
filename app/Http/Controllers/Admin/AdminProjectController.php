@@ -188,9 +188,12 @@ class AdminProjectController extends Controller
     }
 
     public function destroy(Project $project, Request $request)
-    {
-        if ($request->has('id_file')) {
-            $attachment = ProjectsAttachmnets::find($request->id_file);
+{
+        $projectFile =$request->has('id_file');
+        if ($projectFile) {
+            $id = $request->id;
+            $project = Project::where('id', $id)->first();
+            $attachment = ProjectsAttachmnets::find($request->id_file)->first();
             if ($attachment) {
                 $file_path = $project->id . '/' . $attachment->file_name;
                 Storage::disk('public_uploads')->delete($file_path);

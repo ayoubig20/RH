@@ -272,8 +272,8 @@
                                                                 <select class="form-control" id="priority"
                                                                     name="priority" required>
                                                                     <option value="">choice Priority</option>
-                                                                    <option value="highest"
-                                                                        {{ old('priority') == 'highest' ? 'selected' : '' }}>
+                                                                    <option value="high"
+                                                                        {{ old('priority') == 'high' ? 'selected' : '' }}>
                                                                         highest</option>
                                                                     <option value="Medium"
                                                                         {{ old('priority') == 'medium' ? 'selected' : '' }}>
@@ -283,10 +283,7 @@
                                                                         {{ old('priority') == 'low' ? 'selected' : '' }}>
                                                                         low
                                                                     </option>
-                                                                    <option value="High"
-                                                                        {{ old('priority') == 'lowest' ? 'selected' : '' }}>
-                                                                        lowest
-                                                                    </option>
+
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -341,10 +338,11 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table">
+                                    <table class="table text-center">
                                         <thead class=" text-primary">
                                             <th>#</th>
                                             <th>Project name</th>
+                                            <th>Project status</th>
                                             <th>progresion</th>
                                             <th>Nombre of tasks</th>
                                             <th>team projects</th>
@@ -358,6 +356,18 @@
                                                 <tr>
                                                     <td>{{ $i }}</td>
                                                     <td>{{ $project->getName() }}</td>
+                                            
+                                                    <td>
+                                                        @if ($project->status == 'Panding')
+                                                            <span class="badge bg-info p-1">{{ $project->status }}</span>
+                                                        @elseif ($project->status == 'In progress')
+                                                            <span
+                                                                class="badge bg-warning p-1">{{ $project->status }}</span>
+                                                        @else
+                                                            <span
+                                                                class="badge bg-success p-1">{{ $project->status }}</span>
+                                                        @endif
+                                                    </td>
                                                     <td>
                                                         <div class="progress">
                                                             <div class="progress-bar {{ $project->progression() < 50 ? 'bg-warning' : ($project->progression() < 75 ? 'bg-info' : 'bg-success') }}"
@@ -370,15 +380,13 @@
                                                     </td>
                                                     <td>{{ $project->Totaltasks() }}</td>
                                                     <td>
-                                                        @foreach ($project->tasks as $task)
+                                                        @foreach ($project->tasks->unique('employee_id') as $task)
                                                             <div
                                                                 style="position: relative; display: inline-block; margin-right: 10px;">
                                                                 <img src="{{ asset('storage/assets/users/' . $task->employee->image) }}"
                                                                     class="user-img" alt="user avatar">
-                                                                {{-- <div style="position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%); text-align: center; width: 100%;"> --}}
                                                                 {{ $task->employee->firstName }}
                                                                 {{ $task->employee->lastName }}
-                                                                {{-- </div> --}}
                                                             </div>
                                                         @endforeach
                                                     </td>
@@ -390,6 +398,11 @@
                                                                 data-bs-toggle="modal"
                                                                 data-bs-target="#editProject{{ $project->getId() }}">
                                                                 <i class="bx bxs-edit"></i> Edit
+                                                            </button>
+                                                            <button type="button" class="btn btn-outline-primary btn-sm">
+                                                                <a style="text-decoration: none;color:rgb(25, 40, 154)"
+                                                                    href="{{ route('admin.projects.show', $project->getId()) }}"><i
+                                                                        class='bx bxs-show me-0'></i> Show</a>
                                                             </button>
                                                             <div class="modal fade"
                                                                 id="editProject{{ $project->getId() }}" tabindex="-1"
@@ -449,8 +462,10 @@
                                                                                 <div class="form-group">
                                                                                     <label for="start_date">Starte
                                                                                         Date:</label>
-                                                                                        <input type="date" name="start_date" id="start_date" class="form-control"
-                                                                                        value="{{old('start_date',$project->start_date->format('Y-m-d')) }}">
+                                                                                    <input type="date"
+                                                                                        name="start_date" id="start_date"
+                                                                                        class="form-control"
+                                                                                        value="{{ old('start_date', $project->start_date->format('Y-m-d')) }}">
                                                                                 </div>
 
                                                                                 <div class="form-group">
@@ -465,8 +480,7 @@
                                                                                     <input id="budget" type="number"
                                                                                         class="form-control"
                                                                                         name="budget"
-                                                                                        value="{{ old('budget', $project->budget) }}"
-                                                                                        >
+                                                                                        value="{{ old('budget', $project->budget) }}">
                                                                                 </div>
                                                                                 <div class="form-group">
                                                                                     <label for="priority">Priority:</label>
@@ -476,8 +490,8 @@
                                                                                         <option value="" selected
                                                                                             disabled>Select priority
                                                                                         </option>
-                                                                                        <option value="highest"
-                                                                                            {{ $project->priority == 'highest' ? 'selected' : '' }}>
+                                                                                        <option value="high"
+                                                                                            {{ $project->priority == 'high' ? 'selected' : '' }}>
                                                                                             Highest</option>
                                                                                         <option value="medium"
                                                                                             {{ $project->priority == 'medium' ? 'selected' : '' }}>
@@ -485,9 +499,7 @@
                                                                                         <option value="low"
                                                                                             {{ $project->priority == 'low' ? 'selected' : '' }}>
                                                                                             Low</option>
-                                                                                        <option value="lowest"
-                                                                                            {{ $project->priority == 'lowest' ? 'selected' : '' }}>
-                                                                                            Lowest</option>
+
                                                                                     </select>
                                                                                 </div>
                                                                                 <div class="form-group">

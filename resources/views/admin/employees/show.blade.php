@@ -88,11 +88,11 @@
                         <div class="card-body">
                             @if ($employee->projects->count() > 0)
                                 <ul class="list-group">
-                                    @foreach ($employee->projects as $project)
+                                    @foreach ($employee->projects->unique('id') as $project)
                                         <li>{{ $project->name }}</li>
                                     @endforeach
                                 </ul>
-                                <p><strong>Total projects:</strong> {{ $employee->projects->count() }}</p>
+                                <p><strong>Total projects:</strong> {{ $employee->projects->unique('id')->count() }}</p>
                             @else
                                 <p><strong>No projects assigned.</strong></p>
                             @endif

@@ -5,9 +5,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        crossorigin="anonymous" />
-    <link href="{{ asset('/css/app.css') }}" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+    <link href="{{ asset('assets/css/home.css') }}" rel="stylesheet" />
 
     <title>@yield('title', 'Empolye Mangement')</title>
 </head>
@@ -16,7 +15,9 @@
     <!-- header -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-secondary py-4">
         <div class="container">
-            <a class="navbar-brand" href="{{ route('home.index') }}">Empolye Mangement</a>
+            <span><img src="{{asset('assets/images/logo.png')}}" alt="logo" height="39"></span>
+            <a class="navbar-brand" href="{{ route('home.index') }}" > 
+            Empolye Mangement Systeme </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -35,16 +36,18 @@
                     onclick="document.getElementById('logout').submit();">Logout</a>
                     @csrf
                     </form>
+                    <a class="nav-link active" href="{{ route("admin.home.index") }}">Admin Pannel</a>
+
                     @endguest
                 </div>
             </div>
         </div>
     </nav>
-    <header class="masthead bg-primary text-white text-center py-4">
+    {{-- <header class="masthead bg-primary text-white text-center py-4">
         <div class="container d-flex align-items-center flex-column">
             <h2>@yield('subtitle', 'Empolye Mangement')</h2>
         </div>
-    </header>
+    </header> --}}
     <!-- header -->
     <div class="container my-4">
         @yield('content')

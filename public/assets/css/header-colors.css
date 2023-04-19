@@ -46,7 +46,7 @@ html.color-header .mobile-toggle-menu {
 	background: #157d4c!important
 }
 .switcher-body .headercolor5 {
-	background: #673ab7!important
+	background: #412077!important
 }
 .switcher-body .headercolor6 {
 	background: #795548!important
@@ -70,7 +70,7 @@ html.headercolor4 .topbar {
 	background: #157d4c
 }
 html.headercolor5 .topbar {
-	background: #673ab7
+	background: #412077 
 }
 html.headercolor6 .topbar {
 	background: #795548
@@ -193,11 +193,10 @@ html.color-sidebar.sidebarcolor6 .sidebar-wrapper {
     background-image: url(../images/bg-themes/6.png);
 }
 
-html.color-sidebar.sidebarcolor7 .sidebar-wrapper {
+.color-sidebar.sidebarcolor7 .sidebar-wrapper {
     background-image: url(../images/bg-themes/7.png);
 }
-
-html.color-sidebar.sidebarcolor8 .sidebar-wrapper {
+.color-sidebar.sidebarcolor8 .sidebar-wrapper {
     background-image: url(../images/bg-themes/8.png);
 }
 

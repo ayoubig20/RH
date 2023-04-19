@@ -76,7 +76,7 @@
                     </div>
                 @endif
                 <div class="text-sm-end">
-                    <div class="btn-group mb-3">
+                    {{-- <div class="btn-group mb-3">
                         <a href="{{ route('admin.tasks.index') }}"
                             class="btn btn-primary{{ !request()->has('status') && !request()->has('view') ? ' active' : '' }}"
                             style="{{ !request()->has('status') && !request()->has('view') ? 'background-color: #0d6efd;' : 'background-color: transparent;border-color: #0d6efd;color: #0d6efd;' }}">All</a>
@@ -98,7 +98,7 @@
                         <a href="{{ route('admin.tasks.index', ['view' => 'list']) }}" class="btn btn-muted"
                             style="{{ request()->get('view') != 'card' ? 'background-color: #6c757d;border-color: #6c757d;color: #fff;font-weight: bold;' : 'background-color: transparent;border-color: #6c757d;color: #6c757d;' }}"><i
                                 class='bx bx-list-ul'></i></a>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
             <!-- Button trigger modal -->

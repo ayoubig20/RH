@@ -238,9 +238,9 @@
                                                                 <select class="form-control" id="priority"
                                                                     name="priority" required>
                                                                     <option value="">choice Priority</option>
-                                                                    <option value="highest"
-                                                                        {{ old('priority') == 'highest' ? 'selected' : '' }}>
-                                                                        highest</option>
+                                                                    <option value="high"
+                                                                        {{ old('priority') == 'high' ? 'selected' : '' }}>
+                                                                        high</option>
                                                                     <option value="Medium"
                                                                         {{ old('priority') == 'medium' ? 'selected' : '' }}>
                                                                         Medium
@@ -249,10 +249,7 @@
                                                                         {{ old('priority') == 'low' ? 'selected' : '' }}>
                                                                         low
                                                                     </option>
-                                                                    <option value="High"
-                                                                        {{ old('priority') == 'lowest' ? 'selected' : '' }}>
-                                                                        lowest
-                                                                    </option>
+
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -283,7 +280,7 @@
 
                                                     <div class="form-group">
                                                         <div class="col col-md-offset-4">
-                                                            <button type="submit" class="btn btn-primary">
+                                                            <button type="submit" class="btn btn-success">
                                                                 create project </button>
                                                         </div>
                                                     </div>
@@ -314,8 +311,8 @@
                                     <!-- project card -->
                                     <div class="card d-block h-100">
                                         <?php
-                                        $imagePath = 'storage/assets/projects/'.$project->image; // Get the path to the image
-
+                                        $imagePath = 'storage/assets/projects/' . $project->image; // Get the path to the image
+                                        
                                         if (file_exists($imagePath)) {
                                             // Check if the image exists
                                             $imageSrc = $imagePath; // If the image exists, set the source to the image path
@@ -326,14 +323,22 @@
 
                                         <img class="card-img-top" src="<?php echo asset($imageSrc); ?>" alt="project image cap">
                                         <div class="card-img-overlay">
-                                            <div class="badge bg-success p-1">Finished</div>
+                                            {{-- <div class="badge bg-success p-1">{{ $project->status }}</div> --}}
+                                        @if ( $project->status  == 'Panding')
+                                            <span class="badge bg-info p-1">{{ $project->status }}</span>
+                                        @elseif ($project->status  == 'In progress')
+                                            <span class="badge bg-warning p-1">{{ $project->status }}</span>
+                                        @else
+                                            <span class="badge bg-success p-1">{{ $project->status }}</span>
+                                        @endif
+                                            {{-- <div class="badge bg-success p-1">{{ $project->status }}</div> --}}
                                         </div>
                                         <div class="card-body position-relative">
 
 
                                             <!-- project title-->
                                             <h4 class="mt-0">
-                                                <a href="{{route('admin.projects.show',$project->id)}}"
+                                                <a href="{{ route('admin.projects.show', $project->id) }}"
                                                     class="text-title">{{ $project->name }}</a>
                                             </h4>
                                             <p class="text-muted font-13 my-3 project-description">
@@ -355,18 +360,27 @@
 
                                             </p>
                                             <div id="tooltip-container">
-                                                @foreach ($project->tasks as $task)
+                                                @php
+                                                    $uniqueEmployees = $project->tasks->unique(function ($task) {
+                                                        return $task->employee->id;
+                                                    });
+                                                @endphp
+
+                                                @foreach ($uniqueEmployees as $task)
                                                     <a href="#" class="d-inline-block avatar-tooltip"
                                                         data-bs-toggle="tooltip" data-bs-placement="top"
                                                         data-bs-original-title="{{ $task->employee ? $task->employee->firstName . ' ' . $task->employee->lastName : '' }}">
-                                                        <div style="position: relative; display: inline-block; margin-right: 10px;">
-                                                            <img src="{{ asset('storage/assets/users/'.$task->employee->image) }}" class="user-img" alt="user avatar">
-                                                            {{-- <div style="position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%); text-align: center; width: 100%;"> --}}
-                                                                {{ $task->employee->firstName }} 
-                                                            {{-- </div> --}}
+                                                        <div
+                                                            style="position: relative; display: inline-block; margin-right: 10px;">
+                                                            <img src="{{ asset('storage/assets/users/' . $task->employee->image) }}"
+                                                                class="user-img" alt="user avatar">
+                                                            {{-- <div style="position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%); text-align: center; width: 100%;">
+                                                                {{ $task->employee->firstName }}
+                                                            </div> --}}
                                                         </div>
                                                     </a>
                                                 @endforeach
+
                                                 @if ($project->tasks->count() > 3)
                                                     <a href="javascript:void(0);"
                                                         class="d-inline-block text-muted fw-bold ms-2"
@@ -380,7 +394,7 @@
                                         <ul class="list-group list-group-flush">
                                             <li class="list-group-item p-3">
                                                 <!-- project progress-->
-                                                
+
                                                 <p class="mb-2 fw-bold">Progress <span
                                                         class="float-end">{!! $project->progression() !!}%</span></p>
                                                 <div class="progress progress-sm">
@@ -416,16 +430,16 @@
 
         {{-- issue i didnit fixed to make javascript work css issue --}}
         {{-- <script>
-                    $('.view-more').click(function() {
-                        $(this).closest('.project-description').hide();
-                        $(this).closest('.project-description').next('.hidden-content').slideDown();
-                    });
+            $('.view-more').click(function() {
+                $(this).closest('.project-description').hide();
+                $(this).closest('.project-description').next('.hidden-content').slideDown();
+            });
 
-                    $('.view-less').click(function() {
-                        $(this).closest('.hidden-content').slideUp();
-                        $(this).closest('.hidden-content').prev('.project-description').show();
-                    });
-                </script> --}}
+            $('.view-less').click(function() {
+                $(this).closest('.hidden-content').slideUp();
+                $(this).closest('.hidden-content').prev('.project-description').show();
+            });
+        </script> --}}
         <script>
             // Initialize all tooltips with default settings
             var tooltipTriggerList = [].slice.call(document.querySelectorAll('.avatar-tooltip'))

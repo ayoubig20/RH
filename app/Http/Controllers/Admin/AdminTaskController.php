@@ -68,11 +68,13 @@ class AdminTaskController extends Controller
         $viewData['employees'] = Employee::all();
         $viewData['projects'] = Project::all();
 
-        return redirect()->route('admin.tasks.index')->with([
-            'success' => 'Task created successfully!',
-            'viewData' => $viewData
-        ]);
-
+        // return redirect()->route('admin.tasks.index')->with([
+        //     'success' => 'Task created successfully!',
+        //     'viewData' => $viewData
+        // ]);
+        return back()->with([
+                 'success' => 'Task created successfully!','viewData' => $viewData
+                ]);
     }
 
 
@@ -118,13 +120,13 @@ class AdminTaskController extends Controller
         ]);
         $task->save();
 
-        return redirect()->route('admin.tasks.index')->with('success', 'Task updated successfully!');
+        return back()->with('success', 'Task updated successfully!');
     }
 
     public function destroy(Task $task)
     {
         $task->delete();
 
-        return redirect()->route('admin.tasks.index')->with('success', 'Task deleted successfully!');
+        return back()->with('success', 'Task deleted successfully!');
     }
 }

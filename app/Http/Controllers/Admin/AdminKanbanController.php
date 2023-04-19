@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Task;
+use App\Models\Project;
+use App\Models\Employee;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -20,4 +22,14 @@ class AdminKanbanController extends Controller
     // return $request;
 
 }
-}
+public function index()
+{
+    $viewData = [];
+    $viewData['tasks']  = Task::all();
+
+    $viewData['employees'] = Employee::all();
+    $viewData['projects'] = Project::all();
+
+    return view('admin.kanban.index', compact('viewData')); 
+    
+}}

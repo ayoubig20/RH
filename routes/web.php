@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\AdminEmployeeController;
 use App\Http\Controllers\Admin\AdminHolidaysController;
 use App\Http\Controllers\Admin\AdminDepartmentController;
 use App\Http\Controllers\Admin\AdminKanbanController;
+use App\Http\Controllers\Admin\AdminProjectAttachmnet;
 
 /*
 |--------------------------------------------------------------------------
@@ -85,9 +86,10 @@ Route::middleware('auth')->group(function () {
         'destroy' => 'admin.category.destroy',
     ]);
     Route::get('download/{id}/{file_name}', [AdminProjectController::class, 'get_file']);
-
     Route::get('View_file/{id}/{file_name}', [AdminProjectController::class, 'open_file']);
+    Route::resource('ProjectAttachments', AdminProjectAttachmnet::class);
     Route::put('/admin/tasks/{id}/status', [AdminKanbanController::class, 'updateStatus'])->name('admin.tasks.updateStatus');
+    Route::get('/admin/kanban', [AdminKanbanController::class, 'index'])->name('admin.kanban.index');
 
 });
 Auth::routes();

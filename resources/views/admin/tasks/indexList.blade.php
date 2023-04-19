@@ -171,8 +171,8 @@
                                         <label for="priority">Priority</label>
                                         <select class="form-control" id="priority" name="priority" required>
                                             <option value="">choice Priority</option>
-                                            <option value="highest" {{ old('priority') == 'highest' ? 'selected' : '' }}>
-                                                highest</option>
+                                            <option value="high" {{ old('priority') == 'high' ? 'selected' : '' }}>
+                                                high</option>
                                             <option value="Medium" {{ old('priority') == 'Medium' ? 'selected' : '' }}>
                                                 Medium
                                             </option>
@@ -238,7 +238,7 @@
 
                                     <td>{{ $task->getProject()->name }}</td>
                                     <td style="padding: 5px;">
-                                        @if ($task->priority == 'highest')
+                                        @if ($task->priority == 'high')
                                             <span class="badge bg-danger ">{{ $task->priority }}</span>
                                         @elseif ($task->priority == 'Medium')
                                             <span class="badge bg-warning ">{{ $task->priority }}</span>
@@ -349,9 +349,9 @@
                                                                     <select class="form-control" id="priority"
                                                                         name="priority" required>
                                                                         <option value="">choice Priority</option>
-                                                                        <option value="highest"
-                                                                            {{ old('priority', $task->priority) == 'highest' ? 'selected' : '' }}>
-                                                                            highest</option>
+                                                                        <option value="high"
+                                                                            {{ old('priority', $task->priority) == 'high' ? 'selected' : '' }}>
+                                                                            high</option>
                                                                         <option value="Medium"
                                                                             {{ old('priority', $task->priority) == 'Medium' ? 'selected' : '' }}>
                                                                             Medium

@@ -74,26 +74,18 @@
         <ul>
             <li> <a href="{{route('admin.tasks.index')}}"><i class="bx bx-right-arrow-alt"></i> <i class="bx bx-task"></i>Tasks</a>
             </li>
-            <li> <a href="{{ url('icons-boxicons') }}"><i class="bx bx-right-arrow-alt"></i>Boxicons</a>
+            <li> <a href="{{ route('admin.kanban.index') }}"><i class="bx bx-right-arrow-alt"></i><i class='bx bx-list-ol'></i>Kanban Board</a>
             </li>
-            <li> <a href="{{ url('icons-feather-icons') }}"><i class="bx bx-right-arrow-alt"></i>Feather Icons</a>
-            </li>
+            
         </ul>
     </li>
     <li>
-        <a class="has-arrow" href="javascript:;">
+        <a class="has-arrow" href="{{ route('admin.projects.index') }}">
             <div class="parent-icon"> <i class="bx bx-atom"></i>
             </div>
             <div class="menu-title">Projects</div>
         </a>
-        <ul>
-            <li> <a href="{{ route('admin.projects.index') }}"><i class="bx bx-right-arrow-alt"></i>Project create</a>
-            </li>
-            <li> <a href="{{ url('icons-boxicons') }}"><i class="bx bx-right-arrow-alt"></i>Boxicons</a>
-            </li>
-            <li> <a href="{{ url('icons-feather-icons') }}"><i class="bx bx-right-arrow-alt"></i>Feather Icons</a>
-            </li>
-        </ul>
+     
     </li>   
     <li>
         <a class="has-arrow" href="javascript:;">
@@ -111,11 +103,19 @@
         </ul>
     </li>
     <li>
-        <a class="has-arrow" href="{{ route('admin.employees.create') }}">
+        <a class="has-arrow" href="javascript:;">
             <div class="parent-icon"> <i class='bx bxs-archive'></i>
             </div>
             <div class="menu-title">Archive</div>
         </a>
+        <ul>
+            <li> <a href="{{ url('icons-feather-icons') }}"><i class="bx bx-right-arrow-alt"></i><i class='bx bxs-group' ></i>Archive Empolyes</a>
+            </li>
+            <li> <a href="{{ url('icons-feather-icons') }}"><i class="bx bx-right-arrow-alt"></i><i class='bx bx-atom'></i></i>Archive Project </a>
+            </li>
+            {{-- <li> <a href="{{ url('icons-feather-icons') }}"><i class="bx bx-right-arrow-alt"></i><i class='bx bxs-briefcase-alt-2'></i>list job</a> --}}
+            </li>
+        </ul>
     </li>
     </li>
     <!--end navigation-->
