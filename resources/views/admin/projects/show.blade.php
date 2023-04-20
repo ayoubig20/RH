@@ -85,7 +85,7 @@
                             aria-selected="false">Attachments</button>
                     </div>
                 </nav>
-                
+
                 <div class="tab-content" id="nav-tabContent">
 
                     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
@@ -219,7 +219,8 @@
                         <div class="table-responsive table-bordered border-dark  my-5">
 
 
-                            <table class="table center-aligned-table mb-0 table table-hover text-black border-dark " style="text-align:center">
+                            <table class="table center-aligned-table mb-0 table table-hover text-black border-dark "
+                                style="text-align:center">
                                 <thead>
                                     <tr class="text-dark">
                                         <th scope="col">#</th>

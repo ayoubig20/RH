@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('image')->nullable();
-            $table->string('document')->nullable();
+            // $table->string('document')->nullable();
             $table->dateTime('start_date');
             $table->dateTime('end_date');
             $table->unsignedBigInteger('budget')->nullable();
-            $table->enum('priority', ['highest', 'medium', 'low', 'lowest']);
+            $table->enum('priority', ['high', 'medium', 'low']);
             $table->text('description')->nullable();
             $table->string('status')->default("Panding");
             $table->softDeletes();

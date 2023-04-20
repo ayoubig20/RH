@@ -1,4 +1,4 @@
-<?php
+<!-- <?php
 
 namespace Database\Seeders;
 
@@ -16,4 +16,4 @@ class EmployeeSeeder extends Seeder
         Employee::factory()
      ->count(10);
     }
-}
+} -->

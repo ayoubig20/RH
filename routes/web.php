@@ -1,16 +1,19 @@
 <?php
 
-use App\Http\Controllers\admin\AdminCategoryProject;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\AdminHomeController;
 use App\Http\Controllers\Admin\AdminTaskController;
+use App\Http\Controllers\admin\AdminCategoryProject;
+use App\Http\Controllers\Admin\AdminKanbanController;
+use App\Http\Controllers\Admin\AdminProjectAttachmnet;
 use App\Http\Controllers\Admin\AdminProjectController;
 use App\Http\Controllers\Admin\AdminEmployeeController;
 use App\Http\Controllers\Admin\AdminHolidaysController;
 use App\Http\Controllers\Admin\AdminDepartmentController;
-use App\Http\Controllers\Admin\AdminKanbanController;
-use App\Http\Controllers\Admin\AdminProjectAttachmnet;
+use App\Http\Controllers\Admin\ArchiveEmp\AdminEmpArchiveController;
+use App\Http\Controllers\Admin\ArchivePro\AdminProArchiveController;
 
 /*
 |--------------------------------------------------------------------------
@@ -87,9 +90,30 @@ Route::middleware('auth')->group(function () {
     ]);
     Route::get('download/{id}/{file_name}', [AdminProjectController::class, 'get_file']);
     Route::get('View_file/{id}/{file_name}', [AdminProjectController::class, 'open_file']);
+    Route::put('/admin/project/{id}/status', [AdminProjectController::class, 'statusUpdate'])->name('admin.project.updateStatus');
     Route::resource('ProjectAttachments', AdminProjectAttachmnet::class);
     Route::put('/admin/tasks/{id}/status', [AdminKanbanController::class, 'updateStatus'])->name('admin.tasks.updateStatus');
+    Route::put('/admin/tasks/{id}/status', [AdminTaskController::class, 'statusUpdate'])->name('admin.tasksUp.updateStatus');
+
     Route::get('/admin/kanban', [AdminKanbanController::class, 'index'])->name('admin.kanban.index');
 
+    Route::resource('/admin/archiveEmp', AdminEmpArchiveController::class)->names([
+        'index' => 'admin.archiveEmployees.index',
+        // 'create' => 'admin.archiveEmployees.create',
+        'store' => 'admin.archiveEmployees.store',
+        // 'show' => 'admin.archiveEmployees.show',
+        //  'edit' => 'admin.archiveEmployees.edit',
+         'update' => 'admin.archiveEmployees.update',
+        'destroy' => 'admin.archiveEmployees.destroy',
+    ]); 
+     Route::resource('/admin/archivePro', AdminProArchiveController::class)->names([
+        'index' => 'admin.archiveprojects.index',
+        // 'create' => 'admin.archiveprojects.create',
+        'store' => 'admin.archiveprojects.store',
+        // 'show' => 'admin.archiveEmployees.show',
+        //  'edit' => 'admin.archiveprojects.edit',
+         'update' => 'admin.archiveprojects.update',
+        'destroy' => 'admin.archiveprojects.destroy',
+    ]);
 });
 Auth::routes();

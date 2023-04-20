@@ -22,6 +22,16 @@ class AdminProjectController extends Controller
         $projects = Project::all();
         $viewData['categorys'] = CategoryProject::all();
         //  return view('admin.projects.index', compact('projects', 'viewData'));
+        if ($request->has('status')) {
+            $status = $request->input('status');
+            if ($status === 'Panding') {
+                $projects = $projects->where('status', 'Panding');
+            } elseif ($status === 'In progress') {
+                $projects  = $projects->where('status', 'In progress');
+            } elseif ($status === 'Finshed') {
+                $projects = $projects->where('status', 'Finshed');
+            }
+        }
         if ($request->has('view') && $request->get('view') == 'card') {
             return view('admin.projects.indexCards', ['viewData' => $viewData, 'projects' => $projects]);
         } else {
@@ -54,7 +64,7 @@ class AdminProjectController extends Controller
             'document' => 'file|mimes:doc,pdf|max:2048', // validate single document
             'start_date' => 'required|date|before:end_date',
             'end_date' => 'required|date|after:start_date',
-    
+
         ]);
 
         // create new project
@@ -95,33 +105,33 @@ class AdminProjectController extends Controller
 
         //     // redirect to projects index page
         // }
-            if ($request->hasFile('document')) {
-                $project_id = Project::latest()->first()->id;
-                $document = $request->file('document');
-                if ($document->isValid()) {
-                    $extension = $document->getClientOriginalExtension();
-                    $filename = time() . '_' . uniqid() . '.' . $extension;
-                    $document->move(public_path('Attachments/' . $project_id), $filename);
+        if ($request->hasFile('document')) {
+            $project_id = Project::latest()->first()->id;
+            $document = $request->file('document');
+            if ($document->isValid()) {
+                $extension = $document->getClientOriginalExtension();
+                $filename = time() . '_' . uniqid() . '.' . $extension;
+                $document->move(public_path('Attachments/' . $project_id), $filename);
 
-                    $attachments = new ProjectsAttachmnets();
-                    $attachments->file_name = $filename; // use the new filename instead of the original filename
-                    $attachments->Created_by = Auth::user()->name;
-                    $attachments->project_id = $project_id;
-                    $attachments->save();
-                }
-            };
-            $projects = Project::all();
-            $viewData['categorys'] = CategoryProject::all();
-            //  return view('admin.projects.index', compact('projects', 'viewData'));
-            if ($request->has('view') && $request->get('view') == 'card') {
-                return view('admin.projects.indexCards', ['viewData' => $viewData, 'projects' => $projects]);
-            } else {
-                return view('admin.projects.indexList', ['viewData' => $viewData, 'projects' => $projects]);
+                $attachments = new ProjectsAttachmnets();
+                $attachments->file_name = $filename; // use the new filename instead of the original filename
+                $attachments->Created_by = Auth::user()->name;
+                $attachments->project_id = $project_id;
+                $attachments->save();
             }
-            // return $request;
+        };
+        $projects = Project::all();
+        $viewData['categorys'] = CategoryProject::all();
+        //  return view('admin.projects.index', compact('projects', 'viewData'));
+        if ($request->has('view') && $request->get('view') == 'card') {
+            return view('admin.projects.indexCards', ['viewData' => $viewData, 'projects' => $projects]);
+        } else {
+            return view('admin.projects.indexList', ['viewData' => $viewData, 'projects' => $projects]);
         }
+        // return $request;
+    }
 
-    public function edit(Request $request,Project $project,$id)
+    public function edit(Request $request, Project $project, $id)
     {
         // $project = Project::findOrFail($id);
 
@@ -188,8 +198,8 @@ class AdminProjectController extends Controller
     }
 
     public function destroy(Project $project, Request $request)
-{
-        $projectFile =$request->has('id_file');
+    {
+        $projectFile = $request->has('id_file');
         if ($projectFile) {
             $id = $request->id;
             $project = Project::where('id', $id)->first();
@@ -212,10 +222,10 @@ class AdminProjectController extends Controller
             session()->flash('delete', "project and its associated file deleted successfully");
             return redirect()->route('admin.projects.index')->with('success', 'Project deleted successfully.');
         }
-                    // return $request;
+        // return $request;
     }
-    
-    
+
+
     public function get_file($id, $file_name)
     {
         $path = Storage::disk('public_uploads')->path($id . '/' . $file_name);
@@ -226,5 +236,14 @@ class AdminProjectController extends Controller
     {
         $path = Storage::disk('public_uploads')->path($id . '/' . $file_name);
         return response()->file($path);
+    }
+    public function statusUpdate($id, Request $request)
+    {
+        $project = Project::findOrFail($id);
+        $project->update([
+            'status' => $request->status,
+        ]);
+        session()->flash('Status_Update');
+        return back();
     }
 }

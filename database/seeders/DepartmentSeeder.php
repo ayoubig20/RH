@@ -1,4 +1,4 @@
-<?php
+<!-- <?php
 
 namespace Database\Seeders;
 
@@ -18,4 +18,4 @@ class DepartmentSeeder extends Seeder
       Department::factory()
         ->count(2)
         ->create();}
-}
+} -->

@@ -129,4 +129,13 @@ class AdminTaskController extends Controller
 
         return back()->with('success', 'Task deleted successfully!');
     }
+    public function statusUpdate($id, Request $request)
+    {
+        $task = Task::findOrFail($id);
+        $task->update([
+            'status' => $request->status,
+        ]);
+        session()->flash('Status_Update');
+        return back();
+    }
 }

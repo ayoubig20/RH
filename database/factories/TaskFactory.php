@@ -23,6 +23,7 @@ class TaskFactory extends Factory
             'description' => $this->faker->paragraph(3),
             'assigned_to' => Employee::factory()->create()->id,
             'status' => $this->faker->randomElement(['to do', 'in progress', 'done']),
+            'priority' => $this->faker->randomElement(['high', 'Meduim', 'low']),
             'start_date' => $this->faker->dateTimeBetween('-1 month', 'now'),
             'end_date' => $this->faker->dateTimeBetween('now', '+1 month'),
             'project_id' => Project::factory()->create()->id,

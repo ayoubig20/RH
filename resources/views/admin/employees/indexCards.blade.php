@@ -93,7 +93,8 @@
                     @foreach ($viewData['employees'] as $employee)
                         <div class="col">
                             <div class="card" style="width: 18rem;">
-                                <img src="{{asset('storage/assets/users/'.$employee->image)}}" class="card-img-top" alt="...">
+                                <img src="{{ asset('storage/assets/users/' . $employee->image) }}" class="card-img-top"
+                                    alt="...">
                                 <div class="card-body">
                                     <h5 class="card-title fw-bold">{{ $employee->getFirstName() }}
                                         {{ $employee->getLastName() }}</h5>
@@ -120,9 +121,9 @@
                                                     <i class='bx bxs-show me-0'></i> Show</a>
                                             </button>
 
-                                            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
-                                                data-bs-target="#deleteEmployeeModal{{ $employee->getId() }}"><i
-                                                    class='bx bxs-trash me-0'></i>
+                                            <button type="button" class="btn btn-outline-warning btn-sm" data-bs-toggle="modal"
+                                                data-bs-target="#deleteEmployeeModal{{ $employee->getId() }}"> <i
+                                                    class='bx bxs-archive-in'></i>Archive 
                                             </button>
                                         </div>
                                     </div>
@@ -134,12 +135,12 @@
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="deleteEmployeeModalLabel{{ $employee->getId() }}">
-                                                Delete Employee</h5>
+                                                Archive Employee</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            Are you sure you want to delete this employee?
+                                            Are you sure you want to archive this employee?
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
@@ -148,7 +149,7 @@
                                                 method="POST">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                                <button type="submit" class="btn btn-warning">Archive</button>
                                             </form>
                                         </div>
                                     </div>

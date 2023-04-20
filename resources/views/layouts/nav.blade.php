@@ -109,9 +109,9 @@
             <div class="menu-title">Archive</div>
         </a>
         <ul>
-            <li> <a href="{{ url('icons-feather-icons') }}"><i class="bx bx-right-arrow-alt"></i><i class='bx bxs-group' ></i>Archive Empolyes</a>
+            <li> <a href="{{ route('admin.archiveEmployees.index') }}""><i class="bx bx-right-arrow-alt"></i><i class='bx bxs-group' ></i>Archive Empolyes</a>
             </li>
-            <li> <a href="{{ url('icons-feather-icons') }}"><i class="bx bx-right-arrow-alt"></i><i class='bx bx-atom'></i></i>Archive Project </a>
+            <li> <a href="{{ route('admin.archiveprojects.index') }}"><i class="bx bx-right-arrow-alt"></i><i class='bx bx-atom'></i></i>Archive Project </a>
             </li>
             {{-- <li> <a href="{{ url('icons-feather-icons') }}"><i class="bx bx-right-arrow-alt"></i><i class='bx bxs-briefcase-alt-2'></i>list job</a> --}}
             </li>

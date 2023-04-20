@@ -236,7 +236,17 @@
                                     <td>{{ $task->employee ? $task->employee->firstName . ' ' . $task->employee->lastName : '' }}
                                     </td>
 
-                                    <td>{{ $task->getProject()->name }}</td>
+                                    {{-- <td>{{ $task->getProject()->name }}</td> --}}
+                                    <td>
+                                        @if ($task->getProject())
+                                            <a href="{{ route('admin.projects.show', $task->getProject()->getId()) }}"><span
+                                                    class="badge bg-dark p-2">{{ $task->getProject()->name }}</span></a>
+                                        @else
+                                            <span class="badge bg-danger p-2">No project assigned</span>
+                                        @endif
+                                        {{-- <a href="{{ route('admin.projects.show', $task->getProject()->getId()) }}"><span
+                                    class="badge bg-dark p-2">{{ $task->getProject()->name }}</span></a></td> --}}
+                                    </td>
                                     <td style="padding: 5px;">
                                         @if ($task->priority == 'high')
                                             <span class="badge bg-danger ">{{ $task->priority }}</span>
@@ -247,8 +257,8 @@
                                         @endif
                                     </td>
 
-                                    <td>{{ $task->start_date->format('Y-m-d') }}</td>
-                                    <td>{{ $task->end_date->format('Y-m-d') }}</td>
+                                    <td>{{ $task->start_date->format('d-m-Y') }}</td>
+                                    <td>{{ $task->end_date->format('d-m-Y') }}</td>
 
                                     <td
                                         class="{{ $task->status === 'to do' ? 'text-info text-center' : ($task->status === 'in progress' ? 'text-primary text-center' : ($task->status === 'waiting' ? 'text-warning text-center' : ($task->status === 'done' ? 'text-success text-center' : 'text-danger text-center'))) }}">
@@ -259,6 +269,7 @@
                                                 data-bs-toggle="modal" data-bs-target="#editTask{{ $task->getId() }}">
                                                 <i class="bx bxs-edit"></i> Edit
                                             </button>
+                                            {{-- modal edit task --}}
                                             <div class="modal fade" id="editTask{{ $task->getId() }}" tabindex="-1"
                                                 aria-labelledby="editTask{{ $task->getId() }}" aria-hidden="true">
                                                 <div class="modal-dialog">
@@ -390,6 +401,7 @@
                                                 data-bs-toggle="modal" data-bs-target="#deleteTask{{ $task->getId() }}">
                                                 <i class="bx bxs-trash"></i> Delete
                                             </button>
+                                            {{-- modal delete task --}}
                                             <div class="modal fade" id="deleteTask{{ $task->getId() }}" tabindex="-1"
                                                 aria-labelledby="deleteTask" aria-hidden="true">
                                                 <div class="modal-dialog">
@@ -418,6 +430,69 @@
                                                             </form>
                                                         </div>
                                                     </div>
+                                                </div>
+                                            </div>
+                                            <button type="button" class="btn btn-outline-primary btn-sm "
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#updateStatusModal{{ $task->getId() }}">
+                                                <i class='bx bx-upvote'></i> <strong>upadte </strong>
+                                            </button>
+                                            <!-- Update Status Modal -->
+                                            <div class="modal fade" id="updateStatusModal{{ $task->getId() }}"
+                                                tabindex="-1" role="dialog"
+                                                aria-labelledby="updateStatusLabel{{ $task->getId() }}"
+                                                aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <form method="POST"
+                                                        action="{{ route('admin.tasksUp.updateStatus', $task->getId()) }}">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title"
+                                                                    id="updateStatusLabel{{ $task->getId() }}">
+                                                                    Update Status
+                                                                </h5>
+                                                                <button type="button" class="btn-close"
+                                                                    data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="form-group">
+                                                                    <input type="text" value="{{ $task->getId() }}"
+                                                                        name="id" hidden>
+                                                                    <label for="status">Select
+                                                                        Status:</label>
+                                                                    <select class="form-control" name="status"
+                                                                        id="status">
+                                                                        <option value="to do"
+                                                                            {{ old('status', $task->status) == 'to do' ? 'selected' : '' }}>
+                                                                            To do
+                                                                        </option>
+                                                                        <option value="in progress"
+                                                                            {{ old('status', $task->status) == 'in progress' ? 'selected' : '' }}>
+                                                                            In progress
+                                                                        </option>
+                                                                        <option value="done"
+                                                                            {{ old('status', $task->status) == 'done' ? 'selected' : '' }}>
+                                                                            done
+                                                                        </option>
+                                                                        <option value="cancelled"
+                                                                            {{ old('status', $task->status) == 'cancelled' ? 'selected' : '' }}>
+                                                                            cancelled
+                                                                        </option>
+                                                                    </select>
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    data-bs-dismiss="modal">Cancel</button>
+                                                                <button type="submit" class="btn btn-success">
+                                                                    Update
+                                                                    changes</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>

@@ -1,4 +1,4 @@
-<?php
+<!-- <?php
 
 namespace Database\Seeders;
 
@@ -17,4 +17,4 @@ class ProjectSeeder extends Seeder
         Project::factory()
         ->count(3);
     }
-}
+} -->
