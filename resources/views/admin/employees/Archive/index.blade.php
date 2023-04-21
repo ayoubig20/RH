@@ -46,6 +46,8 @@
                     </div>
                 </div>
             </div> --}}
+            @include('layouts.notify')
+
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">
@@ -73,7 +75,8 @@
                                     <tr>
                                         <td>{{ $i }}</td>
                                         <td>
-                                            <img src="{{asset('storage/assets/users/'.$employee->image)}}" class="user-img" alt="user avatar">
+                                            <img src="{{ asset('storage/assets/users/' . $employee->image) }}"
+                                                class="user-img" alt="user avatar">
                                         </td>
 
                                         <td>{{ $employee->getFirstName() }} {{ $employee->getLastName() }}</td>
@@ -87,23 +90,28 @@
                                         <td>{{ $employee->getSalary() }}</td>
                                         <td>
                                             <div class="dropdown">
-                                                <button class="btn btn-outline-secondary dropdown-toggle btn-sm" type="button" id="employeeActionsDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <button class="btn btn-outline-secondary dropdown-toggle btn-sm"
+                                                    type="button" id="employeeActionsDropdown" data-bs-toggle="dropdown"
+                                                    aria-haspopup="true" aria-expanded="false">
                                                     Actions
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="employeeActionsDropdown">
-                                                    <button class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#retrieveEmployeeModal{{ $employee->getId() }}">
+                                                    <button class="dropdown-item" type="button" data-bs-toggle="modal"
+                                                        data-bs-target="#retrieveEmployeeModal{{ $employee->getId() }}">
                                                         <i class='bx bxs-archive me-0'></i> retrieve
                                                     </button>
-                                                    <a class="dropdown-item" href="{{ route('admin.employees.show', $employee->getId()) }}">
+                                                    <a class="dropdown-item"
+                                                        href="{{ route('admin.employees.show', $employee->getId()) }}">
                                                         <i class='bx bxs-show me-0'></i> Show
                                                     </a>
-                                                    <button class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#deleteEmployeeModal{{ $employee->getId() }}">
+                                                    <button class="dropdown-item" type="button" data-bs-toggle="modal"
+                                                        data-bs-target="#deleteEmployeeModal{{ $employee->getId() }}">
                                                         <i class='bx bxs-trash me-0'></i> Delete
                                                     </button>
                                                 </div>
                                             </div>
                                         </td>
-                                        
+
                                     </tr>
                                     <div class="modal fade" id="deleteEmployeeModal{{ $employee->getId() }}" tabindex="-1"
                                         aria-labelledby="deleteEmployeeModalLabel{{ $employee->getId() }}"
@@ -135,36 +143,38 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="modal fade" id="retrieveEmployeeModal{{ $employee->getId() }}" tabindex="-1"
-                                        aria-labelledby="retrieveEmployeeModalLabel{{ $employee->getId() }}"
+                                    <div class="modal fade" id="retrieveEmployeeModal{{ $employee->getId() }}"
+                                        tabindex="-1" aria-labelledby="retrieveEmployeeModalLabel{{ $employee->getId() }}"
                                         aria-hidden="true">
-                                       <div class="modal-dialog">
-                                           <div class="modal-content">
-                                               <div class="modal-header">
-                                                   <h5 class="modal-title"
-                                                       id="retrieveEmployeeModalLabel{{ $employee->getId() }}">
-                                                       Retrieve Employee
-                                                   </h5>
-                                                   <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                           aria-label="Close"></button>
-                                               </div>
-                                               <form action="{{ route('admin.archiveEmployees.update',  $employee->getId()) }}" method="POST">
-                                                   @csrf
-                                                   @method('PUT')
-                                                   <div class="modal-body">
-                                                       Are you sure you want to retrieve this employee?
-                                                       <input type="text" value="{{ $employee->getId() }}" name="id" hidden>
-                                                   </div>
-                                                   <div class="modal-footer">
-                                                       <button type="button" class="btn btn-secondary"
-                                                               data-bs-dismiss="modal">Cancel</button>
-                                                       <button type="submit" class="btn btn-warning">Retrieve</button>
-                                                   </div>
-                                               </form>
-                                           </div>
-                                       </div>
-                                   </div>
-                                   
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title"
+                                                        id="retrieveEmployeeModalLabel{{ $employee->getId() }}">
+                                                        Retrieve Employee
+                                                    </h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <form
+                                                    action="{{ route('admin.archiveEmployees.update', $employee->getId()) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <div class="modal-body">
+                                                        Are you sure you want to retrieve this employee?
+                                                        <input type="text" value="{{ $employee->getId() }}"
+                                                            name="id" hidden>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Cancel</button>
+                                                        <button type="submit" class="btn btn-warning">Retrieve</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
                                 @endforeach
                             </tbody>
                         </table>

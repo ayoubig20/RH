@@ -72,6 +72,7 @@ class AdminTaskController extends Controller
         //     'success' => 'Task created successfully!',
         //     'viewData' => $viewData
         // ]);
+        session()->flash('Add', 'Task created successfully!');
         return back()->with([
                  'success' => 'Task created successfully!','viewData' => $viewData
                 ]);
@@ -92,6 +93,7 @@ class AdminTaskController extends Controller
         $viewData = [];
         $viewData['employees'] = Employee::all();
         $viewData['projects'] = Project::all();
+        session()->flash('edit', 'Task updated successfully');
         return view('admin.tasks.edit', compact(['task', 'viewData']));
     }
 
@@ -120,14 +122,15 @@ class AdminTaskController extends Controller
         ]);
         $task->save();
 
-        return back()->with('success', 'Task updated successfully!');
+        return back()->with('update', 'Task updated successfully!');
     }
 
     public function destroy(Task $task)
     {
         $task->delete();
+        session()->flash('delete','Task deleted successfully!');
 
-        return back()->with('success', 'Task deleted successfully!');
+        return back();
     }
     public function statusUpdate($id, Request $request)
     {
@@ -135,7 +138,7 @@ class AdminTaskController extends Controller
         $task->update([
             'status' => $request->status,
         ]);
-        session()->flash('Status_Update');
+        session()->flash('statusUpdate','Status updated successfully');
         return back();
     }
 }

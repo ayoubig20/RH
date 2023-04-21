@@ -34,15 +34,7 @@
                 </div>
             </div>
             <!--end breadcrumb-->
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
+            @include('layouts.notify')
 
             <div class="card border-top border-0 border-5 border-dark">
                 <div class="card-body p-5">

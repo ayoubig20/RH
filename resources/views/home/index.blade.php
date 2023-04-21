@@ -31,6 +31,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="row row-cols-1 row-cols-md-1 row-cols-lg-2 row-cols-xl-2">
                 <div class="col">
                     <div class="card mb-3">
@@ -58,6 +59,105 @@
                 </div>
             </div>
         </div>
+        <section class="features">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="feature">
+                            <i class="fas fa-chart-line"></i>
+                            <h3>Analytics</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed tincidunt mauris.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="feature">
+                            <i class="fas fa-cog"></i>
+                            <h3>Customization</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed tincidunt mauris.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="feature">
+                            <i class="fas fa-users"></i>
+                            <h3>User Management</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed tincidunt mauris.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h2>Our Features</h2>
+                        <hr class="star-primary">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="feature-item">
+                            <i class="bx bx-shield"></i>
+                            <h4>Secure</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida
+                                pellentesque urna varius vitae.</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="feature-item">
+                            <i class="bx bx-laptop"></i>
+                            <h4>Responsive</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida
+                                pellentesque urna varius vitae.</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="feature-item">
+                            <i class="bx bx-sun"></i>
+                            <h4>Easy to Use</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida
+                                pellentesque urna varius vitae.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="testimonial">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>What Our Clients Say</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="testimonial-box">
+                            <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed tincidunt mauris.
+                                Vestibulum a turpis enim. Duis at nisl ut nunc tincidunt aliquam. Aenean blandit eleifend
+                                sapien, ut pharetra arcu lobortis at."</p>
+                            <p class="client-name">- John Smith</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="testimonial-box">
+                            <p>"Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis
+                                egestas. Fusce facilisis metus sed nibh bibendum, quis posuere sapien egestas. Praesent
+                                faucibus ac massa sit amet dapibus."</p>
+                            <p class="client-name">- Jane Doe</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="testimonial-box">
+                            <p>"Suspendisse semper leo nec felis gravida, sed egestas mi vestibulum. Donec vitae ante id
+                                arcu sagittis hendrerit at et arcu. Nunc blandit, libero a fermentum malesuada, elit elit
+                                tincidunt neque, quis tristique purus mauris quis nisi."</p>
+                            <p class="client-name">- Michael Johnson</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
 
 

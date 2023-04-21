@@ -45,13 +45,13 @@
                 </li>
             </ul>
         </li>
-        <li class="menu-label">UI Elements</li>
+        {{-- <li class="menu-label">UI Elements</li> --}}
 
         <li>
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class='bx bxs-group'></i>
                 </div>
-                <div class="menu-title">Employes</div>
+                <div class="menu-title" >Employes</div>
             </a>
             <ul>
                 <li> <a href="{{ route('admin.employees.index') }}"><i class="bx bx-right-arrow-alt"><i class='bx bxs-group' ></i></i>Employes</a>

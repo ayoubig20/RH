@@ -43,6 +43,7 @@
         @include('layouts.nav')
         <!--end navigation-->
         <!--start page wrapper -->
+        
         @yield('wrapper')
         <!--end page wrapper -->
         <!--start overlay-->
@@ -192,7 +193,7 @@
             $sidebar.toggleClass(storedColor);
         }
     </script>
-    
+    @include('sweetalert::alert')
     <!--app JS-->
     @yield('script')
 </body>

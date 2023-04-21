@@ -6,7 +6,7 @@
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-header  text-center bg-primary">
-                            <span><img src="{{asset('assets/images/logo-purple.png')}}" alt="logo" height="40">Login</span>
+                            <span style="color:white;font-size:large "><img src="{{asset('assets/images/logo.png')}}" alt="logo" height="40">Login</span>
 
                     </div>
 

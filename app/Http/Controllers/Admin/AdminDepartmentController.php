@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Department;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+Use Alert;
+
 
 class AdminDepartmentController extends Controller
 {
@@ -75,6 +77,7 @@ class AdminDepartmentController extends Controller
         $viewData = [];
         $viewData["title"] = " Edit Categry ";
         $viewData['departments']= Department::findOrFail($id);
+
         return view("admin.department.edit")->with("viewData", $viewData);
     }
 
@@ -100,7 +103,8 @@ class AdminDepartmentController extends Controller
     $department->setName($request->input("name"));
     $department->setDescription($request->input("description"));
     $department->save();
-    
+    session()->flash('edit', 'Department updated successfully');
+
     return redirect()->route("admin.department.index");
 }
 
@@ -114,6 +118,8 @@ class AdminDepartmentController extends Controller
     public function destroy($id)
     {
         Department::destroy($id);
+        session()->flash('delete', 'Department deleted successfully');
+
         return back();
     }
 }

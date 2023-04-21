@@ -46,6 +46,8 @@
                     </div>
                 </div>
             </div>
+            @include('layouts.notify')
+
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">
@@ -72,7 +74,8 @@
                                     <tr>
                                         <td>{{ $i }}</td>
                                         <td>
-                                            <img src="{{asset('storage/assets/users/'.$employee->image)}}" class="user-img" alt="user avatar">
+                                            <img src="{{ asset('storage/assets/users/' . $employee->image) }}"
+                                                class="user-img" alt="user avatar">
                                         </td>
 
                                         <td>{{ $employee->getFirstName() }} {{ $employee->getLastName() }}</td>
@@ -85,26 +88,31 @@
                                         <td>{{ $employee->getSalary() }}</td>
                                         <td>
                                             <div class="dropdown">
-                                                <button class="btn btn-outline-secondary dropdown-toggle btn-sm" type="button" id="employeeActionsDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <button class="btn btn-outline-secondary dropdown-toggle btn-sm"
+                                                    type="button" id="employeeActionsDropdown" data-bs-toggle="dropdown"
+                                                    aria-haspopup="true" aria-expanded="false">
                                                     Actions
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="employeeActionsDropdown">
-                                                    <a class="dropdown-item" href="{{ route('admin.employees.edit', $employee->getId()) }}">
-                                                        <i class='bx bxs-edit bx-rotate-180' ></i> Edit
+                                                    <a class="dropdown-item"
+                                                        href="{{ route('admin.employees.edit', $employee->getId()) }}">
+                                                        <i class='bx bxs-edit bx-rotate-180'></i> Edit
                                                     </a>
-                                                    <a class="dropdown-item" href="{{ route('admin.employees.show', $employee->getId()) }}">
+                                                    <a class="dropdown-item"
+                                                        href="{{ route('admin.employees.show', $employee->getId()) }}">
                                                         <i class='bx bxs-show me-0'></i> Show
                                                     </a>
-                                                    <button class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#archiveEmployeeModal{{ $employee->getId() }}">
+                                                    <button class="dropdown-item" type="button" data-bs-toggle="modal"
+                                                        data-bs-target="#archiveEmployeeModal{{ $employee->getId() }}">
                                                         <i class='bx bxs-archive-in'></i>Archive Employee
                                                     </button>
                                                 </div>
                                             </div>
                                         </td>
-                                        
+
                                     </tr>
-                                    <div class="modal fade" id="archiveEmployeeModal{{ $employee->getId() }}" tabindex="-1"
-                                        aria-labelledby="archiveEmployeeModalLabel{{ $employee->getId() }}"
+                                    <div class="modal fade" id="archiveEmployeeModal{{ $employee->getId() }}"
+                                        tabindex="-1" aria-labelledby="archiveEmployeeModalLabel{{ $employee->getId() }}"
                                         aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">

@@ -93,9 +93,8 @@ Route::middleware('auth')->group(function () {
     Route::put('/admin/project/{id}/status', [AdminProjectController::class, 'statusUpdate'])->name('admin.project.updateStatus');
     Route::resource('ProjectAttachments', AdminProjectAttachmnet::class);
     Route::put('/admin/tasks/{id}/status', [AdminKanbanController::class, 'updateStatus'])->name('admin.tasks.updateStatus');
-    Route::put('/admin/tasks/{id}/status', [AdminTaskController::class, 'statusUpdate'])->name('admin.tasksUp.updateStatus');
-
     Route::get('/admin/kanban', [AdminKanbanController::class, 'index'])->name('admin.kanban.index');
+    Route::put('/admin/tasks/{id}/statusUp', [AdminTaskController::class, 'statusUpdate'])->name('admin.tasksUp.updateStatusList');
 
     Route::resource('/admin/archiveEmp', AdminEmpArchiveController::class)->names([
         'index' => 'admin.archiveEmployees.index',

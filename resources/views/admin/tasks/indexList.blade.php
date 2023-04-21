@@ -444,7 +444,7 @@
                                                 aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
                                                     <form method="POST"
-                                                        action="{{ route('admin.tasksUp.updateStatus', $task->getId()) }}">
+                                                        action="{{ route('admin.tasksUp.updateStatusList', $task->getId()) }}">
                                                         @csrf
                                                         @method('PUT')
                                                         <div class="modal-content">

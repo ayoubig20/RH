@@ -7,13 +7,14 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
     <link href="{{ asset('assets/css/home.css') }}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
 
     <title>@yield('title', 'Empolye Mangement')</title>
 </head>
 
 <body>
     <!-- header -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-secondary py-4">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-secondary sticky-top py-4">
         <div class="container">
             <span><img src="{{asset('assets/images/logo.png')}}" alt="logo" height="39"></span>
             <a class="navbar-brand" href="{{ route('home.index') }}" > 

@@ -27,6 +27,7 @@ class AdminCategoryProject extends Controller
     {
         $viewData=[];
         $viewData["title"]='create Department';
+        session()->flash('Add', 'Category added successfully');
         return redirect('/admin/category');
     }
 
@@ -71,6 +72,7 @@ class AdminCategoryProject extends Controller
         $viewData = [];
         $viewData["title"] = " Edit Categry ";
         $viewData['categorys']= CategoryProject::findOrFail($id);
+        session()->flash('edit', 'Category updated successfully');
         return view("admin.category.edit")->with("viewData", $viewData);
     }
 
@@ -109,6 +111,7 @@ class AdminCategoryProject extends Controller
     public function destroy($id)
     {
         CategoryProject::destroy($id);
+        session()->flash('delete', ' Category deleted successfully');
         return back();
     }
 }

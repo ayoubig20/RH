@@ -35,8 +35,8 @@ class AdminEmployeeController extends Controller
         $viewData = [];
         $viewData["title"] = "create employee";
         $viewData['departments'] = Department::all();
-
         return view('admin.employees.create')->with("viewData", $viewData);
+
     }
     public function show($id)
     {
@@ -76,12 +76,15 @@ class AdminEmployeeController extends Controller
         $viewData = [];
         $viewData["title"] = "edit employee";
         $viewData['departments'] = Department::all();
+        session()->flash('edit', 'Employee updated successfully!');
+
         return view('admin.employees.edit', ['employee' => $employee, 'viewData' => $viewData]);
     }
 
     public function destroy(Employee $employee)
     {
         $employee->delete();
+        session()->flash('delete', 'Employee archive successfully');
         return redirect()->route('admin.employees.index')->with('success', 'Employee deleted successfully!');
     }
     public function update(Request $request, Employee $employee)

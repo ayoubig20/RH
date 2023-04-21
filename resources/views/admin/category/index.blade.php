@@ -34,46 +34,7 @@
                 </div>
             </div>
             <!--end breadcrumb-->
-
-            <div class="col">
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-
-                @if (session()->has('Add'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert" id="success-alert">
-                        <strong>{{ session()->get('Add') }}</strong>
-                    
-                    </div>
-                    <script>
-                        // Set a timer to hide the success message after 5 seconds
-                        setTimeout(function() {
-                            $('#success-alert').alert('close');
-                        }, 2000);
-                    </script>
-                @endif
-                <div id="notification"></div>
-
-
-                @if (session()->has('delete'))
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <strong>{{ session()->get('delete') }}</strong>
-                    
-                    </div>
-                @endif
-
-                @if (session()->has('edit'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <strong>{{ session()->get('edit') }}</strong>
-                       
-                    </div>
-                @endif
+            @include('layouts.notify')
                 <!-- Button trigger modal -->
                 <button style="    color: #FFF;
                 background-color: #4F46E5;" type="button" class="btn btn"

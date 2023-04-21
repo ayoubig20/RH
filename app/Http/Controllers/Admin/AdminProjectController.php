@@ -53,6 +53,8 @@ class AdminProjectController extends Controller
 
     public function create()
     {
+        session()->flash('Add', 'Project added successfully');
+
         return view('admin.projects.create');
     }
     public function store(Request $request)
@@ -124,8 +126,10 @@ class AdminProjectController extends Controller
         $viewData['categorys'] = CategoryProject::all();
         //  return view('admin.projects.index', compact('projects', 'viewData'));
         if ($request->has('view') && $request->get('view') == 'card') {
+            session()->flash('Add', 'Project added successfully');
             return view('admin.projects.indexCards', ['viewData' => $viewData, 'projects' => $projects]);
         } else {
+            session()->flash('Add', 'Project added successfully');
             return view('admin.projects.indexList', ['viewData' => $viewData, 'projects' => $projects]);
         }
         // return $request;
@@ -134,7 +138,7 @@ class AdminProjectController extends Controller
     public function edit(Request $request, Project $project, $id)
     {
         // $project = Project::findOrFail($id);
-
+        session()->flash('edit', 'Project updated successfully');
         return view('admin.projects.edit', compact('project'));
         //  return $request;
 
@@ -243,7 +247,7 @@ class AdminProjectController extends Controller
         $project->update([
             'status' => $request->status,
         ]);
-        session()->flash('Status_Update');
+        session()->flash('Status_Update','Status updated successfully');
         return back();
     }
 }
