@@ -17,9 +17,8 @@ class DepartmentFactory extends Factory
     public function definition(): array
     {
         return [
-            //
-            'name' => $this->faker->unique()->word(),
-            'description' => $this->faker->sentence(),
+            'name' => $this->faker->unique(),
+            'description' => $this->faker->sentence(2) ,
         ];
     }
 }

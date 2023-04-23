@@ -39,7 +39,7 @@
             </div>
             <!--end breadcrumb-->
             @include('layouts.notify')
-            
+
             <div class="content-page">
                 <div class="content">
 
@@ -321,17 +321,15 @@
                                             @endphp
 
                                             @foreach ($uniqueEmployees as $task)
-                                                <a href="#" class="d-inline-block avatar-tooltip"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top"
-                                                    data-bs-original-title="{{ $task->employee ? $task->employee->firstName . ' ' . $task->employee->lastName : '' }}">
-                                                    <div
-                                                        style="position: relative; display: inline-block; margin-right: 10px;">
-                                                        <img src="{{ asset('storage/assets/users/' . $task->employee->image) }}"
-                                                            class="user-img" alt="user avatar">
-                                                        {{-- <div style="position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%); text-align: center; width: 100%;">
-                                                                {{ $task->employee->firstName }}
-                                                            </div> --}}
-                                                    </div>
+                                                <a href="{{ route('admin.employees.show',  $task->employee->getId()) }}"
+                                                    class="team-member-avatar"
+                                                    title="{{  $task->employee->firstName }} {{  $task->employee->lastName }}"
+                                                    data-toggle="tooltip"
+                                                    style="position: relative; display: inline-block; margin-right: 10px;">
+                                                    <img src="{{ asset('storage/assets/users/' . $task->employee->image) }}"
+                                                        class="user-img" alt="user avatar">
+
+
                                                 </a>
                                             @endforeach
 

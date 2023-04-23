@@ -14,6 +14,12 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
+    @if (session()->has('Update'))
+        <div class="alert alert-success alert-dismissible fade show mt-3" role="alert" id="success-alert">
+            <strong>{{ session()->get('Update') }}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
      @if (session()->has('Status_Update'))
         <div class="alert alert-success alert-dismissible fade show mt-3" role="alert" id="success-alert">
             <strong>{{ session()->get('Status_Update') }}</strong>
@@ -38,6 +44,12 @@
     @if (session()->has('edit'))
         <div class="alert alert-success alert-dismissible fade show mt-3" role="alert" id="success-alert">
             <strong>{{ session()->get('edit') }}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+    @if (session()->has('error'))
+        <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert" id="success-alert">
+            <strong>{{ session()->get('error') }}</strong>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif

@@ -36,7 +36,6 @@ class AdminEmployeeController extends Controller
         $viewData["title"] = "create employee";
         $viewData['departments'] = Department::all();
         return view('admin.employees.create')->with("viewData", $viewData);
-
     }
     public function show($id)
     {
@@ -48,9 +47,9 @@ class AdminEmployeeController extends Controller
     public function store(Request $request)
     {
         Employee::validate($request);
-    
+
         $data = $request->all();
-    
+
         // Use the default image if no image is provided
         if (!$request->hasFile('image')) {
             $data['image'] = 'default-avatar.png';
@@ -63,32 +62,24 @@ class AdminEmployeeController extends Controller
             );
             $data['image'] = $imageName;
         }
-        
+
         // Set the task_id field in the employee record
         $data['task_id'] = $request->input('task_id');
-    
+
         Employee::create($data);
-    
+
         return redirect()->route('admin.employees.index')->with('success', 'Employee created successfully!');
-    } 
+    }
     public function edit(Employee $employee)
     {
         $viewData = [];
         $viewData["title"] = "edit employee";
         $viewData['departments'] = Department::all();
-        session()->flash('edit', 'Employee updated successfully!');
 
         return view('admin.employees.edit', ['employee' => $employee, 'viewData' => $viewData]);
     }
-
-    public function destroy(Employee $employee)
-    {
-        $employee->delete();
-        session()->flash('delete', 'Employee archive successfully');
-        return redirect()->route('admin.employees.index')->with('success', 'Employee deleted successfully!');
-    }
     public function update(Request $request, Employee $employee)
-  {
+    {
         $validatedData = $request->validate([
             'firstName' => 'required|string|max:255',
             'lastName' => 'required|string|max:255',
@@ -114,9 +105,9 @@ class AdminEmployeeController extends Controller
             'password' => 'nullable|min:8',
             'password_confirmation' => 'nullable|same:password',
         ]);
-    
-       if (!$request->hasFile('image')) {
-        $validatedData['image'] = 'default-avatar.png';
+
+        if (!$request->hasFile('image')) {
+            $validatedData['image'] = 'default-avatar.png';
         } else {
             // Save the uploaded image to storage
             $imageName = uniqid() . '.' . $request->file('image')->extension();
@@ -126,18 +117,32 @@ class AdminEmployeeController extends Controller
             );
             $validatedData['image'] = $imageName;
         }
-        
+
         // Check if password is provided, if not, keep the old password
         if ($request->filled('password')) {
             $validatedData['password'] = Hash::make($validatedData['password']);
         } else {
             unset($validatedData['password']);
         }
-    
+
         $employee->update($validatedData);
-    
+        session()->flash('edit', 'Employee updated successfully!');
+
+
         return redirect()->route('admin.employees.index')->with('success', 'Employee updated successfully!');
         // dd($validatedData);
     }
-    
+    public function destroy(Employee $employee, Request $request)
+    {
+        $assigned_tasks = Task::where("assigned_to", $employee->id)->pluck('assigned_to');
+        if ($assigned_tasks->isEmpty()) {
+            if ($employee) {
+                $employee->delete();
+                session()->flash('success', 'Employee archived successfully.');
+            }
+        } else {
+            session()->flash('error', 'Cannot archive employee - they have assigned tasks.');
+        }
+        return redirect()->route('admin.employees.index');
+    }
 }

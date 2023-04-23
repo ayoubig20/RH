@@ -173,7 +173,7 @@
                     <div class="board">
                         <div class="tasks" data-plugin="dragula"
                             data-containers='["task-list-to do", "task-list-in progress", "task-list-done"]'>
-                            <h4 class="card-header  task-header bg-primary">To Do</h4>
+                            <h4 class="card-header  task-header bg-secondary text-sm-center">To Do</h4>
                             <div id="task-list-to do" class="task-list-items ">
                                 @if ($viewData['tasks']->where('status', 'to do')->isEmpty())
                                     <!-- Render an empty div when there are no tasks -->
@@ -264,7 +264,7 @@
                                                             class="user-img" alt="user avatar">
                                                     @endif
                                                     <span
-                                                        class="align-middle">{{ $task->employee ? $task->employee->firstName . ' ' . $task->employee->lastName : '' }}</span>
+                                                    class="align-middle"><a href="{{ route('admin.employees.show',  $task->employee->getId()) }}">{{ $task->employee ? $task->employee->firstName . ' ' . $task->employee->lastName : '' }}</a></span>
                                                 </p>
                                                 <p class="card-text"><strong>Description:</strong>
                                                     {{ $task->description }}
@@ -412,7 +412,7 @@
                 <div class="tasks" data-plugin="dragula"
                     data-containers='["task-list-to do", "task-list-in progress", "task-list-done"]'>
                     <div class="col-md-4 float-start ">
-                        <h4 class="card-header task-header bg-warning">In progress</h4>
+                        <h4 class="card-header task-header bg-info text-center">In progress</h4>
                         <div id="task-list-in progress" class="task-list-items ">
                             @if ($viewData['tasks']->where('status', 'in progress')->isEmpty())
                                 <!-- Render an empty div when there are no tasks -->
@@ -440,7 +440,7 @@
                                                     class="text-body">{{ $task->name }}</a>
                                             </h5>
                                             <p class="mb-0">
-                                                <span class="badge bg-warning">{{ ucfirst($task->status) }}</span>
+                                                <span class="badge bg-info">{{ ucfirst($task->status) }}</span>
                                             </p>
                                             <div class="dropdown float-end">
                                                 <a class="text-muted arrow-none dropdown-toggle" id="dropdownMenu2"
@@ -499,7 +499,7 @@
                                                         class="user-img" alt="user avatar">
                                                 @endif
                                                 <span
-                                                    class="align-middle">{{ $task->employee ? $task->employee->firstName . ' ' . $task->employee->lastName : '' }}</span>
+                                                    class="align-middle"><a href="{{ route('admin.employees.show',  $task->employee->getId()) }}">{{ $task->employee ? $task->employee->firstName . ' ' . $task->employee->lastName : '' }}</a></span>
                                             </p>
                                             <p class="card-text"><strong>Description:</strong>
                                                 {{ $task->description }}
@@ -643,7 +643,7 @@
                 <div class="tasks" data-plugin="dragula"
                     data-containers='["task-list-to do", "task-list-in progress", "task-list-done"]'>
                     <div class="col-md-4 float-start">
-                        <h4 class="card-header  task-header bg-success">Done</h4>
+                        <h4 class="card-header  task-header bg-success text-center">Done</h4>
                         <div id="task-list-done" class="task-list-items">
                             @if ($viewData['tasks']->where('status', 'done')->isEmpty())
                                 <!-- Render an empty div when there are no tasks -->
@@ -730,7 +730,7 @@
                                                         class="user-img" alt="user avatar">
                                                 @endif
                                                 <span
-                                                    class="align-middle">{{ $task->employee ? $task->employee->firstName . ' ' . $task->employee->lastName : '' }}</span>
+                                                    class="align-middle"><a href="{{ route('admin.employees.show',  $task->employee->getId()) }}">{{ $task->employee ? $task->employee->firstName . ' ' . $task->employee->lastName : '' }}</a></span>
                                             </p>
                                             <p class="card-text"><strong>Description:</strong>
                                                 {{ $task->description }}

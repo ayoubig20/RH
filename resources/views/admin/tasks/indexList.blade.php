@@ -36,45 +36,8 @@
                 </div>
             </div>
             <!--end breadcrumb-->
+            @include('layouts.notify')
 
-            <div class="col">
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-
-                @if (session()->has('Add'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert" id="success-alert">
-                        <strong>{{ session()->get('Add') }}</strong>
-
-                    </div>
-                    <script>
-                        // Set a timer to hide the success message after 5 seconds
-                        setTimeout(function() {
-                            $('#success-alert').alert('close');
-                        }, 2000);
-                    </script>
-                @endif
-                <div id="notification"></div>
-
-
-                @if (session()->has('delete'))
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <strong>{{ session()->get('delete') }}</strong>
-
-                    </div>
-                @endif
-
-                @if (session()->has('edit'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <strong>{{ session()->get('edit') }}</strong>
-                    </div>
-                @endif
                 <div class="text-sm-end">
                     <div class="btn-group mb-3">
                         <a href="{{ route('admin.tasks.index') }}"
@@ -233,7 +196,7 @@
                                                 class="user-img" alt="user avatar">
                                         @endif
                                     </td>
-                                    <td>{{ $task->employee ? $task->employee->firstName . ' ' . $task->employee->lastName : '' }}
+                                    <td><a href="{{ route('admin.employees.show',  $task->employee->getId()) }}">{{ $task->employee ? $task->employee->firstName . ' ' . $task->employee->lastName : '' }}</a>
                                     </td>
 
                                     {{-- <td>{{ $task->getProject()->name }}</td> --}}
@@ -260,9 +223,12 @@
                                     <td>{{ $task->start_date->format('d-m-Y') }}</td>
                                     <td>{{ $task->end_date->format('d-m-Y') }}</td>
 
-                                    <td
-                                        class="{{ $task->status === 'to do' ? 'text-info text-center' : ($task->status === 'in progress' ? 'text-primary text-center' : ($task->status === 'waiting' ? 'text-warning text-center' : ($task->status === 'done' ? 'text-success text-center' : 'text-danger text-center'))) }}">
-                                        {{ $task->status }}</td>
+                                    <td>
+                                        <span class="badge {{ $task->status === 'to do' ? 'bg-secondary' : ($task->status === 'in progress' ? 'bg-info' : ($task->status === 'waiting' ? 'bg-warning' : ($task->status === 'done' ? 'bg-success' : 'bg-danger'))) }}">
+                                            {{ $task->status }}
+                                        </span>
+                                    </td>
+                                    
                                     <td>
                                         <div class="d-flex flex-row">
                                             <button type="button" class="btn btn-outline-success btn-sm"
@@ -460,8 +426,7 @@
                                                                 <div class="form-group">
                                                                     <input type="text" value="{{ $task->getId() }}"
                                                                         name="id" hidden>
-                                                                    <label for="status">Select
-                                                                        Status:</label>
+                                                                    <label for="status">Select Status:</label>
                                                                     <select class="form-control" name="status"
                                                                         id="status">
                                                                         <option value="to do"
@@ -505,23 +470,7 @@
             </div>
         </div>
     </div>
-    <script>
-        // Show notification function
-        function showNotification(message, type) {
-            // Get the notification element
-            var notification = document.getElementById("notification");
-
-            // Set the message and type
-            notification.innerHTML = message;
-            notification.classList.add(type);
-
-            // Show the notification for 3 seconds
-            setTimeout(function() {
-                notification.innerHTML = "";
-                notification.classList.remove(type);
-            }, 3000);
-        }
-    </script>
+   
 
 
 @endsection

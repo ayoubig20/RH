@@ -78,8 +78,8 @@ class AdminProArchiveController extends Controller
         $id = $request->id;
         Project::withTrashed()->where('id', $id)->restore();
         session()->flash('restore_project');
-        // return redirect('/admin/projects');
-        return $request;
+        return redirect('/admin/projects');
+        // return $request;
     }
 
     /**
@@ -94,5 +94,14 @@ class AdminProArchiveController extends Controller
         $project->forceDelete();
         session()->flash('delete_project');
         return back();
+    }
+    public function deleteAll(Request $request)
+    {
+        $delete_all_id = explode(",", $request->delete_all_id);
+
+        $project= Project::withTrashed()->whereIn('id', $delete_all_id);
+        $project->forceDelete();
+        session()->flash('delete_project');
+        return $request;
     }
 }

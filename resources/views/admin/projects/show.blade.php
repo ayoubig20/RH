@@ -58,9 +58,9 @@
                                     <th scope="row">Project ID</th>
                                     <td>{{ $project->id }}</td>
                                     <th scope="row">Date created</th>
-                                    <td>{{ $project->start_date }}</td>
+                                    <td>{{ $project->start_date->format('d-m-Y') }}</td>
                                     <th scope="row">Due date</th>
-                                    <td>{{ $project->end_date }}</td>
+                                    <td>{{ $project->end_date ->format('d-m-Y')}}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Category</th>
@@ -70,7 +70,7 @@
                                         @if ($project->status == 'Finished')
                                             <span class="badge bg-success">{{ $project->status }}</span>
                                         @elseif ($project->status == 'In progress')
-                                            <span class="badge bg-warning text-dark">{{ $project->status }}</span>
+                                            <span class="badge bg-info ">{{ $project->status }}</span>
                                         @elseif ($project->status == 'Panding')
                                             <span class="badge bg-info">{{ $project->status }}</span>
                                         @else
@@ -78,7 +78,15 @@
                                         @endif
                                     </td>
                                     <th scope="row">Priority</th>
-                                    <td>{{ $project->priority }}</td>
+                                    <td style="padding: 5px;">
+                                        @if ($project->priority == 'high')
+                                            <span class="badge bg-danger ">{{ $project->priority }}</span>
+                                        @elseif ($project->priority == 'Medium')
+                                            <span class="badge bg-warning ">{{ $project->priority }}</span>
+                                        @else
+                                            <span class="badge bg-info ">{{ $project->priority }}</span>
+                                        @endif
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Description</th>
@@ -138,7 +146,7 @@
                                                                         class="badge bg-secondary ">{{ $task->status }}</span>
                                                                 @elseif ($task->status == 'in progress')
                                                                     <span
-                                                                        class="badge bg-warning">{{ $task->status }}</span>
+                                                                        class="badge bg-info">{{ $task->status }}</span>
                                                                 @else
                                                                     <span
                                                                         class="badge bg-success">{{ $task->status }}</span>
@@ -158,7 +166,7 @@
 
                 <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                     <div class="card-body">
-                        <h3 class="card-title text-center">Add Attachments</h3>
+                        <h5 class="card-title text-center">Add Attachments</h5>
 
                         <p class="text-danger">* Attachment format: pdf, jpeg, .jpg, png</p>
                         <form method="post" action="{{ url('/ProjectAttachments') }}" enctype="multipart/form-data">

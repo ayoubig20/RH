@@ -212,7 +212,7 @@ class AdminProjectController extends Controller
                 $file_path = $project->id . '/' . $attachment->file_name;
                 Storage::disk('public_uploads')->delete($file_path);
                 $attachment->delete();
-                session()->flash('delete', "attachment file deleted successfully");
+                session()->flash('delete', " archive successfully");
                 return redirect()->route('admin.projects.index');
             }
         } else {
@@ -228,7 +228,7 @@ class AdminProjectController extends Controller
         }
         // return $request;
     }
-
+    
 
     public function get_file($id, $file_name)
     {

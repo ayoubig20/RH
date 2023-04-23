@@ -121,8 +121,9 @@ class AdminTaskController extends Controller
             'created_at' => now(), 'updated_at' => now(), 'created_by' => (Auth::user()->name),
         ]);
         $task->save();
+        session()->flash('Update','Task updated successfully!');
 
-        return back()->with('update', 'Task updated successfully!');
+        return back();
     }
 
     public function destroy(Task $task)

@@ -34,6 +34,8 @@
                                     <p><strong>Gender:</strong> {{ $employee->gender }}</p>
                                     <p><strong>Date of Birth:</strong> {{ $employee->DateOfBirth }}</p>
                                     <p><strong>Marital Status:</strong> {{ $employee->martialStatus }}</p>
+                                    <p><strong>Fattening Date:</strong>{{ $employee->fatteningDate}}</p>
+                                    <p><strong>Employee status:</strong>{{ $employee->status}}</p>
                                     <p><strong>Address:</strong> {{ $employee->address }}</p>
                                 </div>
                                 <div class="col-md-6">

@@ -1,24 +1,6 @@
 @extends('layouts.admin')
 @section('style')
-    {{-- .employee-wrapper {
-    position: relative;
-    display: inline-block;
-    }
-    .employee-badge {
-    position: absolute;
-    top: -20px; /* adjust this value as needed */
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #333;
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 10px;
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-    }
-    .employee-wrapper:hover .employee-badge {
-    opacity: 1;
-    } --}}
+
 @endsection
 @section('title', 'Employees')
 
@@ -59,238 +41,36 @@
             <!--end breadcrumb-->
             @include('layouts.notify')
 
-                <div class="content-page">
-                    <div class="content">
+            <div class="content-page">
+                <div class="content">
 
-                        <!-- Start Content-->
-                        <div class="container-fluid">
+                    <!-- Start Content-->
+                    <div class="container-fluid">
 
-                            <!-- start page title -->
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="page-title-box">
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box">
 
-                                        <h4 class="page-title">Projects List</h4>
-                                    </div>
+                                    <h4 class="page-title">Projects List</h4>
                                 </div>
                             </div>
-                            <!-- end page title -->
+                        </div>
+                        <!-- end page title -->
 
-                            <div class="row mb-2">
-                                <div class="col-sm-4">
-                                    {{-- <a href="apps-projects-add.html" class="btn btn-danger rounded-pill mb-3"><i
-                                            class="mdi mdi-plus"></i> Create Project</a> --}}
-                                    <!-- Button trigger modal -->
-                                    <button style="    color: #FFF;
-                background-color: #4F46E5;"
-                                        type="button" class="btn btn rounded " data-bs-toggle="modal"
-                                        data-bs-target="#exampleModal">add
-                                        Projects</button>
-                                </div>
-                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                                    aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">add Project</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-
-                                                <form class="form-horizontal" enctype="multipart/form-data"method="POST"
-                                                    action="{{ route('admin.projects.store') }}">
-                                                    {{ csrf_field() }}
-
-                                                    <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                                                        <label for="name" class="col-md-4 control-label">Name</label>
-
-                                                        <div class="col">
-                                                            <input id="name" type="text" class="form-control"
-                                                                name="name" value="{{ old('name') }}" required
-                                                                autofocus>
-
-                                                            @if ($errors->has('name'))
-                                                                <span class="help-block">
-                                                                    <strong>{{ $errors->first('name') }}</strong>
-                                                                </span>
-                                                            @endif
-                                                        </div>
-                                                    </div>
-
-                                                    <div
-                                                        class="form-group{{ $errors->has('category_id') ? ' has-error' : '' }}">
-                                                        <label for="category_id" class="col-md-4 control-label">category
-                                                        </label>
-
-                                                        <div class="col">
-                                                            <select id="category_id" class="form-control" name="category_id"
-                                                                required>
-                                                                <option value="">Select a category </option>
-                                                                @foreach ($viewData['categorys'] as $category)
-                                                                    <option value="{{ $category->getId() }}"
-                                                                        {{ $category->getId() == $category->getName() ? 'selected' : '' }}>
-                                                                        {{ $category->getName() }}</option>
-                                                                @endforeach
-                                                            </select>
-
-                                                            @if ($errors->has('category_id'))
-                                                                <span class="help-block">
-                                                                    <strong>{{ $errors->first('category_id') }}</strong>
-                                                                </span>
-                                                            @endif
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group{{ $errors->has('image') ? ' has-error' : '' }}">
-                                                        <label for="image" class="col-md-4 control-label">Image</label>
-
-                                                        <div class="col-md-6">
-                                                            <input id="image" type="file" class="form-control"
-                                                                name="image">
-
-                                                            @if ($errors->has('image'))
-                                                                <span class="help-block">
-                                                                    <strong>{{ $errors->first('image') }}</strong>
-                                                                </span>
-                                                            @endif
-                                                        </div>
-                                                    </div>
-
-                                                    <div
-                                                        class="form-group{{ $errors->has('document') ? ' has-error' : '' }}">
-                                                        <label for="document"
-                                                            class="col-md-4 control-label">Document</label>
-
-                                                        <div class="col-md-6">
-                                                            <input id="document" type="file" class="form-control"
-                                                                name="document">
-
-                                                            @if ($errors->has('document'))
-                                                                <span class="help-block">
-                                                                    <strong>{{ $errors->first('document') }}</strong>
-                                                                </span>
-                                                            @endif
-                                                        </div>
-                                                    </div>
-                                                    <div
-                                                        class="form-group{{ $errors->has('start_date') ? ' has-error' : '' }}">
-                                                        <label for="start_date" class="col-md-4 control-label">started
-                                                            date</label>
-
-                                                        <div class="col">
-                                                            <input id="start_date" type="date" class="form-control"
-                                                                name="start_date" value="{{ old('start_date') }}"
-                                                                required>
-
-                                                            @if ($errors->has('start_date'))
-                                                                <span class="help-block">
-                                                                    <strong>{{ $errors->first('start_date') }}</strong>
-                                                                </span>
-                                                            @endif
-                                                        </div>
-                                                    </div>
-
-                                                    <div
-                                                        class="form-group{{ $errors->has('end_date') ? ' has-error' : '' }}">
-                                                        <label for="end_date" class="col-md-4 control-label">End
-                                                            date</label>
-
-                                                        <div class="col">
-                                                            <input id="end_date" type="date" class="form-control"
-                                                                name="end_date" value="{{ old('end_date') }}" required>
-
-                                                            @if ($errors->has('end_date'))
-                                                                <span class="help-block">
-                                                                    <strong>{{ $errors->first('end_date') }}</strong>
-                                                                </span>
-                                                            @endif
-                                                        </div>
-                                                    </div>
-                                                    <div
-                                                        class="form-group{{ $errors->has('budget') ? ' has-error' : '' }}">
-                                                        <label for="budget"
-                                                            class="col-md-4 control-label">Budget</label>
-
-                                                        <div class="col">
-                                                            <input id="budget" type="number" class="form-control"
-                                                                name="budget">
-
-                                                            @if ($errors->has('budget'))
-                                                                <span class="help-block">
-                                                                    <strong>{{ $errors->first('budget') }}</strong>
-                                                                </span>
-                                                            @endif
-                                                        </div>
-                                                    </div>
-
-                                                    <div
-                                                        class="form-group{{ $errors->has('priority') ? ' has-error' : '' }}">
-
-                                                        <div class="form-group">
-                                                            <div class="col">
-
-                                                                <label for="priority">Priority</label>
-                                                                <select class="form-control" id="priority"
-                                                                    name="priority" required>
-                                                                    <option value="">choice Priority</option>
-                                                                    <option value="high"
-                                                                        {{ old('priority') == 'high' ? 'selected' : '' }}>
-                                                                        highest</option>
-                                                                    <option value="Medium"
-                                                                        {{ old('priority') == 'medium' ? 'selected' : '' }}>
-                                                                        Medium
-                                                                    </option>
-                                                                    <option value="High"
-                                                                        {{ old('priority') == 'low' ? 'selected' : '' }}>
-                                                                        low
-                                                                    </option>
-
-                                                                </select>
-                                                            </div>
-                                                        </div>
-
-                                                        @if ($errors->has('priority'))
-                                                            <span class="help-block">
-                                                                <strong>{{ $errors->first('priority') }}</strong>
-                                                            </span>
-                                                        @endif
-                                                    </div>
-
-
-                                                    <div
-                                                        class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
-                                                        <label for="description"
-                                                            class="col-md-4 control-label">Description</label>
-
-                                                        <div class="col">
-                                                            <textarea id="description" class="form-control" name="description">{{ old('description') }}</textarea>
-
-                                                            @if ($errors->has('description'))
-                                                                <span class="help-block">
-                                                                    <strong>{{ $errors->first('description') }}</strong>
-                                                                </span>
-                                                            @endif
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <div class="col col-md-offset-4">
-                                                            <button type="submit" class="btn btn-success">
-                                                                create project </button>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                        <div class="row mb-2">
+                            <div class="col-sm-4">
+                                {{-- Button trigger modal --}}
+                                <button class="btn btn-rounded bg-danger text-white" id="delete-selected">
+                                    <span class="text-white">Delete Selected</span>
+                                </button>
                             </div>
-
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table text-center">
+                                    <table id="datatable" class="table  table-hover table-sm table-bordered p-0"
+                                        data-page-length="50" style="text-align: center">
                                         <thead class=" text-primary">
+                                            <th><input type="checkbox" id="select-all"></th>
                                             <th>#</th>
                                             <th>Project name</th>
                                             <th>Project status</th>
@@ -300,13 +80,16 @@
                                             <th>Nombre of tasks</th>
                                             <th>team projects</th>
                                             <th>Action</th>
-
                                         </thead>
                                         <tbody>
                                             <?php $i = 0; ?>
                                             @foreach ($projects as $project)
                                                 <?php $i++; ?>
                                                 <tr>
+                                                    <td><input type="checkbox" name="selected[]"
+                                                            value="{{ $project->id }}"></td>
+
+
                                                     <td>{{ $i }}</td>
                                                     <td>
                                                         <span class="badge bg-dark p-2">{{ $project->getName() }}</span>
@@ -316,17 +99,13 @@
                                                         @if ($project->status == 'Panding')
                                                             <span class="badge bg-info p-1">{{ $project->status }}</span>
                                                         @elseif ($project->status == 'In progress')
-                                                            <span
-                                                                class="badge bg-warning p-1">{{ $project->status }}</span>
+                                                            <span class="badge bg-warning p-1">{{ $project->status }}</span>
                                                         @else
-                                                            <span
-                                                                class="badge bg-success p-1">{{ $project->status }}</span>
+                                                            <span class="badge bg-success p-1">{{ $project->status }}</span>
                                                         @endif
                                                     </td>
                                                     <td>{{ $project->start_date->format('d-m-Y') }}</td>
                                                     <td>{{ $project->end_date->format('d-m-Y') }}</td>
-
-
                                                     <td>
                                                         <div class="progress">
                                                             <div class="progress-bar {{ $project->progression() < 50 ? 'bg-warning' : ($project->progression() < 75 ? 'bg-info' : 'bg-success') }}"
@@ -349,11 +128,8 @@
                                                             </div>
                                                         @endforeach
                                                     </td>
-
-                                                    {{-- <td>{{ $project->getDescription() }}</td> --}}
                                                     <td>
                                                         <div class="d-flex flex-row">
-
                                                             <button type="button" class="btn btn-outline-danger btn-sm"
                                                                 data-bs-toggle="modal"
                                                                 data-bs-target="#deleteProject{{ $project->getId() }}">
@@ -375,19 +151,17 @@
                                                                         </div>
                                                                         <div class="modal-body">
                                                                             <p><strong>Are you sure you want
-                                                                                to delete this
-                                                                                Project?</strong></p>
+                                                                                    to delete this
+                                                                                    Project?</strong></p>
                                                                             <input type="text" class="form-control"
                                                                                 id="name" name="name"
-                                                                                value="{{ $project->getName() }}"
-                                                                                readonly>
+                                                                                value="{{ $project->getName() }}" readonly>
                                                                         </div>
                                                                         <div class="modal-footer">
-                                                                            <button type="button"
-                                                                                class="btn btn-secondary"
+                                                                            <button type="button" class="btn btn-secondary"
                                                                                 data-bs-dismiss="modal">Cancel</button>
                                                                             <form
-                                                                                action="{{ route('admin.projects.destroy', $project->getId()) }}"
+                                                                                action="{{ route('admin.archiveprojects.destroy', $project->getId()) }}"
                                                                                 method="POST">
                                                                                 @csrf
                                                                                 @method('DELETE')
@@ -425,9 +199,9 @@
                                                                             @csrf
                                                                             @method('PUT')
                                                                             <div class="modal-body">
-                                                                               <p><strong>Are you sure you want
-                                                                                to retrieve this
-                                                                                Project?</strong></p> 
+                                                                                <p><strong>Are you sure you want
+                                                                                        to retrieve this
+                                                                                        Project?</strong></p>
                                                                                 <input type="text" class="form-control"
                                                                                     id="name" name="name"
                                                                                     value="{{ $project->getName() }}"
@@ -456,26 +230,58 @@
                                 </div>
                             </div>
                         </div>
-                        <script>
-                            // Show notification function
-                            function showNotification(message, type) {
-                                // Get the notification element
-                                var notification = document.getElementById("notification");
 
-                                // Set the message and type
-                                notification.innerHTML = message;
-                                notification.classList.add(type);
-
-                                // Show the notification for 3 seconds
-                                setTimeout(function() {
-                                    notification.innerHTML = "";
-                                    notification.classList.remove(type);
-                                }, 3000);
-                            }
-                        </script>
+                        {{-- delete list of projects modal --}}
 
                     </div>
                 </div>
             </div>
         </div>
+        <script>
+            $('#datatable').ready(function() {
+                // Select/Deselect checkboxes
+                $('#select-all').click(function(event) {
+                    if (this.checked) {
+                        // Iterate each checkbox
+                        $(':checkbox').each(function() {
+                            this.checked = true;
+                        });
+                    } else {
+                        $(':checkbox').each(function() {
+                            this.checked = false;
+                        });
+                    }
+                });
+
+                // Delete selected projects
+                $('#delete-selected').click(function() {
+                    var ids = [];
+                    $('input[name="selected[]"]').each(function() {
+                        if (this.checked) {
+                            ids.push($(this).val());
+                        }
+                    });
+
+                    if (ids.length == 0) {
+                        alert('Please select at least one project to delete.');
+                    } else {
+                        if (confirm('Are you sure you want to delete the selected projects?')) {
+                            $.ajax({
+                                url: "{{ route('admin.archiveprojects.deleteAll') }}",
+                                method: "POST",
+                                data: {
+                                    ids: ids
+                                },
+                                success: function(response) {
+                                    // Handle success response
+                                },
+                                error: function(xhr, status, error) {
+                                    // Handle error response
+                                }
+                            });
+                        }
+                    }
+                });
+            });
+        </script>
     @endsection

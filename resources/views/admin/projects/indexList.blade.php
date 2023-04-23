@@ -426,15 +426,37 @@
                                                     </td>
                                                     <td>{{ $project->Totaltasks() }}</td>
                                                     <td>
-                                                        @foreach ($project->tasks->unique('employee_id') as $task)
-                                                            <div
-                                                                style="position: relative; display: inline-block; margin-right: 10px;">
-                                                                <img src="{{ asset('storage/assets/users/' . $task->employee->image) }}"
-                                                                    class="user-img" alt="user avatar">
-                                                                {{ $task->employee->firstName }}
-                                                                {{ $task->employee->lastName }}
+                                                        @foreach ($project->tasks->groupBy('employee.id') as $tasksByEmployee)
+                                                            @php
+                                                                $employee = $tasksByEmployee->first()->employee;
+                                                            @endphp
+                                                            <div class="team-members text-nowrap">
+                                                                <a href="{{ route('admin.employees.show', $employee->getId()) }}" class="team-member-avatar"
+                                                                    title="{{ $employee->firstName }} {{ $employee->lastName }}"
+                                                                    data-toggle="tooltip">
+                                                                    <img src="{{ asset('storage/assets/users/' . $employee->image) }}"
+                                                                      class="user-img" alt="user avatar">
+                                                                </a>
+                                                                <div class="dropdown avatar-dropdown">
+                                                                
+                                                                    <div class="dropdown-menu dropdown-menu-right"
+                                                                        id="avatar-dropdown-{{ $employee->id }}">
+                                                                        <div class="avatar-group">
+                                                                            @foreach ($tasksByEmployee as $task)
+                                                                                <a class="avatar avatar-xs" href="#"
+                                                                                    title="{{ $task->name }}">
+                                                                                    <img src="{{ asset('storage/assets/users/' . $task->employee->image) }}"
+                                                                                        class="user-img"
+                                                                                        alt="user avatar">
+                                                                                </a>
+                                                                            @endforeach
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         @endforeach
+
+
                                                     </td>
 
                                                     {{-- <td>{{ $project->getDescription() }}</td> --}}
@@ -683,26 +705,11 @@
                                 </div>
                             </div>
                         </div>
-                        <script>
-                            // Show notification function
-                            function showNotification(message, type) {
-                                // Get the notification element
-                                var notification = document.getElementById("notification");
-
-                                // Set the message and type
-                                notification.innerHTML = message;
-                                notification.classList.add(type);
-
-                                // Show the notification for 3 seconds
-                                setTimeout(function() {
-                                    notification.innerHTML = "";
-                                    notification.classList.remove(type);
-                                }, 3000);
-                            }
-                        </script>
-
                     </div>
                 </div>
             </div>
         </div>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
     @endsection

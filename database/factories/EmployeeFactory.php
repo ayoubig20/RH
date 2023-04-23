@@ -25,27 +25,104 @@ class EmployeeFactory extends Factory
     public function definition(): array
     {
         return [
-            //
-            'firstName' => $this->faker->firstName(),
-            'lastName' => $this->faker->lastName(),
-            'gender' => $this->faker->randomElement(['Male', 'Female']),
-            'email' => $this->faker->unique()->safeEmail(),
-            'phone' => $this->faker->phoneNumber(),
-            'address' => $this->faker->address(),
-            'job' => $this->faker->jobTitle(),
-            'martialStatus' => $this->faker->randomElement(['Married', 'Single']),
-            'fatteningDate' => $this->faker->dateTimeBetween('-5 years', 'now'),
-            'DateOfBirth' => $this->faker->dateTimeBetween('-60 years', '-18 years'),
-            'salary' => $this->faker->numberBetween(1000, 5000),
-            'department_id' => function() {
-                return Department::factory()->create()->id;
-            }, 
-            'project_id' => Project::factory()->create()->id,
-            'task_id' =>  Task::factory()->create()->id,
-            'status' =>$this->faker->randomElement(['full-time','intern','seasonal','part-time','contarctor']),
-            'image' => $this->faker->imageUrl(),
+            'firstName' => $this->generateFirstName(),
+            'lastName' => $this->generateLastName(),
+            'gender' => $this->generateGender(),
+            'email' => $this->generateEmail(),
+            'phone' => $this->generatePhoneNumber(),
+            'address' => $this->generateAddress(),
+            'job' => $this->generateJobTitle(),
+            'martialStatus' => $this->generateMaritalStatus(),
+            'fatteningDate' => $this->generateFatteningDate(),
+            'DateOfBirth' => $this->generateDateOfBirth(),
+            'salary' => $this->generateSalary(),
+            'department_id' => $this->generateDepartmentId(),
+            'project_id' => $this->generateProjectId(),
+            'task_id' => $this->generateTaskId(),
+            'status' => $this->generateStatus(),
+            'image' => $this->generateImageUrl(),
             'password' => bcrypt('admin1234'),
-            'role' => 'employee',        
+            'role' => 'employee',
         ];
     }
-}
+    
+    private function generateFirstName(): string
+    {
+        return $this->faker->firstName();
+    }
+    
+    private function generateLastName(): string
+    {
+        return $this->faker->lastName();
+    }
+    
+    private function generateGender(): string
+    {
+        return $this->faker->randomElement(['Male', 'Female']);
+    }
+    
+    private function generateEmail(): string
+    {
+        return $this->faker->unique()->safeEmail();
+    }
+    
+    private function generatePhoneNumber(): string
+    {
+        return $this->faker->phoneNumber();
+    }
+    
+    private function generateAddress(): string
+    {
+        return $this->faker->address();
+    }
+    
+    private function generateJobTitle(): string
+    {
+        return $this->faker->jobTitle();
+    }
+    
+    private function generateMaritalStatus(): string
+    {
+        return $this->faker->randomElement(['Married', 'Single']);
+    }
+    
+    private function generateFatteningDate()
+    {
+        return $this->faker->dateTimeBetween('-5 years', 'now');
+    }
+    
+    private function generateDateOfBirth()
+    {
+        return $this->faker->dateTimeBetween('-60 years', '-18 years');
+    }
+    
+    private function generateSalary(): int
+    {
+        return $this->faker->numberBetween(1000, 5000);
+    }
+    
+    private function generateDepartmentId(): int
+    {
+        return Department::factory()->create()->id;
+    }
+    
+    private function generateProjectId(): int
+    {
+        return Project::factory()->create()->id;
+    }
+    
+    private function generateTaskId(): int
+    {
+        return Task::factory()->create()->id;
+    }
+    
+    private function generateStatus(): string
+    {
+        return $this->faker->randomElement(['full-time','intern','seasonal','part-time','contarctor']);
+    }
+    
+    private function generateImageUrl(): string
+    {
+        return $this->faker->imageUrl();
+    }
+}    

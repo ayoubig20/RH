@@ -95,6 +95,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/admin/tasks/{id}/status', [AdminKanbanController::class, 'updateStatus'])->name('admin.tasks.updateStatus');
     Route::get('/admin/kanban', [AdminKanbanController::class, 'index'])->name('admin.kanban.index');
     Route::put('/admin/tasks/{id}/statusUp', [AdminTaskController::class, 'statusUpdate'])->name('admin.tasksUp.updateStatusList');
+    Route::post('/admin/archivePro/deleteAll',[AdminProArchiveController::class,'deleteAll'])->name('admin.archiveprojects.deleteAll');
 
     Route::resource('/admin/archiveEmp', AdminEmpArchiveController::class)->names([
         'index' => 'admin.archiveEmployees.index',
