@@ -11,7 +11,9 @@ use App\Http\Controllers\Admin\AdminProjectAttachmnet;
 use App\Http\Controllers\Admin\AdminProjectController;
 use App\Http\Controllers\Admin\AdminEmployeeController;
 use App\Http\Controllers\Admin\AdminHolidaysController;
+use App\Http\Controllers\Employee\Auth\LoginController;
 use App\Http\Controllers\Admin\AdminDepartmentController;
+use App\Http\Controllers\Employee\EmployeeHomeController;
 use App\Http\Controllers\Admin\ArchiveEmp\AdminEmpArchiveController;
 use App\Http\Controllers\Admin\ArchivePro\AdminProArchiveController;
 
@@ -29,10 +31,12 @@ use App\Http\Controllers\Admin\ArchivePro\AdminProArchiveController;
 Route::get('/', [HomeController::class, 'index'])->name("home.index");
 Route::get('/about', [HomeController::class, 'about'])->name("home.about");
 Route::get('/admin', [AdminHomeController::class, 'index'])->name("admin.home.index");
+
 // Route::get('/phpinfo', function() {
 //     return phpinfo();
 // });
-Route::middleware('auth')->group(function () {
+Route::middleware('auth:web')->group(function () {
+
     Route::resource('/admin/employees', AdminEmployeeController::class)->names([
         'index' => 'admin.employees.index',
         'create' => 'admin.employees.create',
@@ -95,7 +99,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/admin/tasks/{id}/status', [AdminKanbanController::class, 'updateStatus'])->name('admin.tasks.updateStatus');
     Route::get('/admin/kanban', [AdminKanbanController::class, 'index'])->name('admin.kanban.index');
     Route::put('/admin/tasks/{id}/statusUp', [AdminTaskController::class, 'statusUpdate'])->name('admin.tasksUp.updateStatusList');
-    Route::post('/admin/archivePro/deleteAll',[AdminProArchiveController::class,'deleteAll'])->name('admin.archiveprojects.deleteAll');
+    Route::post('/admin/archivePro/deleteAll', [AdminProArchiveController::class, 'deleteAll'])->name('admin.archiveprojects.deleteAll');
 
     Route::resource('/admin/archiveEmp', AdminEmpArchiveController::class)->names([
         'index' => 'admin.archiveEmployees.index',
@@ -103,17 +107,19 @@ Route::middleware('auth')->group(function () {
         'store' => 'admin.archiveEmployees.store',
         // 'show' => 'admin.archiveEmployees.show',
         //  'edit' => 'admin.archiveEmployees.edit',
-         'update' => 'admin.archiveEmployees.update',
+        'update' => 'admin.archiveEmployees.update',
         'destroy' => 'admin.archiveEmployees.destroy',
-    ]); 
-     Route::resource('/admin/archivePro', AdminProArchiveController::class)->names([
+    ]);
+    Route::resource('/admin/archivePro', AdminProArchiveController::class)->names([
         'index' => 'admin.archiveprojects.index',
         // 'create' => 'admin.archiveprojects.create',
         'store' => 'admin.archiveprojects.store',
         // 'show' => 'admin.archiveEmployees.show',
         //  'edit' => 'admin.archiveprojects.edit',
-         'update' => 'admin.archiveprojects.update',
+        'update' => 'admin.archiveprojects.update',
         'destroy' => 'admin.archiveprojects.destroy',
     ]);
 });
+
+
 Auth::routes();

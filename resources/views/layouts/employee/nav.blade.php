@@ -55,16 +55,16 @@
             <div class="menu-title">Employes</div>
         </a>
         <ul>
-            <li> <a href="{{ route('admin.employees.index') }}"><i class="bx bx-right-arrow-alt"><i
+            <li> <a href="{{ route('employee.employees.index') }}"><i class="bx bx-right-arrow-alt"><i
                             class='bx bxs-group'></i></i>Employes</a>
             </li>
-            {{-- <li> <a href="{{ route('admin.employees.index') }}"><i class="bx bx-right-arrow-alt"></i>Employe
+            {{-- <li> <a href="{{ route('employee.employees.index') }}"><i class="bx bx-right-arrow-alt"></i>Employe
                         Details</a>
                 </li> --}}
-            <li> <a href="{{ route('admin.employees.create') }}"><i class="bx bx-right-arrow-alt"></i><i
+            {{-- <li> <a href="{{ route('employee.employees.create') }}"><i class="bx bx-right-arrow-alt"></i><i
                         class='bx bx-user-plus'></i>Add New
                     Employes</a>
-            </li>
+            </li> --}}
     </li>
 
     </ul>
@@ -75,58 +75,24 @@
             <div class="menu-title">Tasks</div>
         </a>
         <ul>
-            <li> <a href="{{ route('admin.tasks.index') }}"><i class="bx bx-right-arrow-alt"></i> <i
+            <li> <a href="{{ route('employee.tasks.index') }}"><i class="bx bx-right-arrow-alt"></i> <i
                         class="bx bx-task"></i>Tasks</a>
             </li>
-            <li> <a href="{{ route('admin.kanban.index') }}"><i class="bx bx-right-arrow-alt"></i><i
+            <li> <a href="{{ route('employee.kanban.index') }}"><i class="bx bx-right-arrow-alt"></i><i
                         class='bx bx-list-ol'></i>Kanban Board</a>
             </li>
 
         </ul>
     </li>
     <li>
-        <a class="has-arrow" href="{{ route('admin.projects.index') }}">
+        <a class="has-arrow" href="{{ route('employee.projects.index') }}">
             <div class="parent-icon"> <i class="bx bx-atom"></i>
             </div>
             <div class="menu-title">Projects</div>
         </a>
 
     </li>
-    <li>
-        <a class="has-arrow" href="javascript:;">
-            <div class="parent-icon"> <i class='bx bxs-cog'></i>
-            </div>
-            <div class="menu-title">Setting</div>
-        </a>
-        <ul>
-            <li> <a href="{{ route('admin.department.index') }}"><i class="bx bx-right-arrow-alt"></i><i
-                        class='bx bx-buildings'></i>Departement</a>
-            </li>
-            <li> <a href="{{ route('admin.category.index') }}"><i class="bx bx-right-arrow-alt"></i><i
-                        class='bx bxs-briefcase'></i></i>Project Category</a>
-            </li>
-            <li> <a href="{{ url('icons-feather-icons') }}"><i class="bx bx-right-arrow-alt"></i><i
-                        class='bx bxs-briefcase-alt-2'></i>list job</a>
-            </li>
-        </ul>
-    </li>
-    <li>
-        <a class="has-arrow" href="javascript:;">
-            <div class="parent-icon"> <i class='bx bxs-archive'></i>
-            </div>
-            <div class="menu-title">Archive</div>
-        </a>
-        <ul>
-            <li> <a href="{{ route('admin.archiveEmployees.index') }}""><i class="bx bx-right-arrow-alt"></i><i
-                        class='bx bxs-group'></i>Archive Empolyes</a>
-            </li>
-            <li> <a href="{{ route('admin.archiveprojects.index') }}"><i class="bx bx-right-arrow-alt"></i><i
-                        class='bx bx-atom'></i></i>Archive Project </a>
-            </li>
-            {{-- <li> <a href="{{ url('icons-feather-icons') }}"><i class="bx bx-right-arrow-alt"></i><i class='bx bxs-briefcase-alt-2'></i>list job</a> --}}
-    </li>
-    </ul>
-    </li>
+ 
     <!--end navigation-->
 </div>
 <!--end sidebar wrapper -->

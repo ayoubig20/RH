@@ -49,6 +49,8 @@ class AdminEmployeeController extends Controller
         Employee::validate($request);
 
         $data = $request->all();
+        $data['password'] = Hash::make($request->input('password')) ;
+
 
         // Use the default image if no image is provided
         if (!$request->hasFile('image')) {

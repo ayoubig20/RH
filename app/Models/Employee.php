@@ -6,23 +6,31 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 /**
  * Summary of Employee
  */
-class Employee extends Model
+class Employee extends Authenticatable
 {
 
     use SoftDeletes;
 
-    use HasFactory;
+    use HasApiTokens, HasFactory, Notifiable;
+
+    protected $guard = 'employee';
+
     protected $fillable = [
         'firstName', 'lastName', 'gender', 'email', 'phone', 'address', 'job', 'fatteningDate', 'department_id', 'martialStatus', 'salary', 'DateOfBirth', 'status', 'image', 'password', 'role'
     ];
     protected $hidden = [
+
         'password',
         'remember_token',
     ];
+
     public static function validate($request)
     {
         $request->validate([
@@ -227,6 +235,16 @@ class Employee extends Model
     {
         Employee::where('id', $EmpolyeeId)->update(['task_id' => $taskId]);
     }
+    public function scopeIsActive($query)
+    {
+        return $query->where('is_active', true);
+    }
+    function isEmployeeActive($email): bool
+    {
+        $employee = Employee::whereEmail($email)->isActive()->exists();
+        return $employee;
+    }
+
     /**
      * Summary of teams
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
