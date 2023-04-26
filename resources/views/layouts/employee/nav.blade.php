@@ -13,13 +13,13 @@
     <!--navigation-->
     <ul class="metismenu" id="menu">
         <li>
-            <a href="javascript:;" class="has-arrow">
+            <a href="javascript:;" href="{{ route('employee.home.index') }} class="has-arrow">
                 <div class="parent-icon"><i class='bx bx-home-circle'></i>
                 </div>
                 <div class="menu-title">Dashboard</div>
             </a>
             <ul>
-                <li> <a href="{{ url('index') }}"><i class="bx bx-right-arrow-alt"></i><i
+                <li> <a href="{{ route('employee.home.index') }}"><i class="bx bx-right-arrow-alt"></i><i
                             class='bx bx-bar-chart-alt-2'></i>Statistical</a>
                 </li>
         </li>
@@ -55,7 +55,7 @@
             <div class="menu-title">Employes</div>
         </a>
         <ul>
-            <li> <a href="{{ route('employee.employees.index') }}"><i class="bx bx-right-arrow-alt"><i
+            <li> <a href="{{ route('employee.employee.show',auth()->user()->id) }}"><i class="bx bx-right-arrow-alt"><i
                             class='bx bxs-group'></i></i>Employes</a>
             </li>
             {{-- <li> <a href="{{ route('employee.employees.index') }}"><i class="bx bx-right-arrow-alt"></i>Employe
@@ -85,7 +85,8 @@
         </ul>
     </li>
     <li>
-        <a class="has-arrow" href="{{ route('employee.projects.index') }}">
+        {{-- <a class="has-arrow" href="{{ route('employee.projects.index') }}"> --}}
+        <a class="has-arrow" href="#">
             <div class="parent-icon"> <i class="bx bx-atom"></i>
             </div>
             <div class="menu-title">Projects</div>

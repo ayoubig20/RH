@@ -89,7 +89,7 @@
                             <p class="user-name mb-0">{{ auth()->guard('web')->user()->name }}</p>
                             <p class="designation mb-0">{{ auth()->guard('web')->user()->email }}</p>
                         @elseif (auth()->guard('employee')->check())
-                            <p class="user-name mb-0">{{ auth()->guard('employee')->user()->name }}</p>
+                            <p class="user-name mb-0">{{ auth()->guard('employee')->user()->firstName }} {{ auth()->guard('employee')->user()->lastName }}</p>
                             <p class="designation mb-0">{{ auth()->guard('employee')->user()->email }}</p>
                         @endif
                     </div>

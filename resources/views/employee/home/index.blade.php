@@ -1,469 +1,362 @@
 @extends('layouts.employee')
-@section('title', $viewData["title"])
-@section("style")
-<link href="assets/plugins/vectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
-<link href="assets/plugins/highcharts/css/highcharts-white.css" rel="stylesheet" />
+@section('title', $viewData['title'])
+@section('style')
+    <link href="assets/plugins/vectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
+    <link href="assets/plugins/highcharts/css/highcharts-white.css" rel="stylesheet" />
 @endsection
 
-  @section("wrapper")
-  <div class="page-wrapper">
-    <div class="page-content">
-      <div class="card shadow-none bg-transparent border-bottom border-2">
-        <div class="card-body">
-          <div class="row align-items-center">
-            <div class="col-md-3">
-              <h4 class="mb-3 mb-md-0">Employee</h4>
-            </div>
-            <div class="col-md-9">
-              <form class="float-md-end">
-                <div class="row row-cols-md-auto g-lg-3">
-                  <label for="inputFromDate" class="col-md-2 col-form-label text-md-end">From Date</label>
-                  <div class="col-md-4">
-                    <input type="date" class="form-control" id="inputFromDate">
-                  </div>
-                  <label for="inputToDate" class="col-md-2 col-form-label text-md-end">To Date</label>
-                  <div class="col-md-4">
-                    <input type="date" class="form-control" id="inputToDate">
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="card shadow-none bg-transparent">
-        <div class="card-body">
-          <div id="chart1"></div>
-        </div>
-      </div>
-      <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4">
-        <div class="col">
-          <div class="card radius-10">
-            <div class="card-body">
-              <div class="d-flex align-items-center">
-                <div>
-                  <p class="mb-0">Total Users</p>
-                  <h5 class="mb-0">85,028</h5>
-                </div>
-                <div class="dropdown ms-auto">
-                  <a class="dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown">	<i class='bx bx-dots-horizontal-rounded font-22 text-white'></i>
-                  </a>
-                  <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="javascript:;">Action</a>
-                    </li>
-                    <li><a class="dropdown-item" href="javascript:;">Another action</a>
-                    </li>
-                    <li>
-                      <hr class="dropdown-divider">
-                    </li>
-                    <li><a class="dropdown-item" href="javascript:;">Something else here</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div class="" id="chart2"></div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card radius-10">
-            <div class="card-body">
-              <div class="d-flex align-items-center">
-                <div>
-                  <p class="mb-0">Page Views</p>
-                  <h5 class="mb-0">42,892</h5>
-                </div>
-                <div class="dropdown ms-auto">
-                  <a class="dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown">	<i class='bx bx-dots-horizontal-rounded font-22 text-white'></i>
-                  </a>
-                  <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="javascript:;">Action</a>
-                    </li>
-                    <li><a class="dropdown-item" href="javascript:;">Another action</a>
-                    </li>
-                    <li>
-                      <hr class="dropdown-divider">
-                    </li>
-                    <li><a class="dropdown-item" href="javascript:;">Something else here</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div class="" id="chart3"></div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card radius-10">
-            <div class="card-body">
-              <div class="d-flex align-items-center">
-                <div>
-                  <p class="mb-0">Avg. Session Duration</p>
-                  <h5 class="mb-0">00:03:20</h5>
-                </div>
-                <div class="dropdown ms-auto">
-                  <a class="dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown">	<i class='bx bx-dots-horizontal-rounded font-22 text-white'></i>
-                  </a>
-                  <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="javascript:;">Action</a>
-                    </li>
-                    <li><a class="dropdown-item" href="javascript:;">Another action</a>
-                    </li>
-                    <li>
-                      <hr class="dropdown-divider">
-                    </li>
-                    <li><a class="dropdown-item" href="javascript:;">Something else here</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div class="" id="chart4"></div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card radius-10">
-            <div class="card-body">
-              <div class="d-flex align-items-center">
-                <div>
-                  <p class="mb-0">Bounce Rate</p>
-                  <h5 class="mb-0">51.46%</h5>
-                </div>
-                <div class="dropdown ms-auto">
-                  <a class="dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown">	<i class='bx bx-dots-horizontal-rounded font-22 text-white'></i>
-                  </a>
-                  <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="javascript:;">Action</a>
-                    </li>
-                    <li><a class="dropdown-item" href="javascript:;">Another action</a>
-                    </li>
-                    <li>
-                      <hr class="dropdown-divider">
-                    </li>
-                    <li><a class="dropdown-item" href="javascript:;">Something else here</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div class="" id="chart5"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!--end row-->
-      <div class="row row-cols-1 row-cols-md-2 row-cols-xl-2">
-        <div class="col">
-          <div class="card radius-10">
-            <div class="card-body">
-              <div id="chart6"></div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card radius-10">
-            <div class="card-body">
-              <div id="chart7"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-     
-      <!--end row-->
-      <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3">
-        <div class="col d-flex">
-          <div class="card radius-10 w-100">
-            <div class="card-body">
-              <div id="chart8"></div>
-            </div>
-          </div>
-        </div>
-        <div class="col d-flex">
-          <div class="card radius-10 w-100">
-            <div class="card-body">
-              <div class="d-flex align-items-center">
-                <div>
-                  <h5 class="mb-0">Browser Statistics</h5>
-                </div>
-                <div class="font-22 ms-auto"><i class="bx bx-dots-horizontal-rounded"></i>
-                </div>
-              </div>
-              <div class="mt-4" id="chart9" style="height: 250px;"></div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-12 d-flex">
-          <div class="card radius-10 w-100">
-            <div class="card-body">
-              <div class="d-flex align-items-center">
-                <h5 class="mb-0 font-weight-bold">Social Traffic</h5>
-                <p class="mb-0 ms-auto"><i class="bx bx-dots-horizontal-rounded float-right font-22"></i>
-                </p>
-              </div>
-              <div class="d-flex mt-2 mb-4">
-                <h2 class="mb-0 font-weight-bold">89,421</h2>
-                <p class="mb-0 ms-1 font-14 align-self-end">Total Visits</p>
-              </div>
-              <div class="progress radius-10" style="height: 10px">
-                <div class="progress-bar bg-white" role="progressbar" style="width: 35%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
-                <div class="progress-bar bg-white" role="progressbar" style="width: 20%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-                <div class="progress-bar bg-white" role="progressbar" style="width: 15%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                <div class="progress-bar bg-white" role="progressbar" style="width: 25%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                <div class="progress-bar bg-white" role="progressbar" style="width: 10%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-              <div class="table-responsive mt-4">
-                <table class="table mb-0">
-                  <tbody>
-                    <tr>
-                      <td class="px-0">
-                        <div class="d-flex align-items-center">
-                          <div><i class="bx bxs-checkbox me-2 font-22 text-white"></i>
-                          </div>
-                          <div>Facebook</div>
+@section('wrapper')
+    <div class="page-wrapper">
+        <div class="page-content">
+            <div class="card shadow-none bg-transparent border-bottom border-2">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div style="background-color: rgb(72, 209, 204);" class="card text-white text-center">
+                            <div class="card-body">
+                                @if (auth()->guard('web')->check())
+                                    <strong>
+                                        <h1 class="text-white">Welcome {{ auth()->guard('web')->user()->name }}</h1>
+                                    </strong>
+                                @else
+                                    <strong>
+                                        <h1 class="text-white">Welcome {{ auth()->guard('employee')->user()->firstName }}
+                                        </h1>
+                                    </strong>
+                                @endif
+                            </div>
                         </div>
-                      </td>
-                      <td>46 Visits</td>
-                      <td class="px-0 text-right">33%</td>
-                    </tr>
-                    <tr>
-                      <td class="px-0">
-                        <div class="d-flex align-items-center">
-                          <div><i class="bx bxs-checkbox me-2 font-22 text-white"></i>
-                          </div>
-                          <div>YouTube</div>
-                        </div>
-                      </td>
-                      <td>12 Visits</td>
-                      <td class="px-0 text-right">17%</td>
-                    </tr>
-                    <tr>
-                      <td class="px-0">
-                        <div class="d-flex align-items-center">
-                          <div><i class="bx bxs-checkbox me-2 font-22 text-white"></i>
-                          </div>
-                          <div>Linkedin</div>
-                        </div>
-                      </td>
-                      <td>29 Visits</td>
-                      <td class="px-0 text-right">21%</td>
-                    </tr>
-                    <tr>
-                      <td class="px-0">
-                        <div class="d-flex align-items-center">
-                          <div><i class="bx bxs-checkbox me-2 font-22 text-white"></i>
-                          </div>
-                          <div>Twitter</div>
-                        </div>
-                      </td>
-                      <td>34 Visits</td>
-                      <td class="px-0 text-right">23%</td>
-                    </tr>
-                    <tr>
-                      <td class="px-0">
-                        <div class="d-flex align-items-center">
-                          <div><i class="bx bxs-checkbox me-2 font-22 text-white"></i>
-                          </div>
-                          <div>Dribbble</div>
-                        </div>
-                      </td>
-                      <td>28 Visits</td>
-                      <td class="px-0 text-right">19%</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!--end row-->
-      <div class="card radius-10">
-        <div class="card-body">
-          <div class="table-responsive lead-table">
-            <table class="table mb-0 align-middle">
-              <thead class="table-light">
-                <tr>
-                  <th>Potential Leads</th>
-                  <th>Diposit</th>
-                  <th>Progress</th>
-                  <th>Last Update</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    <div class="d-flex align-items-center">
-                      <div>
-                        <input class="form-check-input me-3" type="checkbox" value="" aria-label="...">
-                      </div>
-                      <div class="">
-                        <img src="assets/images/avatars/avatar-1.png" class="rounded-circle" width="40" height="40" alt="">
-                      </div>
-                      <div class="ms-2">
-                        <h6 class="mb-0 font-14">Ronald Waters</h6>
-                        <p class="mb-0 font-13 text-secondary">Lead Designers</p>
-                      </div>
-                    </div>
-                  </td>
-                  <td>$89,620</td>
-                  <td class=" w-25">
-                    <div class="progress radius-10" style="height:4.5px;">
-                      <div class="progress-bar" role="progressbar" style="width: 66%"></div>
-                    </div>
-                  </td>
-                  <td>14 Oct 2020</td>
-                  <td>
-                    <div class="badge rounded-pill bg-light w-100">In Progress</div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="d-flex align-items-center">
-                      <div>
-                        <input class="form-check-input me-3" type="checkbox" value="" aria-label="...">
-                      </div>
-                      <div class="">
-                        <img src="assets/images/avatars/avatar-2.png" class="rounded-circle" width="40" height="40" alt="">
-                      </div>
-                      <div class="ms-2">
-                        <h6 class="mb-0 font-14">David Buckley</h6>
-                        <p class="mb-0 font-13">Lead Designers</p>
-                      </div>
-                    </div>
-                  </td>
-                  <td>$38,520</td>
-                  <td class=" w-25">
-                    <div class="progress radius-10" style="height:4.5px;">
-                      <div class="progress-bar" role="progressbar" style="width: 76%"></div>
-                    </div>
-                  </td>
-                  <td>15 Oct 2020</td>
-                  <td>
-                    <div class="badge rounded-pill bg-light w-100">Cancelled</div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="d-flex align-items-center">
-                      <div>
-                        <input class="form-check-input me-3" type="checkbox" value="" aria-label="...">
-                      </div>
-                      <div class="">
-                        <img src="assets/images/avatars/avatar-3.png" class="rounded-circle" width="40" height="40" alt="">
-                      </div>
-                      <div class="ms-2">
-                        <h6 class="mb-0 font-14">James Caviness</h6>
-                        <p class="mb-0 font-13">Lead Designers</p>
-                      </div>
-                    </div>
-                  </td>
-                  <td>$63,820</td>
-                  <td class=" w-25">
-                    <div class="progress radius-10" style="height:4.5px;">
-                      <div class="progress-bar" role="progressbar" style="width: 100%"></div>
-                    </div>
-                  </td>
-                  <td>16 Oct 2020</td>
-                  <td>
-                    <div class="badge rounded-pill bg-light w-100">Completed</div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="d-flex align-items-center">
-                      <div>
-                        <input class="form-check-input me-3" type="checkbox" value="" aria-label="...">
-                      </div>
-                      <div class="">
-                        <img src="assets/images/avatars/avatar-4.png" class="rounded-circle" width="40" height="40" alt="">
-                      </div>
-                      <div class="ms-2">
-                        <h6 class="mb-0 font-14">John Roman</h6>
-                        <p class="mb-0 font-13">Lead Designers</p>
-                      </div>
-                    </div>
-                  </td>
-                  <td>$97,420</td>
-                  <td class=" w-25">
-                    <div class="progress radius-10" style="height:4.5px;">
-                      <div class="progress-bar" role="progressbar" style="width: 58%"></div>
-                    </div>
-                  </td>
-                  <td>18 Oct 2020</td>
-                  <td>
-                    <div class="badge rounded-pill bg-light w-100">In Progress</div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="d-flex align-items-center">
-                      <div>
-                        <input class="form-check-input me-3" type="checkbox" value="" aria-label="...">
-                      </div>
-                      <div class="">
-                        <img src="assets/images/avatars/avatar-7.png" class="rounded-circle" width="40" height="40" alt="">
-                      </div>
-                      <div class="ms-2">
-                        <h6 class="mb-0 font-14">Johnny Seitz</h6>
-                        <p class="mb-0 font-13">Lead Designers</p>
-                      </div>
-                    </div>
-                  </td>
-                  <td>$48,360</td>
-                  <td class=" w-25">
-                    <div class="progress radius-10" style="height:4.5px;">
-                      <div class="progress-bar" role="progressbar" style="width: 66%"></div>
-                    </div>
-                  </td>
-                  <td>22 Oct 2020</td>
-                  <td>
-                    <div class="badge rounded-pill bg-light w-100">Cancelled</div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="d-flex align-items-center">
-                      <div>
-                        <input class="form-check-input me-3" type="checkbox" value="" aria-label="...">
-                      </div>
-                      <div class="">
-                        <img src="assets/images/avatars/avatar-8.png" class="rounded-circle" width="40" height="40" alt="">
-                      </div>
-                      <div class="ms-2">
-                        <h6 class="mb-0 font-14">Pauline Bird</h6>
-                        <p class="mb-0 font-13">Lead Designers</p>
-                      </div>
-                    </div>
-                  </td>
-                  <td>$74,620</td>
-                  <td class=" w-25">
-                    <div class="progress radius-10" style="height:4.5px;">
-                      <div class="progress-bar" role="progressbar" style="width: 100%"></div>
-                    </div>
-                  </td>
-                  <td>24 Oct 2020</td>
-                  <td>
-                    <div class="badge rounded-pill bg-light w-100">Completed</div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  @endsection
+                        <!--end row-->
+                        <div class="row row-cols-1 row-cols-md-2 row-cols-xl-2">
+                            <div class="col">
+                                <div style="background-color: rgb(123, 104, 238);" class="card text-white text-center">
+                                    <div class="card-body">
+                                        <h3 class="text-white">Total Tasks</h3>
+                                        <strong>
+                                            <h4 class="text-center text-white">{{ $viewData['numTasks'] }}</h4>
+                                        </strong>
+                                    </div>
+                                </div>
 
-@section("script")
-<!-- Vector map JavaScript -->
-<script src="assets/plugins/vectormap/jquery-jvectormap-2.0.2.min.js"></script>
-<script src="assets/plugins/vectormap/jquery-jvectormap-world-mill-en.js"></script>
-<!-- highcharts js -->
-<script src="assets/plugins/highcharts/js/highcharts.js"></script>
-<script src="assets/plugins/apexcharts-bundle/js/apexcharts.min.js"></script>
-<script src="assets/js/dashboard-analytics.js"></script>
-<script>
-  new PerfectScrollbar('.dashboard-top-countries');
-</script>
-@endsection	
+                            </div>
+                            <div class="col">
+                                <div style="background-color: rgb(123, 104, 238);" class="card text-white text-center">
+                                    <div class="card-body">
+                                        <h3 class="text-white">Total Projects</h3>
+                                        <strong>
+                                            <h4 class="text-center text-white">{{ $viewData['numProject'] }}</h4>
+                                        </strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--end row-->
+
+                        <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3">
+                            <div class="col-md-12 d-flex">
+                                <div class="card radius-10 w-100">
+                                    <div class="card-body">
+                                        <div class="col">
+                                            <div class="card  text-white" style="background-color:rgb(220, 20, 60);">
+                                                <div class="card-body">
+                                                    <h3>High Priority Tasks</h3>
+                                                    <strong>
+                                                        <h4 class="text-center">{{ $viewData['priorityHighTasks'] }}</h4>
+                                                    </strong>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col">
+                                            <div class="card"style="background-color: rgb(255, 215, 0);">
+                                                <div class="card-body">
+                                                    <h3>Medium Priority tasks</h3>
+                                                    <strong>
+                                                        <h4 class="text-center">{{ $viewData['priorityMediumTasks'] }}</h4>
+                                                    </strong>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col">
+                                            <div class="card  text-white" style="background-color: rgb(240, 248, 255);">
+                                                <div class="card-body">
+                                                    <h3>Low Priority Tasks</h3>
+                                                    <strong>
+                                                        <h4 class="text-center">{{ $viewData['priorityLowTasks'] }}</h4>
+                                                    </strong>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col d-flex">
+                                <div class="card radius-10 w-100">
+                                    <div class="card-body">
+                                        <canvas id="task-chart" style="width: 800px; max-width: 100%;"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col d-flex">
+                                <div class="card radius-10 w-100">
+                                    <div class="card-body">
+                                        <canvas id="chart-order-status"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--end row-->
+                        <div class="card radius-10">
+                            <div class="card-body">
+                                <div class="table-responsive lead-table">
+                                    <table class="table mb-0 align-middle">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Tasks</th>
+                                                <th>Projects</th>
+                                                <th>Status</th>
+                                                <th>End date</th>
+                                                <th>Priority</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php $i = 0; ?>
+                                            @foreach ($viewData['tasks'] as $task)
+                                                <?php $i++; ?>
+                                                <tr>
+                                                    <td><strong>{{ $i }}</td></strong>
+                                                    <td><strong>{{ $task->name }}</strong></td>
+                                                    <td>
+                                                        @if ($task->getProject())
+                                                            <a
+                                                                href="{{ route('employee.projects.show', $task->getProject()->getId()) }}"><span
+                                                                    class="badge bg-dark p-2">{{ $task->getProject()->name }}</span></a>
+                                                        @else
+                                                            <span class="badge bg-danger p-2">No project assigned</span>
+                                                        @endif
+                                                        {{-- <a href="{{ route('admin.projects.show', $task->getProject()->getId()) }}"><span
+                                                    class="badge bg-dark p-2">{{ $task->getProject()->name }}</span></a></td> --}}
+                                                    </td>
+                                                    <td style="padding: 5px;">
+                                                        @if ($task->priority == 'high')
+                                                            <span class="badge bg-danger ">{{ $task->priority }}</span>
+                                                        @elseif ($task->priority == 'Medium')
+                                                            <span class="badge bg-warning ">{{ $task->priority }}</span>
+                                                        @else
+                                                            <span class="badge bg-info ">{{ $task->priority }}</span>
+                                                        @endif
+                                                    </td>
+                                                    <td><strong>{{ $task->end_date->format('d-m-Y') }}</td></strong>
+
+                                                    <td>
+                                                        <span
+                                                            class="badge {{ $task->status === 'to do' ? 'bg-secondary' : ($task->status === 'in progress' ? 'bg-info' : ($task->status === 'waiting' ? 'bg-warning' : ($task->status === 'done' ? 'bg-success' : 'bg-danger'))) }}">
+                                                            {{ $task->status }}
+                                                        </span>
+                                                    </td>
+
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+                {{-- charte tasks --}}
+                <script>
+                    var taskChart = new Chart(document.getElementById("task-chart"), {
+                        type: 'pie',
+                        data: {
+                            labels: ['Completed Tasks', 'Tasks in Progress', 'Tasks to do'],
+                            datasets: [{
+                                label: 'Number of Tasks',
+                                backgroundColor: [
+                                    '#17a2b8', // Completed Tasks
+                                    '#007bff', // Tasks in Progress
+                                    '#28a745;' // Tasks to do
+                                ],
+                                data: [{{ $viewData['numCompletedTasks'] }}, {{ $viewData['numProgressTasks'] }},
+                                    {{ $viewData['numToDOTasks'] }}
+                                ]
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            title: {
+                                display: true,
+                                text: 'Tasks Overview'
+                            },
+                            maintainAspectRatio: false,
+                            width: 800,
+                            height: 800
+                        }
+                    });
+                </script>
+                <script src="assets/plugins/chartjs/js/chartjs-custom.js"></script>
+                <script src="https://code.highcharts.com/highcharts.js"></script>
+                <script src="https://code.highcharts.com/modules/exporting.js"></script>
+                <script src="https://code.highcharts.com/modules/export-data.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                {{-- chart projects --}}
+                <script>
+                    var data = {
+                        labels: ["Pending", "In progress", "Finished"],
+                        datasets: [{
+                            label: 'Projects',
+                            data: [{{ $viewData['numToDOTPoject'] }}, {{ $viewData['numProgerssPoject'] }},
+                                {{ $viewData['numCompletedPoject'] }}
+                            ],
+                            backgroundColor: [
+                                'rgb(186, 85, 211)', // 
+                                'rgb(255, 255, 0)', // yellow
+                                'rgb(124, 252, 0)' // green
+                            ],
+                            hoverBackgroundColor: [
+                                'rgb(186, 85, 211)', // 
+                                'rgb(255, 255, 0)', // yellow
+                                'rgb(124, 252, 0)' // green
+                            ],
+
+                            borderColor: "#fff",
+                            pointRadius: 6,
+                            pointHoverRadius: 6,
+                            pointHoverBackgroundColor: "#fff",
+                            borderWidth: 2
+                        }]
+                    };
+
+                    // Get the context of the canvas element
+                    var ctx = document.getElementById('chart-order-status').getContext('2d');
+
+                    // Create the chart using the data and options
+                    var myChart = new Chart(ctx, {
+                        type: 'doughnut',
+                        data: data,
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            title: {
+                                display: true,
+                                text: 'Projects Overview',
+                                fontColor: '#585757'
+                            },
+                            legend: {
+                                display: false,
+                            },
+                            tooltips: {
+                                enabled: true,
+                                mode: 'single',
+                                callbacks: {
+                                    label: function(tooltipItems, data) {
+                                        return data.labels[tooltipItems.index] + ": " + data.datasets[0].data[tooltipItems
+                                            .index];
+                                    }
+                                }
+                            },
+                            scales: {
+                                xAxes: [{
+                                    ticks: {
+                                        fontColor: '#585757'
+                                    },
+                                    gridLines: {
+                                        display: true,
+                                        color: "rgba(0, 0, 0, 0.08)"
+                                    }
+                                }],
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true,
+                                        fontColor: '#585757'
+                                    },
+                                    gridLines: {
+                                        display: false,
+                                        color: "rgba(0, 0, 0, 0.08)"
+                                    }
+                                }]
+                            }
+                        }
+                    });
+                </script>
+                {{-- charte task priority --}}
+                <script>
+                    Highcharts.chart('chart-priority', {
+                        chart: {
+                            type: 'bar',
+                            backgroundColor: '#f5f5f5'
+                        },
+                        title: {
+                            text: 'Tasks by Priority',
+                            style: {
+                                fontSize: '24px',
+                                fontWeight: 'bold'
+                            }
+                        },
+                        xAxis: {
+                            categories: ['High Priority', 'Medium Priority', 'Low Priority'],
+                            labels: {
+                                style: {
+                                    fontSize: '16px'
+                                }
+                            }
+                        },
+                        yAxis: {
+                            title: {
+                                text: 'Number of Tasks',
+                                style: {
+                                    fontSize: '16px'
+                                }
+                            },
+                            labels: {
+                                style: {
+                                    fontSize: '16px'
+                                }
+                            }
+                        },
+                        legend: {
+                            enabled: false
+                        },
+                        tooltip: {
+                            pointFormat: '{point.y} tasks'
+                        },
+                        plotOptions: {
+                            bar: {
+                                colorByPoint: true,
+                                colors: ['#FFA500', '#008000', '#0000FF'],
+                                dataLabels: {
+                                    enabled: true,
+                                    style: {
+                                        fontSize: '16px',
+                                        textOutline: false
+                                    }
+                                }
+                            }
+                        },
+                        series: [{
+                            name: 'Tasks',
+                            data: [{
+                                    y: {{ $viewData['priorityHighTasks'] }},
+                                    name: 'High Priority'
+                                },
+                                {
+                                    y: {{ $viewData['priorityMediumTasks'] }},
+                                    name: 'Medium Priority'
+                                },
+                                {
+                                    y: {{ $viewData['priorityLowTasks'] }},
+                                    name: 'Low Priority'
+                                }
+                            ]
+                        }]
+                    });
+                </script>
+
+
+            @endsection

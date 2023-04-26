@@ -1,6 +1,6 @@
-@extends('layouts.admin')
+@extends('layouts.employee')
 
-@section('title', 'Employee')
+@section('title', 'Employees')
 
 @section('wrapper')
     <!--start page wrapper -->
@@ -41,25 +41,25 @@
 
             <div class="text-sm-end">
                 <div class="btn-group mb-3">
-                    <a href="{{ route('admin.tasks.index') }}"
+                    <a href="{{ route('employee.tasks.index') }}"
                         class="btn btn-primary{{ !request()->has('status') && !request()->has('view') ? ' active' : '' }}"
                         style="{{ !request()->has('status') && !request()->has('view') ? 'background-color: #0d6efd;' : 'background-color: transparent;border-color: #0d6efd;color: #0d6efd;' }}">All</a>
                 </div>
                 <div class="btn-group mb-3 ms-1">
-                    <a href="{{ route('admin.tasks.index', ['status' => 'to do']) }}" class="btn btn-light"
+                    <a href="{{ route('employee.tasks.index', ['status' => 'to do']) }}" class="btn btn-light"
                         style="{{ request()->get('status') == 'to do' ? 'background-color: #0d6efd;border-color: #0d6efd;color: #fff;font-weight: bold;' : 'background-color: transparent;border-color: #0d6efd;color: #0d6efd;' }}">
                         To do</a>
-                    <a href="{{ route('admin.tasks.index', ['status' => 'in_progress']) }}" class="btn btn-light"
+                    <a href="{{ route('employee.tasks.index', ['status' => 'in_progress']) }}" class="btn btn-light"
                         style="{{ request()->get('status') == 'in_progress' ? 'background-color: #0d6efd;border-color: #0d6efd;color: #fff;font-weight: bold;' : 'background-color: transparent;border-color: #0d6efd;color: #0d6efd;' }}">In
                         Progress</a>
-                    <a href="{{ route('admin.tasks.index', ['status' => 'done']) }}" class="btn btn-light"
+                    <a href="{{ route('employee.tasks.index', ['status' => 'done']) }}" class="btn btn-light"
                         style="{{ request()->get('status') == 'done' ? 'background-color: #0d6efd;border-color: #0d6efd;color: #fff;font-weight: bold;' : 'background-color: transparent;border-color: #0d6efd;color: #0d6efd;' }}">Done</a>
                 </div>
                 <div class="btn-group mb-3 d-none d-sm-inline-block">
-                    <a href="{{ route('admin.tasks.index', ['view' => 'card']) }}" class="btn btn-muted"
+                    <a href="{{ route('employee.tasks.index', ['view' => 'card']) }}" class="btn btn-muted"
                         style="{{ request()->get('view') == 'card' ? 'background-color: #6c757d;border-color: #6c757d;color: #fff;font-weight: bold;' : 'background-color: transparent;border-color: #6c757d;color: #6c757d;' }}"><i
                             class='bx bxs-grid-alt'></i></a>
-                    <a href="{{ route('admin.tasks.index', ['view' => 'list']) }}" class="btn btn-muted"
+                    <a href="{{ route('employee.tasks.index', ['view' => 'list']) }}" class="btn btn-muted"
                         style="{{ request()->get('view') != 'card' ? 'background-color: #6c757d;border-color: #6c757d;color: #fff;font-weight: bold;' : 'background-color: transparent;border-color: #6c757d;color: #6c757d;' }}"><i
                             class='bx bx-list-ul'></i></a>
                 </div>
@@ -80,7 +80,7 @@
                     </div>
                     <div class="modal-body">
 
-                        <form action="{{ route('admin.tasks.store') }}" method="POST">
+                        <form action="{{ route('employee.tasks.store') }}" method="POST">
                             @csrf
                             <div class="form-group">
                                 <input type="hidden" name="id" id="id" value="">
@@ -246,7 +246,7 @@
                                                                     <button type="button" class="btn btn-secondary"
                                                                         data-bs-dismiss="modal">Cancel</button>
                                                                     <form
-                                                                        action="{{ route('admin.tasks.destroy', $task->getId()) }}"
+                                                                        action="{{ route('employee.tasks.destroy', $task->getId()) }}"
                                                                         method="POST">
                                                                         @csrf
                                                                         @method('DELETE')
@@ -264,7 +264,7 @@
                                                             class="user-img" alt="user avatar">
                                                     @endif
                                                     <span
-                                                        class="align-middle">{{ $task->employee ? $task->employee->firstName . ' ' . $task->employee->lastName : '' }}</span>
+                                                    class="align-middle"><a href="{{ route('employee.employee.show',  $task->employee->getId()) }}">{{ $task->employee ? $task->employee->firstName . ' ' . $task->employee->lastName : '' }}</a></span>
                                                 </p>
                                                 <p class="card-text"><strong>Description:</strong>
                                                     {{ $task->description }}
@@ -281,7 +281,7 @@
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                             aria-label="Close"></button>
                                                     </div>
-                                                    <form action="{{ route('admin.tasks.update', $task->getId()) }}"
+                                                    <form action="{{ route('employee.tasks.update', $task->getId()) }}"
                                                         method="POST">
                                                         @csrf
                                                         @method('PATCH')
@@ -481,7 +481,7 @@
                                                                 <button type="button" class="btn btn-secondary"
                                                                     data-bs-dismiss="modal">Cancel</button>
                                                                 <form
-                                                                    action="{{ route('admin.tasks.destroy', $task->getId()) }}"
+                                                                    action="{{ route('employee.tasks.destroy', $task->getId()) }}"
                                                                     method="POST">
                                                                     @csrf
                                                                     @method('DELETE')
@@ -499,7 +499,7 @@
                                                         class="user-img" alt="user avatar">
                                                 @endif
                                                 <span
-                                                    class="align-middle">{{ $task->employee ? $task->employee->firstName . ' ' . $task->employee->lastName : '' }}</span>
+                                                    class="align-middle"><a href="{{ route('employee.employee.show',  $task->employee->getId()) }}">{{ $task->employee ? $task->employee->firstName . ' ' . $task->employee->lastName : '' }}</a></span>
                                             </p>
                                             <p class="card-text"><strong>Description:</strong>
                                                 {{ $task->description }}
@@ -516,7 +516,7 @@
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
                                                 </div>
-                                                <form action="{{ route('admin.tasks.update', $task->getId()) }}"
+                                                <form action="{{ route('employee.tasks.update', $task->getId()) }}"
                                                     method="POST">
                                                     @csrf
                                                     @method('PATCH')
@@ -711,7 +711,7 @@
                                                                 <button type="button" class="btn btn-secondary"
                                                                     data-bs-dismiss="modal">Cancel</button>
                                                                 <form
-                                                                    action="{{ route('admin.tasks.destroy', $task->getId()) }}"
+                                                                    action="{{ route('employee.tasks.destroy', $task->getId()) }}"
                                                                     method="POST">
                                                                     @csrf
                                                                     @method('DELETE')
@@ -730,7 +730,7 @@
                                                         class="user-img" alt="user avatar">
                                                 @endif
                                                 <span
-                                                    class="align-middle">{{ $task->employee ? $task->employee->firstName . ' ' . $task->employee->lastName : '' }}</span>
+                                                    class="align-middle"><a href="{{ route('employee.employee.show',  $task->employee->getId()) }}">{{ $task->employee ? $task->employee->firstName . ' ' . $task->employee->lastName : '' }}</a></span>
                                             </p>
                                             <p class="card-text"><strong>Description:</strong>
                                                 {{ $task->description }}
@@ -747,7 +747,7 @@
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
                                                 </div>
-                                                <form action="{{ route('admin.tasks.update', $task->getId()) }}"
+                                                <form action="{{ route('employee.tasks.update', $task->getId()) }}"
                                                     method="POST">
                                                     @csrf
                                                     @method('PATCH')
@@ -944,7 +944,7 @@
                 console.log(status);
                 // Send an AJAX request to update the task status in the database
                 $.ajax({
-                    url: '/admin/tasks/' + taskId + '/status',
+                    url: '/employee/tasks/' + taskId + '/status',
                     type: 'PUT',
                     data: {
                         status: status
