@@ -47,10 +47,8 @@ class AdminEmployeeController extends Controller
     public function store(Request $request)
     {
         Employee::validate($request);
-
         $data = $request->all();
-        $data['password'] = Hash::make($request->input('password')) ;
-
+        $data['password'] = Hash::make($request->input('password'));
 
         // Use the default image if no image is provided
         if (!$request->hasFile('image')) {
@@ -64,11 +62,24 @@ class AdminEmployeeController extends Controller
             );
             $data['image'] = $imageName;
         }
-
         // Set the task_id field in the employee record
         $data['task_id'] = $request->input('task_id');
+        $employee = Employee::create($data);
 
-        Employee::create($data);
+        if ($request->input('role') == 'departmentHead') {
+            $departmentId = $request->input('department_id');
+            $department = Department::findOrFail($departmentId);
+            // Update the previous department head's role
+            $prevDepartmentHeadId = $department->departmentHead;
+            if ($prevDepartmentHeadId) {
+                $prevDepartmentHead = Employee::findOrFail($prevDepartmentHeadId);
+                $prevDepartmentHead->role = 'employee';
+                $prevDepartmentHead->save();
+            }
+            $department->departmentHead = $employee->id;
+            $department->save();
+        }
+        session()->flash('success', 'Employee created successfully!');
 
         return redirect()->route('admin.employees.index')->with('success', 'Employee created successfully!');
     }
@@ -119,15 +130,30 @@ class AdminEmployeeController extends Controller
             );
             $validatedData['image'] = $imageName;
         }
-
         // Check if password is provided, if not, keep the old password
         if ($request->filled('password')) {
             $validatedData['password'] = Hash::make($validatedData['password']);
         } else {
             unset($validatedData['password']);
         }
+        if ($request->input('role') != $employee->role) {
+            $employee->role = 'employee';
+        }
 
         $employee->update($validatedData);
+        if ($request->input('role') == 'departmentHead') {
+            $departmentId = $request->input('department_id');
+            // Update the previous department head's role
+            $department = Department::findOrFail($departmentId);
+            $prevDepartmentHeadId = $department->departmentHead;
+            if ($prevDepartmentHeadId) {
+                $prevDepartmentHead = Employee::findOrFail($prevDepartmentHeadId);
+                $prevDepartmentHead->role = 'employee';
+                $prevDepartmentHead->save();
+            }
+            $department->departmentHead = $employee->id;
+            $department->update();
+        }
         session()->flash('edit', 'Employee updated successfully!');
 
 

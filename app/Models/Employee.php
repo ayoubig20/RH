@@ -213,8 +213,6 @@ class Employee extends Authenticatable
     {
         return $this->belongsToMany(Task::class, 'employee_tasks');
     }
-
-
     public function getTasks()
     {
         return $this->tasks;
@@ -244,7 +242,9 @@ class Employee extends Authenticatable
         $employee = Employee::whereEmail($email)->isActive()->exists();
         return $employee;
     }
-
+    public function departmentHead(){
+        return $this->belongsTo(Department::class);
+    }
     /**
      * Summary of teams
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

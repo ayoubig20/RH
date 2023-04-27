@@ -9,7 +9,7 @@ class Department extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name','description'];
+    protected $fillable = ['name','description','departmentHead'];
     public static function validate($request)
     {
         $request->validate([
@@ -45,5 +45,9 @@ class Department extends Model
     public function employees()
     {
         return $this->belongsToMany(Employee::class);
+    }
+     public function employeeDepartmentHead()
+    {
+        return $this->belongsTo(Employee::class,'departmentHead');
     }
 }

@@ -19,21 +19,15 @@
                         </ol>
                     </nav>
                 </div>
-                <div class="ms-auto">
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-primary">Settings</button>
-                        <button type="button"
-                            class="btn btn-primary split-bg-primary dropdown-toggle dropdown-toggle-split"
-                            data-bs-toggle="dropdown"> <span class="visually-hidden">Toggle Dropdown</span>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-end"> <a class="dropdown-item"
-                                href="javascript:;">Action</a>
-                            <a class="dropdown-item" href="javascript:;">Another action</a>
-                            <a class="dropdown-item" href="javascript:;">Something else here</a>
-                            <div class="dropdown-divider"></div> <a class="dropdown-item" href="javascript:;">Separated
-                                link</a>
-                        </div>
-                    </div>
+            </div>
+            <div class="text-sm-end">
+                <div class="btn-group mb-3 d-none d-sm-inline-block">
+                    <a href="{{ route('admin.department.index', ['view' => 'card']) }}" class="btn btn-muted"
+                        style="{{ request()->get('view') == 'card' ? 'background-color: #6c757d;border-color: #6c757d;color: #fff;font-weight: bold;' : 'background-color: transparent;border-color: #6c757d;color: #6c757d;' }}"><i
+                            class='bx bxs-grid-alt'></i></a>
+                    <a href="{{ route('admin.department.index', ['view' => 'list']) }}" class="btn btn-muted"
+                        style="{{ request()->get('view') != 'card' ? 'background-color: #6c757d;border-color: #6c757d;color: #fff;font-weight: bold;' : 'background-color: transparent;border-color: #6c757d;color: #6c757d;' }}"><i
+                            class='bx bx-list-ul'></i></a>
                 </div>
             </div>
             <!--end breadcrumb-->
@@ -78,15 +72,16 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table">
+                <table class="table text-center">
                     <thead class=" text-primary">
                         <th>#</th>
                         <th>department name</th>
+                        <th>department Head</th>
                         <th>description</th>
                         <th>Action</th>
 
                     </thead>
-                    <tbody>
+                    <tbody class="text-bold">
                         <?php $i = 0; ?>
                         @foreach ($viewData['departments'] as $department)
                             <?php $i++; ?>
@@ -94,15 +89,29 @@
                             <tr>
                                 <td>{{ $i }}</td>
                                 <td>{{ $department->getName() }}</td>
+                                <td>
+                                    @if ($department->employeeDepartmentHead)
+                                        <a href="{{ route('admin.employees.show', $department->employeeDepartmentHead) }}"><img
+                                                src="{{ asset('storage/assets/users/' . $department->employeeDepartmentHead->image) }}"
+                                                class="user-img" alt="user avatar">
+                                            <span class="badge bg-dark p-2">
+                                                {{ $department->employeeDepartmentHead->firstName . ' ' . $department->employeeDepartmentHead->lastName }}</span>
+                                        </a>
+                                    @else
+                                        N/A
+                                    @endif
+                                </td>
                                 <td>{{ $department->getDescription() }}</td>
+
                                 <td>
                                     <div class="d-flex flex-row">
                                         <button type="button" class="btn btn-outline-success btn-sm" data-bs-toggle="modal"
                                             data-bs-target="#editDepartment{{ $department->getId() }}">
                                             <i class="bx bxs-edit"></i> Edit
                                         </button>
-                                        <div class="modal fade" id="editDepartment{{ $department->getId() }}" tabindex="-1"
-                                            aria-labelledby="editDepartment{{ $department->getId() }}" aria-hidden="true">
+                                        <div class="modal fade" id="editDepartment{{ $department->getId() }}"
+                                            tabindex="-1" aria-labelledby="editDepartment{{ $department->getId() }}"
+                                            aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">

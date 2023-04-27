@@ -166,7 +166,7 @@
                                 <span class="input-group-text"><i class="bx bx-user"></i></span>
                                 <select class="form-control" id="role" name="role" required>
                                     <option value="">Select Role</option>
-                                    <option value="admin" {{ $employee->role == 'admin' ? 'selcted' : '' }}>Admin
+                                    <option value="departmentHead" {{ $employee->role == 'departmentHead' ? 'selcted' : '' }}>department head
                                     </option>
                                     <option value="employee" {{ $employee->role == 'employee' ? 'selected' : '' }}>
                                         Employee</option>

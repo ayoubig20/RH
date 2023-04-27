@@ -53,18 +53,15 @@ class AdminTaskController extends Controller
 
         $creationData = $request->all();
         $task = Task::create($creationData);
-
         // Get the employee and project IDs from the request
         $employeeId = $request->input('assigned_to');
         $projectId = $request->input('project_id');
-
         // Attach the task to the employee and project using the pivot table
         $employee = Employee::findOrFail($employeeId);
         $employee->projects()->attach($projectId, ['created_at' => now(), 'updated_at' => now(), 'created_by' => (Auth::user()->name)]);
         $employee->tasks()->attach($task->id, [
             'created_at' => now(), 'updated_at' => now(), 'created_by' => (Auth::user()->name),
         ]);
-
         $viewData['employees'] = Employee::all();
         $viewData['projects'] = Project::all();
 

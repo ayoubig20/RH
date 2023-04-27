@@ -9,20 +9,20 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
+//     public function up(): void
+//     {
      
-Schema::table('users', function (Blueprint $table) {
-    $table->string('role')->default('employe');
-    });
-    }
+// Schema::table('users', function (Blueprint $table) {
+//     $table->string('role')->default('employe');
+//     });
+//     }
     
-    public function down()
-    {
-    Schema::table('users', function (Blueprint $table) {
-    $table->dropColumn(['role']);
-    });
+//     public function down()
+//     {
+//     Schema::table('users', function (Blueprint $table) {
+//     $table->dropColumn(['role']);
+//     });
     
-        //
-    }
+//         //
+//     }
 };
