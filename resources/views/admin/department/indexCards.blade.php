@@ -90,6 +90,8 @@
                                     @else
                                         <strong>N/A</strong>
                                     @endif
+                                    </br>
+                                    <h6>Number of employees:</br><strong>{{ $department->NumberOfEmployeesByDepartment($department->id) }}</strong></h6>
                                     <div class="d-flex flex-row justify-content-center mt-3">
                                         <button type="button" class="btn btn-outline-success btn-sm me-2"
                                             data-bs-toggle="modal"

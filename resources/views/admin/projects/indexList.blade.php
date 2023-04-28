@@ -391,7 +391,7 @@
                                                                                         In progress
                                                                                     </option>
                                                                                     <option value="Finshed"
-                                                                                        {{ old('status', $project->status) == 'Completed' ? 'selected' : '' }}>
+                                                                                        {{ old('status', $project->status) == 'Finshed' ? 'selected' : '' }}>
                                                                                         Finshed
                                                                                     </option>
                                                                                 </select>

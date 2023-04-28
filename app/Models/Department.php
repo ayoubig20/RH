@@ -50,4 +50,9 @@ class Department extends Model
     {
         return $this->belongsTo(Employee::class,'departmentHead');
     }
+    public function NumberOfEmployeesByDepartment($departmentId)
+{
+    return Employee::where('department_id', $departmentId)->count();
+}
+
 }

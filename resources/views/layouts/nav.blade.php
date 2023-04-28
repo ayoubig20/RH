@@ -19,7 +19,7 @@
                 <div class="menu-title">Dashboard</div>
             </a>
             <ul>
-                <li> <a href="{{ url('index') }}"><i class="bx bx-right-arrow-alt"></i><i
+                <li> <a href="{{ route('admin.home.index') }}"><i class="bx bx-right-arrow-alt"></i><i
                             class='bx bx-bar-chart-alt-2'></i>Statistical</a>
                 </li>
         </li>
@@ -93,15 +93,20 @@
 
     </li>
     <li>
+        <a class="has-arrow" href="{{route('admin.department.index') }}">
+            <div class="parent-icon"> <i class="bx bx-buildings"></i>
+            </div>
+            <div class="menu-title">Departement</div>
+        </a>
+
+    </li>
+    <li>
         <a class="has-arrow" href="javascript:;">
             <div class="parent-icon"> <i class='bx bxs-cog'></i>
             </div>
             <div class="menu-title">Setting</div>
         </a>
         <ul>
-            <li> <a href="{{ route('admin.department.index') }}"><i class="bx bx-right-arrow-alt"></i><i
-                        class='bx bx-buildings'></i>Departement</a>
-            </li>
             <li> <a href="{{ route('admin.category.index') }}"><i class="bx bx-right-arrow-alt"></i><i
                         class='bx bxs-briefcase'></i></i>Project Category</a>
             </li>

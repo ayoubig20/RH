@@ -77,6 +77,7 @@
                         <th>#</th>
                         <th>department name</th>
                         <th>department Head</th>
+                        <th>Nombers of employees by department</th>
                         <th>description</th>
                         <th>Action</th>
 
@@ -101,6 +102,7 @@
                                         N/A
                                     @endif
                                 </td>
+                                <td><strong>{{ $department->NumberOfEmployeesByDepartment($department->id) }}</strong></td>
                                 <td>{{ $department->getDescription() }}</td>
 
                                 <td>
@@ -109,6 +111,8 @@
                                             data-bs-target="#editDepartment{{ $department->getId() }}">
                                             <i class="bx bxs-edit"></i> Edit
                                         </button>
+
+                                        <!-- Edit Modal -->
                                         <div class="modal fade" id="editDepartment{{ $department->getId() }}"
                                             tabindex="-1" aria-labelledby="editDepartment{{ $department->getId() }}"
                                             aria-hidden="true">
@@ -128,16 +132,38 @@
                                                         @method('PUT')
                                                         <div class="modal-body">
                                                             <div class="form-group">
-                                                                <label for="name">Name:</label>
+                                                                <label for="name" class="col-form-label">Name:</label>
                                                                 <input type="text" class="form-control" id="name"
                                                                     name="name" value="{{ $department->getName() }}"
                                                                     required>
                                                             </div>
+
                                                             <div class="form-group">
-                                                                <label for="description">Description:</label>
+                                                                <label for="departmentHead"
+                                                                    class="col-form-label">Department Head:</label>
+                                                                <select name="departmentHead" id="departmentHead"
+                                                                    class="form-control">
+                                                                    <option value="">Select Department Head
+                                                                    </option>
+
+                                                                    @foreach ($viewData['employees'] as $employee)
+                                                                        <option value="{{ $employee->id }}"
+                                                                            {{ $employee->id == $department->departmentHead ? 'selected' : '' }}>
+                                                                            {{ $employee->firstName }}
+                                                                            {{ $employee->lastName }}
+                                                                        </option>
+                                                                    @endforeach
+
+                                                                </select>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="description"
+                                                                    class="col-form-label">Description:</label>
                                                                 <textarea class="form-control" id="description" name="description">{{ $department->getDescription() }}</textarea>
                                                             </div>
                                                         </div>
+
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary"
                                                                 data-bs-dismiss="modal">Cancel</button>
@@ -148,8 +174,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
-
                                         <button type="button" class="btn btn-outline-danger btn-sm"
                                             data-bs-toggle="modal"
                                             data-bs-target="#deleteDepartement{{ $department->getId() }}">

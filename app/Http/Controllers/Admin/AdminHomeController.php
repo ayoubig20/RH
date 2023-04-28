@@ -18,10 +18,10 @@ class AdminHomeController extends Controller
         $numCompletedTasks = Task::all()->where('status', 'done')->count();
         $numProgerssTasks = Task::all()->where('status', 'in progress')->count();
         $numToDOTasks = Task::all()->where('status', 'to do')->count();
-        // priority tasks
-        $priorityHighTasks = Task::all()->where('priority', 'high')->count();
-        $priorityMediumTasks = Task::all()->where('priority', 'Medium')->count();
-        $priorityLowTasks = Task::all()->where('priority', 'low')->count();
+        // priority Project
+        $priorityHighProject = Project::all()->where('priority', 'high')->count();
+        $priorityMediumProject = Project::all()->where('priority', 'medium')->count();
+        $priorityLowProject = Project::all()->where('priority', 'low')->count();
         // stats project
         // $TasksId = Task::where('assigned_to', $employeeId)->get()->pluck('project_id');
         $Projects = Project::all();
@@ -32,7 +32,7 @@ class AdminHomeController extends Controller
 
         // stats Employees
         $employees=Employee::all();
-        $numProject = $employees->count();
+        $numEmployes = $employees->count();
         // $departmentHead = $employees->where('role', 'department head');
 
 
@@ -45,13 +45,15 @@ class AdminHomeController extends Controller
             'numProgressTasks' => $numProgerssTasks,
             'numToDOTasks' => $numToDOTasks,
             'numProject' => $numProject,
+            'numEmployes' => $numEmployes,
             'numCompletedPoject' => $numCompletedPoject,
             'numProgerssPoject' => $numProgerssPoject,
             'numToDOTPoject' => $numToDOTPoject,
-            'priorityHighTasks' => $priorityHighTasks,
-            'priorityMediumTasks' => $priorityMediumTasks,
-            'priorityLowTasks' => $priorityLowTasks,
-            'tasks' => $Tasks
+            'priorityHighProject' => $priorityHighProject,
+            'priorityMediumProject' => $priorityMediumProject,
+            'priorityLowProject' => $priorityLowProject,
+            'tasks' => $Tasks,
+            'Projects' => $Projects,
         ];
         return view('admin.home.index')->with("viewData", $viewData);
     }

@@ -57,7 +57,7 @@
                                 <div class="card radius-10 w-100">
                                     <div class="card-body">
                                         <div class="col">
-                                            <div class="card  text-white" style="background-color:rgb(220, 20, 60);">
+                                            <div class="card  text-white" style="background-color:#FF4858;">
                                                 <div class="card-body">
                                                     <h3>High Priority Tasks</h3>
                                                     <strong>
@@ -69,7 +69,7 @@
                                         </div>
 
                                         <div class="col">
-                                            <div class="card"style="background-color: rgb(255, 215, 0);">
+                                            <div class="card"style="background-color: #FFEC5C;">
                                                 <div class="card-body">
                                                     <h3>Medium Priority tasks</h3>
                                                     <strong>
