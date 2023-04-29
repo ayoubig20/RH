@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\AdminEmployeeController;
 use App\Http\Controllers\Admin\AdminHolidaysController;
 use App\Http\Controllers\Employee\Auth\LoginController;
 use App\Http\Controllers\Admin\AdminDepartmentController;
+use App\Http\Controllers\Admin\AdminJobContoller;
 use App\Http\Controllers\Employee\EmployeeHomeController;
 use App\Http\Controllers\Admin\ArchiveEmp\AdminEmpArchiveController;
 use App\Http\Controllers\Admin\ArchivePro\AdminProArchiveController;
@@ -54,6 +55,15 @@ Route::middleware('auth:web')->group(function () {
         'edit' => 'admin.department.edit',
         'update' => 'admin.department.update',
         'destroy' => 'admin.department.destroy',
+    ]);
+       Route::resource('/admin/jobs', AdminJobContoller::class)->names([
+        'index' => 'admin.jobs.index',
+        'create' => 'admin.jobs.create',
+        'store' => 'admin.jobs.store',
+        'show' => 'admin.jobs.show',
+        'edit' => 'admin.jobs.edit',
+        'update' => 'admin.jobs.update',
+        'destroy' => 'admin.jobs.destroy',
     ]);
     Route::resource('/admin/projects', AdminProjectController::class)->names([
         'index' => 'admin.projects.index',

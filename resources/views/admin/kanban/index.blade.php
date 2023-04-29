@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Employee')
+@section('title', 'Kanban')
 
 @section('wrapper')
     <!--start page wrapper -->
@@ -12,31 +12,16 @@
                 <div class="ps-3">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb mb-0 p-0">
-                            <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
+                            <li class="breadcrumb-item"><a href="{{ route('admin.home.index') }}"><i
+                                        class="bx bx-home-alt"></i></a>
                             </li>
                             <li class="breadcrumb-item active" aria-current="page">Data Table</li>
                         </ol>
                     </nav>
                 </div>
-                <div class="ms-auto">
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-primary">Settings</button>
-                        <button type="button"
-                            class="btn btn-primary split-bg-primary dropdown-toggle dropdown-toggle-split"
-                            data-bs-toggle="dropdown"> <span class="visually-hidden">Toggle Dropdown</span>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-end"> <a class="dropdown-item"
-                                href="javascript:;">Action</a>
-                            <a class="dropdown-item" href="javascript:;">Another action</a>
-                            <a class="dropdown-item" href="javascript:;">Something else here</a>
-                            <div class="dropdown-divider"></div> <a class="dropdown-item" href="javascript:;">Separated
-                                link</a>
-                        </div>
-                    </div>
-                </div>
+
             </div>
             <!--end breadcrumb-->
-
             @include('layouts.notify')
 
             <div class="text-sm-end">
@@ -878,7 +863,7 @@
     </div>
 
     </div>
-    <script>
+    {{-- <script>
         $(document).on('click', '.dropdown-menu', function(e) {
             e.stopPropagation();
         });
@@ -909,7 +894,7 @@
                 e.stopPropagation();
             }
         });
-    </script>
+    </script> --}}
     <script src="{{ asset('assets/js/vendor.min.js') }}"></script>
     <!-- dragula js-->
     <script src="{{ asset('assets/vendor/dragula/dragula.min.js') }}"></script>
@@ -938,7 +923,6 @@
             drake.on('drop', function(el, target, source, sibling) {
                 // Get the task ID and new status after a drop event
                 var taskId = $(el).data('task-id');
-
                 var status = target.id.replace('task-list-', '');
                 console.log(taskId);
                 console.log(status);
@@ -953,14 +937,12 @@
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     success: function(response) {
-                        // Show a success message
                         console.log('Task status updated successfully');
-                        console.log(response); // Display the response in the console
+                        console.log(response);
                         location.reload();
 
                     },
                     error: function(xhr, status, error) {
-                        // Show an error message
                         console.log('Error updating task status: ' + error);
 
                     }
@@ -969,6 +951,5 @@
         });
     </script>
 
-    </div>
     </div>
 @endsection

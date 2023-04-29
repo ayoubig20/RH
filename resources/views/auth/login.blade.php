@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+
     <main class="login-form">
         <div class="cotainer">
             <div class="row justify-content-center">
@@ -90,4 +91,51 @@
             </div>
         </div>
     </main>
+    <script>
+        const startConfetti = () => {
+  // Check if user is authenticated
+  const isAuthenticated = document.querySelector('meta[name="isAuthenticated"]').getAttribute('content') === 'true';
+  
+  if (isAuthenticated) {
+    let myCanvas = document.createElement("canvas");
+    document.body.appendChild(myCanvas);
+
+    let myConfetti = confetti.create(myCanvas, {
+      resize: true,
+      useWorker: true
+    });
+
+    const counter = document.querySelector(".counter");
+    const loader = document.querySelector(".loader");
+
+    animate((progress) => (counter.innerHTML = `${Math.round(progress * 100)}%`), {
+      duration: 1,
+      easing: "ease-out"
+    }).finished.then(() => {
+      animate(
+        loader,
+        {
+          clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)"
+        },
+        {
+          delay: 0.4,
+          duration: 0.6
+        }
+      ).finished.then(() => {
+        myConfetti({
+          particleCount: 100,
+          startVelocity: 30,
+          spread: 360,
+          origin: {
+            x: Math.random(),
+            // since they fall down, start a bit higher than random
+            y: Math.random() - 0.2
+          }
+        });
+      });
+    });
+  }
+};
+
+    </script>
 @endsection

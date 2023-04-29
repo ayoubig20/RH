@@ -13,59 +13,30 @@
     <!--navigation-->
     <ul class="metismenu" id="menu">
         <li>
-            <a href="javascript:;" class="has-arrow">
-                <div class="parent-icon"><i class='bx bx-home-circle'></i>
+            <a href="{{ route('admin.home.index') }}" class="has-arrow">
+                <div class="parent-icon"><i class="bx bx-home-circle"></i>
                 </div>
                 <div class="menu-title">Dashboard</div>
             </a>
-            <ul>
-                <li> <a href="{{ route('admin.home.index') }}"><i class="bx bx-right-arrow-alt"></i><i
-                            class='bx bx-bar-chart-alt-2'></i>Statistical</a>
-                </li>
         </li>
-    </ul>
-    </li>
-    <li>
-        <a href="javascript:;" class="has-arrow">
-            <div class="parent-icon"><i class="bx bx-category"></i>
-            </div>
-            <div class="menu-title">Application</div>
-        </a>
-        <ul>
-            <li> <a href="{{ url('app-emailbox') }}"><i class="bx bx-right-arrow-alt"></i>Email</a>
-            </li>
-    </li>
-    <li> <a href="{{ url('app-file-manager') }}"><i class="bx bx-right-arrow-alt"></i>File Manager</a>
-    </li>
-    </li>
-    <li> <a href="{{ url('app-to-do') }}"><i class="bx bx-right-arrow-alt"></i>Todo List</a>
-    </li>
-    {{-- <li> <a href="{{ url('app-invoice') }}"><i class="bx bx-right-arrow-alt"></i>Invoice</a> --}}
-    </li>
-    <li> <a href="{{ url('app-fullcalender') }}"><i class="bx bx-right-arrow-alt"></i>Calendar</a>
-    </li>
-    </ul>
-    </li>
-    {{-- <li class="menu-label">UI Elements</li> --}}
-
-    <li>
-        <a href="javascript:;" class="has-arrow">
-            <div class="parent-icon"><i class='bx bxs-group'></i>
-            </div>
-            <div class="menu-title">Employes</div>
-        </a>
-        <ul>
-            <li> <a href="{{ route('admin.employees.index') }}"><i class="bx bx-right-arrow-alt"><i
-                            class='bx bxs-group'></i></i>Employes</a>
-            </li>
-            {{-- <li> <a href="{{ route('admin.employees.index') }}"><i class="bx bx-right-arrow-alt"></i>Employe
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class='bx bxs-group'></i>
+                </div>
+                <div class="menu-title">Employes</div>
+            </a>
+            <ul>
+                <li> <a href="{{ route('admin.employees.index') }}"><i class="bx bx-right-arrow-alt"><i
+                                class='bx bxs-group'></i></i>Employes</a>
+                </li>
+                {{-- <li> <a href="{{ route('admin.employees.index') }}"><i class="bx bx-right-arrow-alt"></i>Employe
                         Details</a>
                 </li> --}}
-            <li> <a href="{{ route('admin.employees.create') }}"><i class="bx bx-right-arrow-alt"></i><i
-                        class='bx bx-user-plus'></i>Add New
-                    Employes</a>
-            </li>
-    </li>
+                <li> <a href="{{ route('admin.employees.create') }}"><i class="bx bx-right-arrow-alt"></i><i
+                            class='bx bx-user-plus'></i>Add New
+                        Employes</a>
+                </li>
+        </li>
 
     </ul>
     <li>
@@ -93,7 +64,7 @@
 
     </li>
     <li>
-        <a class="has-arrow" href="{{route('admin.department.index') }}">
+        <a class="has-arrow" href="{{ route('admin.department.index') }}">
             <div class="parent-icon"> <i class="bx bx-buildings"></i>
             </div>
             <div class="menu-title">Departement</div>
@@ -110,7 +81,7 @@
             <li> <a href="{{ route('admin.category.index') }}"><i class="bx bx-right-arrow-alt"></i><i
                         class='bx bxs-briefcase'></i></i>Project Category</a>
             </li>
-            <li> <a href="{{ url('icons-feather-icons') }}"><i class="bx bx-right-arrow-alt"></i><i
+            <li> <a href="{{ route('admin.jobs.index') }}"><i class="bx bx-right-arrow-alt"></i><i
                         class='bx bxs-briefcase-alt-2'></i>list job</a>
             </li>
         </ul>
@@ -128,9 +99,9 @@
             <li> <a href="{{ route('admin.archiveprojects.index') }}"><i class="bx bx-right-arrow-alt"></i><i
                         class='bx bx-atom'></i></i>Archive Project </a>
             </li>
-            {{-- <li> <a href="{{ url('icons-feather-icons') }}"><i class="bx bx-right-arrow-alt"></i><i class='bx bxs-briefcase-alt-2'></i>list job</a> --}}
+        </ul>
+
     </li>
-    </ul>
     </li>
     <!--end navigation-->
 </div>

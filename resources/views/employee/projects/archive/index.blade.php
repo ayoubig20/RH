@@ -238,11 +238,15 @@
             </div>
         </div>
         <script>
-            $('#datatable').ready(function() {
-                // Select/Deselect checkboxes
+            $(document).ready(function() {
+                // Set CSRF token for AJAX requests
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
                 $('#select-all').click(function(event) {
                     if (this.checked) {
-                        // Iterate each checkbox
                         $(':checkbox').each(function() {
                             this.checked = true;
                         });
@@ -253,7 +257,6 @@
                     }
                 });
 
-                // Delete selected projects
                 $('#delete-selected').click(function() {
                     var ids = [];
                     $('input[name="selected[]"]').each(function() {
@@ -261,6 +264,7 @@
                             ids.push($(this).val());
                         }
                     });
+                    console.log(ids);
 
                     if (ids.length == 0) {
                         alert('Please select at least one project to delete.');
@@ -273,10 +277,10 @@
                                     ids: ids
                                 },
                                 success: function(response) {
-                                    // Handle success response
+                                    // handle success
                                 },
                                 error: function(xhr, status, error) {
-                                    // Handle error response
+                                    // handle error
                                 }
                             });
                         }

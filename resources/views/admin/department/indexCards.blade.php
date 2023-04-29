@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Employees')
+@section('title', 'Departement')
 
 @section('wrapper')
     <!--start page wrapper -->
@@ -12,9 +12,9 @@
                 <div class="ps-3">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb mb-0 p-0">
-                            <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
+                            <li class="breadcrumb-item"><a href="{{ route('admin.home.index') }}"><i class="bx bx-home-alt"></i></a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Data Table</li>
+                            <li class="breadcrumb-item active" aria-current="page">Data Cards Department</li>
                         </ol>
                     </nav>
                 </div>
@@ -66,7 +66,7 @@
             </div>
 
             <div class="card">
-                <div class="card-header display-flex">Department List</div>
+                <div class="card-header display-flex text-center"> <h3>Department List Cards</h3></div>
                 <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
                     @foreach ($viewData['departments'] as $department)
                         <div class="col mb-4">

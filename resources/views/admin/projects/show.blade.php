@@ -1,7 +1,5 @@
 @extends('layouts.admin')
-
-@section('title', 'Employees')
-
+@section('title', 'Details Project')
 @section('wrapper')
     <!--start page wrapper -->
     <div class="page-wrapper">
@@ -12,27 +10,12 @@
                 <div class="ps-3">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb mb-0 p-0">
-                            <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
+                            <li class="breadcrumb-item"><a href="{{ route('admin.home.index') }}"><i
+                                        class="bx bx-home-alt"></i></a>
                             </li>
                             <li class="breadcrumb-item active" aria-current="page">Data Table</li>
                         </ol>
                     </nav>
-                </div>
-                <div class="ms-auto">
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-primary">Settings</button>
-                        <button type="button"
-                            class="btn btn-primary split-bg-primary dropdown-toggle dropdown-toggle-split"
-                            data-bs-toggle="dropdown"> <span class="visually-hidden">Toggle Dropdown</span>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-end"> <a class="dropdown-item"
-                                href="javascript:;">Action</a>
-                            <a class="dropdown-item" href="javascript:;">Another action</a>
-                            <a class="dropdown-item" href="javascript:;">Something else here</a>
-                            <div class="dropdown-divider"></div> <a class="dropdown-item" href="javascript:;">Separated
-                                link</a>
-                        </div>
-                    </div>
                 </div>
             </div>
             <!--end breadcrumb-->
@@ -60,7 +43,7 @@
                                     <th scope="row">Date created</th>
                                     <td>{{ $project->start_date->format('d-m-Y') }}</td>
                                     <th scope="row">Due date</th>
-                                    <td>{{ $project->end_date ->format('d-m-Y')}}</td>
+                                    <td>{{ $project->end_date->format('d-m-Y') }}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Category</th>
@@ -145,8 +128,7 @@
                                                                     <span
                                                                         class="badge bg-secondary ">{{ $task->status }}</span>
                                                                 @elseif ($task->status == 'in progress')
-                                                                    <span
-                                                                        class="badge bg-info">{{ $task->status }}</span>
+                                                                    <span class="badge bg-info">{{ $task->status }}</span>
                                                                 @else
                                                                     <span
                                                                         class="badge bg-success">{{ $task->status }}</span>
@@ -266,5 +248,8 @@
                             $('#delete_file_modal').modal('show');
                         }
                     </script>
-
-                @endsection
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection

@@ -22,7 +22,6 @@ return new class extends Migration
             $table->string('phone');
             $table->string('address');
             $table->string('image')->nullable();
-            $table->string('job');
             $table->string('role');
             $table->string('martialStatus');
             $table->date('fatteningDate');

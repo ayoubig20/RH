@@ -1,28 +1,6 @@
 @extends('layouts.admin')
-@section('style')
-    {{-- .employee-wrapper {
-    position: relative;
-    display: inline-block;
-    }
-    .employee-badge {
-    position: absolute;
-    top: -20px; /* adjust this value as needed */
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #333;
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 10px;
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-    }
-    .employee-wrapper:hover .employee-badge {
-    opacity: 1;
-    } --}}
-@endsection
-@section('title', 'Employees')
 
-
+@section('title', 'Projects')
 @section('wrapper')
     <!--start page wrapper -->
     <div class="page-wrapper">
@@ -33,27 +11,12 @@
                 <div class="ps-3">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb mb-0 p-0">
-                            <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
+                            <li class="breadcrumb-item"><a href="{{ route('admin.home.index') }}"><i
+                                        class="bx bx-home-alt"></i></a>
                             </li>
                             <li class="breadcrumb-item active" aria-current="page">Data Table</li>
                         </ol>
                     </nav>
-                </div>
-                <div class="ms-auto">
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-primary">Settings</button>
-                        <button type="button"
-                            class="btn btn-primary split-bg-primary dropdown-toggle dropdown-toggle-split"
-                            data-bs-toggle="dropdown"> <span class="visually-hidden">Toggle Dropdown</span>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-end"> <a class="dropdown-item"
-                                href="javascript:;">Action</a>
-                            <a class="dropdown-item" href="javascript:;">Another action</a>
-                            <a class="dropdown-item" href="javascript:;">Something else here</a>
-                            <div class="dropdown-divider"></div> <a class="dropdown-item" href="javascript:;">Separated
-                                link</a>
-                        </div>
-                    </div>
                 </div>
             </div>
             <!--end breadcrumb-->
@@ -431,14 +394,15 @@
                                                                 $employee = $tasksByEmployee->first()->employee;
                                                             @endphp
                                                             <div class="team-members text-nowrap">
-                                                                <a href="{{ route('admin.employees.show', $employee->getId()) }}" class="team-member-avatar"
+                                                                <a href="{{ route('admin.employees.show', $employee->getId()) }}"
+                                                                    class="team-member-avatar"
                                                                     title="{{ $employee->firstName }} {{ $employee->lastName }}"
                                                                     data-toggle="tooltip">
                                                                     <img src="{{ asset('storage/assets/users/' . $employee->image) }}"
-                                                                      class="user-img" alt="user avatar">
+                                                                        class="user-img" alt="user avatar">
                                                                 </a>
                                                                 <div class="dropdown avatar-dropdown">
-                                                                
+
                                                                     <div class="dropdown-menu dropdown-menu-right"
                                                                         id="avatar-dropdown-{{ $employee->id }}">
                                                                         <div class="avatar-group">

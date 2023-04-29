@@ -23,7 +23,7 @@ class Employee extends Authenticatable
     protected $guard = 'employee';
 
     protected $fillable = [
-        'firstName', 'lastName', 'gender', 'email', 'phone', 'address', 'job', 'fatteningDate', 'department_id', 'martialStatus', 'salary', 'DateOfBirth', 'status', 'image', 'password', 'role'
+        'firstName', 'lastName', 'gender', 'email', 'phone', 'address', 'job_id', 'fatteningDate', 'department_id', 'martialStatus', 'salary', 'DateOfBirth', 'status', 'image', 'password', 'role'
     ];
     protected $hidden = [
 
@@ -42,7 +42,7 @@ class Employee extends Authenticatable
             'phone' => 'required|string|max:255',
             'address' => 'required|string|max:255',
             'status' => 'required|string|max:255',
-            'job' => 'required|string|max:255',
+            'job_id' => 'required|string|max:255',
             'martialStatus' => 'required|string|max:255',
             'fatteningDate' => 'required|date',
             'DateOfBirth' => 'required|date',
@@ -130,12 +130,12 @@ class Employee extends Authenticatable
     }
     public function getJob()
     {
-        return $this->attributes["job"];
+        return $this->attributes["job_id"];
     }
 
     public function setJob($job)
     {
-        $this->attributes["job"] = $job;
+        $this->attributes["job_id"] = $job;
     }
     public function getMartialStatus()
     {
@@ -244,6 +244,9 @@ class Employee extends Authenticatable
     }
     public function departmentHead(){
         return $this->belongsTo(Department::class);
+    } 
+    public function job(){
+        return $this->belongsTo(Job::class);
     }
     /**
      * Summary of teams

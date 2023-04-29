@@ -10,35 +10,15 @@
                 <div class="ps-3">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb mb-0 p-0">
-                            <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
+                            <li class="breadcrumb-item"><a href="{{ route('admin.home.index') }}"><i class="bx bx-home-alt"></i></a>
                             </li>
                             <li class="breadcrumb-item active" aria-current="page">Data Table</li>
                         </ol>
                     </nav>
                 </div>
-                <div class="ms-auto">
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-primary">Settings</button>
-                        <button type="button"
-                            class="btn btn-primary split-bg-primary dropdown-toggle dropdown-toggle-split"
-                            data-bs-toggle="dropdown"> <span class="visually-hidden">Toggle Dropdown</span>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-end"> <a class="dropdown-item"
-                                href="javascript:;">Action</a>
-                            <a class="dropdown-item" href="javascript:;">Another action</a>
-                            <a class="dropdown-item" href="javascript:;">Something else here</a>
-                            <div class="dropdown-divider"></div> <a class="dropdown-item" href="javascript:;">Separated
-                                link</a>
-                        </div>
-                    </div>
-                </div>
             </div>
-
-
             {{-- edit --}}
             @include('layouts.notify')
-
-
             <div class="card border-top border-0 border-5 border-dark">
                 <div class="card-body p-5">
                     <div class="card-title d-flex align-items-center">
@@ -46,8 +26,8 @@
                         <h3 class="mb-0 text-dark">{{ $employee->firstName }} {{ $employee->lastName }} Update</h3>
                     </div>
                     <hr>
-                    <form method="POST" action="{{ route('admin.employees.update',$employee->id) }}" enctype="multipart/form-data"
-                        class="row g-3">
+                    <form method="POST" action="{{ route('admin.employees.update', $employee->id) }}"
+                        enctype="multipart/form-data" class="row g-3">
                         @csrf
                         @method('PATCH')
                         <div class="col-md-6">
@@ -166,7 +146,8 @@
                                 <span class="input-group-text"><i class="bx bx-user"></i></span>
                                 <select class="form-control" id="role" name="role" required>
                                     <option value="">Select Role</option>
-                                    <option value="departmentHead" {{ $employee->role == 'departmentHead' ? 'selcted' : '' }}>department head
+                                    <option value="departmentHead"
+                                        {{ $employee->role == 'departmentHead' ? 'selcted' : '' }}>department head
                                     </option>
                                     <option value="employee" {{ $employee->role == 'employee' ? 'selected' : '' }}>
                                         Employee</option>
@@ -181,8 +162,7 @@
                                     <option value="">Select department</option>
                                     @foreach ($viewData['departments'] as $department)
                                         <option value="{{ $department->getId() }}"
-                                            {{ old('departement',$employee->getDepartmentId()
-                                                )==$department->getId() ? 'selected' : '' }}>
+                                            {{ old('departement', $employee->getDepartmentId()) == $department->getId() ? 'selected' : '' }}>
                                             {{ $department->getName() }}
                                         </option>
                                     @endforeach
@@ -192,12 +172,14 @@
                         <div> </div>
                         <div class="col-md-6">
 
-                            <label for="password" class="form-label">Password: <span class="badge rounded-pill bg-warning">If you dont wante change old password late empty</span>
+                            <label for="password" class="form-label">Password: <span
+                                    class="badge rounded-pill bg-warning">If you dont wante change old password late
+                                    empty</span>
                             </label>
                             <div class="input-group">
                                 <span class="input-group-text"><i class="bx bx-lock"></i></span>
                                 <input type="password" class="form-control @error('password') is-invalid @enderror"
-                                    id="password" name="password" >
+                                    id="password" name="password">
                             </div>
 
                             @error('password')
@@ -212,7 +194,7 @@
                                 <span class="input-group-text"><i class="bx bx-lock"></i></span>
                                 <input type="password"
                                     class="form-control @error('password_confirmation') is-invalid @enderror"
-                                    id="password_confirmation" name="password_confirmation" >
+                                    id="password_confirmation" name="password_confirmation">
                             </div>
                             @error('password_confirmation')
                                 <span class="invalid-feedback" role="alert">
@@ -224,34 +206,38 @@
                             <div class="form-group">
                                 <label for="status">Status:</label>
                                 <label class="form-check-label mr-4">
-                                    <input class="form-check-input" type="radio" name="status" value="full-time" {{ old('status', $employee->getStatus()) == 'full-time' ? 'checked' : '' }}>
+                                    <input class="form-check-input" type="radio" name="status" value="full-time"
+                                        {{ old('status', $employee->getStatus()) == 'full-time' ? 'checked' : '' }}>
                                     Full-time
                                 </label>
                                 <label class="form-check-label mr-4">
-                                    <input class="form-check-input" type="radio" name="status" value="part-time" {{ old('status', $employee->getStatus()) == 'part-time' ? 'checked' : '' }}>
+                                    <input class="form-check-input" type="radio" name="status" value="part-time"
+                                        {{ old('status', $employee->getStatus()) == 'part-time' ? 'checked' : '' }}>
                                     Part-time
                                 </label>
                                 <label class="form-check-label mr-4">
-                                    <input class="form-check-input" type="radio" name="status" value="contractor" {{ old('status', $employee->getStatus()) == 'contractor' ? 'checked' : '' }}>
+                                    <input class="form-check-input" type="radio" name="status" value="contractor"
+                                        {{ old('status', $employee->getStatus()) == 'contractor' ? 'checked' : '' }}>
                                     Contractor
                                 </label>
                                 <label class="form-check-label mr-4">
-                                    <input class="form-check-input" type="radio" name="status" value="freelancer" {{ old('status', $employee->getStatus()) == 'freelancer' ? 'checked' : '' }}>
+                                    <input class="form-check-input" type="radio" name="status" value="freelancer"
+                                        {{ old('status', $employee->getStatus()) == 'freelancer' ? 'checked' : '' }}>
                                     Freelancer
                                 </label>
                                 <label class="form-check-label mr-4">
-                                    <input class="form-check-input" type="radio" name="status" value="intern" {{ old('status', $employee->getStatus()) == 'intern' ? 'checked' : '' }}>
+                                    <input class="form-check-input" type="radio" name="status" value="intern"
+                                        {{ old('status', $employee->getStatus()) == 'intern' ? 'checked' : '' }}>
                                     Intern
                                 </label>
                             </div>
                         </div>
-                        
-                        
                         <div class="col">
-                            <button type="submit" class="btn btn-success px-5" >Update</button>
+                            <button type="submit" class="btn btn-success px-5">Update</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+@endsection

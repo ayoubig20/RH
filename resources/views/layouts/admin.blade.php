@@ -8,10 +8,11 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
 
+
     <!--favicon-->
     <link rel="icon" href="{{ URL::asset('assets/images/logo-purple.png') }}" type="image/png" />
     <!--plugins-->
-    {{-- <script src="{{asset('https://code.jquery.com/jquery-3.6.0.min.js')}}"></script> --}}
+    <script src="{{asset('https://code.jquery.com/jquery-3.6.0.min.js')}}"></script>
 
     @yield('style')
     <link href="{{ URL::asset('assets/plugins/simplebar/css/simplebar.css') }}" rel="stylesheet" />
@@ -38,6 +39,7 @@
     <div class="wrapper">
         <!--start header -->
         @include('layouts.header')
+        
         <!--end header -->
         <!--navigation-->
         @include('layouts.nav')
@@ -47,7 +49,9 @@
         @yield('wrapper')
         <!--end page wrapper -->
         <!--start overlay-->
-        <div class="overlay toggle-icon"></div>
+        <div class="overlay toggle-icon">
+            
+        </div>
         <!--end overlay-->
         <!--Start Back To Top Button--> <a href="javaScript:;" class="back-to-top"><i
                 class='bx bxs-up-arrow-alt'></i></a>

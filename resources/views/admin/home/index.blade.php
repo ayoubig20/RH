@@ -68,7 +68,7 @@
                                         </div>
 
                                         <div class="col">
-                                            <div class="card"style="background-color:#FFEC5C;">
+                                            <div class="card"style="background-color:rgb(255, 255, 141);">
                                                 <div class="card-body">
                                                     <h3>Medium Priority Projects</h3>
                                                     <strong>
@@ -116,14 +116,14 @@
                         <div class="card radius-10">
                             <div class="card-body">
                                 <div class="table-responsive lead-table">
-                                    <table class="table mb-0 align-middle">
+                                    <table class="table mb-0 align-middle text-center">
                                         <thead class="table-light">
                                             <tr>
                                                 <th>#</th>
                                                 <th>Projects</th>
-                                                <th>Status</th>
-                                                <th>End date</th>
                                                 <th>Priority</th>
+                                                <th>End date</th>
+                                                <th>Status</th>
                                                 <th>Progression</th>
                                                 <th>Total of tasks</th>
                                                 <th>Team</th>
@@ -226,9 +226,9 @@
                                         <th>#</th>
                                         <th>Tasks</th>
                                         <th>Projects</th>
-                                        <th>Status</th>
-                                        <th>End date</th>
                                         <th>Priority</th>
+                                        <th>End date</th>
+                                        <th>Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -319,14 +319,14 @@
                                     {{ $viewData['numCompletedPoject'] }}
                                 ],
                                 backgroundColor: [
-                                    'rgb(186, 85, 211)', // 
-                                    'rgb(255, 255, 0)', // yellow
-                                    'rgb(124, 252, 0)' // green
+                                    'rgb(97, 97, 97)', // gris
+                                    'rgb(79, 195, 247)', // bleu
+                                    'rgb(105, 240, 174)' // vert
                                 ],
                                 hoverBackgroundColor: [
-                                    'rgb(186, 85, 211)', // 
-                                    'rgb(255, 255, 0)', // yellow
-                                    'rgb(124, 252, 0)' // green
+                                    'rgb(97, 97, 97)', // gris
+                                    'rgb(79, 195, 247)', // bleu
+                                    'rgb(105, 240, 174)' // vert
                                 ],
 
                                 borderColor: "#fff",

@@ -1,9 +1,5 @@
 @extends('layouts.admin')
-
-
-@section('title', 'Employees')
-
-
+@section('title', 'Projects')
 @section('wrapper')
     <!--start page wrapper -->
     <div class="page-wrapper">
@@ -14,27 +10,12 @@
                 <div class="ps-3">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb mb-0 p-0">
-                            <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
+                            <li class="breadcrumb-item"><a href="{{ route('admin.home.index') }}"><i
+                                        class="bx bx-home-alt"></i></a>
                             </li>
                             <li class="breadcrumb-item active" aria-current="page">Data Table</li>
                         </ol>
                     </nav>
-                </div>
-                <div class="ms-auto">
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-primary">Settings</button>
-                        <button type="button"
-                            class="btn btn-primary split-bg-primary dropdown-toggle dropdown-toggle-split"
-                            data-bs-toggle="dropdown"> <span class="visually-hidden">Toggle Dropdown</span>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-end"> <a class="dropdown-item"
-                                href="javascript:;">Action</a>
-                            <a class="dropdown-item" href="javascript:;">Another action</a>
-                            <a class="dropdown-item" href="javascript:;">Something else here</a>
-                            <div class="dropdown-divider"></div> <a class="dropdown-item" href="javascript:;">Separated
-                                link</a>
-                        </div>
-                    </div>
                 </div>
             </div>
             <!--end breadcrumb-->
@@ -50,7 +31,6 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box">
-
                                     <h4 class="page-title">Projects Card</h4>
                                 </div>
                             </div>
@@ -321,9 +301,9 @@
                                             @endphp
 
                                             @foreach ($uniqueEmployees as $task)
-                                                <a href="{{ route('admin.employees.show',  $task->employee->getId()) }}"
+                                                <a href="{{ route('admin.employees.show', $task->employee->getId()) }}"
                                                     class="team-member-avatar"
-                                                    title="{{  $task->employee->firstName }} {{  $task->employee->lastName }}"
+                                                    title="{{ $task->employee->firstName }} {{ $task->employee->lastName }}"
                                                     data-toggle="tooltip"
                                                     style="position: relative; display: inline-block; margin-right: 10px;">
                                                     <img src="{{ asset('storage/assets/users/' . $task->employee->image) }}"

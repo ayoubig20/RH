@@ -8,6 +8,7 @@ use App\Models\Department;
 use Laravolt\Avatar\Avatar;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Job;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
@@ -21,6 +22,7 @@ class AdminEmployeeController extends Controller
         $viewData["title"] = "List employees";
         $viewData["employees"] = Employee::all();
         $viewData['departments'] = Department::all();
+        $viewData['jobs'] = Job::all();
         if ($request->has('view') && $request->get('view') == 'card') {
             // Display employees in card view
             return view('admin.employees.indexCards', ['viewData' => $viewData]);
@@ -34,6 +36,7 @@ class AdminEmployeeController extends Controller
     {
         $viewData = [];
         $viewData["title"] = "create employee";
+        $viewData['jobs'] = Job::all();
         $viewData['departments'] = Department::all();
         return view('admin.employees.create')->with("viewData", $viewData);
     }
@@ -80,7 +83,7 @@ class AdminEmployeeController extends Controller
             $department->save();
         }
         session()->flash('success', 'Employee created successfully!');
-
+// return $request;
         return redirect()->route('admin.employees.index')->with('success', 'Employee created successfully!');
     }
     public function edit(Employee $employee)
@@ -107,7 +110,7 @@ class AdminEmployeeController extends Controller
             'phone' => 'required|string|max:255',
             'address' => 'required|string|max:255',
             'status' => 'required|string|max:255',
-            'job' => 'required|string|max:255',
+            'job_id' => 'required|string|max:255',
             'martialStatus' => 'required|string|max:255',
             'fatteningDate' => 'required|date',
             'DateOfBirth' => 'required|date',

@@ -14,8 +14,10 @@ return new class extends Migration
         Schema::table("employees", function(Blueprint $table) {
             $table->unsignedBigInteger("department_id");
             $table->foreign("department_id")->references('id')->on("departments")->onDelete('cascade');
-
+            $table->unsignedBigInteger("job_id");
+            $table->foreign("job_id")->references('id')->on("jobs")->onDelete('cascade');
         });
+        
     }
 
     /**
