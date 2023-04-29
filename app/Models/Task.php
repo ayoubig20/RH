@@ -41,7 +41,6 @@ class Task extends Model
             'end_date' => 'required|date|after:start_date',
             'priority'=> 'required',
         ]);
-
     }
 
     public function employee()
@@ -57,7 +56,7 @@ class Task extends Model
     {
         return $this->project;
     }
-     public function setProject($project)
+    public function setProject($project)
     {
         return $this->project=$project;
     }

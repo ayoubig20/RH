@@ -21,7 +21,6 @@ class AdminProArchiveController extends Controller
         $viewData['categorys'] = CategoryProject::all();
         return view('admin.projects.archive.index', compact('projects', 'viewData'));
         // return $request;
-
     }
     /**
      * Show the form for creating a new resource.
@@ -97,11 +96,11 @@ class AdminProArchiveController extends Controller
     }
     public function deleteAll(Request $request)
     {
-        $delete_all_id = explode(",", $request->delete_all_id);
-
+        $delete_all_id = json_decode($request->ids);
+    
         $project= Project::withTrashed()->whereIn('id', $delete_all_id);
         $project->forceDelete();
         session()->flash('delete_project');
-        return $request;
+        return back();
     }
 }

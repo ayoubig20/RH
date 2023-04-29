@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use File;
 
-
 /**
  * Summary of Project
  */
@@ -44,11 +43,11 @@ class Project extends Model
     }
     public function getTasks()
     {
-    return $this->tasks;
-    } 
+        return $this->tasks;
+    }
     public function setTasks($tasks)
     {
-    $this->tasks = $tasks;
+        $this->tasks = $tasks;
     }
     public function getImage()
     {
@@ -202,6 +201,4 @@ class Project extends Model
 
         return $totalEmployees;
     }
- 
-
 }

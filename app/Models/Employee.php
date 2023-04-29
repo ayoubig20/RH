@@ -242,10 +242,12 @@ class Employee extends Authenticatable
         $employee = Employee::whereEmail($email)->isActive()->exists();
         return $employee;
     }
-    public function departmentHead(){
+    public function departmentHead()
+    {
         return $this->belongsTo(Department::class);
-    } 
-    public function job(){
+    }
+    public function job()
+    {
         return $this->belongsTo(Job::class);
     }
     /**

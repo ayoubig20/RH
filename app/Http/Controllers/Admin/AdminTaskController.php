@@ -29,7 +29,7 @@ class AdminTaskController extends Controller
         $viewData['employees'] = Employee::all();
         $viewData['projects'] = Project::all();
 
-        // return view('admin.tasks.indexList', compact('viewData', 'status')); 
+        // return view('admin.tasks.indexList', compact('viewData', 'status'));
         if ($request->has('view') && $request->get('view') == 'card') {
             return view('admin.tasks.indexCards', ['viewData' => $viewData]);
         } else {
@@ -118,7 +118,7 @@ class AdminTaskController extends Controller
             'created_at' => now(), 'updated_at' => now(), 'created_by' => (Auth::user()->name),
         ]);
         $task->save();
-        session()->flash('Update','Task updated successfully!');
+        session()->flash('Update', 'Task updated successfully!');
 
         return back();
     }
@@ -126,7 +126,7 @@ class AdminTaskController extends Controller
     public function destroy(Task $task)
     {
         $task->delete();
-        session()->flash('delete','Task deleted successfully!');
+        session()->flash('delete', 'Task deleted successfully!');
 
         return back();
     }
@@ -136,7 +136,7 @@ class AdminTaskController extends Controller
         $task->update([
             'status' => $request->status,
         ]);
-        session()->flash('statusUpdate','Status updated successfully');
+        session()->flash('statusUpdate', 'Status updated successfully');
         return back();
     }
 }

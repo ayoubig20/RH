@@ -33,12 +33,11 @@ class DatabaseSeeder extends Seeder
        
         CategoryProject::factory()->count(10)->create();
  
-        Project::factory()->count(10)->create();;
+        Project::factory()->count(10)->create();
+        ;
     
         // Task::factory()
         // ->count(7)
         // ->create();
-
-
     }
 }

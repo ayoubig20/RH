@@ -26,13 +26,12 @@ class LoginController extends Controller
     //         return '/admin';
     //     }
     // }
-    public function redirect($request){
+    public function redirect($request)
+    {
 
-        if($request->type == 'employee'){
+        if ($request->type == 'employee') {
             return redirect()->intended(RouteServiceProvider::EMPLOYEE);
-        }
-        
-        else{
+        } else {
             return redirect()->intended(RouteServiceProvider::HOME);
         }
     }
@@ -59,7 +58,7 @@ class LoginController extends Controller
     {
         
             return view('auth.login');
-        }
+    }
     
     /**
      * Handle a login request to the application.

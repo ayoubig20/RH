@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Job;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -37,7 +36,8 @@ class Job extends Model
     {
         $this->attributes["description"] = $description;
     }
-    public function employees(){
-        $this->hasMany(Job::class,'job');
+    public function employees()
+    {
+        $this->hasMany(Employee::class, 'job_id');
     }
 }

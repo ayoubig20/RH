@@ -12,7 +12,6 @@ use Intervention\Image\Facades\Image;
 
 use Illuminate\Support\Facades\Storage;
 
-
 class AdminProjectController extends Controller
 {
     public function index(Request $request)
@@ -141,7 +140,6 @@ class AdminProjectController extends Controller
         session()->flash('edit', 'Project updated successfully');
         return view('admin.projects.edit', compact('project'));
         //  return $request;
-
     }
 
 
@@ -159,7 +157,7 @@ class AdminProjectController extends Controller
             'description' => 'nullable',
         ]);
 
-        // // Find the project 
+        // // Find the project
         // $project = Project::findOrFail($project);
 
         // Update project data
@@ -247,7 +245,7 @@ class AdminProjectController extends Controller
         $project->update([
             'status' => $request->status,
         ]);
-        session()->flash('Status_Update','Status updated successfully');
+        session()->flash('Status_Update', 'Status updated successfully');
         return back();
     }
 }

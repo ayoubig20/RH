@@ -1,7 +1,11 @@
 @extends('layouts.admin')
 
 @section('title', 'Employees')
+@section('style')
+<style>
 
+ </style>
+@endsection
 @section('wrapper')
     <!--start page wrapper -->
     <div class="page-wrapper">
@@ -38,12 +42,15 @@
                 @foreach ($viewData['employees'] as $employee)
                     <div class="col">
                         <div class="card" style="width: 18rem;">
-                            <img src="{{ asset('storage/assets/users/' . $employee->image) }}" class="card-img-top"
-                                alt="...">
+
+                            <img src="{{ asset('storage/assets/users/' . $employee->image) }}"
+                            class="img-fluid rounded-circle rounded card-img mx-auto" alt="..." style="height: 10rem;width:10rem">
+
+                            <h4 class="text-center"> {{ $employee->getFirstName() }}
+                                {{ $employee->getLastName() }}</h4>
+                            <h4 class="text-center"><span class="badge bg-dark text-white ">{{ $employee->job->title }}</span></h4>
                             <div class="card-body">
-                                <h5 class="card-title fw-bold">{{ $employee->getFirstName() }}
-                                    {{ $employee->getLastName() }}</h5>
-                                <p class="card-text">{{ $employee->getJob() }}</p>
+
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item">Age: {{ $employee->getAge() }}</li>
                                     <li class="list-group-item">Phone: {{ $employee->getPhone() }}</li>

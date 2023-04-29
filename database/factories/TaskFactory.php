@@ -29,5 +29,4 @@ class TaskFactory extends Factory
             'project_id' => Project::factory(),
         ];
     }
-    
 }

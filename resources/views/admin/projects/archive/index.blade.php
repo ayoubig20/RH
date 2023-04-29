@@ -53,7 +53,7 @@
                                     <table id="datatable" class="table  table-hover table-sm table-bordered p-0"
                                         data-page-length="50" style="text-align: center">
                                         <thead class=" text-primary">
-                                            <th><input type="checkbox" id="select-all"></th>
+                                            <th><input type="checkbox" id="select-all"  onclick="CheckAll('box1', this)"></th>
                                             <th>#</th>
                                             <th>Project name</th>
                                             <th>Project status</th>
@@ -70,8 +70,7 @@
                                                 <?php $i++; ?>
                                                 <tr>
                                                     <td><input type="checkbox" name="selected[]"
-                                                            value="{{ $project->id }}"></td>
-
+                                                            value="{{ $project->id }}" class="box1"></td>
 
                                                     <td>{{ $i }}</td>
                                                     <td>
@@ -219,54 +218,113 @@
                 </div>
             </div>
         </div>
+
+{{-- delete all code  --}}
+        <!-- The confirmation modal dialog box -->
+        <div class="modal fade" id="confirm-delete-modal" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Confirm Deletion</h5>
+                        <button type="button" class="close" onclick="closeModal()"><span
+                                aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to delete the selected projects?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+
+                        <button type="button" class="btn btn-danger" id="confirm-delete-btn">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="confirm-delete-modal1" tabindex="-1" role="dialog"
+            aria-labelledby="confirm-delete-modal-label">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content ">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="confirm-delete-modal-label">Confirm Delete</h4>
+                        <button type="button" class="close" onclick="closeModal1()"><span
+                                aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body bg-warning">
+                        <p><strong>Please select at least one project to delete.</strong></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" onclick="closeModal1()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function closeModal() {
+                $('#confirm-delete-modal').modal('hide');
+            }
+
+            function closeModal1() {
+                $('#confirm-delete-modal1').modal('hide');
+            }
+        </script>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
             integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
         </script>
         <script>
-            $('#datatable').ready(function() {
-                // Select/Deselect checkboxes
-                $('#select-all').click(function(event) {
+            $('#delete-selected').click(function() {
+                var ids = [];
+                $('input[name="selected[]"]').each(function() {
                     if (this.checked) {
-                        // Iterate each checkbox
-                        $(':checkbox').each(function() {
-                            this.checked = true;
-                        });
-                    } else {
-                        $(':checkbox').each(function() {
-                            this.checked = false;
-                        });
+                        ids.push($(this).val());
+                        console.log(ids);
                     }
                 });
 
-                // Delete selected projects
-                $('#delete-selected').click(function() {
-                    var ids = [];
-                    $('input[name="selected[]"]').each(function() {
-                        if (this.checked) {
-                            ids.push($(this).val());
-                        }
+                if (ids.length == 0) {
+                    // Display the modal with the message
+                    $('#confirm-delete-modal1').modal('show');
+                } else {
+                    // Show a confirmation modal dialog box
+                    $('#confirm-delete-modal').modal('show');
+                    $('#confirm-delete-modal').on('click', '#confirm-delete-btn', function() {
+                        $.ajax({
+                            url: '/admin/archivePro/deleteAll',
+                            method: "POST",
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            data: {
+                                ids: JSON.stringify(ids)
+                            },
+                            success: function(response) {
+                                console.log('Task status updated successfully');
+                                console.log(response);
+                                location.reload();
+                            },
+                            error: function(xhr, status, error) {
+                                console.log('Error delete project: ' + error);
+                            }
+                        });
                     });
-
-                    if (ids.length == 0) {
-                        alert('Please select at least one project to delete.');
-                    } else {
-                        if (confirm('Are you sure you want to delete the selected projects?')) {
-                            $.ajax({
-                                url: "{{ route('admin.archiveprojects.deleteAll') }}",
-                                method: "POST",
-                                data: {
-                                    ids: ids
-                                },
-                                success: function(response) {
-                                    // Handle success response
-                                },
-                                error: function(xhr, status, error) {
-                                    // Handle error response
-                                }
-                            });
-                        }
-                    }
-                });
+                }
             });
         </script>
+        <script>
+            function CheckAll(className, select_all) {
+                var elements = document.getElementsByClassName(className);
+                var l = elements.length;
+                if (select_all.checked) {
+                    for (var i = 0; i < l; i++) {
+                        elements[i].checked = true;
+                    }
+                } else {
+                    for (var i = 0; i < l; i++) {
+                        elements[i].checked = false;
+                    }
+                }
+            }
+        </script>
+
     @endsection

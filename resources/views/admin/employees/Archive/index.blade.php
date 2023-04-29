@@ -18,27 +18,23 @@
                     </nav>
                 </div>
             </div>
-            <!--end breadcrumb-->
-            {{-- <div class="text-sm-end">
-                <div class="col-auto float-right ml-auto">
-                    <div class="btn-group mb-3 d-none d-sm-inline-block">
-                        <a href="{{ route('admin.employees.index', ['view' => 'card']) }}"
-                            class="btn btn-muted {{ request()->get('view') == 'card' ? 'active' : '' }}"><i
-                                class='bx bxs-grid-alt'></i></a>
-                        <a href="{{ route('admin.employees.index', ['view' => 'list']) }}"
-                            class="btn btn-muted {{ request()->get('view') != 'card' ? 'active' : '' }}"><i
-                                class='bx bx-list-ul'></i></a>
-                    </div>
-                </div>
-            </div> --}}
+          
             @include('layouts.notify')
 
             <div class="card">
+                <div class="col-sm-4">
+                    {{-- Button trigger modal --}}
+                    <button class="btn btn-rounded bg-danger text-white" id="delete-selected">
+                        <span class="text-white">Delete Selected</span>
+                    </button>
+                </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table id="example2" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
+                                    <th><input type="checkbox" id="select-all"  onclick="CheckAll('box1', this)"></th>
+
                                     <th>#</th>
                                     <th>image</th>
                                     <th>Name</th>
@@ -58,6 +54,9 @@
                                 @foreach ($viewData['employees'] as $employee)
                                     <?php $i++; ?>
                                     <tr>
+                                        <td><input type="checkbox" name="selected[]"
+                                            value="{{$employee->id }}" class="box1"></td>
+
                                         <td>{{ $i }}</td>
                                         <td>
                                             <img src="{{ asset('storage/assets/users/' . $employee->image) }}"
@@ -98,8 +97,8 @@
                                         </td>
 
                                     </tr>
-                                    <div class="modal fade" id="deleteEmployeeModal{{ $employee->getId() }}" tabindex="-1"
-                                        aria-labelledby="deleteEmployeeModalLabel{{ $employee->getId() }}"
+                                    <div class="modal fade" id="deleteEmployeeModal{{ $employee->getId() }}"
+                                        tabindex="-1" aria-labelledby="deleteEmployeeModalLabel{{ $employee->getId() }}"
                                         aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
@@ -129,7 +128,8 @@
                                         </div>
                                     </div>
                                     <div class="modal fade" id="retrieveEmployeeModal{{ $employee->getId() }}"
-                                        tabindex="-1" aria-labelledby="retrieveEmployeeModalLabel{{ $employee->getId() }}"
+                                        tabindex="-1"
+                                        aria-labelledby="retrieveEmployeeModalLabel{{ $employee->getId() }}"
                                         aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
@@ -186,6 +186,116 @@
             table.buttons().container()
                 .appendTo('#example2_wrapper .col-md-6:eq(0)');
         });
+    </script>
+
+
+    {{-- delete all code  --}}
+    <!-- The confirmation modal dialog box -->
+    <div class="modal fade" id="confirm-delete-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Confirm Deletion</h5>
+                    <button type="button" class="close" onclick="closeModal()"><span
+                            aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete the selected projects?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+
+                    <button type="button" class="btn btn-danger" id="confirm-delete-btn">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal fade" id="confirm-delete-modal1" tabindex="-1" role="dialog"
+        aria-labelledby="confirm-delete-modal-label">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content ">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="confirm-delete-modal-label">Confirm Delete</h4>
+                    <button type="button" class="close" onclick="closeModal1()"><span
+                            aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body bg-warning">
+                    <p><strong>Please select at least one project to delete.</strong></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal1()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function closeModal() {
+            $('#confirm-delete-modal').modal('hide');
+        }
+
+        function closeModal1() {
+            $('#confirm-delete-modal1').modal('hide');
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
+    <script>
+        $('#delete-selected').click(function() {
+            var ids = [];
+            $('input[name="selected[]"]').each(function() {
+                if (this.checked) {
+                    ids.push($(this).val());
+                    console.log(ids);
+                }
+            });
+
+            if (ids.length == 0) {
+                // Display the modal with the message
+                $('#confirm-delete-modal1').modal('show');
+            } else {
+                // Show a confirmation modal dialog box
+                $('#confirm-delete-modal').modal('show');
+                $('#confirm-delete-modal').on('click', '#confirm-delete-btn', function() {
+                    $.ajax({
+                        url: '/admin/archivePro/deleteAll',
+                        method: "POST",
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        data: {
+                            ids: JSON.stringify(ids)
+                        },
+                        success: function(response) {
+                            console.log('Task status updated successfully');
+                            console.log(response);
+                            location.reload();
+                        },
+                        error: function(xhr, status, error) {
+                            console.log('Error delete project: ' + error);
+                        }
+                    });
+                });
+            }
+        });
+    </script>
+    <script>
+        function CheckAll(className, select_all) {
+            var elements = document.getElementsByClassName(className);
+            var l = elements.length;
+            if (select_all.checked) {
+                for (var i = 0; i < l; i++) {
+                    elements[i].checked = true;
+                }
+            } else {
+                for (var i = 0; i < l; i++) {
+                    elements[i].checked = false;
+                }
+            }
+        }
     </script>
 
 @endsection

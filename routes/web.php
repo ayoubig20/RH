@@ -64,7 +64,7 @@ Route::middleware('auth:web')->group(function () {
         'edit' => 'admin.jobs.edit',
         'update' => 'admin.jobs.update',
         'destroy' => 'admin.jobs.destroy',
-    ]);
+       ]);
     Route::resource('/admin/projects', AdminProjectController::class)->names([
         'index' => 'admin.projects.index',
         'create' => 'admin.projects.create',
@@ -74,7 +74,8 @@ Route::middleware('auth:web')->group(function () {
         'update' => 'admin.projects.update',
         'destroy' => 'admin.projects.destroy',
     ]);
-    Route::post('/admin/projects/{id}', [AdminProjectController::class, 'destroy'])->name('admin.projects.destroy');;
+    Route::post('/admin/projects/{id}', [AdminProjectController::class, 'destroy'])->name('admin.projects.destroy');
+    ;
     Route::resource('/admin/holidays', AdminHolidaysController::class)->names([
         'index' => 'admin.holidays.index',
         'create' => 'admin.holidays.create',
@@ -83,7 +84,8 @@ Route::middleware('auth:web')->group(function () {
         'edit' => 'admin.holidays.edit',
         'update' => 'admin.holidays.update',
         'destroy' => 'admin.holidays.destroy',
-    ]);;
+    ]);
+    ;
     Route::resource('/admin/tasks', AdminTaskController::class)->names([
         'index' => 'admin.tasks.index',
         'create' => 'admin.tasks.create',

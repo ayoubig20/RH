@@ -10,7 +10,8 @@
                 <div class="ps-3">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb mb-0 p-0">
-                            <li class="breadcrumb-item"><a href="{{ route('admin.home.index') }}"><i class="bx bx-home-alt"></i></a>
+                            <li class="breadcrumb-item"><a href="{{ route('admin.home.index') }}"><i
+                                        class="bx bx-home-alt"></i></a>
                             </li>
                             <li class="breadcrumb-item active" aria-current="page">Data Table</li>
                         </ol>
@@ -30,6 +31,19 @@
                         enctype="multipart/form-data" class="row g-3">
                         @csrf
                         @method('PATCH')
+                        <div class="col-md-12">
+                            <label for="image" class="form-label">Profile Picture:</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bx bx-image"></i></span>
+                                @if ($employee->image && !old('image'))
+                                    <img src="{{ asset('storage/assets/users/' . $employee->image) }}" alt="Current Image"
+                                        style="max-width: 100%" class="img-fluid">
+                                @elseif (old('image'))
+                                    <img src="{{ asset('storage/assets/users/' . old('image')) }}" alt="Old Image"
+                                        style="max-width: 100%" class="img-fluid">
+                                @endif
+                            </div>
+                        </div>
                         <div class="col-md-6">
                             <label for="firstName" class="form-label">First Name:</label>
                             <div class="input-group">
@@ -111,17 +125,38 @@
                             <label for="image" class="form-label">Profile Picture:</label>
                             <div class="input-group">
                                 <span class="input-group-text"><i class="bx bx-image"></i></span>
+                               
                                 <input type="file" class="form-control" id="image" name="image"
                                     accept=".jpg,.jpeg,.png">
                             </div>
                         </div>
 
                         <div class="col-md-6">
-                            <label for="job" class="form-label">Job:</label>
+                            <label for="department_id" class="form-label">Department:</label>
                             <div class="input-group">
-                                <span class="input-group-text"><i class='bx bxs-briefcase-alt-2'></i></span>
-                                <input type="text" class="form-control" id="job" name="job"
-                                    value="{{ $employee->job }}" required>
+                                <span class="input-group-text"><i class="bx bx-building"></i></span>
+                                <select class="form-control" id="department_id" name="department_id" required>
+                                    <option value="">Select department</option>
+                                    @foreach ($viewData['departments'] as $department)
+                                        <option value="{{ $department->getId() }}"
+                                            {{ old('departement', $employee->getDepartmentId()) == $department->getId() ? 'selected' : '' }}>
+                                            {{ $department->getName() }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="job_id" class="form-label">job:</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bx bx-briefcase"></i></span>
+                                <select class="form-control" id="job_id" name="job_id"
+                                    @if (!old('job_id')) required @else disabled @endif>
+                                    <option value="{{ $employee->job_id }}"
+                                        {{ old('job_id', $employee->job_id) == $employee->job_id ? 'selected' : '' }}>
+                                        {{ $employee->job->title }}
+                                    </option>
+                                </select>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -146,29 +181,17 @@
                                 <span class="input-group-text"><i class="bx bx-user"></i></span>
                                 <select class="form-control" id="role" name="role" required>
                                     <option value="">Select Role</option>
-                                    <option value="departmentHead"
-                                        {{ $employee->role == 'departmentHead' ? 'selcted' : '' }}>department head
+                                    <option value="{{ $employee->role }}"
+                                        {{ $employee->role == 'departmentHead' ? 'selected' : '' }}>department head
                                     </option>
                                     <option value="employee" {{ $employee->role == 'employee' ? 'selected' : '' }}>
-                                        Employee</option>
+                                        Employee
+                                    </option>
+
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <label for="department_id" class="form-label">Department:</label>
-                            <div class="input-group">
-                                <span class="input-group-text"><i class="bx bx-building"></i></span>
-                                <select class="form-control" id="department_id" name="department_id" required>
-                                    <option value="">Select department</option>
-                                    @foreach ($viewData['departments'] as $department)
-                                        <option value="{{ $department->getId() }}"
-                                            {{ old('departement', $employee->getDepartmentId()) == $department->getId() ? 'selected' : '' }}>
-                                            {{ $department->getName() }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
+
                         <div> </div>
                         <div class="col-md-6">
 
@@ -240,4 +263,38 @@
             </div>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
+    <script>
+        console.log('JavaScript code is running');
+
+        $(document).ready(function() {
+
+            $('#department_id').change(function() {
+                var deptId = $(this).val();
+                // console.log(deptId);
+                if (deptId) {
+                    $('#job_id').prop('disabled', true);
+                    var job_idOptionsHtml = '<option value="">Select job_id</option>';
+                    @foreach ($viewData['jobs'] as $job)
+                        if ('{{ $job->getDepartmentId() }}' == deptId) {
+                            job_idOptionsHtml +=
+                                '<option value="{{ $job->getId() }}">{{ $job->title }}</option>';
+                            // console.log(job_idOptionsHtml);
+
+                        }
+                    @endforeach
+                    if (job_idOptionsHtml === '<option value="">Select job</option>') {
+                        job_idOptionsHtml +=
+                            '<option value="">No jobs found for selected department</option>';
+                    }
+                    $('#job_id').html(job_idOptionsHtml).prop('disabled', false);
+                } else {
+                    $('#job_id').html('<option value="">Select department first</option>').prop('disabled',
+                        true);
+                }
+            });
+        });
+    </script>
 @endsection

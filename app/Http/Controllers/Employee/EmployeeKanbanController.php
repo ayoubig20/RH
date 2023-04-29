@@ -20,7 +20,6 @@ class EmployeeKanbanController extends Controller
         $task->status = $request->input('status');
         $task->save();
          return $request;
-    
     }
     public function index()
     {
@@ -30,7 +29,6 @@ class EmployeeKanbanController extends Controller
         $viewData['employees'] = Employee::all();
         $viewData['projects'] = Project::all();
     
-        return view('employee.kanban.index', compact('viewData')); 
+        return view('employee.kanban.index', compact('viewData'));
     }
-    
 }

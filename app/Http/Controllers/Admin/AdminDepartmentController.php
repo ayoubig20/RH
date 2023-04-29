@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Department;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-Use Alert;
+use Alert;
 use App\Models\Employee;
 
 class AdminDepartmentController extends Controller
@@ -33,7 +33,6 @@ class AdminDepartmentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    
     {
         $viewData=[];
         $viewData["title"]='create Department';
@@ -47,8 +46,7 @@ class AdminDepartmentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-
-    {        
+    {
         Department::validate($request);
         $dep = new Department();
         $dep->setName($request->input("name"));
@@ -77,7 +75,6 @@ class AdminDepartmentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-
     {
         $viewData = [];
         $viewData["title"] = " Edit Categry ";
@@ -102,12 +99,12 @@ class AdminDepartmentController extends Controller
          ], [
              'name.required' => 'Please enter the department name.',
              'name.unique' => 'The department name has already been taken.',
-         ]);    
-         
+         ]);
+     
          $department = Department::findOrFail($id);
          $department->setName($request->input("name"));
          $department->setDescription($request->input("description"));
-         
+     
          // Update department head if it has changed
          $newDepartmentHeadId = $request->input('departmentHead');
          if ($newDepartmentHeadId != $department->departmentHead) {
@@ -118,17 +115,20 @@ class AdminDepartmentController extends Controller
                  $prevDepartmentHead->save();
              }
              // Assign new department head and update their role
-             $newDepartmentHead = Employee::findOrFail($newDepartmentHeadId);
-             $newDepartmentHead->role = 'departmentHead';
-             $newDepartmentHead->save();
-             $department->departmentHead = $newDepartmentHeadId;
+             $newDepartmentHead = Employee::find($newDepartmentHeadId);
+             if ($newDepartmentHead) {
+                 $newDepartmentHead->role = 'departmentHead';
+                 $newDepartmentHead->save();
+                 $department->departmentHead = $newDepartmentHeadId;
+             }
          }
-         
+     
          $department->save();
          session()->flash('edit', 'Department updated successfully');
      
          return redirect()->route("admin.department.index");
      }
+     
 
 
     /**

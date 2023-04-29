@@ -20,9 +20,8 @@ class AdminEmpArchiveController extends Controller
         $viewData["employees"] = Employee::onlyTrashed()->get();
         // $viewData['departments'] = Department::all();
         
-        return view('admin.employees.archive.index', compact('viewData' ));
+        return view('admin.employees.archive.index', compact('viewData'));
         // return $request;
-        
     }
 
     
@@ -78,7 +77,7 @@ class AdminEmpArchiveController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-  public function update(Request $request)
+    public function update(Request $request)
     {
          $id = $request->id;
           Employee::withTrashed()->where('id', $id)->restore();
@@ -95,10 +94,9 @@ class AdminEmpArchiveController extends Controller
      */
     public function destroy($id)
     {
-         $employee = Employee::withTrashed()->where('id',$id)->first();
+         $employee = Employee::withTrashed()->where('id', $id)->first();
          $employee->forceDelete();
          session()->flash('delete_employee');
          return back();
-    
     }
 }

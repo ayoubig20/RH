@@ -28,6 +28,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <p><strong>Name:</strong> {{ $employee->firstName }} {{ $employee->lastName }}</p>
+                                    <p><strong>Job:</strong>{{ $employee->job->title}}</p>
                                     <p><strong>Email:</strong> {{ $employee->email }}</p>
                                     <p><strong>Phone:</strong> {{ $employee->phone }}</p>
                                     <p><strong>Gender:</strong> {{ $employee->gender }}</p>

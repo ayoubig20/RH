@@ -139,7 +139,7 @@
                                                             name="start_date" value="{{ old('start_date') }}" required>
 
                                                         @if ($errors->has('start_date'))
-                                                            <span class="help-block">
+                                                            <span class="help-block bg-danger">
                                                                 <strong>{{ $errors->first('start_date') }}</strong>
                                                             </span>
                                                         @endif
@@ -155,7 +155,7 @@
                                                             name="end_date" value="{{ old('end_date') }}" required>
 
                                                         @if ($errors->has('end_date'))
-                                                            <span class="help-block">
+                                                            <span class="help-block bg-danger">
                                                                 <strong>{{ $errors->first('end_date') }}</strong>
                                                             </span>
                                                         @endif
@@ -169,7 +169,7 @@
                                                             name="budget">
 
                                                         @if ($errors->has('budget'))
-                                                            <span class="help-block">
+                                                            <span class="help-block bg-danger">
                                                                 <strong>{{ $errors->first('budget') }}</strong>
                                                             </span>
                                                         @endif

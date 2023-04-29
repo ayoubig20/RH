@@ -237,55 +237,5 @@
                 </div>
             </div>
         </div>
-        <script>
-            $(document).ready(function() {
-                // Set CSRF token for AJAX requests
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-                $('#select-all').click(function(event) {
-                    if (this.checked) {
-                        $(':checkbox').each(function() {
-                            this.checked = true;
-                        });
-                    } else {
-                        $(':checkbox').each(function() {
-                            this.checked = false;
-                        });
-                    }
-                });
 
-                $('#delete-selected').click(function() {
-                    var ids = [];
-                    $('input[name="selected[]"]').each(function() {
-                        if (this.checked) {
-                            ids.push($(this).val());
-                        }
-                    });
-                    console.log(ids);
-
-                    if (ids.length == 0) {
-                        alert('Please select at least one project to delete.');
-                    } else {
-                        if (confirm('Are you sure you want to delete the selected projects?')) {
-                            $.ajax({
-                                url: "{{ route('admin.archiveprojects.deleteAll') }}",
-                                method: "POST",
-                                data: {
-                                    ids: ids
-                                },
-                                success: function(response) {
-                                    // handle success
-                                },
-                                error: function(xhr, status, error) {
-                                    // handle error
-                                }
-                            });
-                        }
-                    }
-                });
-            });
-        </script>
     @endsection

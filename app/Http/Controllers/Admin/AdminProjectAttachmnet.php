@@ -54,7 +54,8 @@ class AdminProjectAttachmnet extends Controller
             $imageName = $request->file_name->getClientOriginalName();
             $request->file_name->move(public_path('Attachments/'. $request->project_id), $imageName);
             
-            session()->flash('Add',"The attachment has been added successfully");            return back();
+            session()->flash('Add', "The attachment has been added successfully");
+        return back();
     }
 
     /**

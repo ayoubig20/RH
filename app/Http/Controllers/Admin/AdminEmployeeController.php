@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 
-
 class AdminEmployeeController extends Controller
 {
     public function index(Request $request)
@@ -90,6 +89,7 @@ class AdminEmployeeController extends Controller
     {
         $viewData = [];
         $viewData["title"] = "edit employee";
+        $viewData['jobs'] = Job::all();
         $viewData['departments'] = Department::all();
 
         return view('admin.employees.edit', ['employee' => $employee, 'viewData' => $viewData]);

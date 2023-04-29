@@ -42,6 +42,6 @@ class CategoryProjectSeeder extends Seeder
             CategoryProject::create([
               'name' => $categorie,
             ]);
+        }
     }
-}
 }

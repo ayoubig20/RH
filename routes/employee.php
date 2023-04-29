@@ -54,6 +54,5 @@ Route::middleware('auth:employee')->group(function () {
     Route::put('/employee/tasks/{id}/status', [EmployeeKanbanController::class, 'updateStatus'])->name('employee.tasks.updateStatus');
     Route::put('/employee/tasks/{id}/statusUp', [EmployeeTaskController::class, 'statusUpdate'])->name('employee.tasksUp.updateStatusList');
     Route::get('/employee/kanban', [EmployeeKanbanController::class, 'index'])->name('employee.kanban.index');
-
 });
 Auth::routes();

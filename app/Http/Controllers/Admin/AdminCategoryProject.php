@@ -23,7 +23,6 @@ class AdminCategoryProject extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    
     {
         $viewData=[];
         $viewData["title"]='create Department';
@@ -38,8 +37,7 @@ class AdminCategoryProject extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-
-    {        
+    {
         CategoryProject::validate($request);
         $cat = new CategoryProject();
         $cat->setName($request->input("name"));
@@ -67,7 +65,6 @@ class AdminCategoryProject extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-
     {
         $viewData = [];
         $viewData["title"] = " Edit Categry ";
@@ -85,21 +82,21 @@ class AdminCategoryProject extends Controller
      */
 
      
-     public function update(Request $request, $id)
-{
-    $this->validate($request, [
+    public function update(Request $request, $id)
+    {
+        $this->validate($request, [
         "name" => "required|max:255|unique:departments,name,$id",
-    ], [
+        ], [
         'name.required' => 'Please enter the Category Projectname.',
         'name.unique' => 'The department name has already been taken.',
-    ]);    
+        ]);
     
-    $CategoryProject = CategoryProject::findOrFail($id);
-    $CategoryProject->setName($request->input("name"));
-    $CategoryProject->save();
+        $CategoryProject = CategoryProject::findOrFail($id);
+        $CategoryProject->setName($request->input("name"));
+        $CategoryProject->save();
     
-    return redirect()->route("admin.category.index");
-}
+        return redirect()->route("admin.category.index");
+    }
 
 
     /**
