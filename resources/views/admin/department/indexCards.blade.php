@@ -12,7 +12,8 @@
                 <div class="ps-3">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb mb-0 p-0">
-                            <li class="breadcrumb-item"><a href="{{ route('admin.home.index') }}"><i class="bx bx-home-alt"></i></a>
+                            <li class="breadcrumb-item"><a href="{{ route('admin.home.index') }}"><i
+                                        class="bx bx-home-alt"></i></a>
                             </li>
                             <li class="breadcrumb-item active" aria-current="page">Data Cards Department</li>
                         </ol>
@@ -66,7 +67,9 @@
             </div>
 
             <div class="card">
-                <div class="card-header display-flex text-center"> <h3>Department List Cards</h3></div>
+                <div class="card-header display-flex text-center">
+                    <h3>Department List Cards</h3>
+                </div>
                 <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
                     @foreach ($viewData['departments'] as $department)
                         <div class="col mb-4">
@@ -91,7 +94,9 @@
                                         <strong>N/A</strong>
                                     @endif
                                     </br>
-                                    <h6>Number of employees:</br><strong>{{ $department->NumberOfEmployeesByDepartment($department->id) }}</strong></h6>
+                                    <h6>Number of
+                                        employees:</br><strong>{{ $department->NumberOfEmployeesByDepartment($department->id) }}</strong>
+                                    </h6>
                                     <div class="d-flex flex-row justify-content-center mt-3">
                                         <button type="button" class="btn btn-outline-success btn-sm me-2"
                                             data-bs-toggle="modal"
@@ -176,7 +181,11 @@
                         </div>
                     @endforeach
                 </div>
-
+                <div class="d-flex justify-content-center">
+                    <nav aria-label="departments">
+                        {{ $viewData['departments']->links('vendor.pagination.bootstrap-4') }}
+                    </nav>
+                </div>
             </div>
         </div>
         <!--end page-content-->

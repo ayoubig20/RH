@@ -11,7 +11,7 @@ class AdminJobContoller extends Controller
 {
     public function index()
     {
-        $viewData['jobs'] = Job::all();
+        $viewData['jobs'] =Job::paginate(10);
         $viewData['departments'] = Department::all();
         return view('admin.jobs.index', compact('viewData'));
     }

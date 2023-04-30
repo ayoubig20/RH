@@ -25,19 +25,13 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-        //   Department::factory()->count(10)->create();;
+      
             
           
-         Employee::factory()->count(10);
-             
-       
-        CategoryProject::factory()->count(10)->create();
- 
-        Project::factory()->count(10)->create();
+        Employee::factory()->count(10);
+        // CategoryProject::factory()->count(10)->create()
+        // Project::factory()->count(10)->create();
         ;
     
-        // Task::factory()
-        // ->count(7)
-        // ->create();
     }
 }

@@ -277,9 +277,10 @@
                                         <thead class=" text-primary">
                                             <th>#</th>
                                             <th>Project name</th>
+                                            <th>Project Category</th>
                                             <th>Project status</th>
                                             <th>Update status</th>
-                                            <th>start date</th>
+                                            {{-- <th>start date</th> --}}
                                             <th>end date</th>
                                             <th>progresion</th>
                                             <th>Nombre of tasks</th>
@@ -296,7 +297,7 @@
                                                     <td><a href="{{ route('admin.projects.show', $project->getId()) }}"><span
                                                                 class="badge bg-dark p-2">{{ $project->getName() }}</span></a>
                                                     </td>
-
+                                                    <td>{{ $project->category->name }}</td>
                                                     <td>
                                                         @if ($project->status == 'Panding')
                                                             <span class="badge bg-info p-1">{{ $project->status }}</span>
@@ -375,7 +376,7 @@
                                                             </div>
                                                         </div>
                                                     </td>
-                                                    <td>{{ $project->start_date->format('d-m-Y') }}</td>
+                                                    {{-- <td>{{ $project->start_date->format('d-m-Y') }}</td> --}}
                                                     <td>{{ $project->end_date->format('d-m-Y') }}</td>
                                                     <td>
                                                         <div class="progress">

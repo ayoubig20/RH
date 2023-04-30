@@ -1,4 +1,4 @@
-<!-- <?php
+<?php
 
 namespace Database\Seeders;
 
@@ -18,4 +18,4 @@ class TaskSeeder extends Seeder
         ->count(7)
         ->create();
     }
-} -->
+}

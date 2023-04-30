@@ -1,25 +1,5 @@
 @extends('layouts.admin')
-@section('style')
-    {{-- .employee-wrapper {
-    position: relative;
-    display: inline-block;
-    }
-    .employee-badge {
-    position: absolute;
-    top: -20px; /* adjust this value as needed */
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #333;
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 10px;
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-    }
-    .employee-wrapper:hover .employee-badge {
-    opacity: 1;
-    } --}}
-@endsection
+
 @section('title', 'Employees')
 
 

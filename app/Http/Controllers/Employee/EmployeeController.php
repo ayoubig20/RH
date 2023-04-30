@@ -133,4 +133,9 @@ class EmployeeController extends Controller
         return redirect()->route('employee.employees.index')->with('success', 'Employee updated successfully!');
         // dd($validatedData);
     }
+    public function printWorkCertifacte($id){
+        // $employee = Employee::findOrFail($id);
+        $employee=Employee::where('id',$id);
+        return view('employee.workCertifacate.index',compact('employee'));
+    }
 }

@@ -20,109 +20,37 @@ class EmployeeFactory extends Factory
 
      protected $attributes = [
         'role' => 'employee',
-        'status'=>'Full-time'
+        // 'status'=>'full-time'
      ];
      public function definition(): array
      {
          return [
-            'firstName' => $this->generateFirstName(),
-            'lastName' => $this->generateLastName(),
-            'gender' => $this->generateGender(),
-            'email' => $this->generateEmail(),
-            'phone' => $this->generatePhoneNumber(),
-            'address' => $this->generateAddress(),
-            'job' => $this->generateJobTitle(),
-            'martialStatus' => $this->generateMaritalStatus(),
-            'fatteningDate' => $this->generateFatteningDate(),
-            'DateOfBirth' => $this->generateDateOfBirth(),
-            'salary' => $this->generateSalary(),
-            'department_id' => $this->generateDepartmentId(),
-            'project_id' => $this->generateProjectId(),
-            'task_id' => $this->generateTaskId(),
-            'status' => $this->generateStatus(),
-            'image' => $this->generateImageUrl(),
-            'password' => bcrypt('admin1234'),
+          
+            'id' => $this->faker->unique()->numberBetween(1,100),
+            'firstName' => $this->faker->firstName(),
+            'lastName' => $this->faker->lastName(),
+            'gender' => $this->faker->randomElement(['Male', 'Female']),
+            'DateOfBirth' => $this->faker->dateTimeBetween('-60 years', '-18 years')->format('Y-m-d'),
+            'email' => $this->faker->unique()->safeEmail(),
+            'email_verified_at' => now(),
+            'phone' => $this->faker->phoneNumber(),
+            'address' => $this->faker->address(),
+            'image' => 'default-avatar.png',
             'role' => 'employee',
+            'martialStatus' => $this->faker->randomElement(['Single', 'Married']),
+            'fatteningDate' => $this->faker->dateTimeBetween('-10 years', '-1 year')->format('Y-m-d'),
+            'salary' => $this->faker->randomFloat(2, 2900, 10000),
+            'status' => $this->faker->randomElement(['full-time','intern','seasonal','part-time','contarctor']),
+            'deleted_at' => null,
+            'password' => bcrypt('password'),
+            'is_active' => true,
+            'remember_token' => null,
+            'created_at' => now(),
+            'updated_at' => now(),
+            'department_id' => $this->faker->numberBetween(1, 10),
+            'job_id' => $this->faker->numberBetween(1, 10),
          ];
      }
     
-     private function generateFirstName(): string
-     {
-         return $this->faker->firstName();
-     }
-    
-     private function generateLastName(): string
-     {
-         return $this->faker->lastName();
-     }
-    
-     private function generateGender(): string
-     {
-         return $this->faker->randomElement(['Male', 'Female']);
-     }
-    
-     private function generateEmail(): string
-     {
-         return $this->faker->unique()->safeEmail();
-     }
-    
-     private function generatePhoneNumber(): string
-     {
-         return $this->faker->phoneNumber();
-     }
-    
-     private function generateAddress(): string
-     {
-         return $this->faker->address();
-     }
-    
-     private function generateJobTitle(): string
-     {
-         return $this->faker->jobTitle();
-     }
-    
-     private function generateMaritalStatus(): string
-     {
-         return $this->faker->randomElement(['Married', 'Single']);
-     }
-    
-     private function generateFatteningDate()
-     {
-         return $this->faker->dateTimeBetween('-5 years', 'now');
-     }
-    
-     private function generateDateOfBirth()
-     {
-         return $this->faker->dateTimeBetween('-60 years', '-18 years');
-     }
-    
-     private function generateSalary(): int
-     {
-         return $this->faker->numberBetween(1000, 5000);
-     }
-    
-     private function generateDepartmentId(): int
-     {
-         return Department::factory()->create()->id;
-     }
-    
-     private function generateProjectId(): int
-     {
-         return Project::factory()->create()->id;
-     }
-    
-     private function generateTaskId(): int
-     {
-         return Task::factory()->create()->id;
-     }
-    
-     private function generateStatus(): string
-     {
-         return $this->faker->randomElement(['full-time','intern','seasonal','part-time','contarctor']);
-     }
-    
-     private function generateImageUrl(): string
-     {
-         return $this->faker->imageUrl();
-     }
+
 }

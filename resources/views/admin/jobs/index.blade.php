@@ -94,9 +94,13 @@
                         <th>Action</th>
                     </thead>
                     <tbody class="text-bold">
-                        <?php $i = 0; ?>
-                        @foreach ($viewData['jobs'] as $job)
-                            <?php $i++; ?>
+                        <?php
+                        $pageNumber = $viewData['jobs']->currentPage();
+                        $resultsPerPage = $viewData['jobs']->perPage();
+                        $start = ($pageNumber - 1) * $resultsPerPage;
+                        ?>
+                        @foreach ($viewData['jobs'] as $key => $job)
+                            <?php $i = $start + $key + 1; ?>
                             <tr>
                                 <td>{{ $i }}</td>
                                 <td>{{ $job->title }}</td>
@@ -204,10 +208,16 @@
                                 </td>
                             </tr>
                         @endforeach
+
                     </tbody>
                 </table>
             </div>
         </div>
+    </div>
+    <div class="d-flex justify-content-center">
+        <nav aria-label="jobs">
+            {{ $viewData['jobs']->links('vendor.pagination.bootstrap-4') }}
+        </nav>
     </div>
 
 @endsection

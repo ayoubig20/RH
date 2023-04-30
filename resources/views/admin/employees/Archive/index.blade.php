@@ -18,7 +18,6 @@
                     </nav>
                 </div>
             </div>
-          
             @include('layouts.notify')
 
             <div class="card">
@@ -33,7 +32,7 @@
                         <table id="example2" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
-                                    <th><input type="checkbox" id="select-all"  onclick="CheckAll('box1', this)"></th>
+                                    <th><input type="checkbox" id="select-all" onclick="CheckAll('box1', this)"></th>
 
                                     <th>#</th>
                                     <th>image</th>
@@ -54,8 +53,8 @@
                                 @foreach ($viewData['employees'] as $employee)
                                     <?php $i++; ?>
                                     <tr>
-                                        <td><input type="checkbox" name="selected[]"
-                                            value="{{$employee->id }}" class="box1"></td>
+                                        <td><input type="checkbox" name="selected[]" value="{{ $employee->id }}"
+                                                class="box1"></td>
 
                                         <td>{{ $i }}</td>
                                         <td>
@@ -97,8 +96,8 @@
                                         </td>
 
                                     </tr>
-                                    <div class="modal fade" id="deleteEmployeeModal{{ $employee->getId() }}"
-                                        tabindex="-1" aria-labelledby="deleteEmployeeModalLabel{{ $employee->getId() }}"
+                                    <div class="modal fade" id="deleteEmployeeModal{{ $employee->getId() }}" tabindex="-1"
+                                        aria-labelledby="deleteEmployeeModalLabel{{ $employee->getId() }}"
                                         aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
@@ -128,8 +127,7 @@
                                         </div>
                                     </div>
                                     <div class="modal fade" id="retrieveEmployeeModal{{ $employee->getId() }}"
-                                        tabindex="-1"
-                                        aria-labelledby="retrieveEmployeeModalLabel{{ $employee->getId() }}"
+                                        tabindex="-1" aria-labelledby="retrieveEmployeeModalLabel{{ $employee->getId() }}"
                                         aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
@@ -169,11 +167,8 @@
         </div>
     </div>
 
-    </div>
     <!--end page wrapper -->
-@endsection
 
-@section('script')
     <script src="{{ asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script>
     <script>
@@ -211,7 +206,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="modal fade" id="confirm-delete-modal1" tabindex="-1" role="dialog"
         aria-labelledby="confirm-delete-modal-label">
         <div class="modal-dialog" role="document">

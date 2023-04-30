@@ -13,7 +13,8 @@
                 <div class="ps-3">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb mb-0 p-0">
-                            <li class="breadcrumb-item"><a href="{{ route('admin.home.index') }}"><i class="bx bx-home-alt"></i></a>
+                            <li class="breadcrumb-item"><a href="{{ route('admin.home.index') }}"><i
+                                        class="bx bx-home-alt"></i></a>
                             </li>
                             <li class="breadcrumb-item active" aria-current="page">Data Table Department</li>
                         </ol>
@@ -82,142 +83,147 @@
                         <th>Action</th>
                     </thead>
                     <tbody class="text-bold">
-                        <?php $i = 0; ?>
-                        @foreach ($viewData['departments'] as $department)
-                            <?php $i++; ?>
-                            <tr>
-                                <td>{{ $i }}</td>
-                                <td>{{ $department->getName() }}</td>
-                                <td>
-                                    @if ($department->employeeDepartmentHead)
-                                        <a href="{{ route('admin.employees.show', $department->employeeDepartmentHead) }}"><img
-                                                src="{{ asset('storage/assets/users/' . $department->employeeDepartmentHead->image) }}"
-                                                class="user-img" alt="user avatar">
-                                            <span class="badge bg-dark p-2">
-                                                {{ $department->employeeDepartmentHead->firstName . ' ' . $department->employeeDepartmentHead->lastName }}</span>
-                                        </a>
-                                    @else
-                                        N/A
-                                    @endif
-                                </td>
-                                <td><strong>{{ $department->NumberOfEmployeesByDepartment($department->id) }}</strong></td>
-                                <td>{{ substr($department->getDescription(), 0,43)}}...</td>
+                        <?php
+                        $pageNumber = $viewData['departments']->currentPage();
+                        $resultsPerPage = $viewData['departments']->perPage();
+                        $start = ($pageNumber - 1) * $resultsPerPage;
+                        ?>
+                         @foreach ($viewData['departments'] as $key=>$department)
+                            <?php $i = $start + $key + 1; ?>
+                            <td>{{ $i }}</td>
+                            <td>{{ $department->getName() }}</td>
+                            <td>
+                                @if ($department->employeeDepartmentHead)
+                                    <a href="{{ route('admin.employees.show', $department->employeeDepartmentHead) }}"><img
+                                            src="{{ asset('storage/assets/users/' . $department->employeeDepartmentHead->image) }}"
+                                            class="user-img" alt="user avatar">
+                                        <span class="badge bg-dark p-2">
+                                            {{ $department->employeeDepartmentHead->firstName . ' ' . $department->employeeDepartmentHead->lastName }}</span>
+                                    </a>
+                                @else
+                                    N/A
+                                @endif
+                            </td>
+                            <td><strong>{{ $department->NumberOfEmployeesByDepartment($department->id) }}</strong></td>
+                            <td>{{ substr($department->getDescription(), 0, 43) }}...</td>
 
-                                <td>
-                                    <div class="d-flex flex-row">
-                                        <button type="button" class="btn btn-outline-success btn-sm" data-bs-toggle="modal"
-                                            data-bs-target="#editDepartment{{ $department->getId() }}">
-                                            <i class="bx bxs-edit"></i> Edit
-                                        </button>
+                            <td>
+                                <div class="d-flex flex-row">
+                                    <button type="button" class="btn btn-outline-success btn-sm" data-bs-toggle="modal"
+                                        data-bs-target="#editDepartment{{ $department->getId() }}">
+                                        <i class="bx bxs-edit"></i> Edit
+                                    </button>
 
-                                        <!-- Edit Modal -->
-                                        <div class="modal fade" id="editDepartment{{ $department->getId() }}"
-                                            tabindex="-1" aria-labelledby="editDepartment{{ $department->getId() }}"
-                                            aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title"
-                                                            id="editDepartment{{ $department->getId() }}">Edit
-                                                            Department</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
+                                    <!-- Edit Modal -->
+                                    <div class="modal fade" id="editDepartment{{ $department->getId() }}" tabindex="-1"
+                                        aria-labelledby="editDepartment{{ $department->getId() }}" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="editDepartment{{ $department->getId() }}">
+                                                        Edit
+                                                        Department</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <form action="{{ route('admin.department.update', $department->getId()) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <div class="modal-body">
+                                                        <div class="form-group">
+                                                            <label for="name" class="col-form-label">Name:</label>
+                                                            <input type="text" class="form-control" id="name"
+                                                                name="name" value="{{ $department->getName() }}"
+                                                                required>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="departmentHead" class="col-form-label">Department
+                                                                Head:</label>
+                                                            <select name="departmentHead" id="departmentHead"
+                                                                class="form-control">
+                                                                <option value="">Select Department Head
+                                                                </option>
+
+                                                                @foreach ($viewData['employees'] as $employee)
+                                                                    <option value="{{ $employee->id }}"
+                                                                        {{ $employee->id == $department->departmentHead ? 'selected' : '' }}>
+                                                                        {{ $employee->firstName }}
+                                                                        {{ $employee->lastName }}
+                                                                    </option>
+                                                                @endforeach
+
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="description"
+                                                                class="col-form-label">Description:</label>
+                                                            <textarea class="form-control" id="description" name="description">{{ $department->getDescription() }}</textarea>
+                                                        </div>
                                                     </div>
+
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Cancel</button>
+                                                        <button type="submit" class="btn btn-primary">Save
+                                                            changes</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal"
+                                        data-bs-target="#deleteDepartement{{ $department->getId() }}">
+                                        <i class="bx bxs-trash"></i> Delete
+                                    </button>
+                                    <div class="modal fade" id="deleteDepartement{{ $department->getId() }}"
+                                        tabindex="-1" aria-labelledby="deleteDepartement" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title"
+                                                        id="deleteDepartement{{ $department->getId() }}">
+                                                        Confirm Delete Departement</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Are you sure you want to delete this Departement?</p>
+                                                    <input type="text" class="form-control" id="name"
+                                                        name="name" value="{{ $department->getName() }}" readonly>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Cancel</button>
                                                     <form
-                                                        action="{{ route('admin.department.update', $department->getId()) }}"
+                                                        action="{{ route('admin.department.destroy', $department->getId()) }}"
                                                         method="POST">
                                                         @csrf
-                                                        @method('PUT')
-                                                        <div class="modal-body">
-                                                            <div class="form-group">
-                                                                <label for="name" class="col-form-label">Name:</label>
-                                                                <input type="text" class="form-control" id="name"
-                                                                    name="name" value="{{ $department->getName() }}"
-                                                                    required>
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                                <label for="departmentHead"
-                                                                    class="col-form-label">Department Head:</label>
-                                                                <select name="departmentHead" id="departmentHead"
-                                                                    class="form-control">
-                                                                    <option value="">Select Department Head
-                                                                    </option>
-
-                                                                    @foreach ($viewData['employees'] as $employee)
-                                                                        <option value="{{ $employee->id }}"
-                                                                            {{ $employee->id == $department->departmentHead ? 'selected' : '' }}>
-                                                                            {{ $employee->firstName }}
-                                                                            {{ $employee->lastName }}
-                                                                        </option>
-                                                                    @endforeach
-
-                                                                </select>
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                                <label for="description"
-                                                                    class="col-form-label">Description:</label>
-                                                                <textarea class="form-control" id="description" name="description">{{ $department->getDescription() }}</textarea>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary"
-                                                                data-bs-dismiss="modal">Cancel</button>
-                                                            <button type="submit" class="btn btn-primary">Save
-                                                                changes</button>
-                                                        </div>
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger">Delete</button>
                                                     </form>
                                                 </div>
                                             </div>
                                         </div>
-                                        <button type="button" class="btn btn-outline-danger btn-sm"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#deleteDepartement{{ $department->getId() }}">
-                                            <i class="bx bxs-trash"></i> Delete
-                                        </button>
-                                        <div class="modal fade" id="deleteDepartement{{ $department->getId() }}"
-                                            tabindex="-1" aria-labelledby="deleteDepartement" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title"
-                                                            id="deleteDepartement{{ $department->getId() }}">
-                                                            Confirm Delete Departement</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <p>Are you sure you want to delete this Departement?</p>
-                                                        <input type="text" class="form-control" id="name"
-                                                            name="name" value="{{ $department->getName() }}" readonly>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary"
-                                                            data-bs-dismiss="modal">Cancel</button>
-                                                        <form
-                                                            action="{{ route('admin.department.destroy', $department->getId()) }}"
-                                                            method="POST">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" class="btn btn-danger">Delete</button>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
                                     </div>
 
+                                </div>
 
-                                </td>
+
+                            </td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
+    </div>
+    <div class="d-flex justify-content-center">
+        <nav aria-label="departments">
+            {{ $viewData['departments']->links('vendor.pagination.bootstrap-4') }}
+        </nav>
     </div>
 
 @endsection

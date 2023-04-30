@@ -7,7 +7,9 @@ use App\Models\Project;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Notifications\addTask;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 
 class AdminTaskController extends Controller
 {
@@ -58,6 +60,7 @@ class AdminTaskController extends Controller
         $projectId = $request->input('project_id');
         // Attach the task to the employee and project using the pivot table
         $employee = Employee::findOrFail($employeeId);
+        $taskId=$task->id;
         $employee->projects()->attach($projectId, ['created_at' => now(), 'updated_at' => now(), 'created_by' => (Auth::user()->name)]);
         $employee->tasks()->attach($task->id, [
             'created_at' => now(), 'updated_at' => now(), 'created_by' => (Auth::user()->name),
@@ -69,6 +72,9 @@ class AdminTaskController extends Controller
         //     'success' => 'Task created successfully!',
         //     'viewData' => $viewData
         // ]);
+        $user=auth()->user();
+        Notification::send($user, new addTask());
+
         session()->flash('Add', 'Task created successfully!');
         return back()->with([
                  'success' => 'Task created successfully!','viewData' => $viewData

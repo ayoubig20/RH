@@ -81,7 +81,8 @@ class AdminEmployeeController extends Controller
             $department->departmentHead = $employee->id;
             $department->save();
         }
-        session()->flash('success', 'Employee created successfully!');
+        session()->flash('Add', 'Employee created successfully!');
+
 // return $request;
         return redirect()->route('admin.employees.index')->with('success', 'Employee created successfully!');
     }
@@ -91,6 +92,7 @@ class AdminEmployeeController extends Controller
         $viewData["title"] = "edit employee";
         $viewData['jobs'] = Job::all();
         $viewData['departments'] = Department::all();
+        session()->flash('edit', 'Employee update successfully!');
 
         return view('admin.employees.edit', ['employee' => $employee, 'viewData' => $viewData]);
     }
@@ -169,7 +171,7 @@ class AdminEmployeeController extends Controller
         if ($assigned_tasks->isEmpty()) {
             if ($employee) {
                 $employee->delete();
-                session()->flash('success', 'Employee archived successfully.');
+                session()->flash('Add', 'Employee archived successfully.');
             }
         } else {
             session()->flash('error', 'Cannot archive employee - they have assigned tasks.');

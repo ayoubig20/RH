@@ -93,7 +93,18 @@
         </a>
 
     </li>
- 
+    <li>
+        <a class="has-arrow" href="javascript:;">
+            <div class="parent-icon"> <i class='bx bx-file'></i>
+            </div>
+            <div class="menu-title">Documents</div>
+        </a>
+        <ul>
+            <li> <a href="{{ route('employee.printWorkCertifacte',auth()->user()->id)}}"><i class="bx bx-right-arrow-alt"></i> 
+                <i class='bx bx-file'></i>Work certificate</a>
+            </li>
+        </ul>
+    </li>
     <!--end navigation-->
 </div>
 <!--end sidebar wrapper -->

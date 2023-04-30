@@ -13,7 +13,7 @@ class AdminCategoryProject extends Controller
     {
         $viewData = [];
         $viewData["title"] = "List Category Project";
-        $viewData['categorys']= CategoryProject::all();
+        $viewData['categorys']= CategoryProject::paginate(10);
         return view("admin.category.index")->with("viewData", $viewData);
     }
 

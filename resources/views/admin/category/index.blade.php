@@ -66,9 +66,13 @@
 
                     </thead>
                     <tbody>
-                        <?php $i = 0; ?>
-                        @foreach ($viewData['categorys'] as $category)
-                            <?php $i++; ?>
+                        <?php
+                        $pageNumber = $viewData['categorys']->currentPage();
+                        $resultsPerPage = $viewData['categorys']->perPage();
+                        $start = ($pageNumber - 1) * $resultsPerPage;
+                        ?>
+                         @foreach ($viewData['categorys'] as $key => $category)
+                         <?php $i = $start + $key + 1; ?>
 
                             <tr>
                                 <td>{{ $i }}</td>
@@ -148,16 +152,18 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
-
-
                                 </td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
+        </div>
+        <div class="d-flex justify-content-center">
+            <nav aria-label="categorys">
+                {{ $viewData['categorys']->links('vendor.pagination.bootstrap-4') }}
+            </nav>
         </div>
     </div>
 

@@ -23,7 +23,7 @@ class ProjectFactory extends Factory
             'start_date' => $this->generateStartDate(),
             'end_date' => $this->generateEndDate(),
             'description' => $this->generateDescription(),
-            'image' => $this->generateImageUrl(),
+            // 'image' => $this->generateImageUrl(),
         ];
     }
 
