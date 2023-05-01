@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\AdminJobContoller;
 use App\Http\Controllers\Employee\EmployeeHomeController;
 use App\Http\Controllers\Admin\ArchiveEmp\AdminEmpArchiveController;
 use App\Http\Controllers\Admin\ArchivePro\AdminProArchiveController;
+use App\Http\Controllers\Admin\ProjectsReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,7 +57,7 @@ Route::middleware('auth:web')->group(function () {
         'update' => 'admin.department.update',
         'destroy' => 'admin.department.destroy',
     ]);
-       Route::resource('/admin/jobs', AdminJobContoller::class)->names([
+    Route::resource('/admin/jobs', AdminJobContoller::class)->names([
         'index' => 'admin.jobs.index',
         'create' => 'admin.jobs.create',
         'store' => 'admin.jobs.store',
@@ -64,7 +65,7 @@ Route::middleware('auth:web')->group(function () {
         'edit' => 'admin.jobs.edit',
         'update' => 'admin.jobs.update',
         'destroy' => 'admin.jobs.destroy',
-       ]);
+    ]);
     Route::resource('/admin/projects', AdminProjectController::class)->names([
         'index' => 'admin.projects.index',
         'create' => 'admin.projects.create',
@@ -74,8 +75,7 @@ Route::middleware('auth:web')->group(function () {
         'update' => 'admin.projects.update',
         'destroy' => 'admin.projects.destroy',
     ]);
-    Route::post('/admin/projects/{id}', [AdminProjectController::class, 'destroy'])->name('admin.projects.destroy');
-    ;
+    Route::post('/admin/projects/{id}', [AdminProjectController::class, 'destroy'])->name('admin.projects.destroy');;
     Route::resource('/admin/holidays', AdminHolidaysController::class)->names([
         'index' => 'admin.holidays.index',
         'create' => 'admin.holidays.create',
@@ -84,8 +84,7 @@ Route::middleware('auth:web')->group(function () {
         'edit' => 'admin.holidays.edit',
         'update' => 'admin.holidays.update',
         'destroy' => 'admin.holidays.destroy',
-    ]);
-    ;
+    ]);;
     Route::resource('/admin/tasks', AdminTaskController::class)->names([
         'index' => 'admin.tasks.index',
         'create' => 'admin.tasks.create',
@@ -122,6 +121,7 @@ Route::middleware('auth:web')->group(function () {
         'update' => 'admin.archiveEmployees.update',
         'destroy' => 'admin.archiveEmployees.destroy',
     ]);
+    Route::post('/admin/archiveEmp/deleteAll', [AdminEmpArchiveController::class, 'deleteAll'])->name('admin.archiveEmployees.deleteAll');
     Route::resource('/admin/archivePro', AdminProArchiveController::class)->names([
         'index' => 'admin.archiveprojects.index',
         // 'create' => 'admin.archiveprojects.create',
@@ -131,6 +131,9 @@ Route::middleware('auth:web')->group(function () {
         'update' => 'admin.archiveprojects.update',
         'destroy' => 'admin.archiveprojects.destroy',
     ]);
+    Route::get('/admin/report',[ProjectsReportController::class,'index'])->name('admin.report.index');
+
+     Route::post('Search_project', [ProjectsReportController::class,'SearchProjects']);
 });
 
 

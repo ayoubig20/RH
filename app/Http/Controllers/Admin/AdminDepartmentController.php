@@ -18,7 +18,7 @@ class AdminDepartmentController extends Controller
         $viewData = [];
         $viewData["title"] = "List departements";
         // $viewData['departments']= Department::paginate(10);
-        $viewData['departments']= Department::paginate(10);
+        $viewData['departments']= Department::paginate(8);
         $viewData["employees"]=Employee::all();
         if ($request->has('view') && $request->get('view') == 'card') {
             return view('admin.Department.indexCards', ['viewData' => $viewData]);
@@ -26,6 +26,7 @@ class AdminDepartmentController extends Controller
             return view('admin.Department.indexList', ['viewData' => $viewData]);
         }
     }
+    
 
     /**
      * Show the form for creating a new resource.

@@ -19,13 +19,13 @@ class AdminEmpArchiveController extends Controller
         $viewData["title"] = "List employees";
         $viewData["employees"] = Employee::onlyTrashed()->get();
         // $viewData['departments'] = Department::all();
-        
+
         return view('admin.employees.archive.index', compact('viewData'));
         // return $request;
     }
 
-    
-   
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -79,9 +79,9 @@ class AdminEmpArchiveController extends Controller
      */
     public function update(Request $request)
     {
-         $id = $request->id;
-          Employee::withTrashed()->where('id', $id)->restore();
-         session()->flash('restore_employee');
+        $id = $request->id;
+        Employee::withTrashed()->where('id', $id)->restore();
+        session()->flash('restore_employee');
         return redirect('/admin/employees');
         // return $request;
     }
@@ -94,9 +94,17 @@ class AdminEmpArchiveController extends Controller
      */
     public function destroy($id)
     {
-         $employee = Employee::withTrashed()->where('id', $id)->first();
-         $employee->forceDelete();
-         session()->flash('delete_employee');
-         return back();
+        $employee = Employee::withTrashed()->where('id', $id)->first();
+        $employee->forceDelete();
+        session()->flash('delete', 'Employee deleted successfully');
+        return redirect('/admin/archiveEmp');
+    }
+    public function deleteAll(Request $request)
+    {
+        $delete_all_id = json_decode($request->ids);
+        $employee = Employee::withTrashed()->whereIn('id', $delete_all_id);
+        $employee->forceDelete();
+        session()->flash('delete', 'Employees deleted successfully');
+        return redirect('/admin/archiveEmp');
     }
 }

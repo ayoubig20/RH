@@ -172,13 +172,13 @@
                 <!--end row-->
                 <div style="background-image: url('{{ URL::asset('assets/images/bg-themes/5.png') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;"
                     class="card text-white text-center">
-                    <h3 class="text-white">Projects</h3>
+                    <h1 class="text-white">Projects</h1>
                 </div>
                 <div class="card radius-10">
                     <div class="card-body">
                         <div class="table-responsive lead-table">
-                            <table class="table mb-0 align-middle text-center">
-                                <thead class="table-light">
+                            <table id="example1" class="table mb-0 align-middle text-center">
+                                <thead class="table-dark">
                                     <tr>
                                         <th>#</th>
                                         <th>Projects</th>
@@ -270,14 +270,14 @@
                 </div>
                 <div style="background-image: url('{{ URL::asset('assets/images/bg-themes/5.png') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;"
                     class="card text-white text-center">
-                    <h3 class="text-white">Tasks</h3>
+                    <h1 class="text-white">Tasks</h1>
                 </div>
                 <div class="card radius-10">
                     <div class="card radius-10">
                         <div class="card-body">
                             <div class="table-responsive lead-table">
-                                <table class="table mb-0 align-middle text-center">
-                                    <thead class="table-light">
+                                <table id="example" class="table mb-0 align-middle text-center">
+                                    <thead class="table-dark">
                                         <tr>
                                             <th>#</th>
                                             <th>Tasks</th>
@@ -518,5 +518,25 @@
                         });
                     </script> --}}
 
+                    @section('script')
+                        <script src="{{ asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+                        <script src="{{ asset('assets/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script>
+                        <script>
+                            $(document).ready(function() {
+                                $('#example1').DataTable({
+                                    paging: true,
+                                    pageLength: 5
+                                });
+                            });
+
+
+                            $(document).ready(function() {
+                                $('#example').DataTable({
+                                    // paging: true,
+                                    // pageLength: 5
+                                });
+                            });
+                        </script>
 
                     @endsection
+                @endsection

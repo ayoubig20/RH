@@ -12,7 +12,7 @@
     <!--favicon-->
     <link rel="icon" href="{{ URL::asset('assets/images/logo-purple.png') }}" type="image/png" />
     <!--plugins-->
-    <script src="{{asset('https://code.jquery.com/jquery-3.6.0.min.js')}}"></script>
+    <script src="{{ asset('https://code.jquery.com/jquery-3.6.0.min.js') }}"></script>
 
     @yield('style')
     <link href="{{ URL::asset('assets/plugins/simplebar/css/simplebar.css') }}" rel="stylesheet" />
@@ -39,22 +39,22 @@
     <div class="wrapper">
         <!--start header -->
         @include('layouts.header')
-        
+
         <!--end header -->
         <!--navigation-->
         @include('layouts.nav')
         <!--end navigation-->
         <!--start page wrapper -->
-        
+
         @yield('wrapper')
         <!--end page wrapper -->
         <!--start overlay-->
         <div class="overlay toggle-icon">
-            
+
         </div>
         <!--end overlay-->
-        <!--Start Back To Top Button--> <a href="javaScript:;" class="back-to-top"><i
-                class='bx bxs-up-arrow-alt'></i></a>
+        <!--Start Back To Top Button-->
+        <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
         <!--End Back To Top Button-->
         <footer class="page-footer">
             <p class="mb-0">Copyright Kamal Nadir © 2023. All right reserved.</p>
@@ -156,50 +156,140 @@
                     </div>
 
                 </div>
-            </div>
-        </div>
-    </div>
-    <!--end switcher-->
-    <!-- Bootstrap JS -->
-    <script src="{{ URL::asset('assets/js/bootstrap.bundle.min.js') }}"></script>
-    <!--plugins-->
-    <script src="{{ URL::asset('assets/js/jquery.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/simplebar/js/simplebar.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/metismenu/js/metisMenu.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js') }}"></script>
-    <script src="{{ URL::asset('assets/js/app.js') }}"></script>
 
-    <script>
-        // Cache DOM elements
-        const $header = $('.header');
-        const $sidebar = $('.sidebar');
-        const $headerIndicators = $('.header-colors-indicators .indicator');
-        const $sidebarIndicators = $('.sidebar-colors-indicators .indicator');
+                <!--end switcher-->
+                <!-- Bootstrap JS -->
+                <script src="{{ URL::asset('assets/js/bootstrap.bundle.min.js') }}"></script>
+                <!--plugins-->
+                <script src="{{ URL::asset('assets/js/jquery.min.js') }}"></script>
+                <script src="{{ URL::asset('assets/plugins/simplebar/js/simplebar.min.js') }}"></script>
+                <script src="{{ URL::asset('assets/plugins/metismenu/js/metisMenu.min.js') }}"></script>
+                <script src="{{ URL::asset('assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js') }}"></script>
+                <script src="{{ URL::asset('assets/js/app.js') }}"></script>
+                <script>
+                    const lightRadio = document.querySelector('#lightmode');
+                    const darkRadio = document.querySelector('#darkmode');
+                    const semiDarkRadio = document.querySelector('#semidark');
 
-        // Attach a click event listener to each color indicator
-        $headerIndicators.add($sidebarIndicators).on('click', function() {
-            // Get the selected color
-            const selectedColor = $(this).attr('class').split(' ')[1];
+                    // Apply the saved theme on page load (if there is one)
+                    const savedTheme = getCookie('theme');
+                    if (savedTheme) {
+                        const {
+                            theme
+                        } = JSON.parse(savedTheme);
+                        if (theme === 'light') {
+                            lightRadio.checked = true;
+                            setTheme('light');
+                        } else if (theme === 'dark') {
+                            darkRadio.checked = true;
+                            setTheme('dark');
+                        } else if (theme === 'semidark') {
+                            semiDarkRadio.checked = true;
+                            setTheme('semidark');
+                        }
+                    }
 
-            // Set the background color of the header and sidebar
-            $header.toggleClass(selectedColor);
-            $sidebar.toggleClass(selectedColor);
+                    lightRadio.addEventListener('change', () => {
+                        setTheme('light');
+                    });
 
-            // Store the selected color in localStorage
-            localStorage.setItem('selectedColor', selectedColor);
-        });
+                    darkRadio.addEventListener('change', () => {
+                        setTheme('dark');
+                    });
 
-        // Retrieve the selected color from localStorage when the page loads
-        const storedColor = localStorage.getItem('selectedColor');
-        if (storedColor) {
-            // Set the background color of the header and sidebar to the stored color
-            $header.toggleClass(storedColor);
-            $sidebar.toggleClass(storedColor);
-        }
-    </script>
-    @include('sweetalert::alert')
-    <!--app JS-->
-    @yield('script')
+                    semiDarkRadio.addEventListener('change', () => {
+                        setTheme('semidark');
+                    });
+
+                    const headerColorIndicators = document.querySelectorAll('.header-colors-indigators .indigator');
+                    headerColorIndicators.forEach(indigator => {
+                        indigator.addEventListener('click', () => {
+                            const color = indigator.classList[1];
+                            setHeaderColor(color);
+                        });
+                    });
+
+                    const sidebarColorIndicators = document.querySelectorAll('.sidebar-colors-indigators .indigator');
+                    sidebarColorIndicators.forEach(indigator => {
+                        indigator.addEventListener('click', () => {
+                            const color = indigator.classList[1];
+                            setSidebarColor(color);
+                        });
+                    });
+
+                    function setTheme(theme) {
+                        document.body.classList.remove('light', 'dark', 'semidark');
+                        document.body.classList.add(theme);
+                        setCookie('theme', {
+                            theme
+                        });
+                        updateSidebarColors();
+                    }
+
+                    function setHeaderColor(color) {
+                        const header = document.querySelector('.header');
+
+                        // Remove any existing header color classes
+                        const headerClasses = Array.from(header.classList).filter(cls => cls.startsWith('header-'));
+                        header.classList.remove(...headerClasses);
+
+                        // Add the new header color class
+                        header.classList.add(`header-${color}`);
+                        setCookie('headerColor', {
+                            color
+                        });
+                    }
+
+                    function setSidebarColor(color) {
+                        const sidebar = document.getElementById('sidebar');
+
+                        // Remove any existing sidebar color classes
+                        const sidebarClasses = Array.from(sidebar.classList).filter(cls => cls.startsWith('sidebar-'));
+                        sidebar.classList.remove(...sidebarClasses);
+
+                        // Add the new sidebar color class
+                        sidebar.classList.add(`sidebar-${color}`);
+                        setCookie('sidebarColor', {
+                            color
+                        });
+                    }
+
+                    function updateSidebarColors() {
+                        const sidebar = document.getElementById('sidebar');
+
+                        // Example: change the color of all links in the sidebar
+                        const links = sidebar.querySelectorAll('a');
+                        links.forEach(link => {
+                            if (document.body.classList.contains('light')) {
+                                link.style.color = 'blue';
+                            } else if (document.body.classList.contains('dark')) {
+                                link.style.color = 'red';
+                            } else if (document.body.classList.contains('semidark')) {
+                                link.style.color = 'green';
+                            }
+                        });
+
+                        // Add more code here to update other elements in the sidebar as needed
+                    }
+
+                    function setCookie(name, value) {
+                        document.cookie = `${name}=${JSON.stringify(value)}; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/`;
+                    }
+
+                    function getCookie(name) {
+                        const cookies = document.cookie.split('; ');
+                        for (let i = 0; i < cookies.length; i++) {
+                            const cookie = cookies[i].split('=');
+                            if (cookie[0] === name) {
+                                return cookie[1];
+                            }
+                        }
+                    }
+                </script>
+
+
+                <!--app JS-->
+                @yield('script')
 </body>
 
 </html>

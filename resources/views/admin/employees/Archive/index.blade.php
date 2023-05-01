@@ -168,22 +168,6 @@
     </div>
 
     <!--end page wrapper -->
-
-    <script src="{{ asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script>
-    <script>
-        $(document).ready(function() {
-            var table = $('#example2').DataTable({
-                lengthChange: false,
-                buttons: ['copy', 'excel', 'pdf', 'colvis']
-            });
-
-            table.buttons().container()
-                .appendTo('#example2_wrapper .col-md-6:eq(0)');
-        });
-    </script>
-
-
     {{-- delete all code  --}}
     <!-- The confirmation modal dialog box -->
     <div class="modal fade" id="confirm-delete-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -225,7 +209,19 @@
             </div>
         </div>
     </div>
+    <script src="{{ asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            var table = $('#example2').DataTable({
+                lengthChange: false,
+                buttons: ['copy', 'excel', 'pdf', 'colvis']
+            });
 
+            table.buttons().container()
+                .appendTo('#example2_wrapper .col-md-6:eq(0)');
+        });
+    </script>
     <script>
         function closeModal() {
             $('#confirm-delete-modal').modal('hide');
@@ -256,7 +252,7 @@
                 $('#confirm-delete-modal').modal('show');
                 $('#confirm-delete-modal').on('click', '#confirm-delete-btn', function() {
                     $.ajax({
-                        url: '/admin/archivePro/deleteAll',
+                        url: '/admin/archiveEmp/deleteAll',
                         method: "POST",
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

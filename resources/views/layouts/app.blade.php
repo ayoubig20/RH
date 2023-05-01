@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -14,7 +13,7 @@
 
 <body>
     <!-- header -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-secondary sticky-top py-4">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-secondary sticky-top py-4" >
         <div class="container">
             <span><img src="{{asset('assets/images/logo.png')}}" alt="logo" height="39"></span>
             <a class="navbar-brand" href="{{ route('home.index') }}" > 

@@ -183,7 +183,7 @@
                 </div>
                 <div class="d-flex justify-content-center">
                     <nav aria-label="departments">
-                        {{ $viewData['departments']->links('vendor.pagination.bootstrap-4') }}
+                        {{$viewData['departments']->appends(['view' => 'card'])->links('vendor.pagination.bootstrap-4') }}
                     </nav>
                 </div>
             </div>

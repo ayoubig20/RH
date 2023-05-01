@@ -85,8 +85,8 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table text-center">
-                    <thead class=" text-primary">
+                <table class="table text-center table-bordered mb-0 table-hover" id='example'>
+                    <thead class=" table-dark">
                         <th>#</th>
                         <th>Tile job</th>
                         <th>Department</th>
@@ -218,6 +218,22 @@
         <nav aria-label="jobs">
             {{ $viewData['jobs']->links('vendor.pagination.bootstrap-4') }}
         </nav>
-    </div>
+    @section('script')
+
+        <script src="{{ asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script>
+        <script>
+            $(document).ready(function() {
+                var table = $('#example').DataTable({
+                    paging: false,
+                    // pageLength: 5
+                });
+
+                table.buttons().container()
+                    .appendTo('#example_wrapper .col-md-6:eq(0)');
+            });
+        </script>
+
+    @endsection
 
 @endsection

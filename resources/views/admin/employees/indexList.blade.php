@@ -35,8 +35,8 @@
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="example2" class="table table-striped table-bordered">
-                            <thead>
+                        <table id="example2" class="table table-bordered -mb-4 text-center table-hover">
+                            <thead class="table-dark">
                                 <tr>
                                     <th>#</th>
                                     <th>image</th>
@@ -61,15 +61,17 @@
                                             <img src="{{ asset('storage/assets/users/' . $employee->image) }}"
                                                 class="user-img" alt="user avatar">
                                         </td>
-
-                                        <td>{{ $employee->getFirstName() }} {{ $employee->getLastName() }}</td>
+                                        <td><a href="{{ route('admin.employees.show', $employee->getId()) }}"><span
+                                                    class="badge bg-dark p-2">{{ $employee->getFirstName() }}
+                                                    {{ $employee->getLastName() }}</span></a>
+                                        </td>
                                         <td>{{ $employee->getAge() }}</td>
                                         {{-- <td>{{ $employee->getEmail() }}</td> --}}
                                         <td>{{ $employee->getPhone() }}</td>
-                                        <td>{{ $employee->job->title}}</td>
+                                        <td>{{ $employee->job->title }}</td>
                                         <td>{{ $employee->department->getName() }}</td>
                                         <td>{{ $employee->getFatteningDate() }}</td>
-                                        <td>{{ $employee->getSalary() }}</td>
+                                        <td>{{ $employee->getSalary() }}DH</td>
                                         <td>
                                             <div class="dropdown">
                                                 <button class="btn btn-outline-secondary dropdown-toggle btn-sm"

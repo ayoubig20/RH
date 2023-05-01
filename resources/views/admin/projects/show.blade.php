@@ -50,7 +50,7 @@
                                     <td>{{ $project->category->name }}</td>
                                     <th scope="row">Status</th>
                                     <td>
-                                        @if ($project->status == 'Finished')
+                                        @if ($project->status == 'Finshed')
                                             <span class="badge bg-success">{{ $project->status }}</span>
                                         @elseif ($project->status == 'In progress')
                                             <span class="badge bg-info ">{{ $project->status }}</span>

@@ -1,5 +1,5 @@
 <!--sidebar wrapper -->
-<div class="sidebar-wrapper" data-simplebar="true">
+<div class="sidebar-wrapper" data-simplebar="true" id="sidebar">>
     <div class="sidebar-header">
         <div>
             <img src="{{ URL::asset('assets/images/logo-purple.png') }}" class="logo-icon" alt="logo icon">
@@ -13,7 +13,7 @@
     <!--navigation-->
     <ul class="metismenu" id="menu">
         <li>
-            <a href="{{ route('admin.home.index') }}" class="has-arrow">
+            <a href="{{ route('admin.home.index') }}" class="">
                 <div class="parent-icon"><i class="bx bx-home-circle"></i>
                 </div>
                 <div class="menu-title">Dashboard</div>
@@ -40,23 +40,7 @@
 
     </ul>
     <li>
-        <a class="has-arrow" href="javascript:;">
-            <div class="parent-icon"> <i class="bx bx-task"></i>
-            </div>
-            <div class="menu-title">Tasks</div>
-        </a>
-        <ul>
-            <li> <a href="{{ route('admin.tasks.index') }}"><i class="bx bx-right-arrow-alt"></i> <i
-                        class="bx bx-task"></i>Tasks</a>
-            </li>
-            <li> <a href="{{ route('admin.kanban.index') }}"><i class="bx bx-right-arrow-alt"></i><i
-                        class='bx bx-list-ol'></i>Kanban Board</a>
-            </li>
-
-        </ul>
-    </li>
-    <li>
-        <a class="has-arrow" href="{{ route('admin.projects.index') }}">
+        <a class="" href="{{ route('admin.projects.index') }}">
             <div class="parent-icon"> <i class="bx bx-atom"></i>
             </div>
             <div class="menu-title">Projects</div>
@@ -64,7 +48,23 @@
 
     </li>
     <li>
-        <a class="has-arrow" href="{{ route('admin.department.index') }}">
+        <a class="" href="{{ route('admin.tasks.index') }}">
+            <div class="parent-icon"> <i class="bx bx-task"></i>
+            </div>
+            <div class="menu-title">Tasks</div>
+        </a>
+
+    </li>
+    <li>
+        <a class="" href="{{ route('admin.kanban.index') }}">
+            <div class="parent-icon"> <i class='bx bx-list-check'></i>
+            </div>
+            <div class="menu-title">Kanban</div>
+        </a>
+    </li>
+
+    <li>
+        <a class="" href="{{ route('admin.department.index') }}">
             <div class="parent-icon"> <i class="bx bx-buildings"></i>
             </div>
             <div class="menu-title">Departement</div>
@@ -100,9 +100,16 @@
                         class='bx bx-atom'></i></i>Archive Project </a>
             </li>
         </ul>
+    </li>
+    <li>
+        <a class="" href="{{ route('admin.report.index') }}">
+            <div class="parent-icon"> <i class='bx bx-file'></i>
+            </div>
+            <div class="menu-title">Report</div>
+        </a>
+    </li>
+    
 
-    </li>
-    </li>
     <!--end navigation-->
 </div>
 <!--end sidebar wrapper -->

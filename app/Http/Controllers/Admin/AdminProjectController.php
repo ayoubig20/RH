@@ -210,7 +210,7 @@ class AdminProjectController extends Controller
                 $file_path = $project->id . '/' . $attachment->file_name;
                 Storage::disk('public_uploads')->delete($file_path);
                 $attachment->delete();
-                session()->flash('delete', " archive successfully");
+                session()->flash('success', " attachement deleted successfully");
                 return redirect()->route('admin.projects.index');
             }
         } else {
@@ -221,8 +221,8 @@ class AdminProjectController extends Controller
                 $attachment->delete();
             }
             $project->delete();
-            session()->flash('delete', "project and its associated file deleted successfully");
-            return redirect()->route('admin.projects.index')->with('success', 'Project deleted successfully.');
+            session()->flash('success', "project and its associated file archived successfully");
+            return redirect()->route('admin.projects.index')->with('success', 'Project archived successfully.');
         }
         // return $request;
     }

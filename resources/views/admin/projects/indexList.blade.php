@@ -271,410 +271,421 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table text-center">
-                                        <thead class=" text-primary">
-                                            <th>#</th>
-                                            <th>Project name</th>
-                                            <th>Project Category</th>
-                                            <th>Project status</th>
-                                            <th>Update status</th>
-                                            {{-- <th>start date</th> --}}
-                                            <th>end date</th>
-                                            <th>progresion</th>
-                                            <th>Nombre of tasks</th>
-                                            <th>team projects</th>
-                                            <th>Action</th>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered -mb-4 text-center table-hover" id="example">
+                                    <thead class=" table-dark">
+                                        <th>#</th>
+                                        <th>Project name</th>
+                                        <th>Project Category</th>
+                                        <th>Project status</th>
+                                        <th>Update status</th>
+                                        {{-- <th>start date</th> --}}
+                                        <th>end date</th>
+                                        <th>progresion</th>
+                                        <th>Nombre of tasks</th>
+                                        <th>team projects</th>
+                                        <th>Action</th>
 
-                                        </thead>
-                                        <tbody>
-                                            <?php $i = 0; ?>
-                                            @foreach ($projects as $project)
-                                                <?php $i++; ?>
-                                                <tr>
-                                                    <td>{{ $i }}</td>
-                                                    <td><a href="{{ route('admin.projects.show', $project->getId()) }}"><span
-                                                                class="badge bg-dark p-2">{{ $project->getName() }}</span></a>
-                                                    </td>
-                                                    <td>{{ $project->category->name }}</td>
-                                                    <td>
-                                                        @if ($project->status == 'Panding')
-                                                            <span class="badge bg-info p-1">{{ $project->status }}</span>
-                                                        @elseif ($project->status == 'In progress')
-                                                            <span
-                                                                class="badge bg-warning p-1">{{ $project->status }}</span>
-                                                        @else
-                                                            <span
-                                                                class="badge bg-success p-1">{{ $project->status }}</span>
-                                                        @endif
+                                    </thead>
+                                    <tbody>
+                                        <?php $i = 0; ?>
+                                        @foreach ($projects as $project)
+                                            <?php $i++; ?>
+                                            <tr>
+                                                <td>{{ $i }}</td>
+                                                <td><a href="{{ route('admin.projects.show', $project->getId()) }}"><span
+                                                            class="badge bg-dark p-2">{{ $project->getName() }}</span></a>
+                                                </td>
+                                                <td>{{ $project->category->name }}</td>
+                                                <td>
+                                                    @if ($project->status == 'Panding')
+                                                        <span class="badge bg-info p-1">{{ $project->status }}</span>
+                                                    @elseif ($project->status == 'In progress')
+                                                        <span class="badge bg-warning p-1">{{ $project->status }}</span>
+                                                    @else
+                                                        <span class="badge bg-success p-1">{{ $project->status }}</span>
+                                                    @endif
 
-                                                    </td>
-                                                    <td>
-                                                        <button type="button" class="dropdown-item "
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#updateStatusModal{{ $project->getId() }}">
-                                                            <i class="bx bxs-edit"></i> <strong>upadte status</strong>
-                                                        </button>
-                                                        <!-- Update Status Modal -->
-                                                        <div class="modal fade"
-                                                            id="updateStatusModal{{ $project->getId() }}" tabindex="-1"
-                                                            role="dialog"
-                                                            aria-labelledby="updateStatusLabel{{ $project->getId() }}"
-                                                            aria-hidden="true">
-                                                            <div class="modal-dialog" role="document">
-                                                                <form method="POST"
-                                                                    action="{{ route('admin.project.updateStatus', $project->getId()) }}">
-                                                                    @csrf
-                                                                    @method('PUT')
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <h5 class="modal-title"
-                                                                                id="updateStatusLabel{{ $project->getId() }}">
-                                                                                Update Status
-                                                                            </h5>
-                                                                            <button type="button" class="btn-close"
-                                                                                data-bs-dismiss="modal"
-                                                                                aria-label="Close"></button>
-                                                                        </div>
-                                                                        <div class="modal-body">
-                                                                            <div class="form-group">
-                                                                                <input type="text"
-                                                                                    value="{{ $project->getId() }}"
-                                                                                    name="id" hidden>
-                                                                                <label for="status">Select
-                                                                                    Status:</label>
-                                                                                <select class="form-control"
-                                                                                    name="status" id="status">
-                                                                                    <option value="Panding"
-                                                                                        {{ old('status', $project->status) == 'Pending' ? 'selected' : '' }}>
-                                                                                        Panding
-                                                                                    </option>
-                                                                                    <option value="In progress"
-                                                                                        {{ old('status', $project->status) == 'In progress' ? 'selected' : '' }}>
-                                                                                        In progress
-                                                                                    </option>
-                                                                                    <option value="Finshed"
-                                                                                        {{ old('status', $project->status) == 'Finshed' ? 'selected' : '' }}>
-                                                                                        Finshed
-                                                                                    </option>
-                                                                                </select>
-
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <button type="button"
-                                                                                class="btn btn-secondary"
-                                                                                data-bs-dismiss="modal">Cancel</button>
-                                                                            <button type="submit"
-                                                                                class="btn btn-success">
-                                                                                Update
-                                                                                changes</button>
-                                                                        </div>
-                                                                    </div>
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    {{-- <td>{{ $project->start_date->format('d-m-Y') }}</td> --}}
-                                                    <td>{{ $project->end_date->format('d-m-Y') }}</td>
-                                                    <td>
-                                                        <div class="progress">
-                                                            <div class="progress-bar {{ $project->progression() < 50 ? 'bg-warning' : ($project->progression() < 75 ? 'bg-info' : 'bg-success') }}"
-                                                                role="progressbar"
-                                                                style="width: {{ $project->progression() }}%"
-                                                                aria-valuenow="{{ $project->progression() }}"
-                                                                aria-valuemin="0" aria-valuemax="100">
-                                                                {{ $project->progression() }}%</div>
-                                                        </div>
-                                                    </td>
-                                                    <td>{{ $project->Totaltasks() }}</td>
-                                                    <td>
-                                                        @foreach ($project->tasks->groupBy('employee.id') as $tasksByEmployee)
-                                                            @php
-                                                                $employee = $tasksByEmployee->first()->employee;
-                                                            @endphp
-                                                            <div class="team-members text-nowrap">
-                                                                <a href="{{ route('admin.employees.show', $employee->getId()) }}"
-                                                                    class="team-member-avatar"
-                                                                    title="{{ $employee->firstName }} {{ $employee->lastName }}"
-                                                                    data-toggle="tooltip">
-                                                                    <img src="{{ asset('storage/assets/users/' . $employee->image) }}"
-                                                                        class="user-img" alt="user avatar">
-                                                                </a>
-                                                                <div class="dropdown avatar-dropdown">
-
-                                                                    <div class="dropdown-menu dropdown-menu-right"
-                                                                        id="avatar-dropdown-{{ $employee->id }}">
-                                                                        <div class="avatar-group">
-                                                                            @foreach ($tasksByEmployee as $task)
-                                                                                <a class="avatar avatar-xs" href="#"
-                                                                                    title="{{ $task->name }}">
-                                                                                    <img src="{{ asset('storage/assets/users/' . $task->employee->image) }}"
-                                                                                        class="user-img"
-                                                                                        alt="user avatar">
-                                                                                </a>
-                                                                            @endforeach
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        @endforeach
-
-
-                                                    </td>
-
-                                                    {{-- <td>{{ $project->getDescription() }}</td> --}}
-                                                    <td>
-                                                        <div class="dropdown">
-                                                            <button class="btn btn-secondary dropdown-toggle"
-                                                                type="button" id="dropdownMenuButton"
-                                                                data-bs-toggle="dropdown" aria-expanded="false">
-                                                                Actions
-                                                            </button>
-                                                            <ul class="dropdown-menu"
-                                                                aria-labelledby="dropdownMenuButton">
-                                                                <li>
-                                                                    <button type="button" class="dropdown-item"
-                                                                        data-bs-toggle="modal"
-                                                                        data-bs-target="#editProject{{ $project->getId() }}">
-                                                                        <i class="bx bxs-edit"></i> Edit
-                                                                    </button>
-                                                                </li>
-                                                                <li>
-                                                                    <a class="dropdown-item"
-                                                                        href="{{ route('admin.projects.show', $project->getId()) }}">
-                                                                        <i class='bx bxs-show me-0'></i> Show
-                                                                    </a>
-                                                                </li>
-                                                                <li>
-                                                                    <button type="button" class="dropdown-item"
-                                                                        data-bs-toggle="modal"
-                                                                        data-bs-target="#archiveProject{{ $project->getId() }}">
-                                                                        <i class='bx bxs-archive-in'></i> Archive
-                                                                    </button>
-                                                                </li>
-                                                                <li>
-                                                                    <button type="button" class="dropdown-item"
-                                                                        data-bs-toggle="modal"
-                                                                        data-bs-target="#deleteProject{{ $project->getId() }}">
-                                                                        <i class="bx bxs-trash"></i> Delete
-                                                                    </button>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-
-                                                        {{-- edit modal --}}
-                                                        <div class="modal fade" id="editProject{{ $project->getId() }}"
-                                                            tabindex="-1" role="dialog"
-                                                            aria-labelledby="editProject{{ $project->getId() }}"
-                                                            aria-hidden="true">
-                                                            <div class="modal-dialog modal-dialog-centered"
-                                                                role="document">
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="dropdown-item " data-bs-toggle="modal"
+                                                        data-bs-target="#updateStatusModal{{ $project->getId() }}">
+                                                        <i class="bx bxs-edit"></i> <strong>upadte status</strong>
+                                                    </button>
+                                                    <!-- Update Status Modal -->
+                                                    <div class="modal fade" id="updateStatusModal{{ $project->getId() }}"
+                                                        tabindex="-1" role="dialog"
+                                                        aria-labelledby="updateStatusLabel{{ $project->getId() }}"
+                                                        aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <form method="POST"
+                                                                action="{{ route('admin.project.updateStatus', $project->getId()) }}">
+                                                                @csrf
+                                                                @method('PUT')
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
                                                                         <h5 class="modal-title"
-                                                                            id="editProject{{ $project->getId() }}">
-                                                                            Edit Project</h5>
+                                                                            id="updateStatusLabel{{ $project->getId() }}">
+                                                                            Update Status
+                                                                        </h5>
                                                                         <button type="button" class="btn-close"
                                                                             data-bs-dismiss="modal"
                                                                             aria-label="Close"></button>
                                                                     </div>
-                                                                    <form method="POST"
-                                                                        action="{{ route('admin.projects.update', $project) }}"
-                                                                        enctype="multipart/form-data">
-                                                                        @csrf
-                                                                        <div class="modal-body">
-                                                                            <div class="form-group">
-                                                                                <label for="name"
-                                                                                    class="control-label">Name:</label>
-                                                                                <input type="text" class="form-control"
-                                                                                    id="name" name="name"
-                                                                                    value="{{ $project->getName() }}"
-                                                                                    required>
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label for="category_id"
-                                                                                    class="control-label">Category:</label>
-                                                                                <select id="category_id"
-                                                                                    class="form-control"
-                                                                                    name="category_id" required>
-                                                                                    <option value="">Select a
-                                                                                        category</option>
-                                                                                    @foreach ($viewData['categorys'] as $category)
-                                                                                        <option
-                                                                                            value="{{ $category->getId() }}"
-                                                                                            {{ old('category_id', $project->category_id) == $category->getId() ? 'selected' : '' }}>
-                                                                                            {{ $category->getName() }}
-                                                                                        </option>
-                                                                                    @endforeach
-                                                                                </select>
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label for="image"
-                                                                                    class="control-label">Image:</label>
-                                                                                <input id="image" type="file"
-                                                                                    class="form-control" name="image">
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label for="document"
-                                                                                    class="control-label">Document:</label>
-                                                                                <input id="document" type="file"
-                                                                                    class="form-control" name="document">
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label for="start_date"
-                                                                                    class="control-label">Start
-                                                                                    Date:</label>
-                                                                                <input type="date" name="start_date"
-                                                                                    id="start_date" class="form-control"
-                                                                                    value="{{ old('start_date', $project->start_date->format('Y-m-d')) }}">
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label for="end_date"
-                                                                                    class="control-label">End
-                                                                                    Date:</label>
-                                                                                <input type="date" name="end_date"
-                                                                                    id="end_date" class="form-control"
-                                                                                    value="{{ old('end_date', $project->end_date->format('Y-m-d')) }}">
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label for="budget"
-                                                                                    class="control-label">Budget:</label>
-                                                                                <input id="budget" type="number"
-                                                                                    class="form-control" name="budget"
-                                                                                    value="{{ old('budget', $project->budget) }}">
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label for="priority"
-                                                                                    class="control-label">Priority:</label>
-                                                                                <select class="form-control"
-                                                                                    id="priority" name="priority"
-                                                                                    required>
-                                                                                    <option value="" selected
-                                                                                        disabled>Select priority
+                                                                    <div class="modal-body">
+                                                                        <div class="form-group">
+                                                                            <input type="text"
+                                                                                value="{{ $project->getId() }}"
+                                                                                name="id" hidden>
+                                                                            <label for="status">Select
+                                                                                Status:</label>
+                                                                            <select class="form-control" name="status"
+                                                                                id="status">
+                                                                                <option value="Panding"
+                                                                                    {{ old('status', $project->status) == 'Pending' ? 'selected' : '' }}>
+                                                                                    Panding
+                                                                                </option>
+                                                                                <option value="In progress"
+                                                                                    {{ old('status', $project->status) == 'In progress' ? 'selected' : '' }}>
+                                                                                    In progress
+                                                                                </option>
+                                                                                <option value="Finshed"
+                                                                                    {{ old('status', $project->status) == 'Finshed' ? 'selected' : '' }}>
+                                                                                    Finshed
+                                                                                </option>
+                                                                            </select>
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary"
+                                                                            data-bs-dismiss="modal">Cancel</button>
+                                                                        <button type="submit" class="btn btn-success">
+                                                                            Update
+                                                                            changes</button>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                {{-- <td>{{ $project->start_date->format('d-m-Y') }}</td> --}}
+                                                <td>{{ $project->end_date->format('d-m-Y') }}</td>
+                                                <td>
+                                                    <div class="progress">
+                                                        <div class="progress-bar {{ $project->progression() < 50 ? 'bg-warning' : ($project->progression() < 75 ? 'bg-info' : 'bg-success') }}"
+                                                            role="progressbar"
+                                                            style="width: {{ $project->progression() }}%"
+                                                            aria-valuenow="{{ $project->progression() }}"
+                                                            aria-valuemin="0" aria-valuemax="100">
+                                                            {{ $project->progression() }}%</div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    @if ($project->Totaltasks() == 0)
+                                                        <strong class="badge bg-dark p-1">No tasks create</strong>
+                                                    @else
+                                                        <strong>{{ $project->Totaltasks() }}</strong>
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    @foreach ($project->tasks->groupBy('employee.id') as $tasksByEmployee)
+                                                        @php
+                                                            $employee = $tasksByEmployee->first()->employee;
+                                                        @endphp
+                                                        <div class="team-members text-nowrap">
+                                                            <a href="{{ route('admin.employees.show', $employee->getId()) }}"
+                                                                class="team-member-avatar"
+                                                                title="{{ $employee->firstName }} {{ $employee->lastName }}"
+                                                                data-toggle="tooltip">
+                                                                <img src="{{ asset('storage/assets/users/' . $employee->image) }}"
+                                                                    class="user-img" alt="user avatar">
+                                                            </a>
+                                                            <div class="dropdown avatar-dropdown">
+
+                                                                <div class="dropdown-menu dropdown-menu-right"
+                                                                    id="avatar-dropdown-{{ $employee->id }}">
+                                                                    <div class="avatar-group">
+                                                                        @foreach ($tasksByEmployee as $task)
+                                                                            <a class="avatar avatar-xs" href="#"
+                                                                                title="{{ $task->name }}">
+                                                                                <img src="{{ asset('storage/assets/users/' . $task->employee->image) }}"
+                                                                                    class="user-img" alt="user avatar">
+                                                                            </a>
+                                                                        @endforeach
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+
+
+                                                </td>
+
+                                                {{-- <td>{{ $project->getDescription() }}</td> --}}
+                                                <td>
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-secondary dropdown-toggle" type="button"
+                                                            id="dropdownMenuButton" data-bs-toggle="dropdown"
+                                                            aria-expanded="false">
+                                                            Actions
+                                                        </button>
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                            <li>
+                                                                <button type="button" class="dropdown-item"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#editProject{{ $project->getId() }}">
+                                                                    <i class="bx bxs-edit"></i> Edit
+                                                                </button>
+                                                            </li>
+                                                            <li>
+                                                                <a class="dropdown-item"
+                                                                    href="{{ route('admin.projects.show', $project->getId()) }}">
+                                                                    <i class='bx bxs-show me-0'></i> Show
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <button type="button" class="dropdown-item"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#archiveProject{{ $project->getId() }}">
+                                                                    <i class='bx bxs-archive-in'></i> Archive
+                                                                </button>
+                                                            </li>
+                                                            <li>
+                                                                <button type="button" class="dropdown-item"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#deleteProject{{ $project->getId() }}">
+                                                                    <i class="bx bxs-trash"></i> Delete
+                                                                </button>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+
+                                                    {{-- edit modal --}}
+                                                    <div class="modal fade" id="editProject{{ $project->getId() }}"
+                                                        tabindex="-1" role="dialog"
+                                                        aria-labelledby="editProject{{ $project->getId() }}"
+                                                        aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title"
+                                                                        id="editProject{{ $project->getId() }}">
+                                                                        Edit Project</h5>
+                                                                    <button type="button" class="btn-close"
+                                                                        data-bs-dismiss="modal"
+                                                                        aria-label="Close"></button>
+                                                                </div>
+                                                                <form method="POST"
+                                                                    action="{{ route('admin.projects.update', $project) }}"
+                                                                    enctype="multipart/form-data">
+                                                                    @csrf
+                                                                    <div class="modal-body">
+                                                                        <div class="form-group">
+                                                                            <label for="name"
+                                                                                class="control-label">Name:</label>
+                                                                            <input type="text" class="form-control"
+                                                                                id="name" name="name"
+                                                                                value="{{ $project->getName() }}"
+                                                                                required>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="category_id"
+                                                                                class="control-label">Category:</label>
+                                                                            <select id="category_id" class="form-control"
+                                                                                name="category_id" required>
+                                                                                <option value="">Select a
+                                                                                    category</option>
+                                                                                @foreach ($viewData['categorys'] as $category)
+                                                                                    <option
+                                                                                        value="{{ $category->getId() }}"
+                                                                                        {{ old('category_id', $project->category_id) == $category->getId() ? 'selected' : '' }}>
+                                                                                        {{ $category->getName() }}
                                                                                     </option>
-                                                                                    <option value="high"
-                                                                                        {{ $project->priority == 'high' ? 'selected' : '' }}>
-                                                                                        High</option>
-                                                                                    <option value="medium"
-                                                                                        {{ $project->priority == 'medium' ? 'selected' : '' }}>
-                                                                                        Medium</option>
-                                                                                    <option value="low"
-                                                                                        {{ $project->priority == 'low' ? 'selected' : '' }}>
-                                                                                        Low</option>
-                                                                                </select>
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label for="description"
-                                                                                    class="control-label">Description:</label>
-                                                                                <textarea id="description" class="form-control" name="description">{{ $project->description }}</textarea>
-                                                                            </div>
+                                                                                @endforeach
+                                                                            </select>
                                                                         </div>
-                                                                        <div class="modal-footer">
-                                                                            <button type="button"
-                                                                                class="btn btn-secondary"
-                                                                                data-bs-dismiss="modal">Cancel</button>
-                                                                            <button type="submit"
-                                                                                class="btn btn-success">Save
-                                                                                changes</button>
+                                                                        <div class="form-group">
+                                                                            <label for="image"
+                                                                                class="control-label">Image:</label>
+                                                                            <input id="image" type="file"
+                                                                                class="form-control" name="image">
                                                                         </div>
+                                                                        <div class="form-group">
+                                                                            <label for="document"
+                                                                                class="control-label">Document:</label>
+                                                                            <input id="document" type="file"
+                                                                                class="form-control" name="document">
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="start_date"
+                                                                                class="control-label">Start
+                                                                                Date:</label>
+                                                                            <input type="date" name="start_date"
+                                                                                id="start_date" class="form-control"
+                                                                                value="{{ old('start_date', $project->start_date->format('Y-m-d')) }}">
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="end_date"
+                                                                                class="control-label">End
+                                                                                Date:</label>
+                                                                            <input type="date" name="end_date"
+                                                                                id="end_date" class="form-control"
+                                                                                value="{{ old('end_date', $project->end_date->format('Y-m-d')) }}">
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="budget"
+                                                                                class="control-label">Budget:</label>
+                                                                            <input id="budget" type="number"
+                                                                                class="form-control" name="budget"
+                                                                                value="{{ old('budget', $project->budget) }}">
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="priority"
+                                                                                class="control-label">Priority:</label>
+                                                                            <select class="form-control" id="priority"
+                                                                                name="priority" required>
+                                                                                <option value="" selected disabled>
+                                                                                    Select priority
+                                                                                </option>
+                                                                                <option value="high"
+                                                                                    {{ $project->priority == 'high' ? 'selected' : '' }}>
+                                                                                    High</option>
+                                                                                <option value="medium"
+                                                                                    {{ $project->priority == 'medium' ? 'selected' : '' }}>
+                                                                                    Medium</option>
+                                                                                <option value="low"
+                                                                                    {{ $project->priority == 'low' ? 'selected' : '' }}>
+                                                                                    Low</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="description"
+                                                                                class="control-label">Description:</label>
+                                                                            <textarea id="description" class="form-control" name="description">{{ $project->description }}</textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary"
+                                                                            data-bs-dismiss="modal">Cancel</button>
+                                                                        <button type="submit"
+                                                                            class="btn btn-success">Save
+                                                                            changes</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    {{-- archive modal --}}
+                                                    <div class="modal fade" id="archiveProject{{ $project->getId() }}"
+                                                        tabindex="-1" aria-labelledby="archiveProject"
+                                                        aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title"
+                                                                        id="archiveProject{{ $project->getId() }}">
+                                                                        Confirm Archive
+                                                                        Project</h5>
+                                                                    <button type="button" class="btn-close"
+                                                                        data-bs-dismiss="modal"
+                                                                        aria-label="Close"></button>
+                                                                    <input type="hidden" name="id_page" value="1">
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <p>Are you sure you want
+                                                                        to archive this
+                                                                        Project?</p>
+                                                                    <input type="text" class="form-control"
+                                                                        id="name" name="name"
+                                                                        value="{{ $project->getName() }}" readonly>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                        data-bs-dismiss="modal">Cancel</button>
+                                                                    <form
+                                                                        action="{{ route('admin.projects.destroy', $project->getId()) }}"
+                                                                        method="POST">
+                                                                        @csrf
+                                                                        @method('DELETE')
+                                                                        <button type="submit"
+                                                                            class="btn btn-warning">Archive</button>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    {{-- delete modal --}}
+                                                    <div class="modal fade" id="deleteProject{{ $project->getId() }}"
+                                                        tabindex="-1" aria-labelledby="deleteProject"
+                                                        aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title"
+                                                                        id="deleteProject{{ $project->getId() }}">
+                                                                        Confirm Delete
+                                                                        Project</h5>
+                                                                    <button type="button" class="btn-close"
+                                                                        data-bs-dismiss="modal"
+                                                                        aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <p>Are you sure you want
+                                                                        to delete this
+                                                                        Project?</p>
+                                                                    <input type="text" class="form-control"
+                                                                        id="name" name="name"
+                                                                        value="{{ $project->getName() }}" readonly>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                        data-bs-dismiss="modal">Cancel</button>
+                                                                    <form
+                                                                        action="{{ route('admin.archiveprojects.destroy', $project->getId()) }}"
+                                                                        method="POST">
+                                                                        @csrf
+                                                                        @method('DELETE')
+                                                                        <button type="submit"
+                                                                            class="btn btn-danger">Delete</button>
                                                                     </form>
                                                                 </div>
                                                             </div>
                                                         </div>
 
-                                                        {{-- archive modal --}}
-                                                        <div class="modal fade"
-                                                            id="archiveProject{{ $project->getId() }}" tabindex="-1"
-                                                            aria-labelledby="archiveProject" aria-hidden="true">
-                                                            <div class="modal-dialog">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title"
-                                                                            id="archiveProject{{ $project->getId() }}">
-                                                                            Confirm Archive
-                                                                            Project</h5>
-                                                                        <button type="button" class="btn-close"
-                                                                            data-bs-dismiss="modal"
-                                                                            aria-label="Close"></button>
-                                                                        <input type="hidden" name="id_page"
-                                                                            value="1">
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <p>Are you sure you want
-                                                                            to archive this
-                                                                            Project?</p>
-                                                                        <input type="text" class="form-control"
-                                                                            id="name" name="name"
-                                                                            value="{{ $project->getName() }}" readonly>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-secondary"
-                                                                            data-bs-dismiss="modal">Cancel</button>
-                                                                        <form
-                                                                            action="{{ route('admin.projects.destroy', $project->getId()) }}"
-                                                                            method="POST">
-                                                                            @csrf
-                                                                            @method('DELETE')
-                                                                            <button type="submit"
-                                                                                class="btn btn-danger">Archive</button>
-                                                                        </form>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        {{-- delete modal --}}
-                                                        <div class="modal fade" id="deleteProject{{ $project->getId() }}"
-                                                            tabindex="-1" aria-labelledby="deleteProject"
-                                                            aria-hidden="true">
-                                                            <div class="modal-dialog">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title"
-                                                                            id="deleteProject{{ $project->getId() }}">
-                                                                            Confirm Delete
-                                                                            Project</h5>
-                                                                        <button type="button" class="btn-close"
-                                                                            data-bs-dismiss="modal"
-                                                                            aria-label="Close"></button>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <p>Are you sure you want
-                                                                            to delete this
-                                                                            Project?</p>
-                                                                        <input type="text" class="form-control"
-                                                                            id="name" name="name"
-                                                                            value="{{ $project->getName() }}" readonly>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-secondary"
-                                                                            data-bs-dismiss="modal">Cancel</button>
-                                                                        <form
-                                                                            action="{{ route('admin.archiveprojects.destroy', $project->getId()) }}"
-                                                                            method="POST">
-                                                                            @csrf
-                                                                            @method('DELETE')
-                                                                            <button type="submit"
-                                                                                class="btn btn-danger">Delete</button>
-                                                                        </form>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    @section('script')
+
+    <script src="{{ asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            var table = $('#example').DataTable({
+                paging: true,
+                pageLength: 5
+            });
+
+            table.buttons().container()
+                .appendTo('#example_wrapper .col-md-6:eq(0)');
+        });
+    </script>
 
     @endsection
+@endsection

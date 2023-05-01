@@ -151,10 +151,10 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table">
-                    <thead class=" text-primary">
+                <table class="table table-bordered -mb-4 text-center table-hover" id="example">
+                    <thead class=" table-dark">
                         <th>#</th>
-                        <th>Name</th>
+                        <th>Task Name</th>
                         {{-- <th>Description</th> --}}
                         <th>Image</th>
                         <th>Assigned To</th>
@@ -452,7 +452,23 @@
         </div>
     </div>
     </div>
+@section('script')
 
+    <script src="{{ asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            var table = $('#example').DataTable({
+                // paging: true,
+                // pageLength: 5
+            });
+
+            table.buttons().container()
+                .appendTo('#example_wrapper .col-md-6:eq(0)');
+        });
+    </script>
+
+@endsection
 
 
 @endsection

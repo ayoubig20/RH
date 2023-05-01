@@ -43,7 +43,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">add Departement</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">add Department</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -52,7 +52,7 @@
                                 @csrf
                                 <div class="form-group">
                                     <input type="hidden" name="id" id="id" value="">
-                                    <label for="name">Name departement:</label>
+                                    <label for="name">Name department:</label>
                                     <input type="text" id="name" name="name" class="form-control">
                                 </div>
                                 <div class="form-group">
@@ -73,8 +73,8 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table text-center">
-                    <thead class=" text-primary">
+                <table class="table text-center table-bordered mb-0 table-hover" id="exampl">
+                    <thead class=" table-dark ">
                         <th>#</th>
                         <th>department name</th>
                         <th>department Head</th>
@@ -88,7 +88,7 @@
                         $resultsPerPage = $viewData['departments']->perPage();
                         $start = ($pageNumber - 1) * $resultsPerPage;
                         ?>
-                         @foreach ($viewData['departments'] as $key=>$department)
+                        @foreach ($viewData['departments'] as $key => $department)
                             <?php $i = $start + $key + 1; ?>
                             <td>{{ $i }}</td>
                             <td>{{ $department->getName() }}</td>
@@ -226,4 +226,20 @@
         </nav>
     </div>
 
+    @section('script')
+    <script src="{{ asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            var table = $('#example').DataTable({
+                paging: true,
+                pageLength: 5
+            });
+
+            table.buttons().container()
+                .appendTo('#example_wrapper .col-md-6:eq(0)');
+        });
+    </script>
+
+    @endsection
 @endsection
