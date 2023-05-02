@@ -23,12 +23,13 @@
         @include('layouts.notify')
 
         <div class="card border-top border-0 border-5 border-dark">
-            <div class="card-body p-5">
-                <div class="card-title d-flex align-items-center">
-                    <div>
-                        <h3 class="mb-8 text-dark text-center"><i class="bx bxs-user me-1 font-22 text-dark"></i>Empolyee
-                            Registration
-                        </h3>
+            <div class="card-body p-5 font-18 text-strong">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="text-center text-bold">
+                            <h3 class="page-title"><strong>Empolyee
+                                    Registration</strong></h3>
+                        </div>
                     </div>
                 </div>
                 <hr>
@@ -244,7 +245,8 @@
                         }
                     @endforeach
                     if (job_idOptionsHtml === '<option value="">Select job</option>') {
-                        job_idOptionsHtml += '<option value="">No jobs found for selected department</option>';
+                        job_idOptionsHtml +=
+                            '<option value="">No jobs found for selected department</option>';
                     }
                     $('#job_id').html(job_idOptionsHtml).prop('disabled', false);
                 } else {

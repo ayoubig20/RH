@@ -15,11 +15,11 @@ class userSeeder extends Seeder
     public function run(): void
     {
         //
-        //  \App\Models\User::factory()->create([
-        //     'name' => 'Test admin',
-        //     'email' => 'admin@admin.com',
-        //     'password' => bcrypt('123456'),
-        //  ]);
+         \App\Models\User::factory()->create([
+            'name' => 'Test admin',
+            'email' => 'admin@admin.com',
+            'password' => bcrypt('123456'),
+         ]);
         //  Employee::factory()->create([
         //     'firstName' => 'kamal',
         //     'lastName' => 'kamal',
@@ -51,7 +51,7 @@ class userSeeder extends Seeder
             'fatteningDate' => '2020-01-01',
             'salary' => '50000.00',
             'status' => 'intern',
-            'password' => bcrypt('password'),
+            'password' => bcrypt('123456'),
             'is_active' => 1,
             'department_id' => 1,
             'job_id' => 1,

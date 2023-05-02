@@ -21,6 +21,13 @@
             @include('layouts.notify')
 
             <div class="card">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="text-center text-bold">
+                            <h3 class="page-title"><strong>Employees Archive List</strong></h3>
+                        </div>
+                    </div>
+                </div>
                 <div class="col-sm-4">
                     {{-- Button trigger modal --}}
                     <button class="btn btn-rounded bg-danger text-white" id="delete-selected">
@@ -29,11 +36,10 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="example2" class="table table-striped table-bordered">
-                            <thead>
+                        <table class="table table-bordered -mb-4 text-center table-hover" id="example">
+                            <thead class=" table-dark">
                                 <tr>
                                     <th><input type="checkbox" id="select-all" onclick="CheckAll('box1', this)"></th>
-
                                     <th>#</th>
                                     <th>image</th>
                                     <th>Name</th>
@@ -288,5 +294,21 @@
             }
         }
     </script>
+        @section('script')
+
+        <script src="{{ asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script>
+        <script>
+            $(document).ready(function() {
+                var table = $('#example').DataTable({
+                    paging: true,
+                });
+
+                table.buttons().container()
+                    .appendTo('#example_wrapper .col-md-6:eq(0)');
+            });
+        </script>
+
+    @endsection
 
 @endsection

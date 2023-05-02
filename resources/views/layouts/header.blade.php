@@ -75,8 +75,11 @@
                 <a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#"
                     role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     @if (auth()->guard('web')->check())
-                        <img src="{{ URL::asset('assets/images/avatars/avatar-4.png') }}"
-                            class="user-img"alt="user avatar">
+                    <img src="{{ Avatar::create(auth()->guard('')->user())->toBase64() }}" class="user-img" alt="user avatar">
+
+               
+                            {{-- <img src="{{Avatar::create(auth()->guard('')->user())->toBase64()}}" class="user-img"alt="user avatar">  --}}
+
                     @elseif (auth()->guard('employee')->check())
                         <img src="{{ asset('storage/assets/users/' .auth()->guard('employee')->user()->getImage()) }}"
                             class="user-img" alt="user avatar">

@@ -34,6 +34,14 @@
             @include('layouts.notify')
             <div class="card">
                 <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="text-center text-bold">
+                                <h3 class="page-title"><strong>Empolyees
+                                        List</strong></h3>
+                            </div>
+                        </div>
+                    </div>
                     <div class="table-responsive">
                         <table id="example2" class="table table-bordered -mb-4 text-center table-hover">
                             <thead class="table-dark">

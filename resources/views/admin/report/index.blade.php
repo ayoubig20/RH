@@ -54,8 +54,12 @@
                             <form action="/Search_project" method="POST" role="search" autocomplete="off">
                                 {{ csrf_field() }}
 
-                                <h6 class="mb-0 text-uppercase">Projects rapport</h6>
-                                <hr />
+                                <div class="col-12">
+                                    <div class="text-center text-bold">
+                                        <h3 class="page-title"><strong>Projects Reports
+                                            </strong></h3>
+                                    </div>
+                                </div>                                <hr />
                                 <div class="col-lg-3">
                                     <label class="rdiobox">
                                         <input checked name="rdio" type="radio" value="1" id="type_div">

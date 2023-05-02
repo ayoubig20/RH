@@ -193,7 +193,6 @@
             $sidebar.toggleClass(storedColor);
         }
     </script>
-    @include('sweetalert::alert')
     <!--app JS-->
     @yield('script')
 </body>

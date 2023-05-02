@@ -111,5 +111,11 @@
                 @endforeach
             </div>
         </div>
+        <div class="d-flex justify-content-center">
+            <nav aria-label="employees">
+                {{$viewData['employees']->appends(['view' => 'card'])->links('vendor.pagination.bootstrap-4') }}
+            </nav>
+        </div>
     </div>
+    
 @endsection

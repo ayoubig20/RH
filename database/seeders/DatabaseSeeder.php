@@ -11,6 +11,7 @@ use App\Models\Department;
 use App\Models\CategoryProject;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Database\Seeders\DepartmentSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -28,10 +29,13 @@ class DatabaseSeeder extends Seeder
       
             
           
-        Employee::factory()->count(10);
-        // CategoryProject::factory()->count(10)->create()
-        // Project::factory()->count(10)->create();
-        ;
+        // Employee::factory()->count(10);
+        $this->call(DepartmentSeeder::class);
+        $this->call(JobSeeder::class);
+        $this->call(CategoryProjectSeeder::class);
+        $this->call(UserSeeder::class);
+        
+       
     
     }
 }

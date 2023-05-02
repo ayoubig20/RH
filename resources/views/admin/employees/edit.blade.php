@@ -21,26 +21,29 @@
             {{-- edit --}}
             @include('layouts.notify')
             <div class="card border-top border-0 border-5 border-dark">
-                <div class="card-body p-5">
-                    <div class="card-title d-flex align-items-center">
-                        <div><i class="bx bxs-user  font-22 text-drak"></i></div>
-                        <h3 class="mb-0 text-dark">{{ $employee->firstName }} {{ $employee->lastName }} Update</h3>
+                <div class="card-body p-5 font-18 text-strong">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="text-center text-bold">
+                                <h3 class="page-title"><strong> Employee {{ $employee->firstName }} {{ $employee->lastName }} Update</strong></h3>
+                            </div>
+                        </div>
                     </div>
                     <hr>
                     <form method="POST" action="{{ route('admin.employees.update', $employee->id) }}"
                         enctype="multipart/form-data" class="row g-3">
                         @csrf
                         @method('PATCH')
-                        <div class="col-md-12">
+                        <div class="card-body">
                             <label for="image" class="form-label">Profile Picture:</label>
                             <div class="input-group">
-                                <span class="input-group-text"><i class="bx bx-image"></i></span>
+                                <span class="input-group-text"></span>
                                 @if ($employee->image && !old('image'))
                                     <img src="{{ asset('storage/assets/users/' . $employee->image) }}" alt="Current Image"
-                                        style="max-width: 100%" class="img-fluid">
+                                        style="max-width: 80%" class="img-fluid">
                                 @elseif (old('image'))
                                     <img src="{{ asset('storage/assets/users/' . old('image')) }}" alt="Old Image"
-                                        style="max-width: 100%" class="img-fluid">
+                                        style="max-width: 80%" class="img-fluid">
                                 @endif
                             </div>
                         </div>

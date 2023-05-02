@@ -75,7 +75,7 @@ class AdminTaskController extends Controller
         $user=auth()->user();
         Notification::send($user, new addTask());
 
-        session()->flash('Add', 'Task created successfully!');
+        // session()->flash('Add', 'Task created successfully!');
         return back()->with([
                  'success' => 'Task created successfully!','viewData' => $viewData
                 ]);

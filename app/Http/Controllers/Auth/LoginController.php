@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use App\Models\Employee;
+use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -56,10 +58,10 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
-        
-            return view('auth.login');
+
+        return view('auth.login');
     }
-    
+
     /**
      * Handle a login request to the application.
      *
@@ -73,28 +75,44 @@ class LoginController extends Controller
             'password' => 'required',
             'type' => 'required|in:user,employee',
         ]);
-
+    
         $credentials = $request->only('email', 'password');
         $type = $request->input('type');
-
+    
         if ($type === 'employee' && Auth::guard('employee')->attempt($credentials)) {
             return redirect()->intended('/employee');
-            // return $request;
         }
-
+    
         if ($type === 'user' && Auth::guard()->attempt($credentials)) {
             return redirect()->intended('/admin');
         }
-
+    
+        // Check if email exists
+        $emailExists = User::where('email', $request->email)->exists() || Employee::where('email', $request->email)->exists();
+    
+        if (!$emailExists) {
+            return redirect()->back()->withErrors([
+                'email' => 'This email address does not exist.',
+            ])->withInput();
+        }
+    
+        // Check if password is incorrect
+        if (!Auth::guard('employee')->attempt($credentials) && !Auth::guard()->attempt($credentials)) {
+            return redirect()->back()->withErrors([
+                'password' => 'The password is incorrect.',
+            ])->withInput();
+        }
+    
+        // Handle unrecognized type
         return redirect()->back()->withErrors([
-            'email' => 'These credentials do not match our records.',
+            'type' => 'These credentials do not match our records.',
         ]);
-        // return $request;
     }
+    
 
     public function logout(Request $request)
     {
-        $this->guard()->logout();
+        $this->guard('user')->logout();
         $this->guard('employee')->logout();
 
         $request->session()->invalidate();

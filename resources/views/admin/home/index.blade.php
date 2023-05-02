@@ -86,8 +86,10 @@
                                     <div class="card-body">
                                         <div class="d-flex align-items-center">
                                             <div>
-                                                <p class="mb-0 text-white">Total Income</p>
-                                                <h4 class="my-1 text-white">$89,245</h4>
+                                                <h6>
+                                                    <p class="mb-0 text-white bold">Total income</p>
+                                                </h6>
+                                                <h4 class="my-1 text-white">{{ $viewData['budgets'] }}</h4>
                                             </div>
                                             <div class="text-white ms-auto font-35"><i class='bx bx-dollar'></i>
                                             </div>

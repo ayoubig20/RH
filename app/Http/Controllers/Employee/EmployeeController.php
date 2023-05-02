@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Employee;
 use App\Models\Task;
 use App\Models\Employee;
 use App\Models\Department;
+use Laravolt\Avatar\Avatar;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
@@ -50,11 +51,12 @@ class EmployeeController extends Controller
         $data = $request->all();
         $data['password'] = Hash::make($request->input('password')) ;
 
-
         // Use the default image if no image is provided
         if (!$request->hasFile('image')) {
-            $data['image'] = 'default-avatar.png';
-        } else {
+            $avatar = Avatar::create($request->firstName . ' ' . $request->lastName)->toBase64();
+            $data['image'] = 'data:image/png;base64,' . $avatar;
+        }
+         else {
             // Save the uploaded image to storage
             $imageName = uniqid() . '.' . $request->file('image')->extension();
             Storage::disk('public')->put(

@@ -201,4 +201,13 @@ class Project extends Model
 
         return $totalEmployees;
     }
+    // public static function totalEarning()
+    // {
+    //     $projects = Project::all()->get();
+    //     $earning = 0;
+    //     foreach ($projects as $project) {
+    //         $earning += $project->budget;
+    //     }
+    //     return $earning;
+    // }
 }

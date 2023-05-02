@@ -166,7 +166,7 @@
                 <script src="{{ URL::asset('assets/plugins/metismenu/js/metisMenu.min.js') }}"></script>
                 <script src="{{ URL::asset('assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js') }}"></script>
                 <script src="{{ URL::asset('assets/js/app.js') }}"></script>
-                <script>
+                {{-- <script>
                     const lightRadio = document.querySelector('#lightmode');
                     const darkRadio = document.querySelector('#darkmode');
                     const semiDarkRadio = document.querySelector('#semidark');
@@ -285,7 +285,7 @@
                             }
                         }
                     }
-                </script>
+                </script> --}}
 
 
                 <!--app JS-->

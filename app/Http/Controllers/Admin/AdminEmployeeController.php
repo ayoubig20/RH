@@ -19,7 +19,7 @@ class AdminEmployeeController extends Controller
     {
         $viewData = [];
         $viewData["title"] = "List employees";
-        $viewData["employees"] = Employee::all();
+        $viewData["employees"] = Employee::paginate(8);
         $viewData['departments'] = Department::all();
         $viewData['jobs'] = Job::all();
         if ($request->has('view') && $request->get('view') == 'card') {
@@ -54,7 +54,11 @@ class AdminEmployeeController extends Controller
 
         // Use the default image if no image is provided
         if (!$request->hasFile('image')) {
-            $data['image'] = 'default-avatar.png';
+            if ($request->input('gender') == 'Female') {
+                $data['image'] = 'default-avatar-female.jpeg';
+            } else {
+                $data['image'] = 'default-avatar.png';
+            }
         } else {
             // Save the uploaded image to storage
             $imageName = uniqid() . '.' . $request->file('image')->extension();
@@ -81,10 +85,10 @@ class AdminEmployeeController extends Controller
             $department->departmentHead = $employee->id;
             $department->save();
         }
-        session()->flash('Add', 'Employee created successfully!');
+        session()->flash('success', 'Employee created successfully!');
 
 // return $request;
-        return redirect()->route('admin.employees.index')->with('success', 'Employee created successfully!');
+        return redirect()->route('admin.employees.index');
     }
     public function edit(Employee $employee)
     {
@@ -92,7 +96,6 @@ class AdminEmployeeController extends Controller
         $viewData["title"] = "edit employee";
         $viewData['jobs'] = Job::all();
         $viewData['departments'] = Department::all();
-        session()->flash('edit', 'Employee update successfully!');
 
         return view('admin.employees.edit', ['employee' => $employee, 'viewData' => $viewData]);
     }
@@ -162,7 +165,7 @@ class AdminEmployeeController extends Controller
         session()->flash('edit', 'Employee updated successfully!');
 
 
-        return redirect()->route('admin.employees.index')->with('success', 'Employee updated successfully!');
+        return redirect()->route('admin.employees.index');
         // dd($validatedData);
     }
     public function destroy(Employee $employee, Request $request)

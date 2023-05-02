@@ -26,7 +26,7 @@ class AdminCategoryProject extends Controller
     {
         $viewData=[];
         $viewData["title"]='create Department';
-        session()->flash('Add', 'Category added successfully');
+        session()->flash('success', 'Category added successfully');
         return redirect('/admin/category');
     }
 
@@ -69,7 +69,6 @@ class AdminCategoryProject extends Controller
         $viewData = [];
         $viewData["title"] = " Edit Categry ";
         $viewData['categorys']= CategoryProject::findOrFail($id);
-        session()->flash('edit', 'Category updated successfully');
         return view("admin.category.edit")->with("viewData", $viewData);
     }
 
@@ -94,7 +93,7 @@ class AdminCategoryProject extends Controller
         $CategoryProject = CategoryProject::findOrFail($id);
         $CategoryProject->setName($request->input("name"));
         $CategoryProject->save();
-    
+        session()->flash('edit', 'Category updated successfully');
         return redirect()->route("admin.category.index");
     }
 

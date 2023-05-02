@@ -32,12 +32,12 @@ use App\Http\Controllers\Admin\ProjectsReportController;
 
 Route::get('/', [HomeController::class, 'index'])->name("home.index");
 Route::get('/about', [HomeController::class, 'about'])->name("home.about");
-Route::get('/admin', [AdminHomeController::class, 'index'])->name("admin.home.index");
 
 // Route::get('/phpinfo', function() {
 //     return phpinfo();
 // });
 Route::middleware('auth:web')->group(function () {
+    Route::get('/admin', [AdminHomeController::class, 'index'])->name("admin.home.index");
 
     Route::resource('/admin/employees', AdminEmployeeController::class)->names([
         'index' => 'admin.employees.index',

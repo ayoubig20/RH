@@ -18,7 +18,7 @@ class AdminProjectController extends Controller
     {
         $viewData = [];
         $viewData["title"] = "List projects";
-        $projects = Project::all();
+        $projects = Project::paginate(8);
         $viewData['categorys'] = CategoryProject::all();
         //  return view('admin.projects.index', compact('projects', 'viewData'));
         if ($request->has('status')) {
@@ -80,7 +80,7 @@ class AdminProjectController extends Controller
 
         $project->save();
         if (!$request->hasFile('image')) {
-            $project->image = 'project-2.png';
+            $project->image = 'project-default.png';
         } else {
             // Save the uploaded image to storage
             $imageName = uniqid() . '.' . $request->file('image')->extension();

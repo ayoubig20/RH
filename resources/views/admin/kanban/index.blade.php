@@ -23,7 +23,12 @@
             </div>
             <!--end breadcrumb-->
             @include('layouts.notify')
-
+            <div class="col-12">
+                <div class="text-center text-bold">
+                    <h3 class="page-title"><strong>Kanban Tasks
+                        </strong></h3>
+                </div>
+            </div>
             <div class="text-sm-end">
                 <div class="btn-group mb-3">
                     <a href="{{ route('admin.tasks.index') }}"

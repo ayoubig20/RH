@@ -49,6 +49,13 @@
             </div>
         </div>
         <!-- Button trigger modal -->
+        <div class="col-12">
+            <div class="text-center text-bold">
+                <h3 class="page-title"><strong>Tasks Board
+                        </strong></h3>
+            </div>
+        </div>
+
         <button style="    color: #FFF;
                 background-color: #4F46E5;" type="button" class="btn btn"
             data-bs-toggle="modal" data-bs-target="#exampleModal">add
@@ -246,8 +253,8 @@
                                                         <img src="{{ asset('storage/assets/users/' . $task->employee->image) }}"
                                                             class="user-img" alt="user avatar">
                                                     @endif
-                                                    <span
-                                                    class="align-middle"><a href="{{ route('admin.employees.show',  $task->employee->getId()) }}">{{ $task->employee ? $task->employee->firstName . ' ' . $task->employee->lastName : '' }}</a></span>
+                                                    <span class="align-middle"><a
+                                                            href="{{ route('admin.employees.show', $task->employee->getId()) }}">{{ $task->employee ? $task->employee->firstName . ' ' . $task->employee->lastName : '' }}</a></span>
                                                 </p>
                                                 <p class="card-text"><strong>Description:</strong>
                                                     {{ $task->description }}
@@ -481,8 +488,8 @@
                                                     <img src="{{ asset('storage/assets/users/' . $task->employee->image) }}"
                                                         class="user-img" alt="user avatar">
                                                 @endif
-                                                <span
-                                                    class="align-middle"><a href="{{ route('admin.employees.show',  $task->employee->getId()) }}">{{ $task->employee ? $task->employee->firstName . ' ' . $task->employee->lastName : '' }}</a></span>
+                                                <span class="align-middle"><a
+                                                        href="{{ route('admin.employees.show', $task->employee->getId()) }}">{{ $task->employee ? $task->employee->firstName . ' ' . $task->employee->lastName : '' }}</a></span>
                                             </p>
                                             <p class="card-text"><strong>Description:</strong>
                                                 {{ $task->description }}
@@ -712,8 +719,8 @@
                                                     <img src="{{ asset('storage/assets/users/' . $task->employee->image) }}"
                                                         class="user-img" alt="user avatar">
                                                 @endif
-                                                <span
-                                                    class="align-middle"><a href="{{ route('admin.employees.show',  $task->employee->getId()) }}">{{ $task->employee ? $task->employee->firstName . ' ' . $task->employee->lastName : '' }}</a></span>
+                                                <span class="align-middle"><a
+                                                        href="{{ route('admin.employees.show', $task->employee->getId()) }}">{{ $task->employee ? $task->employee->firstName . ' ' . $task->employee->lastName : '' }}</a></span>
                                             </p>
                                             <p class="card-text"><strong>Description:</strong>
                                                 {{ $task->description }}

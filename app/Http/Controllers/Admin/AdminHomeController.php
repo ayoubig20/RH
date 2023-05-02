@@ -29,9 +29,9 @@ class AdminHomeController extends Controller
         $numCompletedPoject = $Projects->where('status', 'Finshed')->count();
         $numProgerssPoject = $Projects->where('status', 'In progress')->count();
         $numToDOTPoject = $Projects->where('status', 'Panding')->count();
-
+        $budgets = Project::sum('budget');
         // stats Employees
-        $employees=Employee::all();
+        $employees = Employee::all();
         $numEmployes = $employees->count();
         // $departmentHead = $employees->where('role', 'department head');
 
@@ -54,7 +54,8 @@ class AdminHomeController extends Controller
             'priorityLowProject' => $priorityLowProject,
             'tasks' => $Tasks,
             'Projects' => $Projects,
+            'budgets' => $budgets ,
         ];
-        return view('admin.home.index')->with("viewData", $viewData);
+        return view('admin.home.index')->with("viewData", $viewData,);
     }
 }
