@@ -4,7 +4,6 @@
     <link href="assets/plugins/vectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
     <link href="assets/plugins/highcharts/css/highcharts-white.css" rel="stylesheet" />
 @endsection
-
 @section('wrapper')
     <div class="page-wrapper">
         <div class="page-content">
@@ -25,7 +24,8 @@
                                     </strong>
                                 @else
                                     <strong>
-                                        <h1 class="text-white">Welcome {{ auth()->guard('employee')->user()->firstName }}
+                                        <h1 class="text-white">Welcome
+                                            {{ auth()->guard('employee')->user()->firstName }}
                                         </h1>
                                     </strong>
                                 @endif
@@ -169,6 +169,7 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
 
                 <!--end row-->
@@ -541,4 +542,12 @@
                         </script>
 
                     @endsection
-                @endsection
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+@endsection

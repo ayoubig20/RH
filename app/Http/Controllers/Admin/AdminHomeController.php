@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Employee;
 
+
 class AdminHomeController extends Controller
 {
     public function index()
@@ -35,6 +36,46 @@ class AdminHomeController extends Controller
         $numEmployes = $employees->count();
         // $departmentHead = $employees->where('role', 'department head');
 
+        // if ($numCompletedPoject == 0) {
+        //     $preCompletedPoject = 0;
+        // } else {
+        //     $preCompletedPoject =  $numCompletedPoject / $numProject * 100;
+        // }
+
+        // if ($numProgerssPoject == 0) {
+        //     $preProgerssPoject = 0;
+        // } else {
+        //     $preProgerssPoject = $numProgerssPoject / $numProject * 100;
+        // }
+
+        // if ($numToDOTPoject == 0) {
+        //     $preToDOTPoject = 0;
+        // } else {
+        //     $preToDOTPoject = $numToDOTPoject / $numProject * 100;
+        // }
+
+
+
+        // $chartjsbar = Charts::create('bar', 'chartjs')
+        //     ->title('Project Status')
+        //     ->elementLabel('Projects')
+        //     ->labels(['Finished', 'In Progress', 'Pending'])
+        //     ->colors(['#81b214', '#ff9642', '#ec5858'])
+        //     ->dataset('Projects', 'bar', [$preCompletedPoject, $preProgerssPoject, $preToDOTPoject])
+        //     ->options([]);
+
+        // $chartjsTest = app()->chartjs
+        //     ->name('pieChartTest')
+        //     ->type('pie')
+        //     ->size(['width' => 340, 'height' => 200])
+        //     ->labels(['projects Finished', 'projects In progress', 'projects Panding'])
+        //     ->datasets([
+        //         [
+        //             'backgroundColor' => ['#81b214', '#ff9642', '#ec5858',],
+        //             'data' => [$numCompletedPoject, $numToDOTPoject, $numProgerssPoject]
+        //         ]
+        //     ])
+        //     ->options([]);
 
 
 
@@ -54,8 +95,9 @@ class AdminHomeController extends Controller
             'priorityLowProject' => $priorityLowProject,
             'tasks' => $Tasks,
             'Projects' => $Projects,
-            'budgets' => $budgets ,
+            'budgets' => $budgets,
+        
         ];
-        return view('admin.home.index')->with("viewData", $viewData,);
+        return view('admin.home.index')->with("viewData", $viewData);
     }
 }

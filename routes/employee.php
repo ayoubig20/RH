@@ -55,6 +55,14 @@ Route::middleware('auth:employee')->group(function () {
     Route::put('/employee/tasks/{id}/statusUp', [EmployeeTaskController::class, 'statusUpdate'])->name('employee.tasksUp.updateStatusList');
     Route::get('/employee/kanban', [EmployeeKanbanController::class, 'index'])->name('employee.kanban.index');
     Route::get('/employee/certifacte/{id}',[EmployeeController::class,'printWorkCertifacte'])->name('employee.printWorkCertifacte');
-
+    Route::post('/notifications/mark-as-read', function (Request $request) {
+        $userUnreadNotifications = auth()->user()->unreadNotifications;
+    
+        if ($userUnreadNotifications) {
+            $userUnreadNotifications->markAsRead();
+        }
+    
+        return redirect()->back();
+    });
 });
-Auth::routes();
+ Auth::routes();

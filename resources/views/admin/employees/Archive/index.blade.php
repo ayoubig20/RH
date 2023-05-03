@@ -72,7 +72,7 @@
                                         <td>{{ $employee->getAge() }}</td>
                                         {{-- <td>{{ $employee->getEmail() }}</td> --}}
                                         <td>{{ $employee->getPhone() }}</td>
-                                        <td>{{ $employee->getJob() }}</td>
+                                        <td>{{ $employee->job->title }}</td>
                                         <td>{{ $employee->department->getName() }}</td>
                                         <td>{{ $employee->getFatteningDate() }}</td>
                                         <td>{{ $employee->deleted_at }}</td>

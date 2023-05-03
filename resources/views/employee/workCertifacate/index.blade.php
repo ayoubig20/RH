@@ -60,7 +60,7 @@
                                         </div>
                                     </div>
                                     <div></br></div>
-                                    <div class="col m-auto fs-3">
+                                    <div class="col m-auto fs-4">
                                         <p>Dear {{ auth()->guard('employee')->user()->firstName }},</p>
                                         <p>This is to certify that you have been working as a
                                             {{ auth()->guard('employee')->user()->job->title }} at <strong>Employee

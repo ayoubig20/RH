@@ -57,7 +57,13 @@
                                 <div class="card radius-10 w-100">
                                     <div class="card-body">
                                         <div class="col">
+                                            <div class="text-center">
+                                                <span class="badge bg-dark m-auto text-center">
+                                                    <h4 class="mb-0 text-white text-center"> Tasks Priority</h4>
+                                                </span>
+                                            </div> </br>
                                             <div class="card  text-white" style="background-color:#FF4858;">
+
                                                 <div class="card-body">
                                                     <h3>High Priority Tasks</h3>
                                                     <strong>
@@ -95,20 +101,37 @@
                             </div>
                             <div class="col d-flex">
                                 <div class="card radius-10 w-100">
+                                </br>
+                                    <div class="text-center">
+                                        <span class="badge bg-dark m-auto text-center">
+                                            <h4 class="mb-0 text-white text-center"> Tasks status</h4>
+                                        </span>
+                                    </div>
                                     <div class="card-body">
+
                                         <canvas id="task-chart" style="width: 800px; max-width: 100%;"></canvas>
                                     </div>
                                 </div>
                             </div>
                             <div class="col d-flex">
+
                                 <div class="card radius-10 w-100">
+                                </br>
+                                    <div class="text-center">
+                                        <span class="badge bg-dark m-auto text-center">
+                                            <h4 class="mb-0 text-white text-center"> Projects status</h4>
+                                        </span>
+                                    </div>
                                     <div class="card-body">
                                         <canvas id="chart-order-status"></canvas>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
+                        <div style="background-image: url('{{ URL::asset('assets/images/bg-themes/5.png') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;"
+                            class="card text-white text-center">
+                            <h1 class="text-white">Tasks</h1>
+                        </div>
                         <!--end row-->
                         <div class="card radius-10">
                             <div class="card-body">

@@ -12,13 +12,13 @@
                 <div class="ps-3">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb mb-0 p-0">
-                            <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
+                            <li class="breadcrumb-item"><a href="{{ route('employee.home.index') }}"><i
+                                        class="bx bx-home-alt"></i></a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Data Table</li>
+                            <li class="breadcrumb-item active" aria-current="page">Data Cards Department</li>
                         </ol>
                     </nav>
                 </div>
-               
             </div>
             <!--end breadcrumb-->
             @include('layouts.notify')
@@ -89,10 +89,8 @@
                                         <select name="assigned_to" id="assigned_to" class="form-control" required>
                                             <option value="">assigned_to</option>
 
-                                            @foreach ($viewData['employees'] as $employee)
-                                                <option value="{{ $employee->id }}">{{ $employee->firstName }}
-                                                    {{ $employee->lastName }}</option>
-                                            @endforeach
+                                                <option value="{{ $viewData['employee'] ->id }}">{{ $viewData['employee'] ->firstName }}
+                                                    {{ $viewData['employee'] ->lastName }}</option>
                                         </select>
                                     </div>
                                     <div class="form-group">
@@ -265,13 +263,12 @@
                                                                         <option value="">Select an employee
                                                                         </option>
 
-                                                                        @foreach ($viewData['employees'] as $employee)
-                                                                            <option value="{{ $employee->id }}"
-                                                                                {{ $task->assigned_to == $employee->id ? 'selected' : '' }}>
-                                                                                {{ $employee->firstName }}
-                                                                                {{ $employee->lastName }}
+                                                                            <option value="{{ $viewData['employee'] ->id }}"
+                                                                                {{ $task->assigned_to == $viewData['employee'] ->id ? 'selected' : '' }}>
+                                                                                {{ $viewData['employee'] ->firstName }}
+                                                                                {{ $viewData['employee'] ->lastName }}
                                                                             </option>
-                                                                        @endforeach
+                                                                        
                                                                     </select>
                                                                 </div>
                                                                 <div class="form-group">

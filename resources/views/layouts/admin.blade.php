@@ -45,8 +45,11 @@
         @include('layouts.nav')
         <!--end navigation-->
         <!--start page wrapper -->
-
+        {{-- <div id="global-loader">
+            <img src="{{ URL::asset('assets/img/loader.svg') }}" class="loader-img" alt="Loader">
+        </div> --}}
         @yield('wrapper')
+
         <!--end page wrapper -->
         <!--start overlay-->
         <div class="overlay toggle-icon">
@@ -166,7 +169,7 @@
                 <script src="{{ URL::asset('assets/plugins/metismenu/js/metisMenu.min.js') }}"></script>
                 <script src="{{ URL::asset('assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js') }}"></script>
                 <script src="{{ URL::asset('assets/js/app.js') }}"></script>
-                {{-- <script>
+                 {{-- <script>
                     const lightRadio = document.querySelector('#lightmode');
                     const darkRadio = document.querySelector('#darkmode');
                     const semiDarkRadio = document.querySelector('#semidark');
@@ -285,9 +288,74 @@
                             }
                         }
                     }
-                </script> --}}
+                </script>  --}}
 
+                <script>
+                    // Fonction pour définir un cookie
+                    function setCookie(name, value, days) {
+                        let date = new Date();
+                        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                        let expires = "expires=" + date.toUTCString();
+                        document.cookie = name + "=" + value + ";" + expires + ";path=/";
+                    }
 
+                    // Fonction pour obtenir un cookie
+                    function getCookie(name) {
+                        let cookie = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
+                        return cookie ? cookie.pop() : '';
+                    }
+
+                    // Fonction pour appliquer les préférences enregistrées dans les cookies
+                    function applyPreferences() {
+                        let themeStyle = getCookie('themeStyle');
+                        let headerColor = getCookie('headerColor');
+                        let sidebarColor = getCookie('sidebarColor');
+
+                        if (themeStyle) {
+                            // Appliquer le style du thème
+                        }
+
+                        if (headerColor) {
+                            // Appliquer la couleur de l'en-tête
+                        }
+
+                        if (sidebarColor) {
+                            // Appliquer la couleur de la barre latérale
+                        }
+                    }
+
+                    // Fonction pour enregistrer les préférences et les appliquer
+                    function saveAndApplyPreferences() {
+                        let themeStyle = document.querySelector('input[name="flexRadioDefault"]:checked').id;
+                        let headerColor = document.querySelector('.header-colors-indigators .indigator.active').id;
+                        let sidebarColor = document.querySelector('.header-colors-indigators .indigator.active').id;
+
+                        setCookie('themeStyle', themeStyle, 30);
+                        setCookie('headerColor', headerColor, 30);
+                        setCookie('sidebarColor', sidebarColor, 30);
+
+                        applyPreferences();
+                    }
+
+                    // Ajout d'événements pour enregistrer et appliquer les préférences
+                    document.querySelectorAll('input[name="flexRadioDefault"]').forEach(function(input) {
+                        input.addEventListener('change', saveAndApplyPreferences);
+                    });
+
+                    document.querySelectorAll('.header-colors-indigators .indigator').forEach(function(indigator) {
+                        indigator.addEventListener('click', function() {
+                            document.querySelectorAll('.header-colors-indigators .indigator').forEach(function(
+                                indigator) {
+                                indigator.classList.remove('active');
+                            });
+                            indigator.classList.add('active');
+                            saveAndApplyPreferences();
+                        });
+                    });
+
+                    // Appliquer les préférences lors du chargement de la page
+                    document.addEventListener('DOMContentLoaded', applyPreferences);
+                </script>
                 <!--app JS-->
                 @yield('script')
 </body>

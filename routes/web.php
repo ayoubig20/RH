@@ -134,7 +134,15 @@ Route::middleware('auth:web')->group(function () {
     Route::get('/admin/report',[ProjectsReportController::class,'index'])->name('admin.report.index');
 
      Route::post('Search_project', [ProjectsReportController::class,'SearchProjects']);
-});
-
+     Route::post('/notifications/mark-as-read', function (Request $request) {
+        $userUnreadNotifications = auth()->user()->unreadNotifications;
+    
+        if ($userUnreadNotifications) {
+            $userUnreadNotifications->markAsRead();
+        }
+    
+        return redirect()->back();
+    });
+    });
 
 Auth::routes();

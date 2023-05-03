@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.employee')
 
 
 @section('title', 'Employees')
@@ -20,22 +20,7 @@
                         </ol>
                     </nav>
                 </div>
-                <div class="ms-auto">
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-primary">Settings</button>
-                        <button type="button"
-                            class="btn btn-primary split-bg-primary dropdown-toggle dropdown-toggle-split"
-                            data-bs-toggle="dropdown"> <span class="visually-hidden">Toggle Dropdown</span>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-end"> <a class="dropdown-item"
-                                href="javascript:;">Action</a>
-                            <a class="dropdown-item" href="javascript:;">Another action</a>
-                            <a class="dropdown-item" href="javascript:;">Something else here</a>
-                            <div class="dropdown-divider"></div> <a class="dropdown-item" href="javascript:;">Separated
-                                link</a>
-                        </div>
-                    </div>
-                </div>
+               
             </div>
             <!--end breadcrumb-->
             @include('layouts.notify')
@@ -59,9 +44,7 @@
 
                         <div class="row mb-2">
                             <div class="col-sm-4">
-                                {{-- <a href="apps-projects-add.html" class="btn btn-danger rounded-pill mb-3"><i
-                                            class="mdi mdi-plus"></i> Create Project</a> --}}
-                                <!-- Button trigger modal -->
+                              
                                 <button style="    color: #FFF;
                 background-color: #4F46E5;" type="button"
                                     class="btn btn rounded " data-bs-toggle="modal" data-bs-target="#exampleModal">add
@@ -79,7 +62,7 @@
                                         <div class="modal-body">
 
                                             <form class="form-horizontal" enctype="multipart/form-data"method="POST"
-                                                action="{{ route('admin.projects.store') }}">
+                                                action="{{ route('employee.projects.store') }}">
                                                 {{ csrf_field() }}
 
                                                 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -248,10 +231,10 @@
                         <div class="text-sm-end">
                             <div class="col-auto float-right ml-auto">
                                 <div class="btn-group mb-3 d-none d-sm-inline-block">
-                                    <a href="{{ route('admin.projects.index', ['view' => 'card']) }}"
+                                    <a href="{{ route('employee.projects.index', ['view' => 'card']) }}"
                                         class="btn btn-muted {{ request()->get('view') == 'card' ? 'active' : '' }}"><i
                                             class='bx bxs-grid-alt'></i></a>
-                                    <a href="{{ route('admin.projects.index', ['view' => 'list']) }}"
+                                    <a href="{{ route('employee.projects.index', ['view' => 'list']) }}"
                                         class="btn btn-muted {{ request()->get('view') != 'card' ? 'active' : '' }}"><i
                                             class='bx bx-list-ul'></i></a>
                                 </div>
@@ -292,7 +275,7 @@
 
                                         <!-- project title-->
                                         <h4 class="mt-0">
-                                            <a href="{{ route('admin.projects.show', $project->id) }}"
+                                            <a href="{{ route('employee.projects.show', $project->id) }}"
                                                 class="text-title">{{ $project->name }}</a>
                                         </h4>
                                         <p class="text-muted font-13 my-3 project-description">
@@ -321,7 +304,7 @@
                                             @endphp
 
                                             @foreach ($uniqueEmployees as $task)
-                                                <a href="{{ route('admin.employees.show',  $task->employee->getId()) }}"
+                                                <a href="{{ route('employee.employees.show',  $task->employee->getId()) }}"
                                                     class="team-member-avatar"
                                                     title="{{  $task->employee->firstName }} {{  $task->employee->lastName }}"
                                                     data-toggle="tooltip"
@@ -374,8 +357,6 @@
                 </div> <!-- end col -->
 
             </div> <!-- content -->
-
-
 
         </div>
     </div>

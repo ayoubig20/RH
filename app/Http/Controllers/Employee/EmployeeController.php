@@ -17,17 +17,17 @@ class EmployeeController extends Controller
 
     public function index(Request $request)
     {
-        $viewData = [];
-        $viewData["title"] = "List employees";
-        $viewData["employees"] = Employee::all();
-        $viewData['departments'] = Department::all();
-        if ($request->has('view') && $request->get('view') == 'card') {
-            // Display employees in card view
-            return view('employee.employees.indexCards', ['viewData' => $viewData]);
-        } else {
-            // Display employees in list view
-            return view('employee.employees.indexList', ['viewData' => $viewData]);
-        }
+        // $viewData = [];
+        // $viewData["title"] = "List employees";
+        // $viewData["employees"] = Employee::all();
+        // $viewData['departments'] = Department::all();
+        // if ($request->has('view') && $request->get('view') == 'card') {
+        //     // Display employees in card view
+        //     return view('employee.employees.indexCards', ['viewData' => $viewData]);
+        // } else {
+        //     // Display employees in list view
+        //     return view('employee.employees.indexList', ['viewData' => $viewData]);
+        // }
     }
 
     public function create()
@@ -37,9 +37,11 @@ class EmployeeController extends Controller
         $viewData['departments'] = Department::all();
         return view('employee.employees.create')->with("viewData", $viewData);
     }
-    public function show($id)
+    public function show()
     {
-        $employee = Employee::findOrFail($id);
+        $employeeId = auth()->user()->id;
+
+        $employee = Employee::findOrFail($employeeId);
 
         $tasks = Task::where('assigned_to', '=', $employee->id)->get();
         return view('employee.employees.show', compact('employee', 'tasks'));

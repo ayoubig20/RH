@@ -29,9 +29,9 @@ class EmployeeProjectController extends Controller
             }
         }
         if ($request->has('view') && $request->get('view') == 'card') {
-            return view('admin.projects.indexCards', ['viewData' => $viewData, 'projects' => $projects]);
+            return view('employee.projects.indexCards', ['viewData' => $viewData, 'projects' => $projects]);
         } else {
-            return view('admin.projects.indexList', ['viewData' => $viewData, 'projects' => $projects]);
+            return view('employee.projects.indexList', ['viewData' => $viewData, 'projects' => $projects]);
         }
     }
 }

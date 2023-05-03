@@ -30,8 +30,8 @@ class EmployeeTaskController extends Controller
         }
 
         $viewData['tasks'] = $tasks->get();
-        $viewData['employees'] = Employee::all();
-        $viewData['projects'] = Project::all();
+        $viewData['employee'] = auth()->user();
+        $viewData['projects'] =Project::where('assigned_to', $employeeId);
 
         if ($request->has('view') && $request->get('view') == 'card') {
             return view('employee.tasks.indexCards', ['viewData' => $viewData]);
@@ -50,14 +50,14 @@ class EmployeeTaskController extends Controller
 
         return back();
     }
-    public function show(Task $task)
-    {
-        $viewData = [];
-        $viewData['task'] = $task; // Pass $task variable to the view
-        $viewData['employees'] = Employee::all();
-        $viewData['projects'] = Project::all();
-        return view('admin.tasks.show', compact('viewData'));
-    }
+    // public function show(Task $task)
+    // {
+    //     $viewData = [];
+    //     $viewData['task'] = $task; // Pass $task variable to the view
+    //     $viewData['employees'] = Employee::all();
+    //     $viewData['projects'] = Project::all();
+    //     return view('employee.tasks.show', compact('viewData'));
+    // }
 
     public function edit(Task $task)
     {
@@ -65,7 +65,7 @@ class EmployeeTaskController extends Controller
         $viewData['employees'] = Employee::all();
         $viewData['projects'] = Project::all();
         session()->flash('edit', 'Task updated successfully');
-        return view('admin.tasks.edit', compact(['task', 'viewData']));
+        return view('employee.tasks.edit', compact(['task', 'viewData']));
     }
     public function statusUpdate($id, Request $request)
     {
@@ -74,6 +74,45 @@ class EmployeeTaskController extends Controller
         'status' => $request->status,
         ]);
         session()->flash('statusUpdate', 'Status updated successfully');
+        return back();
+    }
+
+    public function store(Request $request)
+    {
+        Task::validate($request);
+
+        $creationData = $request->all();
+        $task = Task::create($creationData);
+        // Get the employee and project IDs from the request
+        $employeeId = $request->input('assigned_to');
+        $projectId = $request->input('project_id');
+        // Attach the task to the employee and project using the pivot table
+        $employee = Employee::findOrFail($employeeId);
+        $taskId=$task->id;
+        $employee->projects()->attach($projectId, ['created_at' => now(), 'updated_at' => now(), 'created_by' => (Auth::user()->name)]);
+        $employee->tasks()->attach($task->id, [
+            'created_at' => now(), 'updated_at' => now(), 'created_by' => (Auth::user()->name),
+        ]);
+        $viewData['employees'] = Employee::all();
+        $viewData['projects'] = Project::all();
+
+        // return redirect()->route('admin.tasks.index')->with([
+        //     'success' => 'Task created successfully!',
+        //     'viewData' => $viewData
+        // ]);
+
+
+        //sende to employe assiegned task
+        // $user=$employee;
+        return back()->with([
+                 'success' => 'Task created successfully!','viewData' => $viewData
+                ]);
+    }
+       public function destroy(Task $task)
+    {
+        $task->delete();
+        session()->flash('delete', 'Task deleted successfully!');
+
         return back();
     }
 }
