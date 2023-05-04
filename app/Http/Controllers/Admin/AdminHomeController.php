@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Employee;
 
-
 class AdminHomeController extends Controller
 {
     public function index()

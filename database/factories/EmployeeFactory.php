@@ -26,7 +26,7 @@ class EmployeeFactory extends Factory
      {
          return [
           
-            'id' => $this->faker->unique()->numberBetween(1,100),
+            'id' => $this->faker->unique()->numberBetween(1, 100),
             'firstName' => $this->faker->firstName(),
             'lastName' => $this->faker->lastName(),
             'gender' => $this->faker->randomElement(['Male', 'Female']),
@@ -51,6 +51,4 @@ class EmployeeFactory extends Factory
             'job_id' => $this->faker->numberBetween(1, 10),
          ];
      }
-    
-
 }

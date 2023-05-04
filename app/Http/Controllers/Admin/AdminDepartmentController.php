@@ -93,42 +93,42 @@ class AdminDepartmentController extends Controller
      */
 
      
-     public function update(Request $request, $id)
-     {
-         $this->validate($request, [
-             "name" => "required|max:255|unique:departments,name,$id",
-         ], [
-             'name.required' => 'Please enter the department name.',
-             'name.unique' => 'The department name has already been taken.',
-         ]);
+    public function update(Request $request, $id)
+    {
+        $this->validate($request, [
+            "name" => "required|max:255|unique:departments,name,$id",
+        ], [
+            'name.required' => 'Please enter the department name.',
+            'name.unique' => 'The department name has already been taken.',
+        ]);
      
-         $department = Department::findOrFail($id);
-         $department->setName($request->input("name"));
-         $department->setDescription($request->input("description"));
+        $department = Department::findOrFail($id);
+        $department->setName($request->input("name"));
+        $department->setDescription($request->input("description"));
      
-         // Update department head if it has changed
-         $newDepartmentHeadId = $request->input('departmentHead');
-         if ($newDepartmentHeadId != $department->departmentHead) {
-             // Update the old department head's role
-             if ($department->departmentHead) {
-                 $prevDepartmentHead = Employee::findOrFail($department->departmentHead);
-                 $prevDepartmentHead->role = 'employee';
-                 $prevDepartmentHead->save();
-             }
-             // Assign new department head and update their role
-             $newDepartmentHead = Employee::find($newDepartmentHeadId);
-             if ($newDepartmentHead) {
-                 $newDepartmentHead->role = 'departmentHead';
-                 $newDepartmentHead->save();
-                 $department->departmentHead = $newDepartmentHeadId;
-             }
-         }
+        // Update department head if it has changed
+        $newDepartmentHeadId = $request->input('departmentHead');
+        if ($newDepartmentHeadId != $department->departmentHead) {
+            // Update the old department head's role
+            if ($department->departmentHead) {
+                $prevDepartmentHead = Employee::findOrFail($department->departmentHead);
+                $prevDepartmentHead->role = 'employee';
+                $prevDepartmentHead->save();
+            }
+            // Assign new department head and update their role
+            $newDepartmentHead = Employee::find($newDepartmentHeadId);
+            if ($newDepartmentHead) {
+                $newDepartmentHead->role = 'departmentHead';
+                $newDepartmentHead->save();
+                $department->departmentHead = $newDepartmentHeadId;
+            }
+        }
      
-         $department->save();
-         session()->flash('edit', 'Department updated successfully');
+        $department->save();
+        session()->flash('edit', 'Department updated successfully');
      
-         return redirect()->route("admin.department.index");
-     }
+        return redirect()->route("admin.department.index");
+    }
      
 
 

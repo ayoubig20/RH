@@ -81,7 +81,7 @@ class AdminTaskController extends Controller
         $user=auth()->user();
         $task = task::latest()->first();
         $employee = Employee::findOrFail($employeeId);
-        Notification::send($employee, new TaskDoneDataBase($task,$user));
+        Notification::send($employee, new TaskDoneDataBase($task, $user));
         Notification::send($employee, new addTask());
         return back()->with([
                  'success' => 'Task created successfully!','viewData' => $viewData

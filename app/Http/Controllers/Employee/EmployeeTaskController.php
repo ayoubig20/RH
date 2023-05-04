@@ -53,7 +53,7 @@ class EmployeeTaskController extends Controller
             $employee = auth()->user();
             $users = User::all();
             $task = Task::latest()->first();
-            Notification::send($users, new workFinshed($task,$employee));
+            Notification::send($users, new workFinshed($task, $employee));
         }
         session()->flash('Update', 'Task updated successfully!');
 
@@ -86,7 +86,7 @@ class EmployeeTaskController extends Controller
             $employee = auth()->user();
             $users = User::all();
             $task = Task::latest()->first();
-            Notification::send($users, new workFinshed($task,$employee));
+            Notification::send($users, new workFinshed($task, $employee));
         }
     
         session()->flash('statusUpdate', 'Status updated successfully');
@@ -124,7 +124,7 @@ class EmployeeTaskController extends Controller
                  'success' => 'Task created successfully!','viewData' => $viewData
                 ]);
     }
-       public function destroy(Task $task)
+    public function destroy(Task $task)
     {
         $task->delete();
         session()->flash('delete', 'Task deleted successfully!');

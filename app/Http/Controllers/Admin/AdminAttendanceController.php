@@ -28,4 +28,3 @@ class AdminAttendanceController extends Controller
         return view("admin.attendance.index")->with("viewData", $viewData);
     }
 }
-

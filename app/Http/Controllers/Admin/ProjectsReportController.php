@@ -28,7 +28,6 @@ class ProjectsReportController extends Controller
             }
             $type = $request->type;
             return view('admin.report.index', compact('type'))->withDetails($projects);
-    
         } else {
             // case select date
             if ($request->type != 'all') {
@@ -48,5 +47,4 @@ class ProjectsReportController extends Controller
             }
         }
     }
-    
 }

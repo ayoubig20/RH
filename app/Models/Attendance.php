@@ -22,10 +22,10 @@ class Attendance extends Model
         return Carbon::parse($this->attributes['login_time'])
             ->format('m/d/Y h:i A');
     }
-     public function getLogoutTime()
+    public function getLogoutTime()
     {
         return $this->attributes['logout_time'];
-            // ->format('m/d/Y h:i A');
+           // ->format('m/d/Y h:i A');
     }
     public function employee()
     {
@@ -39,7 +39,8 @@ class Attendance extends Model
         $attendance->employee_id = $employee->id;
         $attendance->login_time = now();
         $attendance->status = 'present';
-        $attendance->ip_address = $request->ip();;
+        $attendance->ip_address = $request->ip();
+        ;
         $attendance->save();
         // return redirect()->back()->with('success', 'Attendance marked successfully!');
     }

@@ -76,7 +76,8 @@ Route::middleware('auth:web')->group(function () {
         'update' => 'admin.projects.update',
         'destroy' => 'admin.projects.destroy',
     ]);
-    Route::post('/admin/projects/{id}', [AdminProjectController::class, 'destroy'])->name('admin.projects.destroy');;
+    Route::post('/admin/projects/{id}', [AdminProjectController::class, 'destroy'])->name('admin.projects.destroy');
+    ;
     Route::resource('/admin/holidays', AdminHolidaysController::class)->names([
         'index' => 'admin.holidays.index',
         'create' => 'admin.holidays.create',
@@ -85,7 +86,8 @@ Route::middleware('auth:web')->group(function () {
         'edit' => 'admin.holidays.edit',
         'update' => 'admin.holidays.update',
         'destroy' => 'admin.holidays.destroy',
-    ]);;
+    ]);
+    ;
     Route::resource('/admin/tasks', AdminTaskController::class)->names([
         'index' => 'admin.tasks.index',
         'create' => 'admin.tasks.create',
@@ -136,7 +138,7 @@ Route::middleware('auth:web')->group(function () {
         'update' => 'admin.attendance.update',
         'destroy' => 'admin.attendance.destroy',
     ]);
-    Route::get('/admin/report',[ProjectsReportController::class,'index'])->name('admin.report.index');
+    Route::get('/admin/report', [ProjectsReportController::class,'index'])->name('admin.report.index');
 
      Route::post('Search_project', [ProjectsReportController::class,'SearchProjects']);
      Route::post('/notifications/mark-as-read', function (Request $request) {
@@ -147,7 +149,7 @@ Route::middleware('auth:web')->group(function () {
         }
     
         return redirect()->back();
-    });
-    });
+     });
+});
 
 Auth::routes();

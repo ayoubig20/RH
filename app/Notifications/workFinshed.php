@@ -11,7 +11,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
 class workFinshed extends Notification
-    {
+{
         use Queueable;
     
         protected $task;
@@ -22,35 +22,35 @@ class workFinshed extends Notification
          *
          * @return void
          */
-        public function __construct(Task $task, Employee $employee)
-        {
-            $this->task = $task;
-            $this->employee = $employee;
-        }
+    public function __construct(Task $task, Employee $employee)
+    {
+        $this->task = $task;
+        $this->employee = $employee;
+    }
     
         // ...
-        public function via(object $notifiable): array
-        {
-            return ['dataBase'];
-        }
+    public function via(object $notifiable): array
+    {
+        return ['dataBase'];
+    }
     
     
-        public function toMail($notifiable)
-        {
-            $url = route('admin.tasks.index');
-            return (new MailMessage)
-                        ->greeting('Hello!')
-                        ->line('Task "' . $this->task->title . '" has been marked as done by ' . $this->employee->name . '.')
-                        ->action('View Task', $url)
-                        ->line('Thank you for using our application!');
-        }
+    public function toMail($notifiable)
+    {
+        $url = route('admin.tasks.index');
+        return (new MailMessage)
+                    ->greeting('Hello!')
+                    ->line('Task "' . $this->task->title . '" has been marked as done by ' . $this->employee->name . '.')
+                    ->action('View Task', $url)
+                    ->line('Thank you for using our application!');
+    }
     
-        public function toArray($notifiable)
-        {
-            return [
-                'id' => $this->task->id,
-                'title' => 'Task "' . $this->task->title . '" has been marked as done by ' . $this->employee->name . '.',
-                'user' => $this->employee->firstName .$this->employee->lastName,
-            ];
-        }
+    public function toArray($notifiable)
+    {
+        return [
+            'id' => $this->task->id,
+            'title' => 'Task "' . $this->task->title . '" has been marked as done by ' . $this->employee->name . '.',
+            'user' => $this->employee->firstName .$this->employee->lastName,
+        ];
+    }
 }

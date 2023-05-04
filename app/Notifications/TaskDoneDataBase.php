@@ -17,12 +17,11 @@ class TaskDoneDataBase extends Notification
     /**
      * Create a new notification instance.
      */
-    public function __construct(Task $task,User $user)
+    public function __construct(Task $task, User $user)
     {
         //
         $this->task= $task;
         $this->user= $user;
-
     }
 
     /**
@@ -59,7 +58,7 @@ class TaskDoneDataBase extends Notification
                 //'data' => $this->details['body']
                 'id'=> $this->task->id,
                 'title'=> "new tasks has been added",
-                'user'=>  $this->user->name,   
+                'user'=>  $this->user->name,
         ];
     }
 }
