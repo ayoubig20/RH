@@ -1,6 +1,6 @@
 @extends('layouts.employee')
 
-@section('title', 'Employees')
+@section('title', 'Taks')
 
 @section('wrapper')
     <!--start page wrapper -->
@@ -15,7 +15,7 @@
                             <li class="breadcrumb-item"><a href="{{ route('employee.home.index') }}"><i
                                         class="bx bx-home-alt"></i></a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Data Cards Department</li>
+                            <li class="breadcrumb-item active" aria-current="page">Data Tasks</li>
                         </ol>
                     </nav>
                 </div>

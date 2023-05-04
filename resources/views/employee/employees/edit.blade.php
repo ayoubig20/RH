@@ -1,5 +1,5 @@
-@extends('layouts.admin')
-@section('title', 'Employees')
+@extends('layouts.employee')
+@section('title', 'Employees profile')
 @section('wrapper')
     <!--start page wrapper -->
     <div class="page-wrapper">
@@ -21,18 +21,34 @@
             {{-- edit --}}
             @include('layouts.notify')
 
-
             <div class="card border-top border-0 border-5 border-dark">
-                <div class="card-body p-5">
-                    <div class="card-title d-flex align-items-center">
-                        <div><i class="bx bxs-user  font-22 text-drak"></i></div>
-                        <h3 class="mb-0 text-dark">{{ $employee->firstName }} {{ $employee->lastName }} Update</h3>
+                <div class="card-body p-5 font-18 text-strong">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="text-center text-bold">
+                                <h3 class="page-title"><strong> Employee {{ $employee->firstName }}
+                                        {{ $employee->lastName }} Update</strong></h3>
+                            </div>
+                        </div>
                     </div>
                     <hr>
-                    <form method="POST" action="{{ route('admin.employees.update', $employee->id) }}"
+                    <form method="POST" action="{{ route('employee.employee.update', $employee->id) }}"
                         enctype="multipart/form-data" class="row g-3">
                         @csrf
                         @method('PATCH')
+                        <div class="card-body">
+                            <label for="image" class="form-label">Profile Picture:</label>
+                            <div class="input-group">
+                                <span class="input-group-text"></span>
+                                @if ($employee->image && !old('image'))
+                                    <img src="{{ asset('storage/assets/users/' . $employee->image) }}" alt="Current Image"
+                                        style="max-width: 80%" class="img-fluid">
+                                @elseif (old('image'))
+                                    <img src="{{ asset('storage/assets/users/' . old('image')) }}" alt="Old Image"
+                                        style="max-width: 80%" class="img-fluid">
+                                @endif
+                            </div>
+                        </div>
                         <div class="col-md-6">
                             <label for="firstName" class="form-label">First Name:</label>
                             <div class="input-group">
@@ -41,6 +57,7 @@
                                     value="{{ $employee->firstName }}" required>
                             </div>
                         </div>
+
                         <div class="col-md-6">
                             <label for="lastName" class="form-label">Last Name:</label>
                             <div class="input-group">
@@ -96,7 +113,8 @@
                                     <option value="Married" {{ $employee->martialStatus == 'Married' ? 'selected' : '' }}>
                                         Married</option>
                                     <option value="Divorced"
-                                        {{ $employee->martialStatus == 'Divorced' ? 'selected' : '' }}>Divorced
+                                        {{ $employee->martialStatus == 'Divorced' ? 'selected' : '' }}>
+                                        Divorced
                                     </option>
                                 </select>
                             </div>
@@ -124,7 +142,7 @@
                             <div class="input-group">
                                 <span class="input-group-text"><i class='bx bxs-briefcase-alt-2'></i></span>
                                 <input type="text" class="form-control" id="job" name="job"
-                                    value="{{ $employee->job }}" required>
+                                    value="{{ $employee->job->title }}" required disabled>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -132,7 +150,7 @@
                             <div class="input-group">
                                 <span class="input-group-text"><i class="bx bx-calendar-alt"></i></span>
                                 <input type="date" class="form-control" id="fatteningDate" name="fatteningDate"
-                                    value="{{ $employee->fatteningDate }}" required>
+                                    value="{{ $employee->fatteningDate }}" required disabled>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -140,14 +158,14 @@
                             <div class="input-group">
                                 <span class="input-group-text"><i class="bx bx-money"></i></span>
                                 <input type="number" class="form-control" id="salary" name="salary"
-                                    value="{{ $employee->salary }}"required>
+                                    value="{{ $employee->salary }}"required disabled>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <label for="role" class="form-label">Role:</label>
                             <div class="input-group">
                                 <span class="input-group-text"><i class="bx bx-user"></i></span>
-                                <select class="form-control" id="role" name="role" required>
+                                <select class="form-control" id="role" name="role" required disabled>
                                     <option value="">Select Role</option>
                                     <option value="admin" {{ $employee->role == 'admin' ? 'selcted' : '' }}>Admin
                                     </option>
@@ -160,7 +178,7 @@
                             <label for="department_id" class="form-label">Department:</label>
                             <div class="input-group">
                                 <span class="input-group-text"><i class="bx bx-building"></i></span>
-                                <select class="form-control" id="department_id" name="department_id" required>
+                                <select class="form-control" id="department_id" name="department_id" required disabled>
                                     <option value="">Select department</option>
                                     @foreach ($viewData['departments'] as $department)
                                         <option value="{{ $department->getId() }}"
@@ -175,7 +193,8 @@
                         <div class="col-md-6">
 
                             <label for="password" class="form-label">Password: <span
-                                    class="badge rounded-pill bg-warning">If you dont wante change old password late
+                                    class="badge rounded-pill bg-warning">If you
+                                    dont wante change old password late
                                     empty</span>
                             </label>
                             <div class="input-group">
@@ -209,27 +228,30 @@
                                 <label for="status">Status:</label>
                                 <label class="form-check-label mr-4">
                                     <input class="form-check-input" type="radio" name="status" value="full-time"
-                                        {{ old('status', $employee->getStatus()) == 'full-time' ? 'checked' : '' }}>
+                                        {{ old('status', $employee->getStatus()) == 'full-time' ? 'checked' : '' }}
+                                        disabled>
                                     Full-time
                                 </label>
                                 <label class="form-check-label mr-4">
                                     <input class="form-check-input" type="radio" name="status" value="part-time"
-                                        {{ old('status', $employee->getStatus()) == 'part-time' ? 'checked' : '' }}>
+                                        {{ old('status', $employee->getStatus()) == 'part-time' ? 'checked' : '' }}disabled>
                                     Part-time
                                 </label>
                                 <label class="form-check-label mr-4">
                                     <input class="form-check-input" type="radio" name="status" value="contractor"
-                                        {{ old('status', $employee->getStatus()) == 'contractor' ? 'checked' : '' }}>
+                                        {{ old('status', $employee->getStatus()) == 'contractor' ? 'checked' : '' }}
+                                        disabled>
                                     Contractor
                                 </label>
                                 <label class="form-check-label mr-4">
                                     <input class="form-check-input" type="radio" name="status" value="freelancer"
-                                        {{ old('status', $employee->getStatus()) == 'freelancer' ? 'checked' : '' }}>
+                                        {{ old('status', $employee->getStatus()) == 'freelancer' ? 'checked' : '' }}
+                                        disabled>
                                     Freelancer
                                 </label>
                                 <label class="form-check-label mr-4">
                                     <input class="form-check-input" type="radio" name="status" value="intern"
-                                        {{ old('status', $employee->getStatus()) == 'intern' ? 'checked' : '' }}>
+                                        {{ old('status', $employee->getStatus()) == 'intern' ? 'checked' : '' }}disabled>
                                     Intern
                                 </label>
                             </div>
@@ -244,3 +266,4 @@
             </div>
         </div>
     </div>
+@endsection

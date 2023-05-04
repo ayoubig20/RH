@@ -51,14 +51,13 @@ class EmployeeController extends Controller
         Employee::validate($request);
 
         $data = $request->all();
-        $data['password'] = Hash::make($request->input('password')) ;
+        $data['password'] = Hash::make($request->input('password'));
 
         // Use the default image if no image is provided
         if (!$request->hasFile('image')) {
             $avatar = Avatar::create($request->firstName . ' ' . $request->lastName)->toBase64();
             $data['image'] = 'data:image/png;base64,' . $avatar;
-        }
-         else {
+        } else {
             // Save the uploaded image to storage
             $imageName = uniqid() . '.' . $request->file('image')->extension();
             Storage::disk('public')->put(
@@ -75,16 +74,20 @@ class EmployeeController extends Controller
 
         return redirect()->route('employee.employees.index')->with('success', 'Employee created successfully!');
     }
-    public function edit(Employee $employee)
+    public function edit()
     {
+        $employee = auth()->user();
+
         $viewData = [];
         $viewData["title"] = "edit employee";
         $viewData['departments'] = Department::all();
 
         return view('employee.employees.edit', ['employee' => $employee, 'viewData' => $viewData]);
     }
-    public function update(Request $request, Employee $employee)
+    public function update(Request $request)
     {
+        $employee = auth()->user();
+
         $validatedData = $request->validate([
             'firstName' => 'required|string|max:255',
             'lastName' => 'required|string|max:255',
@@ -98,14 +101,14 @@ class EmployeeController extends Controller
             ],
             'phone' => 'required|string|max:255',
             'address' => 'required|string|max:255',
-            'status' => 'required|string|max:255',
-            'job' => 'required|string|max:255',
-            'martialStatus' => 'required|string|max:255',
-            'fatteningDate' => 'required|date',
+            // 'status' => 'required|string|max:255',
+            // 'job' => 'required|string|max:255',
+            // 'martialStatus' => 'required|string|max:255',
+            // 'fatteningDate' => 'required|date',
             'DateOfBirth' => 'required|date',
-            'salary' => 'required|numeric|gt:0',
-            'department_id' => 'required',
-            'role' => 'required',
+            // 'salary' => 'required|numeric|gt:0',
+            // 'department_id' => 'required',
+            // 'role' => 'required',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'password' => 'nullable|min:8',
             'password_confirmation' => 'nullable|same:password',
@@ -122,8 +125,6 @@ class EmployeeController extends Controller
             );
             $validatedData['image'] = $imageName;
         }
-
-        // Check if password is provided, if not, keep the old password
         if ($request->filled('password')) {
             $validatedData['password'] = Hash::make($validatedData['password']);
         } else {
@@ -134,12 +135,13 @@ class EmployeeController extends Controller
         session()->flash('edit', 'Employee updated successfully!');
 
 
-        return redirect()->route('employee.employees.index')->with('success', 'Employee updated successfully!');
-        // dd($validatedData);
+        return redirect()->route('employee.home.index');
+        // return $request;
     }
-    public function printWorkCertifacte($id){
+    public function printWorkCertifacte($id)
+    {
         // $employee = Employee::findOrFail($id);
-        $employee=Employee::where('id',$id);
-        return view('employee.workCertifacate.index',compact('employee'));
+        $employee = Employee::where('id', $id);
+        return view('employee.workCertifacate.index', compact('employee'));
     }
 }

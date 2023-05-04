@@ -48,8 +48,10 @@
         {{-- <div id="global-loader">
             <img src="{{ URL::asset('assets/img/loader.svg') }}" class="loader-img" alt="Loader">
         </div> --}}
+        @include('layouts.preloader')
         @yield('wrapper')
 
+       
         <!--end page wrapper -->
         <!--start overlay-->
         <div class="overlay toggle-icon">
@@ -169,7 +171,15 @@
                 <script src="{{ URL::asset('assets/plugins/metismenu/js/metisMenu.min.js') }}"></script>
                 <script src="{{ URL::asset('assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js') }}"></script>
                 <script src="{{ URL::asset('assets/js/app.js') }}"></script>
-                 {{-- <script>
+
+
+                <script>
+                    window.addEventListener('load', function() {
+                        const preloader = document.querySelector('.preloader');
+                        preloader.classList.add('hide-preloader');
+                    })
+                </script>
+                {{-- <script>
                     const lightRadio = document.querySelector('#lightmode');
                     const darkRadio = document.querySelector('#darkmode');
                     const semiDarkRadio = document.querySelector('#semidark');
@@ -288,7 +298,7 @@
                             }
                         }
                     }
-                </script>  --}}
+                </script>  
 
                 <script>
                     // Fonction pour définir un cookie
@@ -355,9 +365,11 @@
 
                     // Appliquer les préférences lors du chargement de la page
                     document.addEventListener('DOMContentLoaded', applyPreferences);
-                </script>
+                </script> --}}
                 <!--app JS-->
-                @yield('script')
+
+            @yield('script')
+
 </body>
 
 </html>

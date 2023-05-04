@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Employee;
 
 use App\Models\Task;
+use App\Models\User;
 use App\Models\Project;
 use App\Models\Employee;
 use Illuminate\Http\Request;
+use App\Notifications\workFinshed;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 
 class EmployeeTaskController extends Controller
 {
@@ -46,6 +49,12 @@ class EmployeeTaskController extends Controller
         $updatedData = $request->all();
         $task->update($updatedData);
         $task->save();
+        if ($task->status === 'done') {
+            $employee = auth()->user();
+            $users = User::all();
+            $task = Task::latest()->first();
+            Notification::send($users, new workFinshed($task,$employee));
+        }
         session()->flash('Update', 'Task updated successfully!');
 
         return back();
@@ -71,8 +80,15 @@ class EmployeeTaskController extends Controller
     {
         $task = Task::findOrFail($id);
         $task->update([
-        'status' => $request->status,
+            'status' => $request->status,
         ]);
+        if ($task->status === 'done') {
+            $employee = auth()->user();
+            $users = User::all();
+            $task = Task::latest()->first();
+            Notification::send($users, new workFinshed($task,$employee));
+        }
+    
         session()->flash('statusUpdate', 'Status updated successfully');
         return back();
     }
