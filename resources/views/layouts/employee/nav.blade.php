@@ -19,10 +19,10 @@
             </a>
         </li>
         <li>
-            <a href="{{ route('employee.employee.show', auth()->user()->id) }}" class="has-arrow">
+            <a href="{{ route('employee.employee.show', auth()->user()->id) }}" class="">
                 <div class="parent-icon"><i class='bx bxs-group'></i>
                 </div>
-                <div class="menu-title">Employes</div>
+                <div class="menu-title">Employe</div>
             </a>
         </li>
 

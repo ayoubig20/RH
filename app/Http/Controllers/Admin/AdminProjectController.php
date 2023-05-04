@@ -145,7 +145,6 @@ class AdminProjectController extends Controller
 
     public function update(Request $request, Project $project)
     {
-        // Validate form input
         $validatedData = $request->validate([
             'name' => 'required|max:255',
             'category_id' => 'required',
@@ -160,7 +159,6 @@ class AdminProjectController extends Controller
         // // Find the project
         // $project = Project::findOrFail($project);
 
-        // Update project data
         $project->name = $request->input('name');
         $project->category_id = $request->input('category_id');
         $project->start_date = $request->input('start_date');
@@ -192,10 +190,8 @@ class AdminProjectController extends Controller
             }
         }
 
-        // Save project data
         $project->update($validatedData);
 
-        // Redirect to project index with success message
         return redirect()->route('admin.projects.index')->with('success', 'Project updated successfully.');
     }
 

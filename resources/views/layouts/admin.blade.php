@@ -1,7 +1,7 @@
-<!doctype html>
-<html lang="en">
+<html lang="en" class="color-sidebar sidebarcolor5 color-header headercolor2">
 
 <head>
+
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -51,7 +51,7 @@
         @include('layouts.preloader')
         @yield('wrapper')
 
-       
+
         <!--end page wrapper -->
         <!--start overlay-->
         <div class="overlay toggle-icon">
@@ -173,12 +173,12 @@
                 <script src="{{ URL::asset('assets/js/app.js') }}"></script>
 
 
-                <script>
+                {{-- <script>
                     window.addEventListener('load', function() {
                         const preloader = document.querySelector('.preloader');
                         preloader.classList.add('hide-preloader');
                     })
-                </script>
+                </script> --}}
                 {{-- <script>
                     const lightRadio = document.querySelector('#lightmode');
                     const darkRadio = document.querySelector('#darkmode');
@@ -367,8 +367,61 @@
                     document.addEventListener('DOMContentLoaded', applyPreferences);
                 </script> --}}
                 <!--app JS-->
+                {{-- <script>
+                    // Set a cookie with the given name and value
+                    function setCookie(name, value) {
+                        document.cookie = `${name}=${value}; path=/`;
+                    }
 
-            @yield('script')
+                    // Get the value of a cookie with the given name
+                    function getCookie(name) {
+                        const cookieString = document.cookie;
+                        const cookies = cookieString.split('; ');
+                        for (let i = 0; i < cookies.length; i++) {
+                            const cookie = cookies[i].split('=');
+                            if (cookie[0] === name) {
+                                return cookie[1];
+                            }
+                        }
+                        return null;
+                    }
+
+                    // Get all sidebar color indicators
+                    const sidebarColorIndicators = document.querySelectorAll('.sidebar-colors-indigators .indigator');
+
+                    // Loop through each indicator and add a click event listener
+                    sidebarColorIndicators.forEach((indicator) => {
+                        indicator.addEventListener('click', (event) => {
+                            // Get the ID of the clicked indicator
+                            const selectedColor = event.target.id;
+
+                            // Store the selected color in a cookie
+                            setCookie('selectedSidebarColor', selectedColor);
+
+                            // Apply the selected color to the sidebar
+                            applySidebarColor(selectedColor);
+                        });
+                    });
+
+                    // Function to apply the selected sidebar color
+                    function applySidebarColor(color) {
+                        // Remove any existing sidebar color classes
+                        document.body.classList.remove('sidebarcolor1', 'sidebarcolor2', 'sidebarcolor3', 'sidebarcolor4',
+                            'sidebarcolor5', 'sidebarcolor6', 'sidebarcolor7', 'sidebarcolor8');
+
+                        // Add the selected sidebar color class
+                        document.body.classList.add(color);
+                    }
+
+                    // Check if a previously selected sidebar color exists in a cookie
+                    const storedSidebarColor = getCookie('selectedSidebarColor');
+                    if (storedSidebarColor) {
+                        // Apply the stored sidebar color
+                        applySidebarColor(storedSidebarColor);
+                    }
+                </script> --}}
+
+                @yield('script')
 
 </body>
 

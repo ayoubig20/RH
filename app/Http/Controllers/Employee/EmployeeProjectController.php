@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Employee;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Models\CategoryProject;
+use App\Models\ProjectsAttachmnets;
 use App\Http\Controllers\Controller;
 
 class EmployeeProjectController extends Controller
@@ -33,5 +34,15 @@ class EmployeeProjectController extends Controller
         } else {
             return view('employee.projects.indexList', ['viewData' => $viewData, 'projects' => $projects]);
         }
+    }
+    public function show($id)
+    {
+        $viewData = [];
+
+        $project = Project::findOrFail($id);
+        $attachments = ProjectsAttachmnets::where('project_id', $project->id)->get();
+
+
+        return view('employee.projects.show', compact('project', 'viewData', 'attachments'));
     }
 }

@@ -102,6 +102,13 @@
         </ul>
     </li>
     <li>
+        <a class="" href="{{ route('admin.attendance.index') }}">
+            <div class="parent-icon"> <i class='bx bx-check-square'></i>
+            </div>
+            <div class="menu-title">Attendance</div>
+        </a>
+    </li> 
+     <li>
         <a class="" href="{{ route('admin.report.index') }}">
             <div class="parent-icon"> <i class='bx bx-file'></i>
             </div>

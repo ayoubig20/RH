@@ -38,14 +38,14 @@ class userSeeder extends Seeder
         //     'role' => 'employee',
         //  ]);
         DB::table('employees')->insert([
-            'firstName' => 'John',
-            'lastName' => 'Doe',
+            'firstName' => 'kamal',
+            'lastName' => 'nadir',
             'gender' => 'Male',
             'DateOfBirth' => '1980-01-01',
             'email' => 'emp@emp.com',
             'phone' => '123-456-7890',
             'address' => '123 Main St',
-            'image' => 'default.png',
+            'image' => 'default-avatar.png',
             'role' => 'Employee',
             'martialStatus' => 'Single',
             'fatteningDate' => '2020-01-01',

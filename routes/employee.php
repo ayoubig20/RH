@@ -8,6 +8,7 @@ use App\Http\Controllers\Employee\EmployeeHomeController;
 use App\Http\Controllers\Employee\EmployeeTaskController;
 use App\Http\Controllers\Employee\EmployeeKanbanController;
 use App\Http\Controllers\Employee\EmployeeProjectController;
+use App\Models\Attendance;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,19 +51,22 @@ Route::middleware('auth:employee')->group(function () {
         'update' => 'employee.projects.update',
         'destroy' => 'employee.projects.destroy',
     ]);
-    
+
     Route::put('/employee/tasks/{id}/status', [EmployeeKanbanController::class, 'updateStatus'])->name('employee.tasks.updateStatus');
     Route::put('/employee/tasks/{id}/statusUp', [EmployeeTaskController::class, 'statusUpdate'])->name('employee.tasksUp.updateStatusList');
     Route::get('/employee/kanban', [EmployeeKanbanController::class, 'index'])->name('employee.kanban.index');
-    Route::get('/employee/certifacte/{id}',[EmployeeController::class,'printWorkCertifacte'])->name('employee.printWorkCertifacte');
+    Route::get('/employee/certifacte/{id}', [EmployeeController::class, 'printWorkCertifacte'])->name('employee.printWorkCertifacte');
     Route::post('/notifications/mark-as-read', function (Request $request) {
         $userUnreadNotifications = auth()->user()->unreadNotifications;
-    
+
         if ($userUnreadNotifications) {
             $userUnreadNotifications->markAsRead();
         }
-    
+
         return redirect()->back();
     });
+    // Attendance
+    // Route::post('/mark-attendance', [AdminAttendanceController::class, 'markAttendance'])->name('employee.markAttendance');
+    // Route::post('/mark-logout', [AdminAttendanceController::class, 'markLogout'])->name('employee.markLogout');
 });
- Auth::routes();
+Auth::routes();

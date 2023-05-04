@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Admin\AdminJobContoller;
 use App\Http\Controllers\Admin\AdminHomeController;
 use App\Http\Controllers\Admin\AdminTaskController;
 use App\Http\Controllers\admin\AdminCategoryProject;
@@ -12,12 +13,12 @@ use App\Http\Controllers\Admin\AdminProjectController;
 use App\Http\Controllers\Admin\AdminEmployeeController;
 use App\Http\Controllers\Admin\AdminHolidaysController;
 use App\Http\Controllers\Employee\Auth\LoginController;
+use App\Http\Controllers\Admin\ProjectsReportController;
+use App\Http\Controllers\Admin\AdminAttendanceController;
 use App\Http\Controllers\Admin\AdminDepartmentController;
-use App\Http\Controllers\Admin\AdminJobContoller;
 use App\Http\Controllers\Employee\EmployeeHomeController;
 use App\Http\Controllers\Admin\ArchiveEmp\AdminEmpArchiveController;
 use App\Http\Controllers\Admin\ArchivePro\AdminProArchiveController;
-use App\Http\Controllers\Admin\ProjectsReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -130,6 +131,10 @@ Route::middleware('auth:web')->group(function () {
         //  'edit' => 'admin.archiveprojects.edit',
         'update' => 'admin.archiveprojects.update',
         'destroy' => 'admin.archiveprojects.destroy',
+    ]); Route::resource('/admin/attendance', AdminAttendanceController::class)->names([
+        'index' => 'admin.attendance.index',
+        'update' => 'admin.attendance.update',
+        'destroy' => 'admin.attendance.destroy',
     ]);
     Route::get('/admin/report',[ProjectsReportController::class,'index'])->name('admin.report.index');
 

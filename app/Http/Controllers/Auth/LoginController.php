@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
+use App\Models\Employee;
+use App\Models\Attendance;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Employee;
 use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -80,6 +81,7 @@ class LoginController extends Controller
         $type = $request->input('type');
     
         if ($type === 'employee' && Auth::guard('employee')->attempt($credentials)) {
+            Attendance::markAttendance($request);
             return redirect()->intended('/employee');
         }
     
@@ -114,7 +116,7 @@ class LoginController extends Controller
     {
         $this->guard('user')->logout();
         $this->guard('employee')->logout();
-
+        Attendance::markLogout($request);
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();

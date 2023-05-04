@@ -137,14 +137,14 @@
                             <div class="card-body">
                                 <div class="table-responsive lead-table">
                                     <table class="table mb-0 align-middle">
-                                        <thead class="table-light">
+                                        <thead class="table-dark">
                                             <tr>
                                                 <th>#</th>
                                                 <th>Tasks</th>
                                                 <th>Projects</th>
-                                                <th>Status</th>
-                                                <th>End date</th>
                                                 <th>Priority</th>
+                                                <th>End date</th>
+                                                <th>Status</th>
                                             </tr>
                                         </thead>
                                         <tbody>

@@ -21,7 +21,8 @@
                 </div>
             </div>
             <!--end breadcrumb-->
-            @include('layouts.notify')
+            <div class="card">
+                @include('layouts.notify')
 
                 <div class="text-sm-end">
                     <div class="btn-group mb-3">
@@ -89,8 +90,9 @@
                                         <select name="assigned_to" id="assigned_to" class="form-control" required>
                                             <option value="">assigned_to</option>
 
-                                                <option value="{{ $viewData['employee'] ->id }}">{{ $viewData['employee'] ->firstName }}
-                                                    {{ $viewData['employee'] ->lastName }}</option>
+                                            <option value="{{ $viewData['employee']->id }}">
+                                                {{ $viewData['employee']->firstName }}
+                                                {{ $viewData['employee']->lastName }}</option>
                                         </select>
                                     </div>
                                     <div class="form-group">
@@ -152,7 +154,7 @@
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table">
-                        <thead class=" text-primary">
+                        <thead class="table-dark">
                             <th>#</th>
                             <th>Name</th>
                             {{-- <th>Description</th> --}}
@@ -179,7 +181,8 @@
                                                 class="user-img" alt="user avatar">
                                         @endif
                                     </td>
-                                    <td><a href="{{ route('employee.employee.show',  $task->employee->getId()) }}">{{ $task->employee ? $task->employee->firstName . ' ' . $task->employee->lastName : '' }}</a>
+                                    <td><a
+                                            href="{{ route('employee.employee.show', $task->employee->getId()) }}">{{ $task->employee ? $task->employee->firstName . ' ' . $task->employee->lastName : '' }}</a>
                                     </td>
 
                                     {{-- <td>{{ $task->getProject()->name }}</td> --}}
@@ -207,11 +210,12 @@
                                     <td>{{ $task->end_date->format('d-m-Y') }}</td>
 
                                     <td>
-                                        <span class="badge {{ $task->status === 'to do' ? 'bg-secondary' : ($task->status === 'in progress' ? 'bg-info' : ($task->status === 'waiting' ? 'bg-warning' : ($task->status === 'done' ? 'bg-success' : 'bg-danger'))) }}">
+                                        <span
+                                            class="badge {{ $task->status === 'to do' ? 'bg-secondary' : ($task->status === 'in progress' ? 'bg-info' : ($task->status === 'waiting' ? 'bg-warning' : ($task->status === 'done' ? 'bg-success' : 'bg-danger'))) }}">
                                             {{ $task->status }}
                                         </span>
                                     </td>
-                                    
+
                                     <td>
                                         <div class="d-flex flex-row">
                                             <button type="button" class="btn btn-outline-success btn-sm"
@@ -230,7 +234,8 @@
                                                             <button type="button" class="btn-close"
                                                                 data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
-                                                        <form action="{{ route('employee.tasks.update', $task->getId()) }}"
+                                                        <form
+                                                            action="{{ route('employee.tasks.update', $task->getId()) }}"
                                                             method="POST">
                                                             @csrf
                                                             @method('PATCH')
@@ -263,12 +268,12 @@
                                                                         <option value="">Select an employee
                                                                         </option>
 
-                                                                            <option value="{{ $viewData['employee'] ->id }}"
-                                                                                {{ $task->assigned_to == $viewData['employee'] ->id ? 'selected' : '' }}>
-                                                                                {{ $viewData['employee'] ->firstName }}
-                                                                                {{ $viewData['employee'] ->lastName }}
-                                                                            </option>
-                                                                        
+                                                                        <option value="{{ $viewData['employee']->id }}"
+                                                                            {{ $task->assigned_to == $viewData['employee']->id ? 'selected' : '' }}>
+                                                                            {{ $viewData['employee']->firstName }}
+                                                                            {{ $viewData['employee']->lastName }}
+                                                                        </option>
+
                                                                     </select>
                                                                 </div>
                                                                 <div class="form-group">
@@ -452,7 +457,6 @@
             </div>
         </div>
     </div>
-   
 
 
 @endsection
