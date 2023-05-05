@@ -3,420 +3,385 @@
 @section('content')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    {{-- <script>
-        $(document).ready(function() {
-            $('.carousel').carousel({
-                padding: 200
-            });
-            autoplay();
+    <section id="hero">
+        <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
 
-            function autoplay() {
-                $('.carousel').carousel('next');
-                setTimeout(autoplay, 6500);
-            }
-        });
-    </script> --}}
-    <div class="account-pages pt-2 pt-sm-5 pb-4 pb-sm-5">
-        <div class="col">
-            <h1 class="mb-0 text-center">Welcome in Employees Mangement systeme</h1>
-            <hr />
-            <div class="card">
-                <div class="card-body">
-                    {{-- <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active" data-bs-interval="10000">
-                                <img src="assets/images/gallery/31.png" class="d-block w-100" alt="...">
-                            </div>
-                            <div class="carousel-item" data-bs-interval="2000">
-                                <img src="assets/images/gallery/29.png" class="d-block w-100" alt="...">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="assets/images/gallery/18.png" class="d-block w-100" alt="...">
-                            </div>
+            <div class="carousel-inner" role="listbox">
+
+                <!-- Slide 1 -->
+                <div class="carousel-item active" style="background-image: url(assets/img/slide/slide-1.jpg);">
+                    <div class="carousel-container">
+                        <div class="carousel-content animate__animated animate__fadeInUp">
+                            <h2>Welcome to <span>Employee Mangement Systeme</span></h2>
+                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Expedita nihil tempore similique
+                                necessitatibus aut ducimus eveniet aspernatur voluptates ab enim quae eos, inventore
+                                laudantium dolorum. Veniam cupiditate nihil delectus voluptatum.</p>
+                            <div class="text-center"><a href="" class="btn-get-started">Read More</a></div>
                         </div>
-                        <a class="carousel-control-prev" href="#carouselExampleInterval" role="button"
-                            data-bs-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carouselExampleInterval" role="button"
-                            data-bs-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </a>
-                    </div> --}}
-                    <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
-                        <div class="carousel-indicators">
-                            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active"
-                                aria-current="true" aria-label="Slide 1"></button>
-                            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1"
-                                aria-label="Slide 2"></button>
-                            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2"
-                                aria-label="Slide 3"></button>
-                        </div>
-                        <div class="carousel-inner">
-                            <div class="carousel-item active" data-bs-interval="10000">
-                                <img src="assets/images/gallery/31.png" class="d-block w-100" alt="...">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h1>First slide label</h1>
-                                    <p>Some representative placeholder content for the first slide.</p>
-                                </div>
-                            </div>
-                            <div class="carousel-item" data-bs-interval="2000">
-                                <img src="assets/images/gallery/29.png" class="d-block w-100" alt="...">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h1>First slide label</h1>
-                                    <p>Some representative placeholder content for the second slide.</p>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <img src="assets/images/gallery/18.png"class="d-block w-100" alt="...">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h1>First slide label</h1>
-                                    <p>Some representative placeholder content for the third slide.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark"
-                            data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark"
-                            data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
                     </div>
                 </div>
+
+                <!-- Slide 2 -->
+                <div class="carousel-item" style="background-image: url(assets/img/slide/slide-2.jpg);">
+                    <div class="carousel-container">
+                        <div class="carousel-content animate__animated animate__fadeInUp">
+                            <h2>Lorem Ipsum Dolor</h2>
+                            <p>Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut
+                                aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque
+                                accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
+                            <div class="text-center"><a href="" class="btn-get-started">Read More</a></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 3 -->
+                <div class="carousel-item" style="background-image: url(assets/img/slide/slide-3.jpg);">
+                    <div class="carousel-container">
+                        <div class="carousel-content animate__animated animate__fadeInUp">
+                            <h2>Sequi ea ut et est quaerat</h2>
+                            <p>Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut
+                                aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque
+                                accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
+                            <div class="text-center"><a href="" class="btn-get-started">Read More</a></div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
-            {{-- <div class="row row-cols-1 row-cols-md-1 row-cols-lg-2 row-cols-xl-2">
-                <div class="col">
-                    <div class="card mb-3">
-                        <img src="assets/images/gallery/08.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                                additional content. This content is a little bit longer.</p>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body1">
-                            <h5 class="card-title1">Card title</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                                additional content. This content is a little bit longer.</p>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small>
-                            </p>
-                        </div>
-                        <img src="assets/images/gallery/05.png" class="card-img-bottom" alt="...">
-                    </div>
-                </div>
-            </div> --}}
+            <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon bx bx-chevron-left" aria-hidden="true"></span>
+            </a>
+
+            <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
+                <span class="carousel-control-next-icon bx bx-chevron-right" aria-hidden="true"></span>
+            </a>
+
+            <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
+
         </div>
-        <section class="features">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12 text-center">
-                        <h2>Our Features</h2>
-                        <hr class="star-primary">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-4">
-                        <div class="feature-item">
-                            <i class="bx bx-shield"></i>
-                            <h4>Secure</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida
-                                pellentesque urna varius vitae.</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="feature-item">
-                            <i class="bx bx-laptop"></i>
-                            <h4>Responsive</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida
-                                pellentesque urna varius vitae.</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="feature-item">
-                            <i class="bx bx-sun"></i>
-                            <h4>Easy to Use</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida
-                                pellentesque urna varius vitae.</p>
-                        </div>
-                    </div>
-                </div>
+    </section><!-- End Hero -->
+
+    <section id="team" class="team section-bg">
+        <div class="container">
+
+            <div class="section-title" data-aos="fade-up">
+                <h2>Our <strong>Team</strong></h2>
+                <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint
+                    consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat
+                    sit in iste officiis commodi quidem hic quas.</p>
             </div>
-        </section>
-        <section class="features">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="feature">
-                            <i class="fas fa-chart-line"></i>
-                            <h3>Analytics</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed tincidunt mauris.</p>
+
+            <div class="row">
+
+                <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+                    <div class="member" data-aos="fade-up">
+                        <div class="member-img">
+                            <img src="assets/img/team/team-1.jpg" class="img-fluid" alt="">
+                            <div class="social">
+                                <a href=""><i class="bx bxl-twitter"></i></a>
+                                <a href=""><i class="bx bxl-facebook"></i></a>
+                                <a href=""><i class="bx bxl-instagram"></i></a>
+                                <a href=""><i class="bx bxl-linkedin"></i></a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="feature">
-                            <i class="fas fa-cog"></i>
-                            <h3>Customization</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed tincidunt mauris.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="feature">
-                            <i class="fas fa-users"></i>
-                            <h3>User Management</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed tincidunt mauris.</p>
+                        <div class="member-info">
+                            <h4>Walter White</h4>
+                            <span>Chief Executive Officer</span>
                         </div>
                     </div>
                 </div>
+
+                <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+                    <div class="member" data-aos="fade-up" data-aos-delay="100">
+                        <div class="member-img">
+                            <img src="assets/img/team/team-2.jpg" class="img-fluid" alt="">
+                            <div class="social">
+                                <a href=""><i class="bx bxl-twitter"></i></a>
+                                <a href=""><i class="bx bxl-facebook"></i></a>
+                                <a href=""><i class="bx bxl-instagram"></i></a>
+                                <a href=""><i class="bx bxl-linkedin"></i></a>
+                            </div>
+                        </div>
+                        <div class="member-info">
+                            <h4>Sarah Jhonson</h4>
+                            <span>Product Manager</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+                    <div class="member" data-aos="fade-up" data-aos-delay="200">
+                        <div class="member-img">
+                            <img src="assets/img/team/team-3.jpg" class="img-fluid" alt="">
+                            <div class="social">
+                                <a href=""><i class="bx bxl-twitter"></i></a>
+                                <a href=""><i class="bx bxl-facebook"></i></a>
+                                <a href=""><i class="bx bxl-instagram"></i></a>
+                                <a href=""><i class="bx bxl-linkedin"></i></a>
+                            </div>
+                        </div>
+                        <div class="member-info">
+                            <h4>William Anderson</h4>
+                            <span>CTO</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+                    <div class="member" data-aos="fade-up" data-aos-delay="300">
+                        <div class="member-img">
+                            <img src="assets/img/team/team-4.jpg" class="img-fluid" alt="">
+                            <div class="social">
+                                <a href=""><i class="bx bxl-twitter"></i></a>
+                                <a href=""><i class="bx bxl-facebook"></i></a>
+                                <a href=""><i class="bx bxl-instagram"></i></a>
+                                <a href=""><i class="bx bxl-linkedin"></i></a>
+                            </div>
+                        </div>
+                        <div class="member-info">
+                            <h4>Amanda Jepson</h4>
+                            <span>Accountant</span>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-        </section>
-        {{-- <section class="testimonial">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h2>What Our Clients Say</h2>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="testimonial-box">
-                            <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed tincidunt mauris.
-                                Vestibulum a turpis enim. Duis at nisl ut nunc tincidunt aliquam. Aenean blandit eleifend
-                                sapien, ut pharetra arcu lobortis at."</p>
-                            <p class="client-name">- John Smith</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="testimonial-box">
-                            <p>"Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis
-                                egestas. Fusce facilisis metus sed nibh bibendum, quis posuere sapien egestas. Praesent
-                                faucibus ac massa sit amet dapibus."</p>
-                            <p class="client-name">- Jane Doe</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="testimonial-box">
-                            <p>"Suspendisse semper leo nec felis gravida, sed egestas mi vestibulum. Donec vitae ante id
-                                arcu sagittis hendrerit at et arcu. Nunc blandit, libero a fermentum malesuada, elit elit
-                                tincidunt neque, quis tristique purus mauris quis nisi."</p>
-                            <p class="client-name">- Michael Johnson</p>
-                        </div>
-                    </div>
-                </div>
+
+        </div>
+    </section><!-- End Our Team Section -->
+    <section id="skills" class="skills">
+        <div class="container">
+
+            <div class="section-title" data-aos="fade-up">
+                <h2>Our <strong>Skills</strong></h2>
+                <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint
+                    consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat
+                    sit in iste officiis commodi quidem hic quas.</p>
             </div>
-        </section> --}}
 
-        <section class="team section-padding" id="team">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="section-header text-center pb-5">
-                            <h2>Our Team</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur<br>
-                                adipisicing elit. Non, quo.</p>
+            <div class="row skills-content">
+
+                <div class="col-lg-6" data-aos="fade-up">
+
+                    <div class="progress">
+                        <span class="skill">HTML <i class="val">100%</i></span>
+                        <div class="progress-bar-wrap">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0"
+                                aria-valuemax="100"></div>
                         </div>
                     </div>
+
+                    <div class="progress">
+                        <span class="skill">CSS <i class="val">90%</i></span>
+                        <div class="progress-bar-wrap">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0"
+                                aria-valuemax="100"></div>
+                        </div>
+                    </div>
+
+                    <div class="progress">
+                        <span class="skill">JavaScript <i class="val">75%</i></span>
+                        <div class="progress-bar-wrap">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0"
+                                aria-valuemax="100"></div>
+                        </div>
+                    </div>
+
                 </div>
-                <div class="row">
-                    <div class="col-12 col-md-6 col-lg-3">
-                        <div class="card text-center">
-                            <div class="card-body">
-                                <img alt="" class="img-fluid rounded-circle"
-                                    src="assets/images/avatars/avatar-25.png">
-                                <h3 class="card-title py-2">Jack Wilson</h3>
-                                <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sequi ipsam
-                                    nostrum illo tempora esse quibusdam.</p>
-                                <p class="socials"><i class="bi bi-twitter text-dark mx-1"></i> <i
-                                        class="bi bi-facebook text-dark mx-1"></i> <i
-                                        class="bi bi-linkedin text-dark mx-1"></i> <i
-                                        class="bi bi-instagram text-dark mx-1"></i></p>
-                            </div>
+
+                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+
+                    <div class="progress">
+                        <span class="skill">PHP <i class="val">80%</i></span>
+                        <div class="progress-bar-wrap">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0"
+                                aria-valuemax="100"></div>
                         </div>
                     </div>
-                    <div class="col-12 col-md-6 col-lg-3">
-                        <div class="card text-center">
-                            <div class="card-body">
-                                <img alt="" class="img-fluid rounded-circle"
-                                    src="assets/images/avatars/avatar-2.png">
-                                <h3 class="card-title py-2">Jack Wilson</h3>
-                                <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sequi ipsam
-                                    nostrum illo tempora esse quibusdam.</p>
-                                <p class="socials"><i class="bi bi-twitter text-dark mx-1"></i> <i
-                                        class="bi bi-facebook text-dark mx-1"></i> <i
-                                        class="bi bi-linkedin text-dark mx-1"></i> <i
-                                        class="bi bi-instagram text-dark mx-1"></i></p>
-                            </div>
+
+                    <div class="progress">
+                        <span class="skill">WordPress/CMS <i class="val">90%</i></span>
+                        <div class="progress-bar-wrap">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0"
+                                aria-valuemax="100"></div>
                         </div>
                     </div>
-                    <div class="col-12 col-md-6 col-lg-3">
-                        <div class="card text-center">
-                            <div class="card-body">
-                                <img alt="" class="img-fluid rounded-circle"
-                                    src="assets/images/avatars/avatar-3.png">
-                                <h3 class="card-title py-2">Jack Wilson</h3>
-                                <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sequi ipsam
-                                    nostrum illo tempora esse quibusdam.</p>
-                                <p class="socials"><i class="bi bi-twitter text-dark mx-1"></i> <i
-                                        class="bi bi-facebook text-dark mx-1"></i> <i
-                                        class="bi bi-linkedin text-dark mx-1"></i> <i
-                                        class="bi bi-instagram text-dark mx-1"></i></p>
-                            </div>
+
+                    <div class="progress">
+                        <span class="skill">Photoshop <i class="val">55%</i></span>
+                        <div class="progress-bar-wrap">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="55" aria-valuemin="0"
+                                aria-valuemax="100"></div>
                         </div>
                     </div>
-                    <div class="col-12 col-md-6 col-lg-3">
-                        <div class="card text-center">
-                            <div class="card-body">
-                                <img alt="" class="img-fluid rounded-circle"
-                                    src="assets/images/avatars/avatar-4.png">
-                                <h3 class="card-title py-2">Jack Wilson</h3>
-                                <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sequi ipsam
-                                    nostrum illo tempora esse quibusdam.</p>
-                                <p class="socials"><i class="bi bi-twitter text-dark mx-1"></i> <i
-                                        class="bi bi-facebook text-dark mx-1"></i> <i
-                                        class="bi bi-linkedin text-dark mx-1"></i> <i
-                                        class="bi bi-instagram text-dark mx-1"></i></p>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
+
             </div>
-        </section><!-- team ends -->
-        <section>
-            <div class="container">
-                <h1 class="section-header">Client Review <span>Lorem ipsum dolor sit amet, consectetur adipisicing
-                        elit.</span></h1>
-                <div class="testimonials">
 
-                    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <div class="single-item">
-                                    <div class="row">
-                                        <div class="col-md-5">
-                                            <div class="profile">
-                                                <div class="img-area">
-                                                    <img src="assets/images/avatars/avatar-6.png" alt="">
-                                                </div>
-                                                <div class="bio">
-                                                    <h2>Dave Wood</h2>
-                                                    <h4>Web Developer</h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="content">
-                                                <p><span><i class="fa fa-quote-left"></i></span>Lorem ipsum dolor sit amet,
-                                                    consectetur adipisicing elit. Vel a eius excepturi molestias commodi
-                                                    aliquam error magnam consectetur laboriosam numquam, minima eveniet
-                                                    nostrum sequi saepe ipsam non ea, inventore tenetur! Corporis commodi
-                                                    consequatur molestiae voluptatum!</p>
-                                                <p class="socials">
-                                                    <i class="fa fa-twitter"></i>
-                                                    <i class="fa fa-behance"></i>
-                                                    <i class="fa fa-pinterest"></i>
-                                                    <i class="fa fa-dribbble"></i>
-                                                    <i class="fa fa-vimeo"></i>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+        </div>
+    </section>
+    <section id="testimonials" class="testimonials section-bg">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up">
+                <h2>Our <strong>Clients Review</strong></h2>
+                {{-- <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint
+                    consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat
+                    sit in iste officiis commodi quidem hic quas.</p> --}}
+            </div>
+          <div class="row">
+  
+            <div class="col-lg-6" data-aos="fade-up">
+              <div class="testimonial-item">
+                <img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
+                <h3>Saul Goodman</h3>
+                <h4>Ceo &amp; Founder</h4>
+                <p>
+                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                  Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
+                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                </p>
+              </div>
+            </div>
+  
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+              <div class="testimonial-item mt-4 mt-lg-0">
+                <img src="assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
+                <h3>Sara Wilsson</h3>
+                <h4>Designer</h4>
+                <p>
+                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                  Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.
+                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                </p>
+              </div>
+            </div>
+  
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+              <div class="testimonial-item mt-4">
+                <img src="assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
+                <h3>Jena Karlis</h3>
+                <h4>Store Owner</h4>
+                <p>
+                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                  Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.
+                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                </p>
+              </div>
+            </div>
+  
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
+              <div class="testimonial-item mt-4">
+                <img src="assets/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
+                <h3>Matt Brandon</h3>
+                <h4>Freelancer</h4>
+                <p>
+                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                  Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.
+                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                </p>
+              </div>
+            </div>
+  
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="400">
+              <div class="testimonial-item mt-4">
+                <img src="assets/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
+                <h3>John Larson</h3>
+                <h4>Entrepreneur</h4>
+                <p>
+                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                  Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.
+                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                </p>
+              </div>
+            </div>
+  
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="500">
+              <div class="testimonial-item mt-4">
+                <img src="assets/img/testimonials/testimonials-6.jpg" class="testimonial-img" alt="">
+                <h3>Emily Harison</h3>
+                <h4>Store Owner</h4>
+                <p>
+                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                  Eius ipsam praesentium dolor quaerat inventore rerum odio. Quos laudantium adipisci eius. Accusamus qui iste cupiditate sed temporibus est aspernatur. Sequi officiis ea et quia quidem.
+                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                </p>
+              </div>
+            </div>
+  
+          </div>
+  
+        </div>
+      </section>
+      <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up">
+                <h2>Our <strong>Contact</strong></h2>
+            <div class="row justify-content-center" data-aos="fade-up">
+
+                <div class="col-lg-10">
+
+                    <div class="info-wrap">
+                        <div class="row">
+                            <div class="col-lg-4 info">
+                                <i class='bx bxs-location-plus' ></i>
+                                <h4>Location:</h4>
+                                <p>A108 Adam Street<br>New York, NY 535022</p>
                             </div>
-                            <div class="carousel-item">
-                                <div class="single-item">
-                                    <div class="row">
-                                        <div class="col-md-5">
-                                            <div class="profile">
-                                                <div class="img-area">
-                                                    <img src="assets/images/avatars/avatar-5.png" alt="">
-                                                </div>
-                                                <div class="bio">
-                                                    <h2>Martin Guptill</h2>
-                                                    <h4>UI/UX Designer</h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="content">
-                                                <p><span><i class="fa fa-quote-left"></i></span>Lorem ipsum dolor sit amet,
-                                                    consectetur adipisicing elit. Vel a eius excepturi molestias commodi
-                                                    aliquam error magnam consectetur laboriosam numquam, minima eveniet
-                                                    nostrum sequi saepe ipsam non ea, inventore tenetur! Corporis commodi
-                                                    consequatur molestiae voluptatum!</p>
-                                                <p class="socials">
-                                                    <i class="fa fa-twitter"></i>
-                                                    <i class="fa fa-behance"></i>
-                                                    <i class="fa fa-pinterest"></i>
-                                                    <i class="fa fa-dribbble"></i>
-                                                    <i class="fa fa-vimeo"></i>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+
+                            <div class="col-lg-4 info mt-4 mt-lg-0">
+                                <i class="bx bx-envelope"></i>
+                                <h4>Email:</h4>
+                                <p>info@example.com<br>contact@example.com</p>
                             </div>
-                            <div class="carousel-item">
-                                <div class="single-item">
-                                    <div class="row">
-                                        <div class="col-md-5">
-                                            <div class="profile">
-                                                <div class="img-area">
-                                                    <img src="assets/images/avatars/avatar-3.png" alt="">
-                                                </div>
-                                                <div class="bio">
-                                                    <h2>Stephen Jones</h2>
-                                                    <h4>Graphic Designer</h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="content">
-                                                <p><span><i class="fa fa-quote-left"></i></span>Lorem ipsum dolor sit amet,
-                                                    consectetur adipisicing elit. Vel a eius excepturi molestias commodi
-                                                    aliquam error magnam consectetur laboriosam numquam, minima eveniet
-                                                    nostrum sequi saepe ipsam non ea, inventore tenetur! Corporis commodi
-                                                    consequatur molestiae voluptatum!</p>
-                                                <p class="socials">
-                                                    <i class="fa fa-twitter"></i>
-                                                    <i class="fa fa-behance"></i>
-                                                    <i class="fa fa-pinterest"></i>
-                                                    <i class="fa fa-dribbble"></i>
-                                                    <i class="fa fa-vimeo"></i>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+
+                            <div class="col-lg-4 info mt-4 mt-lg-0">
+                                <i class="bx bx-phone"></i>
+                                <h4>Call:</h4>
+                                <p>+1 5589 55488 51<br>+1 5589 22475 14</p>
                             </div>
                         </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
-                            data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
-                            data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
                     </div>
 
                 </div>
+
             </div>
-        </section>
 
+            <div class="row mt-5 justify-content-center" data-aos="fade-up">
+                <div class="col-lg-10">
+                    <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <input type="text" name="name" class="form-control" id="name"
+                                    placeholder="Your Name" required>
+                            </div>
+                            <div class="col-md-6 form-group mt-3 mt-md-0">
+                                <input type="email" class="form-control" name="email" id="email"
+                                    placeholder="Your Email" required>
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject"
+                                required>
+                        </div>
+                        <div class="form-group mt-3">
+                            <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+                        </div>
+                        <div class="my-3">
+                            <div class="loading">Loading</div>
+                            <div class="error-message"></div>
+                            <div class="sent-message">Your message has been sent. Thank you!</div>
+                        </div>
+                        <div class="text-center"><button type="submit">Send Message</button></div>
+                    </form>
+                </div>
 
+            </div>
 
-    </div>
+        </div>
+    </section><!-- End Contact Section -->
+
 
 
 @endsection

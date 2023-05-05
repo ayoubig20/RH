@@ -1,10 +1,12 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        crossorigin="anonymous" />
     <link href="{{ asset('assets/css/home.css') }}" rel="stylesheet" />
     <link rel="icon" href="{{ URL::asset('assets/images/logo-purple.png') }}" type="image/png" />
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
@@ -13,59 +15,66 @@
 </head>
 
 <body>
-    <!-- header -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-secondary sticky-top py-4" >
-        <div class="container">
-            <span><img src="{{asset('assets/images/logo.png')}}" alt="logo" height="39"></span>
-            <a class="navbar-brand" href="{{ route('home.index') }}" > 
-            Employee Mangement Systeme </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav ms-auto">
-                    <a class="nav-link active" href="{{ route('home.index') }}">Home</a>
-                    <a class="nav-link active" href="{{ route('home.about') }}">About</a>
-                    <div class="vr bg-white mx-2 d-none d-lg-block"></div>
+ 
+    <header id="header" class="fixed-top">
+        <div class="container d-flex align-items-center">
+
+            <a href="index.html" class="logo me-auto me-lg-0"><img src="{{ asset('assets/images/logo-purple.png') }}"
+                    alt="" class="img-fluid"></a>
+
+            <h1 class="logo me-auto"><a href="index.html"><span>E</span>MS</a></h1>
+            <!-- Uncomment below if you prefer to use an image logo -->
+
+            <nav id="navbar" class="navbar order-last order-lg-0">
+                <ul>
+                    <li><a href="{{ route('home.index') }}" class="active">Home</a></li>
+                    {{-- <li><a href="{{ route('home.about') }}">About Us</a></li> --}}
+                    <li><a href="#team">Team</a></li>
+                    {{-- <li><a href="services.html">Services</a></li> --}}
                     @guest
-                    <a class="nav-link active" href="{{ route('login') }}">Login</a>
-                    <a class="nav-link active" href="{{ route('register') }}">Register</a>
+                    <a class="nav-link " href="{{ route('login') }}">Login</a>
+                    {{-- <a class="nav-link" href="{{ route('register') }}">Register</a> --}}
                     @else
                     <form id="logout" action="{{ route('logout') }}" method="POST">
                     <a role="button" class="nav-link active"
                     onclick="document.getElementById('logout').submit();">Logout</a>
                     @csrf
                     </form>
-                    <a class="nav-link active" href="{{ route("admin.home.index") }}">Admin Pannel</a>
 
                     @endguest
-                </div>
+                    <li><a href="#contact">Contact</a></li>
+
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
+
+            <div class="header-social-links d-flex">
+                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
             </div>
+
         </div>
-    </nav>
-    {{-- <header class="masthead bg-primary text-white text-center py-4">
-        <div class="container d-flex align-items-center flex-column">
-            <h2>@yield('subtitle', 'Empolye Mangement')</h2>
-        </div>
-    </header> --}}
+    </header><!-- End Header -->
+
     <!-- header -->
-    <div class="container my-4">
-        @yield('content')
-    </div>
-    <!-- footer -->
-    <div class="copyright py-4 text-center text-white">
-        <div class="container">
-            <small>
-                Copyright - <a class="text-reset fw-bold text-decoration-none" target="_blank"
-                    href="https://twitter.com/kamal-nadir">
-                    Kamal Nadir </a> - <b>Kamal Nadir </b>
-            </small>
-        </div>
-    </div>
-    <!-- footer -->
+    {{-- <div class="container my-4"> --}}
+    @yield('content')
+    {{-- </div> --}}
+    @include('layouts.footer')
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
     </script>
+    <script src='{{ asset('assets/vendor/aos/aos.js') }}'></script>
+    <script src='{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}'></script>
+    <script src='{{ asset('assets/vendor/glightbox/js/glightbox.min.js') }}'></script>
+    <script src='{{ asset('assets/vendor/isotope-layout/isotope.pkgd.min.js') }}'></script>
+    <script src='{{ asset('assets/vendor/swiper/swiper-bundle.min.js') }}'></script>
+    <script src='{{ asset('assets/vendor/waypoints/noframework.waypoints.js') }}'></script>
+    <script src='{{ asset('assets/vendor/php-email-form/validate.js') }}'></script>
+    <script src='{{ asset('assets/js/main.js') }}'></script>
 </body>
 
 </html>
