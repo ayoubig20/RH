@@ -13,7 +13,7 @@
                             <li class="breadcrumb-item"><a href="{{ route('admin.home.index') }}"><i
                                         class="bx bx-home-alt"></i></a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Data Table Projects Category</li>
+                            <li class="breadcrumb-item active" aria-current="page">Data Table Attendance Employees</li>
                         </ol>
                     </nav>
                 </div>
@@ -41,7 +41,7 @@
                                 <th>Department</th>
                                 <th>Login Time</th>
                                 <th>Logout Time</th>
-                                <th>Conacted From</th>
+                                <th>Connected From</th>
                                 <th>Status</th>
                             </tr>
                         </thead>

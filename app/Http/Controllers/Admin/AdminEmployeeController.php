@@ -27,6 +27,7 @@ class AdminEmployeeController extends Controller
             return view('admin.employees.indexCards', ['viewData' => $viewData]);
         } else {
             // Display employees in list view
+            $viewData["employees"] = Employee::all();
             return view('admin.employees.indexList', ['viewData' => $viewData]);
         }
     }

@@ -20,7 +20,7 @@ File: icons.css
 	font-style: normal;
 	font-variant: normal;
 	line-height: inherit;
-	display: inline-block;
+	/* display: inline-block; */
 	text-transform: none;
 	speak: none;
 	-webkit-font-smoothing: antialiased;

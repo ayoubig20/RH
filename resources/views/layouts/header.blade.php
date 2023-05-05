@@ -125,12 +125,14 @@
             <div class="user-box dropdown">
                 <a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#"
                     role="button" data-bs-toggle="dropdown" aria-expanded="false">
+
+                    {{-- <img src="{{ Avatar::create(auth()->guard('web')->user())->toBase64() }}" class="user-img"
+                            alt="user avatar"> --}}
                     @if (auth()->guard('web')->check())
-                        <img src="{{ Avatar::create(auth()->guard('')->user())->toBase64() }}" class="user-img"
-                            alt="user avatar">
-
-
-                        {{-- <img src="{{Avatar::create(auth()->guard('')->user())->toBase64()}}" class="user-img"alt="user avatar">  --}}
+                        <?php $user = auth()
+                            ->guard('web')
+                            ->user(); ?>
+                        <img src="{{ Avatar::create($user->name)->toBase64() }}" class="user-img" alt="user avatar">
                     @elseif (auth()->guard('employee')->check())
                         <img src="{{ asset('storage/assets/users/' .auth()->guard('employee')->user()->getImage()) }}"
                             class="user-img" alt="user avatar">
@@ -150,14 +152,14 @@
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li>
                         @auth('web')
-                        <li><a class="dropdown-item" href="#"><i
+                        <li><a class="dropdown-item" href="#"><i class='bx bx-user'></i><span>Profile</span></a>
+                        </li>
+                    @else
+                        <li><a class="dropdown-item"
+                                href="{{ route('employee.employee.edit',auth()->guard('employee')->user()) }}"><i
                                     class='bx bx-user'></i><span>Profile</span></a>
                         </li>
-                        @else
-                        <li><a class="dropdown-item" href="{{ route('employee.employee.edit',auth()->guard('employee')->user()) }}"><i
-                                    class='bx bx-user'></i><span>Profile</span></a>
-                        </li>
-                        @endauth
+                    @endauth
                     </li>
 
                     @auth('web')

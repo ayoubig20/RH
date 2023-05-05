@@ -76,47 +76,47 @@ class LoginController extends Controller
             'password' => 'required',
             'type' => 'required|in:user,employee',
         ]);
-    
+
         $credentials = $request->only('email', 'password');
         $type = $request->input('type');
-    
+
         if ($type === 'employee' && Auth::guard('employee')->attempt($credentials)) {
             Attendance::markAttendance($request);
             return redirect()->intended('/employee');
         }
-    
+
         if ($type === 'user' && Auth::guard()->attempt($credentials)) {
             return redirect()->intended('/admin');
         }
-    
+
         // Check if email exists
         $emailExists = User::where('email', $request->email)->exists() || Employee::where('email', $request->email)->exists();
-    
+
         if (!$emailExists) {
             return redirect()->back()->withErrors([
                 'email' => 'This email address does not exist.',
             ])->withInput();
         }
-    
+
         // Check if password is incorrect
         if (!Auth::guard('employee')->attempt($credentials) && !Auth::guard()->attempt($credentials)) {
             return redirect()->back()->withErrors([
                 'password' => 'The password is incorrect.',
             ])->withInput();
         }
-    
+
         // Handle unrecognized type
         return redirect()->back()->withErrors([
             'type' => 'These credentials do not match our records.',
         ]);
     }
-    
+
 
     public function logout(Request $request)
     {
-        $this->guard('user')->logout();
-        $this->guard('employee')->logout();
         Attendance::markLogout($request);
+        $this->guard('employee')->logout();
+        $this->guard('user')->logout();
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();

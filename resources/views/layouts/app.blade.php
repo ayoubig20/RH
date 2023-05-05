@@ -6,6 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
     <link href="{{ asset('assets/css/home.css') }}" rel="stylesheet" />
+    <link rel="icon" href="{{ URL::asset('assets/images/logo-purple.png') }}" type="image/png" />
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
 
     <title>@yield('title', 'Empolye Mangement')</title>

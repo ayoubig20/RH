@@ -43,8 +43,8 @@
                         </div>
                     </div>
                     <div class="table-responsive">
-                        <table id="example2" class="table table-bordered -mb-4 text-center table-hover">
-                            <thead class="table-dark">
+                        <table id="example2" class="table table-bordered text-center table-hover">
+                            <thead class="table-dark text-center">
                                 <tr>
                                     <th>#</th>
                                     <th>image</th>

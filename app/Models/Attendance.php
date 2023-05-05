@@ -42,18 +42,20 @@ class Attendance extends Model
         $attendance->ip_address = $request->ip();
         ;
         $attendance->save();
-        // return redirect()->back()->with('success', 'Attendance marked successfully!');
+     return redirect()->back()->with('success', 'Attendance marked successfully!');
     }
     public static function markLogout(Request $request)
     {
         $employee = auth()->guard('employee')->user();
 
-        $attendance = Attendance::where('employee_id', $employee->id)->latest()->first();
-
-        $attendance->logout_time = now();
-        // $attendance->status = 'left';
-        $attendance->save();
-
-        // return redirect()->back()->with('success', 'Attendance updated successfully!');
+        if ($employee) {
+            $attendance = Attendance::where('employee_id', $employee->id)->latest()->first();
+    
+            if ($attendance) {
+                $attendance->logout_time = now();
+                // $attendance->status = 'left';
+                $attendance->save();
+            }
+        }
     }
 }
