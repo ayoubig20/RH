@@ -105,9 +105,9 @@ class EmployeeTaskController extends Controller
         // Attach the task to the employee and project using the pivot table
         $employee = Employee::findOrFail($employeeId);
         $taskId=$task->id;
-        $employee->projects()->attach($projectId, ['created_at' => now(), 'updated_at' => now(), 'created_by' => (Auth::user()->name)]);
+        $employee->projects()->attach($projectId, ['created_at' => now(), 'updated_at' => now(), 'created_by' => (Auth::user()->firstName) .''. (Auth::user()->lastName)]);
         $employee->tasks()->attach($task->id, [
-            'created_at' => now(), 'updated_at' => now(), 'created_by' => (Auth::user()->name),
+            'created_at' => now(), 'updated_at' => now(), 'created_by' => (Auth::user()->firstName) .''. (Auth::user()->lastName) ,
         ]);
         $viewData['employees'] = Employee::all();
         $viewData['projects'] = Project::all();

@@ -42,7 +42,7 @@ class Attendance extends Model
         $attendance->ip_address = $request->ip();
         ;
         $attendance->save();
-     return redirect()->back()->with('success', 'Attendance marked successfully!');
+        return redirect()->back()->with('success', 'Attendance marked successfully!');
     }
     public static function markLogout(Request $request)
     {

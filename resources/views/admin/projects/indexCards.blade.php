@@ -249,7 +249,7 @@
                                     @foreach ($projects as $project)
                                         <div class="col-md-6 col-xxl-3 mb-4">
                                             <!-- project card -->
-                                            <div class="card d-block h-100">
+                                            <div class="card d-block h-80">
                                                 <?php
                                                 $imagePath = 'storage/assets/projects/' . $project->image; // Get the path to the image
                                                 

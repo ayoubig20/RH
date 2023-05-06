@@ -49,7 +49,7 @@ class userSeeder extends Seeder
             'role' => 'Employee',
             'martialStatus' => 'Single',
             'fatteningDate' => '2020-01-01',
-            'salary' => '50000.00',
+            'salary' => '5000.00',
             'status' => 'intern',
             'password' => bcrypt('123456'),
             'is_active' => 1,

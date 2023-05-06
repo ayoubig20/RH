@@ -1,4 +1,4 @@
-<!doctype html>
+<html lang="en"class="color-sidebar sidebarcolor5 color-header headercolor5">
 <html lang="en">
 
 <head>

@@ -40,7 +40,7 @@ a {
 	bottom: 0;
 	padding: 0 15px;
 	z-index: 5;
-	background: #633d3d;
+	background: #fff;
 	background-clip: padding-box;
 	border-bottom: 1px solid #e4e4e4
 }
@@ -69,7 +69,7 @@ a {
 	left: 250px;
 	right: 0;
 	height: 60px;
-	background: #1bbd36;
+	background:#4d2e8b;
 	/* background-image: url(../images/bg-themes/5.png); */
 	border-bottom: 1px solid rgb(228 228 228 / 0%);
 	z-index: 10;
@@ -1760,7 +1760,7 @@ feBlend .compose-mail-close:hover {
 }
 
 .bg-login {
-	background-image: url(../images/login-images/bg-forgot-password.jpg);
+	background-image: url(../images/bg-themes/5.png);
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;

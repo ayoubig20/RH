@@ -189,12 +189,13 @@
         </div>
     </div>
     {{-- datepicker --}}
-    <script src="assets/plugins/datetimepicker/js/legacy.js"></script>
-    <script src="assets/plugins/datetimepicker/js/picker.js"></script>
-    <script src="assets/plugins/datetimepicker/js/picker.time.js"></script>
-    <script src="assets/plugins/datetimepicker/js/picker.date.js"></script>
-    <script src="assets/plugins/bootstrap-material-datetimepicker/js/moment.min.js"></script>
-    <script src="assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.min.js"></script>
+    {{-- <script src="{{ asset('assets/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/datetimepicker/js/legacy.js') }}"></script>
+    <script src="{{ asset('assets/plugins/datetimepicker/js/picker.js') }}"></script>
+    <script src="{{ asset('assets/plugins/datetimepicker/js/picker.time.js') }}"></script>
+    <script src="{{ asset('assets/plugins/datetimepicker/js/picker.date.js') }}"></script>
+    <script src="{{ asset('assets/plugins/bootstrap-material-datetimepicker/js/moment.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.min.js') }}"></script> --}}
     <script>
         $('.datepicker').pickadate({
                 selectMonths: true,

@@ -11,15 +11,20 @@
             <div class="card shadow-none bg-transparent border-bottom border-2">
                 <div class="card-body">
                     <div class="row align-items-center">
-                        <div style="background-color: rgb(72, 209, 204);" class="card text-white text-center">
+                        <div style="background-image: url('{{ URL::asset('assets/images/bg-themes/5.png') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;"
+                            class="card text-white text-center">
                             <div class="card-body">
                                 @if (auth()->guard('web')->check())
                                     <strong>
-                                        <h1 class="text-white">Welcome {{ auth()->guard('web')->user()->name }}</h1>
+                                        <h1 class="text-white">Welcome {{ auth()->guard('web')->user()->name }} <img
+                                                src="{{ URL::asset('assets/images/logo.png') }}" class="logo-icon"
+                                                alt="logo icon">
+                                        </h1>
                                     </strong>
                                 @else
                                     <strong>
-                                        <h1 class="text-white">Welcome {{ auth()->guard('employee')->user()->firstName }}
+                                        <h1 class="text-white">Welcome
+                                            {{ auth()->guard('employee')->user()->firstName }}
                                         </h1>
                                     </strong>
                                 @endif
@@ -101,7 +106,7 @@
                             </div>
                             <div class="col d-flex">
                                 <div class="card radius-10 w-100">
-                                </br>
+                                    </br>
                                     <div class="text-center">
                                         <span class="badge bg-dark m-auto text-center">
                                             <h4 class="mb-0 text-white text-center"> Tasks status</h4>
@@ -116,7 +121,7 @@
                             <div class="col d-flex">
 
                                 <div class="card radius-10 w-100">
-                                </br>
+                                    </br>
                                     <div class="text-center">
                                         <span class="badge bg-dark m-auto text-center">
                                             <h4 class="mb-0 text-white text-center"> Projects status</h4>

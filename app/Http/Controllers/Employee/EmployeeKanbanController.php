@@ -26,7 +26,7 @@ class EmployeeKanbanController extends Controller
         $viewData = [];
         $employeeId = auth()->user()->id;
         $viewData['tasks']  = Task::where('assigned_to', $employeeId)->get();
-        $viewData['employees'] = Employee::all();
+        $viewData['employee'] = auth()->user();
         $viewData['projects'] = Project::all();
     
         return view('employee.kanban.index', compact('viewData'));

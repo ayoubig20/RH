@@ -88,10 +88,9 @@
                                 <select name="assigned_to" id="assigned_to" class="form-control" required>
                                     <option value="">assigned_to</option>
 
-                                    @foreach ($viewData['employees'] as $employee)
-                                        <option value="{{ $employee->id }}">{{ $employee->firstName }}
-                                            {{ $employee->lastName }}</option>
-                                    @endforeach
+                                        <option value="{{ $viewData['employee']->id }}">{{ $viewData['employee']->firstName }}
+                                            {{ $viewData['employee']->lastName }}</option>
+                                    
                                 </select>
                             </div>
                             <div class="form-group">
@@ -301,13 +300,11 @@
                                                                         employee
                                                                     </option>
 
-                                                                    @foreach ($viewData['employees'] as $employee)
-                                                                        <option value="{{ $employee->id }}"
-                                                                            {{ $task->assigned_to == $employee->id ? 'selected' : '' }}>
-                                                                            {{ $employee->firstName }}
-                                                                            {{ $employee->lastName }}
+                                                                        <option value="{{ $viewData['employee']->id }}"
+                                                                            {{ $task->assigned_to == $viewData['employee']->id ? 'selected' : '' }}>
+                                                                            {{ $viewData['employee']->firstName }}
+                                                                            {{ $viewData['employee']->lastName }}
                                                                         </option>
-                                                                    @endforeach
                                                                 </select>
                                                             </div>
                                                             <div class="form-group">
@@ -535,13 +532,11 @@
                                                                     employee
                                                                 </option>
 
-                                                                @foreach ($viewData['employees'] as $employee)
-                                                                    <option value="{{ $employee->id }}"
-                                                                        {{ $task->assigned_to == $employee->id ? 'selected' : '' }}>
-                                                                        {{ $employee->firstName }}
-                                                                        {{ $employee->lastName }}
+                                                                    <option value="{{ $viewData['employee']->id }}"
+                                                                        {{ $task->assigned_to == $viewData['employee']->id ? 'selected' : '' }}>
+                                                                        {{ $viewData['employee']->firstName }}
+                                                                        {{ $viewData['employee']->lastName }}
                                                                     </option>
-                                                                @endforeach
                                                             </select>
                                                         </div>
                                                         <div class="form-group">
@@ -766,13 +761,11 @@
                                                                     employee
                                                                 </option>
 
-                                                                @foreach ($viewData['employees'] as $employee)
-                                                                    <option value="{{ $employee->id }}"
-                                                                        {{ $task->assigned_to == $employee->id ? 'selected' : '' }}>
-                                                                        {{ $employee->firstName }}
-                                                                        {{ $employee->lastName }}
+                                                                    <option value="{{ $viewData['employee']->id }}"
+                                                                        {{ $task->assigned_to == $viewData['employee']->id ? 'selected' : '' }}>
+                                                                        {{ $viewData['employee']->firstName }}
+                                                                        {{ $viewData['employee']->lastName }}
                                                                     </option>
-                                                                @endforeach
                                                             </select>
                                                         </div>
                                                         <div class="form-group">
