@@ -43,7 +43,7 @@
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-bordered -mb-4 text-center table-hover" id="example">
-                                <thead class=" table-dark">
+                                <thead class="table-light text-center text-success ">
                                     <th><input type="checkbox" id="select-all" onclick="CheckAll('box1', this)">
                                     </th>
                                     <th>#</th>

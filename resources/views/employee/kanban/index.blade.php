@@ -1,6 +1,6 @@
 @extends('layouts.employee')
 
-@section('title', 'Kanban')
+@section('title', 'kanban')
 
 @section('wrapper')
     <!--start page wrapper -->
@@ -15,7 +15,7 @@
                             <li class="breadcrumb-item"><a href="{{ route('employee.home.index') }}"><i
                                         class="bx bx-home-alt"></i></a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Data tasks kanban</li>
+                            <li class="breadcrumb-item active" aria-current="page">Data Tasks</li>
                         </ol>
                     </nav>
                 </div>
@@ -24,7 +24,7 @@
 
             @include('layouts.notify')
 
-            <div class="text-sm-end">
+            {{-- <div class="text-sm-end">
                 <div class="btn-group mb-3">
                     <a href="{{ route('employee.tasks.index') }}"
                         class="btn btn-primary{{ !request()->has('status') && !request()->has('view') ? ' active' : '' }}"
@@ -49,7 +49,7 @@
                             class='bx bx-list-ul'></i></a>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <!-- Button trigger modal -->
         <button style="    color: #FFF;
                 background-color: #4F46E5;" type="button" class="btn btn"
@@ -85,12 +85,13 @@
                             </div>
                             <div class="form-group">
                                 <label for="assigned_to">Assigned To:</label>
-                                <select name="assigned_to" id="assigned_to" class="form-control" required>
-                                    <option value="">assigned_to</option>
+                                <select name="assigned_to" id="assigned_to" class="form-control" required @readonly(true)>
+                                    {{-- <option value="">assigned_to</option> --}}
 
-                                        <option value="{{ $viewData['employee']->id }}">{{ $viewData['employee']->firstName }}
-                                            {{ $viewData['employee']->lastName }}</option>
-                                    
+                                    <option value="{{ $viewData['employee']->id }}">
+                                        {{ $viewData['employee']->firstName }}
+                                        {{ $viewData['employee']->lastName }}</option>
+
                                 </select>
                             </div>
                             <div class="form-group">
@@ -242,13 +243,17 @@
                                                         </div>
                                                     </div>
                                                 </div>
+
                                                 <p class="mb-0">
                                                     @if ($task->employee)
                                                         <img src="{{ asset('storage/assets/users/' . $task->employee->image) }}"
                                                             class="user-img" alt="user avatar">
                                                     @endif
-                                                    <span
-                                                    class="align-middle"><a href="{{ route('employee.employee.show',  $task->employee->getId()) }}">{{ $task->employee ? $task->employee->firstName . ' ' . $task->employee->lastName : '' }}</a></span>
+                                                    <span class="align-middle"><a
+                                                            href="{{ route('admin.employees.show', $task->employee->getId()) }}"></a></span>
+                                                    <span class="badge  p-2" style="background-color:#8971d0;">
+                                                        {{ $task->employee ? $task->employee->firstName . ' ' . $task->employee->lastName : '' }}</span></a>
+
                                                 </p>
                                                 <p class="card-text"><strong>Description:</strong>
                                                     {{ $task->description }}
@@ -295,16 +300,18 @@
                                                                 <label for="assigned_to">Assigned
                                                                     To:</label>
                                                                 <select name="assigned_to" id="assigned_to"
-                                                                    class="form-control" required>
-                                                                    <option value="">Select an
+                                                                    class="form-control" required @readonly(true)>
+                                                                    {{-- <option value="">Select an
                                                                         employee
+                                                                    </option> --}}
+
+
+                                                                    <option value="{{ $viewData['employee']->id }}"
+                                                                        {{ $task->assigned_to == $viewData['employee']->id ? 'selected' : '' }}>
+                                                                        {{ $viewData['employee']->firstName }}
+                                                                        {{ $viewData['employee']->lastName }}
                                                                     </option>
 
-                                                                        <option value="{{ $viewData['employee']->id }}"
-                                                                            {{ $task->assigned_to == $viewData['employee']->id ? 'selected' : '' }}>
-                                                                            {{ $viewData['employee']->firstName }}
-                                                                            {{ $viewData['employee']->lastName }}
-                                                                        </option>
                                                                 </select>
                                                             </div>
                                                             <div class="form-group">
@@ -475,13 +482,17 @@
                                                     </div>
                                                 </div>
                                             </div>
+
                                             <p class="mb-0">
                                                 @if ($task->employee)
                                                     <img src="{{ asset('storage/assets/users/' . $task->employee->image) }}"
                                                         class="user-img" alt="user avatar">
                                                 @endif
-                                                <span
-                                                    class="align-middle"><a href="{{ route('employee.employee.show',  $task->employee->getId()) }}">{{ $task->employee ? $task->employee->firstName . ' ' . $task->employee->lastName : '' }}</a></span>
+                                                <span class="align-middle"><a
+                                                        href="{{ route('admin.employees.show', $task->employee->getId()) }}"></a></span>
+                                                <span class="badge  p-2" style="background-color:#8971d0;">
+                                                    {{ $task->employee ? $task->employee->firstName . ' ' . $task->employee->lastName : '' }}</span></a>
+
                                             </p>
                                             <p class="card-text"><strong>Description:</strong>
                                                 {{ $task->description }}
@@ -527,16 +538,18 @@
                                                             <label for="assigned_to">Assigned
                                                                 To:</label>
                                                             <select name="assigned_to" id="assigned_to"
-                                                                class="form-control" required>
-                                                                <option value="">Select an
+                                                                class="form-control" required @readonly(true)>
+                                                                {{-- <option value="">Select an
                                                                     employee
+                                                                </option> --}}
+
+
+                                                                <option value="{{ $viewData['employee']->id }}"
+                                                                    {{ $task->assigned_to == $viewData['employee']->id ? 'selected' : '' }}>
+                                                                    {{ $viewData['employee']->firstName }}
+                                                                    {{ $viewData['employee']->lastName }}
                                                                 </option>
 
-                                                                    <option value="{{ $viewData['employee']->id }}"
-                                                                        {{ $task->assigned_to == $viewData['employee']->id ? 'selected' : '' }}>
-                                                                        {{ $viewData['employee']->firstName }}
-                                                                        {{ $viewData['employee']->lastName }}
-                                                                    </option>
                                                             </select>
                                                         </div>
                                                         <div class="form-group">
@@ -703,14 +716,16 @@
                                                     </div>
                                                 </div>
                                             </div>
-
                                             <p class="mb-0">
                                                 @if ($task->employee)
                                                     <img src="{{ asset('storage/assets/users/' . $task->employee->image) }}"
                                                         class="user-img" alt="user avatar">
                                                 @endif
-                                                <span
-                                                    class="align-middle"><a href="{{ route('employee.employee.show',  $task->employee->getId()) }}">{{ $task->employee ? $task->employee->firstName . ' ' . $task->employee->lastName : '' }}</a></span>
+                                                <span class="align-middle"><a
+                                                        href="{{ route('admin.employees.show', $task->employee->getId()) }}"></a></span>
+                                                <span class="badge  p-2" style="background-color:#8971d0;">
+                                                    {{ $task->employee ? $task->employee->firstName . ' ' . $task->employee->lastName : '' }}</span></a>
+
                                             </p>
                                             <p class="card-text"><strong>Description:</strong>
                                                 {{ $task->description }}
@@ -756,16 +771,16 @@
                                                             <label for="assigned_to">Assigned
                                                                 To:</label>
                                                             <select name="assigned_to" id="assigned_to"
-                                                                class="form-control" required>
-                                                                <option value="">Select an
+                                                                class="form-control" required @readonly(true)>
+                                                                {{-- <option value="">Select an
                                                                     employee
-                                                                </option>
+                                                                </option> --}}
 
-                                                                    <option value="{{ $viewData['employee']->id }}"
-                                                                        {{ $task->assigned_to == $viewData['employee']->id ? 'selected' : '' }}>
-                                                                        {{ $viewData['employee']->firstName }}
-                                                                        {{ $viewData['employee']->lastName }}
-                                                                    </option>
+                                                                <option value="{{ $viewData['employee']->id }}"
+                                                                    {{ $task->assigned_to == $viewData['employee']->id ? 'selected' : '' }}>
+                                                                    {{ $viewData['employee']->firstName }}
+                                                                    {{ $viewData['employee']->lastName }}
+                                                                </option>
                                                             </select>
                                                         </div>
                                                         <div class="form-group">

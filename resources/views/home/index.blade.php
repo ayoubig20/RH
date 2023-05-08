@@ -13,9 +13,7 @@
                     <div class="carousel-container">
                         <div class="carousel-content animate__animated animate__fadeInUp">
                             <h2>Welcome to <span>Employee Mangement Systeme</span></h2>
-                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Expedita nihil tempore similique
-                                necessitatibus aut ducimus eveniet aspernatur voluptates ab enim quae eos, inventore
-                                laudantium dolorum. Veniam cupiditate nihil delectus voluptatum.</p>
+                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facere corporis, veniam reprehenderit obcaecati dolores dolor repellat recusandae provident expedita eos. Earum inventore mollitia esse voluptatem, quisquam dolorum officia incidunt accusamus.</p>
                             <div class="text-center"><a href="" class="btn-get-started">Read More</a></div>
                         </div>
                     </div>
@@ -327,7 +325,7 @@
                             <div class="col-lg-4 info">
                                 <i class='bx bxs-location-plus' ></i>
                                 <h4>Location:</h4>
-                                <p>A108 Adam Street<br>New York, NY 535022</p>
+                                <p> A2 Street hassan 2<br>Agadir, 80001</p>
                             </div>
 
                             <div class="col-lg-4 info mt-4 mt-lg-0">
@@ -339,7 +337,7 @@
                             <div class="col-lg-4 info mt-4 mt-lg-0">
                                 <i class="bx bx-phone"></i>
                                 <h4>Call:</h4>
-                                <p>+1 5589 55488 51<br>+1 5589 22475 14</p>
+                                <p>+212 524678976<br>+212 524678996</p>
                             </div>
                         </div>
                     </div>

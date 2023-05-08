@@ -281,8 +281,8 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table table-bordered -mb-4 text-center table-hover" id="example">
-                                        <thead class=" table-dark">
+                                    <table class="table table-mb-4 text-center table-hover" id="example">
+                                        <thead class="table-light text-center text-primary ">
                                             <th>#</th>
                                             <th>Project name</th>
                                             <th>Project Category</th>
@@ -303,7 +303,7 @@
                                                 <tr>
                                                     <td>{{ $i }}</td>
                                                     <td><a href="{{ route('admin.projects.show', $project->getId()) }}"><span
-                                                                class="badge bg-dark p-2">{{ $project->getName() }}</span></a>
+                                                                class="badge  p-2" style="background-color:#8971d0">{{ $project->getName() }}</span></a>
                                                     </td>
                                                     <td>{{ $project->category->name }}</td>
                                                     <td>

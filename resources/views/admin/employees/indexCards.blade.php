@@ -41,14 +41,13 @@
             <div class="row row-cols-1 row-cols-md-4 g-3">
                 @foreach ($viewData['employees'] as $employee)
                     <div class="col">
-                        <div class="card" style="width: 18rem;">
-
+                        <div class="card" >
                             <img src="{{ asset('storage/assets/users/' . $employee->image) }}"
                             class="img-fluid rounded-circle rounded card-img mx-auto" alt="..." style="height: 10rem;width:10rem">
 
                             <h4 class="text-center"> {{ $employee->getFirstName() }}
                                 {{ $employee->getLastName() }}</h4>
-                            <h4 class="text-center"><span class="badge bg-dark text-white ">{{ $employee->job->title }}</span></h4>
+                            <h4 class="text-center"><span class="badge"style="background-color:#8971d0">{{ $employee->job->title }}</span></h4>
                             <div class="card-body">
 
                                 <ul class="list-group list-group-flush">

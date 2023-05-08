@@ -26,9 +26,9 @@
             <div class="card-body p-5 font-18 text-strong">
                 <div class="row">
                     <div class="col-12">
-                        <div class="text-center text-bold">
-                            <h3 class="page-title"><strong>Empolyee
-                                    Registration</strong></h3>
+                        <div class="text-center ">
+                            <h3 class="page-title">Empolyee
+                                    Registration</h3>
                         </div>
                     </div>
                 </div>
@@ -235,7 +235,7 @@
                 // console.log(deptId);
                 if (deptId) {
                     $('#job_id').prop('disabled', true);
-                    var job_idOptionsHtml = '<option value="">Select job_id</option>';
+                    var job_idOptionsHtml = '<option value="">Select job</option>';
                     @foreach ($viewData['jobs'] as $job)
                         if ('{{ $job->getDepartmentId() }}' == deptId) {
                             job_idOptionsHtml +=

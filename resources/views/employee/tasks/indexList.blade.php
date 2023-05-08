@@ -87,8 +87,8 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="assigned_to">Assigned To:</label>
-                                        <select name="assigned_to" id="assigned_to" class="form-control" required>
-                                            <option value="">assigned_to</option>
+                                        <select name="assigned_to" id="assigned_to" class="form-control" required @readonly(true)>
+                                            {{-- <option value="">assigned_to</option> --}}
 
                                             <option value="{{ $viewData['employee']->id }}">
                                                 {{ $viewData['employee']->firstName }}
@@ -153,12 +153,12 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table">
-                        <thead class="table-dark">
+                    <table class="table table-mb-4 text-center table-hover" id="example">
+                        <thead class="table-light text-center text-primary ">
                             <th>#</th>
                             <th>Name</th>
                             {{-- <th>Description</th> --}}
-                            <th>Image</th>
+                            {{-- <th>Image</th> --}}
                             <th>Assigned To</th>
                             <th>Project</th>
                             <th>Priority</th>
@@ -176,22 +176,26 @@
                                     <td>{{ $task->name }}</td>
                                     {{-- <td>{{ $task->description }}</td> --}}
                                     <td>
-                                        @if ($task->employee)
-                                            <img src="{{ asset('storage/assets/users/' . $task->employee->image) }}"
-                                                class="user-img" alt="user avatar">
-                                        @endif
+                                        <a href="{{ route('employee.employee.show', $task->employee->getId()) }}"><img
+                                                src="{{ asset('storage/assets/users/' . $task->employee->image) }}"
+                                                class="user-img" alt="user avatar"></br>
+                                            <span class="badge p-2" style="background-color:#23067a">
+                                                {{ $task->employee ? $task->employee->firstName . ' ' . $task->employee->lastName : '' }}</span>
+                                        </a>
                                     </td>
-                                    <td><a
+                                    {{-- <td><a
                                             href="{{ route('employee.employee.show', $task->employee->getId()) }}">{{ $task->employee ? $task->employee->firstName . ' ' . $task->employee->lastName : '' }}</a>
-                                    </td>
+                                    </td> --}}
 
                                     {{-- <td>{{ $task->getProject()->name }}</td> --}}
                                     <td>
                                         @if ($task->getProject())
                                             <a href="{{ route('employee.projects.show', $task->getProject()->getId()) }}"><span
-                                                    class="badge bg-dark p-2">{{ $task->getProject()->name }}</span></a>
+                                                    class="badge p-2"
+                                                    style="background-color:#8971d0">{{ $task->getProject()->name }}</span></a>
                                         @else
-                                            <span class="badge bg-danger p-2">No project assigned</span>
+                                            <span class="badge p-2" style="background-color:#a6acec">No project
+                                                assigned</span>
                                         @endif
                                         {{-- <a href="{{ route('employee.projects.show', $task->getProject()->getId()) }}"><span
                                     class="badge bg-dark p-2">{{ $task->getProject()->name }}</span></a></td> --}}
@@ -457,6 +461,23 @@
             </div>
         </div>
     </div>
+@section('script')
+
+    <script src="{{ asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            var table = $('#example').DataTable({
+                // paging: true,
+                // pageLength: 5
+            });
+
+            table.buttons().container()
+                .appendTo('#example_wrapper .col-md-6:eq(0)');
+        });
+    </script>
+
+@endsection
 
 
 @endsection

@@ -57,7 +57,7 @@ class TaskDoneDataBase extends Notification
 
                 //'data' => $this->details['body']
                 'id'=> $this->task->id,
-                'title'=> "new tasks has been added",
+                'title'=> "new tasks has been added by",
                 'user'=>  $this->user->name,
         ];
     }

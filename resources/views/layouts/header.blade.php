@@ -91,11 +91,11 @@
                                                             <i class="la la-file-alt text-white"></i>
                                                         </div>
                                                         <div class="mr-3">
-                                                            <h5 class="notification-label mb-1">
+                                                            <p class="notification-label mb-1">
                                                                 {{ $notification->data['title'] }}
-                                                            </h5>
+                                                            </p>
                                                             <div class="notification-subtext">
-                                                                created by
+                                                                {{-- created by --}}
                                                                 {{ $notification->data['user'] }} at
                                                                 {{ $notification->created_at }}
 

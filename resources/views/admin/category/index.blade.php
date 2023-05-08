@@ -67,7 +67,7 @@
 
                 <div class="card-body">
                     <table class="table text-center table-bordered mb-0 table-hover" id='example'>
-                        <thead class=" table-dark">
+                        <thead class="table-light text-center text-primary ">
                             <th>#</th>
                             <th>Category </th>
                             <th>Action</th>

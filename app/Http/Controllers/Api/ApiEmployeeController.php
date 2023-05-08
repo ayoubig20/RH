@@ -17,6 +17,8 @@ class ApiEmployeeController extends Controller
             'title' => 'List employees',
             'employees' => $employees,
             'departments' => $departments,
+            'message'=>'ok',
+            'status'=>200,
         ]);
     }
 

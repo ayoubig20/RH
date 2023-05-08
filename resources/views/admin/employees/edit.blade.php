@@ -13,7 +13,7 @@
                             <li class="breadcrumb-item"><a href="{{ route('admin.home.index') }}"><i
                                         class="bx bx-home-alt"></i></a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Data Table</li>
+                            <li class="breadcrumb-item active" aria-current="page">Employee Registration</li>
                         </ol>
                     </nav>
                 </div>
@@ -25,7 +25,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="text-center text-bold">
-                                <h3 class="page-title"><strong> Employee {{ $employee->firstName }} {{ $employee->lastName }} Update</strong></h3>
+                                <h3 class="page-title">Employee  profile {{ $employee->firstName }} {{ $employee->lastName }} </strong></h3>
                             </div>
                         </div>
                     </div>
@@ -279,7 +279,7 @@
                 // console.log(deptId);
                 if (deptId) {
                     $('#job_id').prop('disabled', true);
-                    var job_idOptionsHtml = '<option value="">Select job_id</option>';
+                    var job_idOptionsHtml = '<option value="">Select job</option>';
                     @foreach ($viewData['jobs'] as $job)
                         if ('{{ $job->getDepartmentId() }}' == deptId) {
                             job_idOptionsHtml +=

@@ -35,8 +35,8 @@
             <div class="card">
                 <div class="col-12">
                     <div class="text-center text-bold">
-                        <h3 class="page-title"><strong>Departments List
-                            </strong></h3>
+                        <h3 class="page-title">Departments List
+                        </h3>
                     </div>
                 </div>
                 @include('layouts.notify')
@@ -82,8 +82,8 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table text-center table-bordered mb-0 table-hover" id="exampl">
-                            <thead class=" table-dark ">
+                        <table class="table text-center  mb-0 table-hover" id="exampl">
+                            <thead class="table-light text-center text-primary">
                                 <th>#</th>
                                 <th>department name</th>
                                 <th>department Head</th>
@@ -106,8 +106,8 @@
                                             <a
                                                 href="{{ route('admin.employees.show', $department->employeeDepartmentHead) }}"><img
                                                     src="{{ asset('storage/assets/users/' . $department->employeeDepartmentHead->image) }}"
-                                                    class="user-img" alt="user avatar">
-                                                <span class="badge bg-dark p-2">
+                                                    class="user-img" alt="user avatar"></br>
+                                                <span class="badge p-2" style="background-color:#4f3c89">
                                                     {{ $department->employeeDepartmentHead->firstName . ' ' . $department->employeeDepartmentHead->lastName }}</span>
                                             </a>
                                         @else

@@ -100,7 +100,7 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-bordered -mb-4 text-center table-hover" id="example">
-                            <thead class=" table-dark">
+                            <thead class="table-light text-center text-primary ">
                                 <th>#</th>
                                 <th>Tile job</th>
                                 <th>Department</th>

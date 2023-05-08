@@ -75,10 +75,10 @@
                         <div class="col mb-4">
                             <div class="card h-100">
                                 <div class="card-body text-center">
-                                    <h2 class="card-title"><strong>{{ $department->getName() }}</strong></h2>
-                                    <h5>Department Head:</h5>
-                                    @if ($department->employeeDepartmentHead)
-                                        <div class="d-flex flex-column align-items-center">
+                                    <h4 class="card-title"><strong>{{ $department->getName() }}</strong></h4>
+                                    <h6>Department Head:</h6>
+                                    <div class="d-flex flex-column align-items-center">
+                                        @if ($department->employeeDepartmentHead)
                                             <a
                                                 href="{{ route('admin.employees.show', $department->employeeDepartmentHead) }}">
                                                 <img src="{{ asset('storage/assets/users/' . $department->employeeDepartmentHead->image) }}"
@@ -86,23 +86,39 @@
                                                     class="img-thumbnail rounded-circle">
                                                 </br>
                                                 <span
-                                                    class="badge bg-dark p-2">{{ $department->employeeDepartmentHead->firstName . ' ' . $department->employeeDepartmentHead->lastName }}</span>
+                                                    class="badge p-2"style="background-color:#8971d0">{{ $department->employeeDepartmentHead->firstName . ' ' . $department->employeeDepartmentHead->lastName }}</span>
                                             </a>
                                             {{-- <strong>{{ $department->employeeDepartmentHead->firstName . ' ' . $department->employeeDepartmentHead->lastName }}</strong> --}}
+                                        @else
+                                            <span class="badge p-2" style="background-color:#8971d0"><strong>N/A</strong>
+                                            </span>
+                                        @endif
+                                        </br>
+                                        <h6>Number of
+                                            employees:</br><strong>{{ $department->NumberOfEmployeesByDepartment($department->id) }}</strong>
+                                        </h6>
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class="col">
+
+                                            <button type="button" class="btn btn-outline-success btn-sm me-2"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#editDepartment{{ $department->getId() }}">
+                                                <i class="bx bxs-edit"></i> Edit
+                                            </button>
+
+
+                                            <button type="button" class="btn btn-outline-danger btn-sm"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#deleteDepartmentModal{{ $department->getId() }}"> <i
+                                                    class='bx bxs-trash'></i>Delete
+                                            </button>
                                         </div>
-                                    @else
-                                        <strong>N/A</strong>
-                                    @endif
-                                    </br>
-                                    <h6>Number of
-                                        employees:</br><strong>{{ $department->NumberOfEmployeesByDepartment($department->id) }}</strong>
-                                    </h6>
+                                    </div>
                                     <div class="d-flex flex-row justify-content-center mt-3">
-                                        <button type="button" class="btn btn-outline-success btn-sm me-2"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#editDepartment{{ $department->getId() }}">
-                                            <i class="bx bxs-edit"></i> Edit
-                                        </button>
+
                                         <!-- Edit Modal -->
                                         <div class="modal fade" id="editDepartment{{ $department->getId() }}"
                                             tabindex="-1" aria-labelledby="editDepartment{{ $department->getId() }}"
@@ -164,8 +180,44 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        {{-- delete Modal --}}
+                                        <div class="modal fade" id="deleteDepartmentModal{{ $department->getId() }}"
+                                            tabindex="-1"
+                                            aria-labelledby="deleteDepatmentModalLabel{{ $department->getId() }}"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title"
+                                                            id="deleteDepatmentModalLabel{{ $department->getId() }}">
+                                                            Delete Department</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>Are you sure you want
+                                                            to delete this
+                                                            Department?</p>
+                                                        <input type="text" class="form-control"
+                                                            id="name" name="name"
+                                                            value="{{ $department->name }}" readonly>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Cancel</button>
+                                                        <form
+                                                            action="{{ route('admin.department.destroy', $department->getId()) }}"
+                                                            method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <!-- modal content -->
-                                        <form action="{{ route('admin.department.destroy', $department->getId()) }}"
+                                        {{-- <form action="{{ route('admin.department.destroy', $department->getId()) }}"
                                             method="POST">
                                             @csrf
                                             @method('DELETE')
@@ -174,7 +226,7 @@
                                                     <i class="bx bxs-trash"></i> Delete
                                                 </button>
                                             </div>
-                                        </form>
+                                        </form> --}}
                                     </div>
                                 </div>
                             </div>
@@ -183,7 +235,7 @@
                 </div>
                 <div class="d-flex justify-content-center">
                     <nav aria-label="departments">
-                        {{$viewData['departments']->appends(['view' => 'card'])->links('vendor.pagination.bootstrap-4') }}
+                        {{ $viewData['departments']->appends(['view' => 'card'])->links('vendor.pagination.bootstrap-4') }}
                     </nav>
                 </div>
             </div>

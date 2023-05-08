@@ -253,8 +253,11 @@
                                                         <img src="{{ asset('storage/assets/users/' . $task->employee->image) }}"
                                                             class="user-img" alt="user avatar">
                                                     @endif
-                                                    <span
-                                                        class="align-middle">{{ $task->employee ? $task->employee->firstName . ' ' . $task->employee->lastName : '' }}</span>
+                                                    <span class="align-middle"><a
+                                                            href="{{ route('admin.employees.show', $task->employee->getId()) }}"></a></span>
+                                                    <span class="badge  p-2" style="background-color:#8971d0;">
+                                                        {{ $task->employee ? $task->employee->firstName . ' ' . $task->employee->lastName : '' }}</span></a>
+
                                                 </p>
                                                 <p class="card-text"><strong>Description:</strong>
                                                     {{ $task->description }}
@@ -488,8 +491,11 @@
                                                     <img src="{{ asset('storage/assets/users/' . $task->employee->image) }}"
                                                         class="user-img" alt="user avatar">
                                                 @endif
-                                                <span
-                                                    class="align-middle">{{ $task->employee ? $task->employee->firstName . ' ' . $task->employee->lastName : '' }}</span>
+                                                <span class="align-middle"><a
+                                                        href="{{ route('admin.employees.show', $task->employee->getId()) }}"></a></span>
+                                                <span class="badge  p-2" style="background-color:#8971d0;">
+                                                    {{ $task->employee ? $task->employee->firstName . ' ' . $task->employee->lastName : '' }}</span></a>
+
                                             </p>
                                             <p class="card-text"><strong>Description:</strong>
                                                 {{ $task->description }}
@@ -719,8 +725,11 @@
                                                     <img src="{{ asset('storage/assets/users/' . $task->employee->image) }}"
                                                         class="user-img" alt="user avatar">
                                                 @endif
-                                                <span
-                                                    class="align-middle">{{ $task->employee ? $task->employee->firstName . ' ' . $task->employee->lastName : '' }}</span>
+                                                <span class="align-middle"><a
+                                                        href="{{ route('admin.employees.show', $task->employee->getId()) }}"></a></span>
+                                                <span class="badge  p-2" style="background-color:#8971d0;">
+                                                    {{ $task->employee ? $task->employee->firstName . ' ' . $task->employee->lastName : '' }}</span></a>
+
                                             </p>
                                             <p class="card-text"><strong>Description:</strong>
                                                 {{ $task->description }}
@@ -868,7 +877,14 @@
     </div>
 
     </div>
-    {{-- <script>
+
+    <script src="{{ asset('assets/js/vendor.min.js') }}"></script>
+    <!-- dragula js-->
+    <script src="{{ asset('assets/vendor/dragula/dragula.min.js') }}"></script>
+    <!-- demo js -->
+    <script src="{{ asset('assets/js/ui/component.dragula.js') }}"></script>
+
+    <script>
         $(document).on('click', '.dropdown-menu', function(e) {
             e.stopPropagation();
         });
@@ -899,24 +915,7 @@
                 e.stopPropagation();
             }
         });
-    </script> --}}
-    <script src="{{ asset('assets/js/vendor.min.js') }}"></script>
-    <!-- dragula js-->
-    <script src="{{ asset('assets/vendor/dragula/dragula.min.js') }}"></script>
-    <!-- demo js -->
-    <script src="{{ asset('assets/js/ui/component.dragula.js') }}"></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/dragula/3.6.6/dragula.js'></script>
-
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
-    </script>
-
     <script>
         $(function() {
             // Initialize dragula containers
@@ -942,8 +941,8 @@
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     success: function(response) {
-                        console.log('Task status updated successfully');
-                        console.log(response);
+                        // console.log('Task status updated successfully');
+                        // console.log(response);
                         location.reload();
 
                     },
@@ -956,5 +955,5 @@
         });
     </script>
 
-    </div>
+
 @endsection

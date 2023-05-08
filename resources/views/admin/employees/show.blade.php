@@ -25,8 +25,8 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="text-center text-bold">
-                                <h3 class="page-title"><strong>Empolyee
-                                        Profile</strong></h3>
+                                <h3 class="page-title">Empolyee
+                                        Profile</h3>
                             </div>
                         </div>
                     </div>
@@ -35,14 +35,15 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="card">
-                                <div class="card-header bg-primary text-white">
-                                    <h3 class="mb-0">Employee Details</h3>
+                                <div class="card-header"style="background-color:#8971d0">
+                                    <h3 class="mb-0- text-center">Employee Details</h3>
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <p><strong>Name:</strong> {{ $employee->firstName }} {{ $employee->lastName }}
                                             </p>
+                                            <p><strong>Department:</strong>{{ $employee->department->name}}</p>
                                             <p><strong>Job:</strong>{{ $employee->job->title }}</p>
                                             <p><strong>Email:</strong> {{ $employee->email }}</p>
                                             <p><strong>Phone:</strong> {{ $employee->phone }}</p>
@@ -64,9 +65,28 @@
                             </div>
                         </div>
                         <div class="col-md-6">
+                            <div class="card mt-3">
+                                <div class="card-header bg-info text-white">
+                                    <h3 class="mb-0 text-center">Assigned Projects</h3>
+                                </div>
+                                <div class="card-body">
+                                    @if ($employee->projects->count() > 0)
+                                        <ul class="list-group">
+                                            @foreach ($employee->projects->unique('id') as $project)
+                                                <li>{{ $project->name }}</li>
+                                            @endforeach
+                                        </ul>
+                                        <p><strong>Total projects:</strong>
+                                            {{ $employee->projects->unique('id')->count() }}
+                                        </p>
+                                    @else
+                                        <p><strong>No projects assigned.</strong></p>
+                                    @endif
+                                </div>
+                            </div>
                             <div class="card">
                                 <div class="card-header bg-secondary text-white">
-                                    <h3 class="mb-0">Assigned Tasks</h3>
+                                    <h3 class="mb-0 text-center">Assigned Tasks</h3>
                                 </div>
                                 <div class="card-body">
                                     @if ($employee->tasks && $employee->tasks->count() > 0)
@@ -79,17 +99,17 @@
                                             @foreach ($employee->tasks as $task)
                                                 @if ($task->status == 'to do')
                                                     @php $toDoCount++; @endphp
-                                                    <li class="list-group-item list-group-item-danger">{{ $task->name }}
+                                                    <li class="list-group-item list-group-item-danger ">Task Name :{{ $task->name }}
                                                         -
                                                         {{ $task->status }}</li>
                                                 @elseif ($task->status == 'in progress')
                                                     @php $inProgressCount++; @endphp
-                                                    <li class="list-group-item list-group-item-warning">{{ $task->name }}
+                                                    <li class="list-group-item list-group-item-warning">Task Name :{{ $task->name }}
                                                         -
                                                         {{ $task->status }}</li>
                                                 @elseif ($task->status == 'done')
                                                     @php $doneCount++; @endphp
-                                                    <li class="list-group-item list-group-item-success">{{ $task->name }}
+                                                    <li class="list-group-item list-group-item-success ">Task Name :{{ $task->name }}
                                                         -
                                                         {{ $task->status }}</li>
                                                 @endif
@@ -107,25 +127,7 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="card mt-3">
-                                <div class="card-header bg-info text-white">
-                                    <h3 class="mb-0">Assigned Projects</h3>
-                                </div>
-                                <div class="card-body">
-                                    @if ($employee->projects->count() > 0)
-                                        <ul class="list-group">
-                                            @foreach ($employee->projects->unique('id') as $project)
-                                                <li>{{ $project->name }}</li>
-                                            @endforeach
-                                        </ul>
-                                        <p><strong>Total projects:</strong>
-                                            {{ $employee->projects->unique('id')->count() }}
-                                        </p>
-                                    @else
-                                        <p><strong>No projects assigned.</strong></p>
-                                    @endif
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>

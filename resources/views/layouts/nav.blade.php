@@ -2,7 +2,7 @@
 <div class="sidebar-wrapper" data-simplebar="true" id="sidebar">>
     <div class="sidebar-header">
         <div>
-            <img src="{{ URL::asset('assets/images/logo.png') }}" class="logo-icon" alt="logo icon">
+            <img src="{{ URL::asset('assets/images/logo-purple.png') }}" class="logo-icon" alt="logo icon">
         </div>
         <div>
             <h4 class="logo-text">Employes Mangement</h4>

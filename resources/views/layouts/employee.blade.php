@@ -1,4 +1,4 @@
-<html lang="en"class="color-sidebar sidebarcolor5 color-header headercolor5">
+<html lang="en" class="color-header headercolor2">
 <html lang="en">
 
 <head>

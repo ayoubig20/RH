@@ -13,7 +13,8 @@
                             <li class="breadcrumb-item"><a href="{{ route('admin.home.index') }}"><i
                                         class="bx bx-home-alt"></i></a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Data Table</li>
+                            <li class="breadcrumb-item active" aria-current="page">Data Empolyees
+                                List</li>
                         </ol>
                     </nav>
                 </div>
@@ -37,14 +38,13 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="text-center text-bold">
-                                <h3 class="page-title"><strong>Empolyees
-                                        List</strong></h3>
+                                <h3 class="page-title">Employees list</h3>
                             </div>
                         </div>
                     </div>
                     <div class="table-responsive">
-                        <table id="example2" class="table table-bordered text-center table-hover">
-                            <thead class="table-dark text-center">
+                        <table id="example2" class="table  text-center table-hover">
+                            <thead class="table-light text-center text-primary">
                                 <tr>
                                     <th>#</th>
                                     <th>image</th>
@@ -70,7 +70,7 @@
                                                 class="user-img" alt="user avatar">
                                         </td>
                                         <td><a href="{{ route('admin.employees.show', $employee->getId()) }}"><span
-                                                    class="badge bg-dark p-2">{{ $employee->getFirstName() }}
+                                                    class="badge p-2"style="background-color:#8971d0">{{ $employee->getFirstName() }}
                                                     {{ $employee->getLastName() }}</span></a>
                                         </td>
                                         <td>{{ $employee->getAge() }}</td>

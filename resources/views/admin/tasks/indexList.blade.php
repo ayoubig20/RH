@@ -57,7 +57,7 @@
                 </div>
 
                 <!-- Button trigger modal -->
-               
+
                 <button style="    color: #FFF;
                 background-color: #4F46E5;" type="button" class="btn btn"
                     data-bs-toggle="modal" data-bs-target="#exampleModal">add
@@ -160,12 +160,12 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-bordered -mb-4 text-center table-hover" id="example">
-                            <thead class=" table-dark">
+                        <table class="table table-mb-4 text-center table-hover" id="example">
+                            <thead class="table-light text-center text-primary ">
                                 <th>#</th>
                                 <th>Task Name</th>
                                 {{-- <th>Description</th> --}}
-                                <th>Image</th>
+                                {{-- <th>Image</th> --}}
                                 <th>Assigned To</th>
                                 <th>Project</th>
                                 <th>Priority</th>
@@ -182,24 +182,25 @@
                                         <td>{{ $i }}</td>
                                         <td>{{ $task->name }}</td>
                                         {{-- <td>{{ $task->description }}</td> --}}
+
                                         <td>
-                                            @if ($task->employee)
-                                                <img src="{{ asset('storage/assets/users/' . $task->employee->image) }}"
-                                                    class="user-img" alt="user avatar">
-                                            @endif
-                                        </td>
-                                        <td><a
-                                                href="{{ route('admin.employees.show', $task->employee->getId()) }}">{{ $task->employee ? $task->employee->firstName . ' ' . $task->employee->lastName : '' }}</a>
+                                            <a href="{{ route('admin.employees.show', $task->employee->getId()) }}"><img
+                                                    src="{{ asset('storage/assets/users/' . $task->employee->image) }}"
+                                                    class="user-img" alt="user avatar"></br>
+                                                <span class="badge p-2" style="background-color:#23067a">
+                                                    {{ $task->employee ? $task->employee->firstName . ' ' . $task->employee->lastName : '' }}</span>
+                                            </a>
                                         </td>
 
-                                        {{-- <td>{{ $task->getProject()->name }}</td> --}}
                                         <td>
                                             @if ($task->getProject())
                                                 <a
                                                     href="{{ route('admin.projects.show', $task->getProject()->getId()) }}"><span
-                                                        class="badge bg-dark p-2">{{ $task->getProject()->name }}</span></a>
+                                                        class="badge  p-2"
+                                                        style="background-color:#8971d0">{{ $task->getProject()->name }}</span></a>
                                             @else
-                                                <span class="badge bg-danger p-2">No project assigned</span>
+                                                <span class="badge p-2" style="background-color:#a6acec">No project
+                                                    assigned</span>
                                             @endif
                                             {{-- <a href="{{ route('admin.projects.show', $task->getProject()->getId()) }}"><span
                                     class="badge bg-dark p-2">{{ $task->getProject()->name }}</span></a></td> --}}
@@ -424,30 +425,30 @@
                                                                         data-bs-dismiss="modal"
                                                                         aria-label="Close"></button>
                                                                 </div>
+
+
                                                                 <div class="modal-body">
                                                                     <div class="form-group">
                                                                         <input type="text"
                                                                             value="{{ $task->getId() }}" name="id"
                                                                             hidden>
                                                                         <label for="status">Select Status:</label>
+                                                                        @php
+                                                                            $statuses = ['to do', 'in progress', 'done', 'cancelled'];
+                                                                            $oldStatus = old('status', $task->status);
+                                                                            $statusesWithoutOld = array_filter($statuses, function ($status) use ($oldStatus) {
+                                                                                return $status !== $oldStatus;
+                                                                            });
+                                                                        @endphp
+
                                                                         <select class="form-control" name="status"
                                                                             id="status">
-                                                                            <option value="to do"
-                                                                                {{ old('status', $task->status) == 'to do' ? 'selected' : '' }}>
-                                                                                To do
-                                                                            </option>
-                                                                            <option value="in progress"
-                                                                                {{ old('status', $task->status) == 'in progress' ? 'selected' : '' }}>
-                                                                                In progress
-                                                                            </option>
-                                                                            <option value="done"
-                                                                                {{ old('status', $task->status) == 'done' ? 'selected' : '' }}>
-                                                                                done
-                                                                            </option>
-                                                                            <option value="cancelled"
-                                                                                {{ old('status', $task->status) == 'cancelled' ? 'selected' : '' }}>
-                                                                                cancelled
-                                                                            </option>
+                                                                            <option value="{{ $oldStatus }}" selected>
+                                                                                {{ ucfirst($oldStatus) }}</option>
+                                                                            @foreach ($statusesWithoutOld as $status)
+                                                                                <option value="{{ $status }}">
+                                                                                    {{ ucfirst($status) }}</option>
+                                                                            @endforeach
                                                                         </select>
 
                                                                     </div>

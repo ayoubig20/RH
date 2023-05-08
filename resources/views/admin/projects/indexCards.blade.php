@@ -285,11 +285,6 @@
                                                         {{-- <a href="javascript:void(0);" class="fw-bold text-muted view-more">view more</a> --}}
                                                     </p>
 
-                                                    {{-- <div class="hidden-content">
-                                                    <p>{{ $project->description }}</p>
-                                                    <a href="javascript:void(0);" class="fw-bold text-muted view-less">view less</a>
-                                                </div> --}}
-
                                                     <!-- project detail-->
                                                     <p class="mb-1">
                                                         <span class="pe-2 text-nowrap mb-2 d-inline-block">
@@ -345,30 +340,30 @@
                                                                 role="progressbar" aria-valuenow="{!! $project->progression() !!}"
                                                                 aria-valuemin="0" aria-valuemax="100"
                                                                 style="width: {!! $project->progression() !!}%;">
-                                                            </div><!-- /.progress-bar -->
+                                                            </div>
                                                         </div>
                                                     </li>
                                                 </ul>
 
-                                            </div> <!-- container -->
-                                        </div> <!-- container -->
+                                            </div>
+                                        </div>
                                     @endforeach
-                                </div> <!-- end col -->
-                            </div> <!-- end col -->
-                        </div> <!-- end col -->
-                    </div> <!-- end col -->
-                </div> <!-- end col -->
-            </div> <!-- end col -->
-            <div class="d-flex justify-content-center">
-                <nav aria-label="projects">
-                    {{ $projects->appends(['view' => 'card'])->links('vendor.pagination.bootstrap-4') }}
-                </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-center">
+                    <nav aria-label="projects">
+                        {{ $projects->appends(['view' => 'card'])->links('vendor.pagination.bootstrap-4') }}
+                    </nav>
+                </div>
             </div>
         </div>
-    </div>
 
-    {{-- issue i didnit fixed to make javascript work css issue --}}
-    {{-- <script>
+        {{-- issue i didnit fixed to make javascript work css issue --}}
+        {{-- <script>
             $('.view-more').click(function() {
                 $(this).closest('.project-description').hide();
                 $(this).closest('.project-description').next('.hidden-content').slideDown();
@@ -379,28 +374,28 @@
                 $(this).closest('.hidden-content').prev('.project-description').show();
             });
         </script> --}}
-    <script>
-        // Initialize all tooltips with default settings
-        var tooltipTriggerList = [].slice.call(document.querySelectorAll('.avatar-tooltip'))
-        var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
-            return new bootstrap.Tooltip(tooltipTriggerEl)
-        })
+        <script>
+            // Initialize all tooltips with default settings
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('.avatar-tooltip'))
+            var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+            })
 
-        // Change the background color of the tooltip
-        var tooltipEl = document.querySelector('.avatar-tooltip')
-        tooltipEl.style.backgroundColor = 'red'
+            // Change the background color of the tooltip
+            var tooltipEl = document.querySelector('.avatar-tooltip')
+            tooltipEl.style.backgroundColor = 'red'
 
-        // Update the tooltip content dynamically
-        var tooltipTriggerEl = document.querySelector('.avatar-tooltip')
-        tooltipTriggerEl.setAttribute('data-bs-original-title', 'New tooltip content')
+            // Update the tooltip content dynamically
+            var tooltipTriggerEl = document.querySelector('.avatar-tooltip')
+            tooltipTriggerEl.setAttribute('data-bs-original-title', 'New tooltip content')
 
-        // Add a custom function to be called when the tooltip is shown
-        var tooltipTriggerEl = document.querySelector('.avatar-tooltip')
-        tooltipTriggerEl.addEventListener('shown.bs.tooltip', function() {
-            console.log('The tooltip was shown')
-        })
-    </script>
+            // Add a custom function to be called when the tooltip is shown
+            var tooltipTriggerEl = document.querySelector('.avatar-tooltip')
+            tooltipTriggerEl.addEventListener('shown.bs.tooltip', function() {
+                console.log('The tooltip was shown')
+            })
+        </script>
 
 
 
-@endsection
+    @endsection

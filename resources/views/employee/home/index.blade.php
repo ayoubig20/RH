@@ -63,7 +63,7 @@
                                     <div class="card-body">
                                         <div class="col">
                                             <div class="text-center">
-                                                <span class="badge bg-dark m-auto text-center">
+                                                <span class="badge  m-auto text-center"  style="background-color:#8971d0">
                                                     <h4 class="mb-0 text-white text-center"> Tasks Priority</h4>
                                                 </span>
                                             </div> </br>
@@ -108,7 +108,7 @@
                                 <div class="card radius-10 w-100">
                                     </br>
                                     <div class="text-center">
-                                        <span class="badge bg-dark m-auto text-center">
+                                        <span class="badge  m-auto text-center"  style="background-color:#8971d0">
                                             <h4 class="mb-0 text-white text-center"> Tasks status</h4>
                                         </span>
                                     </div>
@@ -123,7 +123,7 @@
                                 <div class="card radius-10 w-100">
                                     </br>
                                     <div class="text-center">
-                                        <span class="badge bg-dark m-auto text-center">
+                                        <span class="badge  m-auto text-center"  style="background-color:#8971d0">
                                             <h4 class="mb-0 text-white text-center"> Projects status</h4>
                                         </span>
                                     </div>
@@ -140,251 +140,266 @@
                         <!--end row-->
                         <div class="card radius-10">
                             <div class="card-body">
-                                <div class="table-responsive lead-table">
-                                    <table class="table mb-0 align-middle">
-                                        <thead class="table-dark">
+                                <table class="table table-mb-4 text-center table-hover" id="example">
+                                    <thead class="table-light text-center text-primary ">
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Tasks</th>
+                                            <th>Projects</th>
+                                            <th>Priority</th>
+                                            <th>End date</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php $i = 0; ?>
+                                        @foreach ($viewData['tasks'] as $task)
+                                            <?php $i++; ?>
                                             <tr>
-                                                <th>#</th>
-                                                <th>Tasks</th>
-                                                <th>Projects</th>
-                                                <th>Priority</th>
-                                                <th>End date</th>
-                                                <th>Status</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php $i = 0; ?>
-                                            @foreach ($viewData['tasks'] as $task)
-                                                <?php $i++; ?>
-                                                <tr>
-                                                    <td><strong>{{ $i }}</td></strong>
-                                                    <td><strong>{{ $task->name }}</strong></td>
-                                                    <td>
-                                                        @if ($task->getProject())
-                                                            <a
-                                                                href="{{ route('employee.projects.show', $task->getProject()->getId()) }}"><span
-                                                                    class="badge bg-dark p-2">{{ $task->getProject()->name }}</span></a>
-                                                        @else
-                                                            <span class="badge bg-danger p-2">No project assigned</span>
-                                                        @endif
-                                                        {{-- <a href="{{ route('admin.projects.show', $task->getProject()->getId()) }}"><span
+                                                <td><strong>{{ $i }}</td></strong>
+                                                <td><strong>{{ $task->name }}</strong></td>
+                                                <td>
+                                                    @if ($task->getProject())
+                                                        <a
+                                                            href="{{ route('employee.projects.show', $task->getProject()->getId()) }}"><span
+                                                                class="badge p-2"  style="background-color:#8971d0">{{ $task->getProject()->name }}</span></a>
+                                                    @else
+                                                        <span class="badge p-2" style="background-color:#a6acec">No project assigned</span>
+                                                    @endif
+                                                    {{-- <a href="{{ route('admin.projects.show', $task->getProject()->getId()) }}"><span
                                                     class="badge bg-dark p-2">{{ $task->getProject()->name }}</span></a></td> --}}
-                                                    </td>
-                                                    <td style="padding: 5px;">
-                                                        @if ($task->priority == 'high')
-                                                            <span class="badge bg-danger ">{{ $task->priority }}</span>
-                                                        @elseif ($task->priority == 'Medium')
-                                                            <span class="badge bg-warning ">{{ $task->priority }}</span>
-                                                        @else
-                                                            <span class="badge bg-info ">{{ $task->priority }}</span>
-                                                        @endif
-                                                    </td>
-                                                    <td><strong>{{ $task->end_date->format('d-m-Y') }}</td></strong>
+                                                </td>
+                                                <td style="padding: 5px;">
+                                                    @if ($task->priority == 'high')
+                                                        <span class="badge bg-danger ">{{ $task->priority }}</span>
+                                                    @elseif ($task->priority == 'Medium')
+                                                        <span class="badge bg-warning ">{{ $task->priority }}</span>
+                                                    @else
+                                                        <span class="badge bg-info ">{{ $task->priority }}</span>
+                                                    @endif
+                                                </td>
+                                                <td><strong>{{ $task->end_date->format('d-m-Y') }}</td></strong>
 
-                                                    <td>
-                                                        <span
-                                                            class="badge {{ $task->status === 'to do' ? 'bg-secondary' : ($task->status === 'in progress' ? 'bg-info' : ($task->status === 'waiting' ? 'bg-warning' : ($task->status === 'done' ? 'bg-success' : 'bg-danger'))) }}">
-                                                            {{ $task->status }}
-                                                        </span>
-                                                    </td>
+                                                <td>
+                                                    <span
+                                                        class="badge {{ $task->status === 'to do' ? 'bg-secondary' : ($task->status === 'in progress' ? 'bg-info' : ($task->status === 'waiting' ? 'bg-warning' : ($task->status === 'done' ? 'bg-success' : 'bg-danger'))) }}">
+                                                        {{ $task->status }}
+                                                    </span>
+                                                </td>
 
-                                                </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
                 </div>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-                {{-- charte tasks --}}
-                <script>
-                    var taskChart = new Chart(document.getElementById("task-chart"), {
-                        type: 'pie',
-                        data: {
-                            labels: ['Completed Tasks', 'Tasks in Progress', 'Tasks to do'],
-                            datasets: [{
-                                label: 'Number of Tasks',
-                                backgroundColor: [
-                                    '#17a2b8', // Completed Tasks
-                                    '#007bff', // Tasks in Progress
-                                    '#28a745;' // Tasks to do
-                                ],
-                                data: [{{ $viewData['numCompletedTasks'] }}, {{ $viewData['numProgressTasks'] }},
-                                    {{ $viewData['numToDOTasks'] }}
-                                ]
-                            }]
-                        },
-                        options: {
-                            responsive: true,
-                            title: {
-                                display: true,
-                                text: 'Tasks Overview'
-                            },
-                            maintainAspectRatio: false,
-                            width: 800,
-                            height: 800
-                        }
-                    });
-                </script>
-                <script src="assets/plugins/chartjs/js/chartjs-custom.js"></script>
-                <script src="https://code.highcharts.com/highcharts.js"></script>
-                <script src="https://code.highcharts.com/modules/exporting.js"></script>
-                <script src="https://code.highcharts.com/modules/export-data.js"></script>
-                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-                {{-- chart projects --}}
-                <script>
-                    var data = {
-                        labels: ["Pending", "In progress", "Finished"],
+            </div>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+            {{-- charte tasks --}}
+            <script>
+                var taskChart = new Chart(document.getElementById("task-chart"), {
+                    type: 'pie',
+                    data: {
+                        labels: ['Completed Tasks', 'Tasks in Progress', 'Tasks to do'],
                         datasets: [{
-                            label: 'Projects',
-                            data: [{{ $viewData['numToDOTPoject'] }}, {{ $viewData['numProgerssPoject'] }},
-                                {{ $viewData['numCompletedPoject'] }}
-                            ],
+                            label: 'Number of Tasks',
                             backgroundColor: [
-                                'rgb(186, 85, 211)', // 
-                                'rgb(255, 255, 0)', // yellow
-                                'rgb(124, 252, 0)' // green
+                                '#17a2b8', // Completed Tasks
+                                '#007bff', // Tasks in Progress
+                                '#28a745;' // Tasks to do
                             ],
-                            hoverBackgroundColor: [
-                                'rgb(186, 85, 211)', // 
-                                'rgb(255, 255, 0)', // yellow
-                                'rgb(124, 252, 0)' // green
-                            ],
-
-                            borderColor: "#fff",
-                            pointRadius: 6,
-                            pointHoverRadius: 6,
-                            pointHoverBackgroundColor: "#fff",
-                            borderWidth: 2
-                        }]
-                    };
-
-                    // Get the context of the canvas element
-                    var ctx = document.getElementById('chart-order-status').getContext('2d');
-
-                    // Create the chart using the data and options
-                    var myChart = new Chart(ctx, {
-                        type: 'doughnut',
-                        data: data,
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: false,
-                            title: {
-                                display: true,
-                                text: 'Projects Overview',
-                                fontColor: '#585757'
-                            },
-                            legend: {
-                                display: false,
-                            },
-                            tooltips: {
-                                enabled: true,
-                                mode: 'single',
-                                callbacks: {
-                                    label: function(tooltipItems, data) {
-                                        return data.labels[tooltipItems.index] + ": " + data.datasets[0].data[tooltipItems
-                                            .index];
-                                    }
-                                }
-                            },
-                            scales: {
-                                xAxes: [{
-                                    ticks: {
-                                        fontColor: '#585757'
-                                    },
-                                    gridLines: {
-                                        display: true,
-                                        color: "rgba(0, 0, 0, 0.08)"
-                                    }
-                                }],
-                                yAxes: [{
-                                    ticks: {
-                                        beginAtZero: true,
-                                        fontColor: '#585757'
-                                    },
-                                    gridLines: {
-                                        display: false,
-                                        color: "rgba(0, 0, 0, 0.08)"
-                                    }
-                                }]
-                            }
-                        }
-                    });
-                </script>
-                {{-- charte task priority --}}
-                <script>
-                    Highcharts.chart('chart-priority', {
-                        chart: {
-                            type: 'bar',
-                            backgroundColor: '#f5f5f5'
-                        },
-                        title: {
-                            text: 'Tasks by Priority',
-                            style: {
-                                fontSize: '24px',
-                                fontWeight: 'bold'
-                            }
-                        },
-                        xAxis: {
-                            categories: ['High Priority', 'Medium Priority', 'Low Priority'],
-                            labels: {
-                                style: {
-                                    fontSize: '16px'
-                                }
-                            }
-                        },
-                        yAxis: {
-                            title: {
-                                text: 'Number of Tasks',
-                                style: {
-                                    fontSize: '16px'
-                                }
-                            },
-                            labels: {
-                                style: {
-                                    fontSize: '16px'
-                                }
-                            }
-                        },
-                        legend: {
-                            enabled: false
-                        },
-                        tooltip: {
-                            pointFormat: '{point.y} tasks'
-                        },
-                        plotOptions: {
-                            bar: {
-                                colorByPoint: true,
-                                colors: ['#FFA500', '#008000', '#0000FF'],
-                                dataLabels: {
-                                    enabled: true,
-                                    style: {
-                                        fontSize: '16px',
-                                        textOutline: false
-                                    }
-                                }
-                            }
-                        },
-                        series: [{
-                            name: 'Tasks',
-                            data: [{
-                                    y: {{ $viewData['priorityHighTasks'] }},
-                                    name: 'High Priority'
-                                },
-                                {
-                                    y: {{ $viewData['priorityMediumTasks'] }},
-                                    name: 'Medium Priority'
-                                },
-                                {
-                                    y: {{ $viewData['priorityLowTasks'] }},
-                                    name: 'Low Priority'
-                                }
+                            data: [{{ $viewData['numCompletedTasks'] }}, {{ $viewData['numProgressTasks'] }},
+                                {{ $viewData['numToDOTasks'] }}
                             ]
                         }]
+                    },
+                    options: {
+                        responsive: true,
+                        title: {
+                            display: true,
+                            text: 'Tasks Overview'
+                        },
+                        maintainAspectRatio: false,
+                        width: 800,
+                        height: 800
+                    }
+                });
+            </script>
+            <script src="assets/plugins/chartjs/js/chartjs-custom.js"></script>
+            <script src="https://code.highcharts.com/highcharts.js"></script>
+            <script src="https://code.highcharts.com/modules/exporting.js"></script>
+            <script src="https://code.highcharts.com/modules/export-data.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            {{-- chart projects --}}
+            <script>
+                var data = {
+                    labels: ["Pending", "In progress", "Finished"],
+                    datasets: [{
+                        label: 'Projects',
+                        data: [{{ $viewData['numToDOTPoject'] }}, {{ $viewData['numProgerssPoject'] }},
+                            {{ $viewData['numCompletedPoject'] }}
+                        ],
+                        backgroundColor: [
+                            'rgb(186, 85, 211)', // 
+                            'rgb(255, 255, 0)', // yellow
+                            'rgb(124, 252, 0)' // green
+                        ],
+                        hoverBackgroundColor: [
+                            'rgb(186, 85, 211)', // 
+                            'rgb(255, 255, 0)', // yellow
+                            'rgb(124, 252, 0)' // green
+                        ],
+
+                        borderColor: "#fff",
+                        pointRadius: 6,
+                        pointHoverRadius: 6,
+                        pointHoverBackgroundColor: "#fff",
+                        borderWidth: 2
+                    }]
+                };
+
+                // Get the context of the canvas element
+                var ctx = document.getElementById('chart-order-status').getContext('2d');
+
+                // Create the chart using the data and options
+                var myChart = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: data,
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        title: {
+                            display: true,
+                            text: 'Projects Overview',
+                            fontColor: '#585757'
+                        },
+                        legend: {
+                            display: false,
+                        },
+                        tooltips: {
+                            enabled: true,
+                            mode: 'single',
+                            callbacks: {
+                                label: function(tooltipItems, data) {
+                                    return data.labels[tooltipItems.index] + ": " + data.datasets[0].data[tooltipItems
+                                        .index];
+                                }
+                            }
+                        },
+                        scales: {
+                            xAxes: [{
+                                ticks: {
+                                    fontColor: '#585757'
+                                },
+                                gridLines: {
+                                    display: true,
+                                    color: "rgba(0, 0, 0, 0.08)"
+                                }
+                            }],
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true,
+                                    fontColor: '#585757'
+                                },
+                                gridLines: {
+                                    display: false,
+                                    color: "rgba(0, 0, 0, 0.08)"
+                                }
+                            }]
+                        }
+                    }
+                });
+            </script>
+            {{-- charte task priority --}}
+            <script>
+                Highcharts.chart('chart-priority', {
+                    chart: {
+                        type: 'bar',
+                        backgroundColor: '#f5f5f5'
+                    },
+                    title: {
+                        text: 'Tasks by Priority',
+                        style: {
+                            fontSize: '24px',
+                            fontWeight: 'bold'
+                        }
+                    },
+                    xAxis: {
+                        categories: ['High Priority', 'Medium Priority', 'Low Priority'],
+                        labels: {
+                            style: {
+                                fontSize: '16px'
+                            }
+                        }
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Number of Tasks',
+                            style: {
+                                fontSize: '16px'
+                            }
+                        },
+                        labels: {
+                            style: {
+                                fontSize: '16px'
+                            }
+                        }
+                    },
+                    legend: {
+                        enabled: false
+                    },
+                    tooltip: {
+                        pointFormat: '{point.y} tasks'
+                    },
+                    plotOptions: {
+                        bar: {
+                            colorByPoint: true,
+                            colors: ['#FFA500', '#008000', '#0000FF'],
+                            dataLabels: {
+                                enabled: true,
+                                style: {
+                                    fontSize: '16px',
+                                    textOutline: false
+                                }
+                            }
+                        }
+                    },
+                    series: [{
+                        name: 'Tasks',
+                        data: [{
+                                y: {{ $viewData['priorityHighTasks'] }},
+                                name: 'High Priority'
+                            },
+                            {
+                                y: {{ $viewData['priorityMediumTasks'] }},
+                                name: 'Medium Priority'
+                            },
+                            {
+                                y: {{ $viewData['priorityLowTasks'] }},
+                                name: 'Low Priority'
+                            }
+                        ]
+                    }]
+                });
+            </script>
+
+        @section('script')
+
+            <script src="{{ asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+            <script src="{{ asset('assets/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script>
+            <script>
+                $(document).ready(function() {
+                    var table = $('#example').DataTable({
+                        // paging: true,
+                        // pageLength: 5
                     });
-                </script>
 
+                    table.buttons().container()
+                        .appendTo('#example_wrapper .col-md-6:eq(0)');
+                });
+            </script>
 
-            @endsection
+        @endsection
+    @endsection

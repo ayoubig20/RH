@@ -40,7 +40,7 @@ class workFinshed extends Notification
         $url = route('admin.tasks.index');
         return (new MailMessage)
                     ->greeting('Hello!')
-                    ->line('Task "' . $this->task->title . '" has been marked as done by ' . $this->employee->name . '.')
+                    ->line('Task ' . $this->task->name . ' has been marked as done by ' . ' '.$this->employee->firstName .''.$this->employee->lastName)
                     ->action('View Task', $url)
                     ->line('Thank you for using our application!');
     }
@@ -49,8 +49,8 @@ class workFinshed extends Notification
     {
         return [
             'id' => $this->task->id,
-            'title' => 'Task "' . $this->task->title . '" has been marked as done by ' . $this->employee->name . '.',
-            'user' => $this->employee->firstName .$this->employee->lastName,
+            'title' => 'Task "' . $this->task->name . '" has been marked as done by ' . ' '. $this->employee->name . '.',
+            'user' => $this->employee->firstName .' '.$this->employee->lastName,
         ];
     }
 }
