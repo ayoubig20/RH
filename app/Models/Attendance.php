@@ -38,7 +38,7 @@ class Attendance extends Model
         $attendance = new Attendance;
         $attendance->employee_id = $employee->id;
         $attendance->login_time = now();
-        $attendance->status = 'present';
+        $attendance->status =1;
         $attendance->ip_address = $request->ip();
         ;
         $attendance->save();

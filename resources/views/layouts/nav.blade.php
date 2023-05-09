@@ -9,6 +9,7 @@
         </div>
         <div class="toggle-icon ms-auto"><i class='bx bx-menu'></i>
         </div>
+
     </div>
     <!--navigation-->
     <ul class="metismenu" id="menu">
@@ -36,87 +37,98 @@
                             class='bx bx-user-plus'></i>Add New
                         Employes</a>
                 </li>
+
+            </ul>
         </li>
 
-    </ul>
-    <li>
-        <a class="" href="{{ route('admin.projects.index') }}">
-            <div class="parent-icon"> <i class="bx bx-atom"></i>
-            </div>
-            <div class="menu-title">Projects</div>
-        </a>
 
-    </li>
-    <li>
-        <a class="" href="{{ route('admin.tasks.index') }}">
-            <div class="parent-icon"> <i class="bx bx-task"></i>
-            </div>
-            <div class="menu-title">Tasks</div>
-        </a>
+        <li>
+            <a class="" href="{{ route('admin.projects.index') }}">
+                <div class="parent-icon"> <i class="bx bx-atom"></i>
+                </div>
+                <div class="menu-title">Projects</div>
+            </a>
 
-    </li>
-    <li>
-        <a class="" href="{{ route('admin.kanban.index') }}">
-            <div class="parent-icon"> <i class='bx bx-list-check'></i>
-            </div>
-            <div class="menu-title">Kanban</div>
-        </a>
-    </li>
+        </li>
+        <li>
+            <a class="" href="{{ route('admin.tasks.index') }}">
+                <div class="parent-icon"> <i class="bx bx-task"></i>
+                </div>
+                <div class="menu-title">Tasks</div>
+            </a>
 
-    <li>
-        <a class="" href="{{ route('admin.department.index') }}">
-            <div class="parent-icon"> <i class="bx bx-buildings"></i>
-            </div>
-            <div class="menu-title">Departement</div>
-        </a>
+        </li>
+        <li>
+            <a class="" href="{{ route('admin.kanban.index') }}">
+                <div class="parent-icon"> <i class='bx bx-list-check'></i>
+                </div>
+                <div class="menu-title">Kanban</div>
+            </a>
+        </li>
 
-    </li>
-    <li>
-        <a class="has-arrow" href="javascript:;">
-            <div class="parent-icon"> <i class='bx bxs-cog'></i>
-            </div>
-            <div class="menu-title">Setting</div>
-        </a>
-        <ul>
-            <li> <a href="{{ route('admin.category.index') }}"><i class="bx bx-right-arrow-alt"></i><i
-                        class='bx bxs-briefcase'></i></i>Project Category</a>
-            </li>
-            <li> <a href="{{ route('admin.jobs.index') }}"><i class="bx bx-right-arrow-alt"></i><i
-                        class='bx bxs-briefcase-alt-2'></i>list job</a>
-            </li>
-        </ul>
-    </li>
-    <li>
-        <a class="has-arrow" href="javascript:;">
-            <div class="parent-icon"> <i class='bx bxs-archive'></i>
-            </div>
-            <div class="menu-title">Archive</div>
-        </a>
-        <ul>
-            <li> <a href="{{ route('admin.archiveEmployees.index') }}""><i class="bx bx-right-arrow-alt"></i><i
-                        class='bx bxs-group'></i>Archive Empolyes</a>
-            </li>
-            <li> <a href="{{ route('admin.archiveprojects.index') }}"><i class="bx bx-right-arrow-alt"></i><i
-                        class='bx bx-atom'></i></i>Archive Project </a>
-            </li>
-        </ul>
-    </li>
-    <li>
-        <a class="" href="{{ route('admin.attendance.index') }}">
-            <div class="parent-icon"> <i class='bx bx-check-square'></i>
-            </div>
-            <div class="menu-title">Attendance</div>
-        </a>
-    </li> 
-     <li>
-        <a class="" href="{{ route('admin.report.index') }}">
-            <div class="parent-icon"> <i class='bx bx-file'></i>
-            </div>
-            <div class="menu-title">Report</div>
-        </a>
-    </li>
-    
+        <li>
+            <a class="" href="{{ route('admin.department.index') }}">
+                <div class="parent-icon"> <i class="bx bx-buildings"></i>
+                </div>
+                <div class="menu-title">Departement</div>
+            </a>
 
-    <!--end navigation-->
+        </li>
+        <li>
+            <a class="has-arrow" href="javascript:;">
+                <div class="parent-icon"> <i class='bx bxs-cog'></i>
+                </div>
+                <div class="menu-title">Setting</div>
+            </a>
+            <ul>
+                <li> <a href="{{ route('admin.category.index') }}"><i class="bx bx-right-arrow-alt"></i><i
+                            class='bx bxs-briefcase'></i></i>Project Category</a>
+                </li>
+                <li> <a href="{{ route('admin.jobs.index') }}"><i class="bx bx-right-arrow-alt"></i><i
+                            class='bx bxs-briefcase-alt-2'></i>list job</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a class="has-arrow" href="javascript:;">
+                <div class="parent-icon"> <i class='bx bxs-archive'></i>
+                </div>
+                <div class="menu-title">Archive</div>
+            </a>
+            <ul>
+                <li> <a href="{{ route('admin.archiveEmployees.index') }}""><i class="bx bx-right-arrow-alt"></i><i
+                            class='bx bxs-group'></i>Archive Empolyes</a>
+                </li>
+                <li> <a href="{{ route('admin.archiveprojects.index') }}"><i class="bx bx-right-arrow-alt"></i><i
+                            class='bx bx-atom'></i></i>Archive Project </a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a class="" href="{{ route('admin.attendance.index') }}">
+                <div class="parent-icon"> <i class='bx bx-check-square'></i>
+                </div>
+                <div class="menu-title">Attendance</div>
+            </a>
+        </li>
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class='bx bxs-file'></i>
+                </div>
+                <div class="menu-title">Report</div>
+            </a>
+            <ul>
+                <li> <a href="{{ route('admin.report-projects.index') }}"><i class="bx bx-right-arrow-alt"></i><i
+                    class='bx bx-file'></i>Report projects</a>
+        </li>
+
+                <li> <a href="{{ route('admin.report-attendances.index') }}"><i class="bx bx-right-arrow-alt"></i><i
+                            class='bx bx-file'></i>Report attendances</a>
+                </li>
+            </ul>
+        </li>
+
+
+        <!--end navigation-->
 </div>
 <!--end sidebar wrapper -->

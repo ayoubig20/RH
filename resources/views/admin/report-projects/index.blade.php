@@ -101,7 +101,7 @@
                                                 </div>
                                             </div><input class="form-control fc-datepicker" id="date2"
                                                 value="{{ $start_at ?? '' }}" name="start_at" placeholder="YYYY-MM-DD"
-                                                type="text">
+                                                type="date">
                                         </div><!-- input-group -->
                                     </div>
 
@@ -113,7 +113,7 @@
                                                     <i class='bx bxs-calendar'></i>
                                                 </div>
                                             </div><input class="form-control fc-datepicker" name="end_at" id="date1"
-                                                value="{{ $end_at ?? '' }}" placeholder="YYYY-MM-DD" type="text">
+                                                value="{{ $end_at ?? '' }}" placeholder="YYYY-MM-DD" type="date">
                                         </div><!-- input-group -->
                                     </div>
                                 </div><br>
@@ -124,7 +124,6 @@
                                     </div>
                                 </div>
                             </form>
-
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">

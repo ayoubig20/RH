@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('attendances', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('employee_id');
-            $table->string('status')->default('absent');
+            $table->string('status')->default(0);
             $table->dateTime('login_time')->nullable();
             $table->dateTime('logout_time')->nullable();
             $table->string('ip_address')->nullable();

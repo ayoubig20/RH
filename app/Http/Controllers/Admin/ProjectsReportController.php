@@ -11,7 +11,7 @@ class ProjectsReportController extends Controller
     public function index()
     {
 
-        return view('admin.report.index');
+        return view('admin.report-projects.index');
     }
 
     public function searchProjects(Request $request)
@@ -27,7 +27,7 @@ class ProjectsReportController extends Controller
                 $projects = Project::all();
             }
             $type = $request->type;
-            return view('admin.report.index', compact('type'))->withDetails($projects);
+            return view('admin.report-projects.index', compact('type'))->withDetails($projects);
         } else {
             // case select date
             if ($request->type != 'all') {
@@ -39,11 +39,11 @@ class ProjectsReportController extends Controller
                             ->where('status', '=', $request->type)
                             ->get();
     
-                return view('admin.report.index', compact('type', 'start_at', 'end_at'))->withDetails($projects);
+                return view('admin.report-projects.index', compact('type', 'start_at', 'end_at'))->withDetails($projects);
             } else {
                 // case search by id
                 $projects = Project::select('*')->where('id', '=', $request->projectId)->get();
-                return view('admin.report.index')->withDetails($projects);
+                return view('admin.report-projects.index')->withDetails($projects);
             }
         }
     }

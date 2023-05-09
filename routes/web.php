@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\ProjectsReportController;
 use App\Http\Controllers\Admin\AdminAttendanceController;
 use App\Http\Controllers\Admin\AdminDepartmentController;
 use App\Http\Controllers\Employee\EmployeeHomeController;
+use App\Http\Controllers\Admin\AttendancesReportController;
 use App\Http\Controllers\Admin\ArchiveEmp\AdminEmpArchiveController;
 use App\Http\Controllers\Admin\ArchivePro\AdminProArchiveController;
 
@@ -138,7 +139,8 @@ Route::middleware('auth:web')->group(function () {
         'update' => 'admin.attendance.update',
         'destroy' => 'admin.attendance.destroy',
     ]);
-    Route::get('/admin/report', [ProjectsReportController::class,'index'])->name('admin.report.index');
+    Route::get('/admin/report/projects', [ProjectsReportController::class,'index'])->name('admin.report-projects.index');
+    Route::get('/admin/report/attendances', [AttendancesReportController::class,'index'])->name('admin.report-attendances.index');
 
      Route::post('Search_project', [ProjectsReportController::class,'SearchProjects']);
      Route::post('/notifications/mark-as-read', function (Request $request) {
