@@ -10,7 +10,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class TaskDoneDataBase extends Notification
+class TaskAddDataBase extends Notification
 {
     use Queueable;
     private $task;
@@ -52,13 +52,14 @@ class TaskDoneDataBase extends Notification
      */
     public function toArray(object $notifiable): array
     {
-        return [
-           
+        $url = '/employee/tasks';
 
+        return [
                 //'data' => $this->details['body']
                 'id'=> $this->task->id,
                 'title'=> "new tasks has been added by",
                 'user'=>  $this->user->name,
+                'url'=>$url,
         ];
     }
 }

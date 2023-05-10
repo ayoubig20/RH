@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Employee;
 
 use App\Models\Task;
+use App\Models\User;
 use App\Models\Project;
 use App\Models\Employee;
 use Illuminate\Http\Request;
+use App\Notifications\workFinshed;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Notification;
 
 class EmployeeKanbanController extends Controller
 {
@@ -19,6 +22,12 @@ class EmployeeKanbanController extends Controller
     
         $task->status = $request->input('status');
         $task->save();
+        if ($task->status === 'done') {
+            $employee = auth()->user();
+            $users = User::all();
+            $task = Task::latest()->first();
+            Notification::send($users, new workFinshed($task, $employee));
+        }
          return $request;
     }
     public function index()

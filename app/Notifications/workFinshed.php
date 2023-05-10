@@ -47,10 +47,12 @@ class workFinshed extends Notification
     
     public function toArray($notifiable)
     {
+        $url ='/admin/tasks';
         return [
             'id' => $this->task->id,
-            'title' => 'Task "' . $this->task->name . '" has been marked as done by ' . ' '. $this->employee->name . '.',
+            'title' => 'Task "' . $this->task->name . '" has been marked as done by ' . ' '. $this->employee->name ,
             'user' => $this->employee->firstName .' '.$this->employee->lastName,
+            'url'=>$url,
         ];
     }
 }

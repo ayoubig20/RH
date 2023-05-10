@@ -9,8 +9,8 @@ use App\Models\Employee;
 use Illuminate\Http\Request;
 use App\Notifications\addTask;
 use App\Http\Controllers\Controller;
-use App\Notifications\TaskDoneDataBase;
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\TaskAddDataBase;
 use Illuminate\Support\Facades\Notification;
 
 class AdminTaskController extends Controller
@@ -81,7 +81,7 @@ class AdminTaskController extends Controller
         $user=auth()->user();
         $task = task::latest()->first();
         $employee = Employee::findOrFail($employeeId);
-        Notification::send($employee, new TaskDoneDataBase($task, $user));
+        Notification::send($employee, new TaskAddDataBase($task, $user));
         Notification::send($employee, new addTask());
         return back()->with([
                  'success' => 'Task created successfully!','viewData' => $viewData

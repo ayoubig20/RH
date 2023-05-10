@@ -143,8 +143,8 @@ Route::middleware('auth:web')->group(function () {
     Route::get('/admin/report/attendances', [AttendancesReportController::class,'index'])->name('admin.report-attendances.index');
 
      Route::post('Search_project', [ProjectsReportController::class,'SearchProjects']);
-     Route::post('/notifications/mark-as-read', function (Request $request) {
-        $userUnreadNotifications = auth()->user()->unreadNotifications;
+     Route::post('/notifications/mark-as-read/admin', function (Request $request) {
+        $userUnreadNotifications = auth()->user('web')->unreadNotifications;
     
         if ($userUnreadNotifications) {
             $userUnreadNotifications->markAsRead();

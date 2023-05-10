@@ -35,7 +35,7 @@ class addTask extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
-        $url = "http://127.0.0.1:8000/admin/tasks?status=to%20do";
+        $url = "route('employe.tasks.index')";
         return (new MailMessage)
             ->greeting('Hello!')
             ->subject('New task available')
