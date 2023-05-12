@@ -42,6 +42,11 @@
                             </div>
                         </div>
                     </div>
+                    <a href="{{ route('admin.employees.create') }}"> <button style="    color: #FFF;
+                        background-color: #4F46E5;" type="button" class="btn btn"
+                            data-bs-toggle="modal" >add
+                            New employee</button></a>                   <div></br></div>
+
                     <div class="table-responsive">
                         <table id="example2" class="table  text-center table-hover">
                             <thead class="table-light text-center text-primary">

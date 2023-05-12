@@ -1,4 +1,4 @@
-<html lang="en" class="color-sidebar sidebarcolor5" >
+<html lang="en" class="semi-dark color-header headercolor5">
 
 <head>
     <!-- Required meta tags -->

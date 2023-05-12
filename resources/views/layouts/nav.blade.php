@@ -21,24 +21,24 @@
             </a>
         </li>
         <li>
-            <a href="javascript:;" class="has-arrow">
+            <a href="{{ route('admin.employees.index') }}">
                 <div class="parent-icon"><i class='bx bxs-group'></i>
                 </div>
                 <div class="menu-title">Employes</div>
             </a>
-            <ul>
+            {{-- <ul>
                 <li> <a href="{{ route('admin.employees.index') }}"><i class="bx bx-right-arrow-alt"><i
                                 class='bx bxs-group'></i></i>Employes</a>
                 </li>
-                {{-- <li> <a href="{{ route('admin.employees.index') }}"><i class="bx bx-right-arrow-alt"></i>Employe
+                <li> <a href="{{ route('admin.employees.index') }}"><i class="bx bx-right-arrow-alt"></i>Employe
                         Details</a>
-                </li> --}}
+                </li> 
                 <li> <a href="{{ route('admin.employees.create') }}"><i class="bx bx-right-arrow-alt"></i><i
                             class='bx bx-user-plus'></i>Add New
                         Employes</a>
                 </li>
 
-            </ul>
+            </ul> --}}
         </li>
 
 
