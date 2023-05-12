@@ -12,11 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('holidays', function (Blueprint $table) {
-                $table->id();
-                $table->string('name');
-                $table->date('date');
-                $table->timestamps();
+            $table->id();
+            $table->string('name');
+            $table->string('description')->nullable();
+            $table->string('country');
+            $table->date('date');
+            $table->string('type');
+            $table->string('primary_type')->nullable();
+            $table->string('urlid')->nullable();
+            $table->timestamps();
         });
+        
     }
 
     /**

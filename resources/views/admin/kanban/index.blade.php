@@ -941,9 +941,9 @@
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     success: function(response) {
+                        location.reload();
                         // console.log('Task status updated successfully');
                         // console.log(response);
-                        location.reload();
 
                     },
                     error: function(xhr, status, error) {

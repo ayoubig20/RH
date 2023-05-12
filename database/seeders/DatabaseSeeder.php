@@ -9,9 +9,12 @@ use App\Models\Project;
 use App\Models\Employee;
 use App\Models\Department;
 use App\Models\CategoryProject;
+use App\Models\Working_days;
+use Database\Seeders\JobSeeder;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Database\Seeders\DepartmentSeeder;
+use Database\Seeders\CategoryProjectSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -34,5 +37,8 @@ class DatabaseSeeder extends Seeder
         $this->call(JobSeeder::class);
         $this->call(CategoryProjectSeeder::class);
         $this->call(UserSeeder::class);
+        $this->call(HolidaysTableSeeder::class);
+        Working_days::initializeWorkingDaysTable();
+
     }
 }
