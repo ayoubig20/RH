@@ -12,121 +12,153 @@
 
     </div>
     <!--navigation-->
+
     <ul class="metismenu" id="menu">
-        <li>
-            <a href="{{ route('admin.home.index') }}" class="">
-                <div class="parent-icon"><i class="bx bx-home-circle"></i>
-                </div>
-                <div class="menu-title">Dashboard</div>
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('admin.employees.index') }}">
-                <div class="parent-icon"><i class='bx bxs-group'></i>
-                </div>
-                <div class="menu-title">Employes</div>
-            </a>
-            {{-- <ul>
-                <li> <a href="{{ route('admin.employees.index') }}"><i class="bx bx-right-arrow-alt"><i
-                                class='bx bxs-group'></i></i>Employes</a>
-                </li>
-                <li> <a href="{{ route('admin.employees.index') }}"><i class="bx bx-right-arrow-alt"></i>Employe
-                        Details</a>
-                </li> 
-                <li> <a href="{{ route('admin.employees.create') }}"><i class="bx bx-right-arrow-alt"></i><i
-                            class='bx bx-user-plus'></i>Add New
-                        Employes</a>
-                </li>
+        @can('list-statistics')
+            <li>
+                <a href="{{ route('admin.home.index') }}" class="">
+                    <div class="parent-icon"><i class="bx bx-home-circle"></i>
+                    </div>
+                    <div class="menu-title">Dashboard</div>
+                </a>
+            </li>
+        @endcan
+        @can('list-employees')
+            <li>
+                <a href="{{ route('admin.employees.index') }}">
+                    <div class="parent-icon"><i class='bx bxs-group'></i>
+                    </div>
+                    <div class="menu-title">Employes</div>
+                </a>
 
-            </ul> --}}
-        </li>
+            </li>
+        @endcan
+        @can('list-adminstrator')
+            <li>
+                <a href="{{ route('users.index') }}">
+                    <div class="parent-icon"><i class='bx bxs-user-account'></i>
+                    </div>
+                    <div class="menu-title">Administrator</div>
+                </a>
+            </li>
+        @endcan
+        @can('list-projects')
+            <li>
+                <a class="" href="{{ route('admin.projects.index') }}">
+                    <div class="parent-icon"> <i class="bx bx-atom"></i>
+                    </div>
+                    <div class="menu-title">Projects</div>
+                </a>
 
+            </li>
+        @endcan
+        @can('list-tasks')
+            <li>
+                <a class="" href="{{ route('admin.tasks.index') }}">
+                    <div class="parent-icon"> <i class="bx bx-task"></i>
+                    </div>
+                    <div class="menu-title">Tasks</div>
+                </a>
 
-        <li>
-            <a class="" href="{{ route('admin.projects.index') }}">
-                <div class="parent-icon"> <i class="bx bx-atom"></i>
-                </div>
-                <div class="menu-title">Projects</div>
-            </a>
+            </li>
+        @endcan
+        @can('list-kanban')
+            <li>
+                <a class="" href="{{ route('admin.kanban.index') }}">
+                    <div class="parent-icon"> <i class='bx bx-list-check'></i>
+                    </div>
+                    <div class="menu-title">Kanban</div>
+                </a>
+            </li>
+        @endcan
+        @can('list-department')
+            <li>
+                <a class="" href="{{ route('admin.department.index') }}">
+                    <div class="parent-icon"> <i class="bx bx-buildings"></i>
+                    </div>
+                    <div class="menu-title">Departement</div>
+                </a>
+            </li>
+        @endcan
+        @can('list-setting')
+            <li>
+                <a class="has-arrow" href="javascript:;">
+                    <div class="parent-icon"> <i class='bx bxs-cog'></i>
+                    </div>
+                    <div class="menu-title">Setting</div>
+                </a>
+                <ul>
+                    @can('list-category')
+                        <li> <a href="{{ route('admin.category.index') }}"><i class="bx bx-right-arrow-alt"></i><i
+                                    class='bx bxs-briefcase'></i></i>Project Category</a>
+                        </li>
+                    @endcan
+                    @can('list-job')
+                        <li> <a href="{{ route('admin.jobs.index') }}"><i class="bx bx-right-arrow-alt"></i><i
+                                    class='bx bxs-briefcase-alt-2'></i>list job</a>
+                        </li>
+                    @endcan
+                    @can('list-roles')
+                        <li> <a href="{{ route('roles.index') }}"><i class="bx bx-right-arrow-alt"></i><i
+                                    class='bx bxs-shield'></i>Permissions</a>
+                        </li>
+                    @endcan
+                </ul>
+            </li>
+        @endcan
+        @can('archive')
+            <li>
+                <a class="has-arrow" href="javascript:;">
+                    <div class="parent-icon"> <i class='bx bxs-archive'></i>
+                    </div>
+                    <div class="menu-title">Archive</div>
+                </a>
 
-        </li>
-        <li>
-            <a class="" href="{{ route('admin.tasks.index') }}">
-                <div class="parent-icon"> <i class="bx bx-task"></i>
-                </div>
-                <div class="menu-title">Tasks</div>
-            </a>
+                <ul>
+                    @can('archive-employee')
+                        <li> <a href="{{ route('admin.archiveEmployees.index') }}""><i class="bx bx-right-arrow-alt"></i><i
+                                    class='bx bxs-group'></i>Archive Empolyes</a>
+                        </li>
+                    @endcan
+                    @can('archive-projects')
+                        <li> <a href="{{ route('admin.archiveprojects.index') }}"><i class="bx bx-right-arrow-alt"></i><i
+                                    class='bx bx-atom'></i></i>Archive Project </a>
+                        </li>
+                    @endcan
+                </ul>
+            </li>
+        @endcan
 
-        </li>
-        <li>
-            <a class="" href="{{ route('admin.kanban.index') }}">
-                <div class="parent-icon"> <i class='bx bx-list-check'></i>
-                </div>
-                <div class="menu-title">Kanban</div>
-            </a>
-        </li>
-
-        <li>
-            <a class="" href="{{ route('admin.department.index') }}">
-                <div class="parent-icon"> <i class="bx bx-buildings"></i>
-                </div>
-                <div class="menu-title">Departement</div>
-            </a>
-
-        </li>
-        <li>
-            <a class="has-arrow" href="javascript:;">
-                <div class="parent-icon"> <i class='bx bxs-cog'></i>
-                </div>
-                <div class="menu-title">Setting</div>
-            </a>
-            <ul>
-                <li> <a href="{{ route('admin.category.index') }}"><i class="bx bx-right-arrow-alt"></i><i
-                            class='bx bxs-briefcase'></i></i>Project Category</a>
-                </li>
-                <li> <a href="{{ route('admin.jobs.index') }}"><i class="bx bx-right-arrow-alt"></i><i
-                            class='bx bxs-briefcase-alt-2'></i>list job</a>
-                </li>
-            </ul>
-        </li>
-        <li>
-            <a class="has-arrow" href="javascript:;">
-                <div class="parent-icon"> <i class='bx bxs-archive'></i>
-                </div>
-                <div class="menu-title">Archive</div>
-            </a>
-            <ul>
-                <li> <a href="{{ route('admin.archiveEmployees.index') }}""><i class="bx bx-right-arrow-alt"></i><i
-                            class='bx bxs-group'></i>Archive Empolyes</a>
-                </li>
-                <li> <a href="{{ route('admin.archiveprojects.index') }}"><i class="bx bx-right-arrow-alt"></i><i
-                            class='bx bx-atom'></i></i>Archive Project </a>
-                </li>
-            </ul>
-        </li>
-        <li>
-            <a class="" href="{{ route('admin.attendance.index') }}">
-                <div class="parent-icon"> <i class='bx bx-check-square'></i>
-                </div>
-                <div class="menu-title">Attendance</div>
-            </a>
-        </li>
-        <li>
-            <a href="javascript:;" class="has-arrow">
-                <div class="parent-icon"><i class='bx bxs-file'></i>
-                </div>
-                <div class="menu-title">Report</div>
-            </a>
-            <ul>
-                <li> <a href="{{ route('admin.report-projects.index') }}"><i class="bx bx-right-arrow-alt"></i><i
-                    class='bx bx-file'></i>Report projects</a>
-        </li>
-
-                <li> <a href="{{ route('admin.report-attendances.index') }}"><i class="bx bx-right-arrow-alt"></i><i
-                            class='bx bx-file'></i>Report attendances</a>
-                </li>
-            </ul>
-        </li>
+        @can('attendances')
+            <li>
+                <a class="" href="{{ route('admin.attendance.index') }}">
+                    <div class="parent-icon"> <i class='bx bx-check-square'></i>
+                    </div>
+                    <div class="menu-title">Attendances</div>
+                </a>
+            </li>
+        @endcan
+        @can('Report')
+            <li>
+                <a href="javascript:;" class="has-arrow">
+                    <div class="parent-icon"><i class='bx bxs-file'></i>
+                    </div>
+                    <div class="menu-title">Report</div>
+                </a>
+                <ul>
+                    @can('report-projects')
+                        <li> <a href="{{ route('admin.report-projects.index') }}"><i class="bx bx-right-arrow-alt"></i><i
+                                    class='bx bx-file'></i>Report projects</a>
+                        </li>
+                    @endcan
+                    @can('report-attendances')
+                        <li> <a href="{{ route('admin.report-attendances.index') }}"><i class="bx bx-right-arrow-alt"></i><i
+                                    class='bx bx-file'></i>Report attendances</a>
+                        </li>
+                    @endcan
+                </ul>
+            </li>
+        @endcan
 
 
         <!--end navigation-->

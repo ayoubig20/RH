@@ -37,6 +37,8 @@ class DatabaseSeeder extends Seeder
         $this->call(JobSeeder::class);
         $this->call(CategoryProjectSeeder::class);
         $this->call(UserSeeder::class);
+        $this->call(PermissionTableSeeder::class);
+        $this->call(CreateAdminUserSeeder::class);
         $this->call(HolidaysTableSeeder::class);
         Working_days::initializeWorkingDaysTable();
 

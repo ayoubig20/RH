@@ -214,7 +214,7 @@
                                 </span>
                             @enderror
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6 my-1">
                             <label for="password_confirmation">Confirm Password</label>
                             <div class="input-group">
                                 <span class="input-group-text"><i class="bx bx-lock"></i></span>

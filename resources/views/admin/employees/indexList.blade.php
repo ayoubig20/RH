@@ -52,13 +52,12 @@
                             <thead class="table-light text-center text-primary">
                                 <tr>
                                     <th>#</th>
-                                    <th>image</th>
                                     <th>Name</th>
+                                    <th>Department</th>
+                                    <th>Job</th>
                                     <th>Age</th>
                                     {{-- <th>Email</th> --}}
                                     <th>Phone</th>
-                                    <th>Job</th>
-                                    <th>Department</th>
                                     <th>Fattening Date</th>
                                     <th>Salary</th>
                                     <th>Actions</th>
@@ -70,26 +69,26 @@
                                     <?php $i++; ?>
                                     <tr>
                                         <td>{{ $i }}</td>
-                                        <td>
-                                            <img src="{{ asset('storage/assets/users/' . $employee->image) }}"
-                                                class="user-img" alt="user avatar">
+                                        <td class="text-center">
+                                            <a href="{{ route('admin.employees.show', $employee->getId()) }}">
+                                                <img src="{{ asset('storage/assets/users/' . $employee->image) }}"
+                                                    class="user-img" alt="user avatar"></br>
+                                                <span class="badge p-2"
+                                                    style="background-color:#23067a">{{ $employee ? $employee->firstName . ' ' . $employee->lastName : '' }}</span>
+                                            </a>
                                         </td>
-                                        <td><a href="{{ route('admin.employees.show', $employee->getId()) }}"><span
-                                                    class="badge p-2"style="background-color:#8971d0">{{ $employee->getFirstName() }}
-                                                    {{ $employee->getLastName() }}</span></a>
-                                        </td>
+                                        <td>{{ $employee->department->getName() }}</td>
+                                        <td>{{ $employee->job->title }}</td>
                                         <td>{{ $employee->getAge() }}</td>
                                         {{-- <td>{{ $employee->getEmail() }}</td> --}}
                                         <td>{{ $employee->getPhone() }}</td>
-                                        <td>{{ $employee->job->title }}</td>
-                                        <td>{{ $employee->department->getName() }}</td>
                                         <td>{{ $employee->getFatteningDate() }}</td>
                                         <td>{{ $employee->getSalary() }}DH</td>
                                         <td>
                                             <div class="dropdown">
-                                                <button class="btn btn-outline-secondary dropdown-toggle btn-sm"
+                                                <button class="btn btn-outline-secondary dropdown-toggle btn bg-secondary text-white"
                                                     type="button" id="employeeActionsDropdown" data-bs-toggle="dropdown"
-                                                    aria-haspopup="true" aria-expanded="false">
+                                                     aria-haspopup="true" aria-expanded="false">
                                                     Actions
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="employeeActionsDropdown">

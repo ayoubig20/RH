@@ -14,12 +14,12 @@ class userSeeder extends Seeder
      */
     public function run(): void
     {
-        //
-         \App\Models\User::factory()->create([
-            'name' => 'Test admin',
-            'email' => 'admin@admin.com',
-            'password' => bcrypt('123456'),
-         ]);
+        // //
+        //  \App\Models\User::factory()->create([
+        //     'name' => 'Test admin',
+        //     'email' => 'admin@admin.com',
+        //     'password' => bcrypt('123456'),
+        //  ]);
         //  Employee::factory()->create([
         //     'firstName' => 'kamal',
         //     'lastName' => 'kamal',

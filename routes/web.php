@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\AdminJobContoller;
 use App\Http\Controllers\Admin\AdminHomeController;
 use App\Http\Controllers\Admin\AdminTaskController;
@@ -77,8 +79,7 @@ Route::middleware('auth:web')->group(function () {
         'update' => 'admin.projects.update',
         'destroy' => 'admin.projects.destroy',
     ]);
-    Route::post('/admin/projects/{id}', [AdminProjectController::class, 'destroy'])->name('admin.projects.destroy');
-    ;
+    Route::post('/admin/projects/{id}', [AdminProjectController::class, 'destroy'])->name('admin.projects.destroy');;
     Route::resource('/admin/holidays', AdminHolidaysController::class)->names([
         'index' => 'admin.holidays.index',
         'create' => 'admin.holidays.create',
@@ -87,8 +88,7 @@ Route::middleware('auth:web')->group(function () {
         'edit' => 'admin.holidays.edit',
         'update' => 'admin.holidays.update',
         'destroy' => 'admin.holidays.destroy',
-    ]);
-    ;
+    ]);;
     Route::resource('/admin/tasks', AdminTaskController::class)->names([
         'index' => 'admin.tasks.index',
         'create' => 'admin.tasks.create',
@@ -134,24 +134,29 @@ Route::middleware('auth:web')->group(function () {
         //  'edit' => 'admin.archiveprojects.edit',
         'update' => 'admin.archiveprojects.update',
         'destroy' => 'admin.archiveprojects.destroy',
-    ]); Route::resource('/admin/attendance', AdminAttendanceController::class)->names([
+    ]);
+    Route::resource('/admin/attendance', AdminAttendanceController::class)->names([
         'index' => 'admin.attendance.index',
         'update' => 'admin.attendance.update',
         'destroy' => 'admin.attendance.destroy',
     ]);
-    Route::get('/admin/report/projects', [ProjectsReportController::class,'index'])->name('admin.report-projects.index');
-    Route::get('/admin/report/attendances', [AttendancesReportController::class,'index'])->name('admin.report-attendances.index');
+    Route::get('/admin/report/projects', [ProjectsReportController::class, 'index'])->name('admin.report-projects.index');
+    Route::get('/admin/report/attendances', [AttendancesReportController::class, 'index'])->name('admin.report-attendances.index');
 
-     Route::post('Search_project', [ProjectsReportController::class,'SearchProjects']);
-     Route::post('/notifications/mark-as-read/admin', function (Request $request) {
+    Route::post('Search_project', [ProjectsReportController::class, 'SearchProjects']);
+    Route::post('/notifications/mark-as-read/admin', function (Request $request) {
         $userUnreadNotifications = auth()->user('web')->unreadNotifications;
-    
+
         if ($userUnreadNotifications) {
             $userUnreadNotifications->markAsRead();
         }
-    
+
         return redirect()->back();
-     });
+    });
+});
+Route::group(['middleware' => ['auth']], function () {
+    Route::resource('roles', RoleController::class);
+    Route::resource('users', UserController::class);
 });
 
 Auth::routes();
