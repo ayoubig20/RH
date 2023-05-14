@@ -25,9 +25,15 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="text-center text-bold">
-                                <h3 class="page-title">Employee  profile {{ $employee->firstName }} {{ $employee->lastName }} </strong></h3>
+                                <h3 class="page-title">Employee profile {{ $employee->firstName }} {{ $employee->lastName }}
+                                    </strong></h3>
                             </div>
                         </div>
+                    </div>
+                    <div class="pull-right">
+                        <a class="btn " style="color: #FFF;
+                        background-color: #4F46E5;"
+                            href="{{ route('admin.employees.index') }}">Back</a>
                     </div>
                     <hr>
                     <form method="POST" action="{{ route('admin.employees.update', $employee->id) }}"
@@ -128,7 +134,7 @@
                             <label for="image" class="form-label">Profile Picture:</label>
                             <div class="input-group">
                                 <span class="input-group-text"><i class="bx bx-image"></i></span>
-                               
+
                                 <input type="file" class="form-control" id="image" name="image"
                                     accept=".jpg,.jpeg,.png">
                             </div>

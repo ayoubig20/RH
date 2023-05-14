@@ -39,13 +39,9 @@
                     </div>
                     <div></br></div>
                 </div>
-                @if ($message = Session::get('success'))
-                    <div class="alert alert-success">
-                        <p>{{ $message }}</p>
-                    </div>
-                @endif
+               
                 <div class="table-responsive">
-                    <table class="table text-center  mb-0 table-hover" id="exampl">
+                    <table class="table text-center  mb-0 table-hover" id="example">
                         <thead class="table-light text-center text-primary">
                             <th>#</th>
                             <th>Name</th>
@@ -53,63 +49,77 @@
                             <th>Roles</th>
                             <th width="280px">Action</th>
                         </thead>
-                        @foreach ($data as $key => $user)
-                            <tr>
-                                <td>{{ ++$i }}</td>
-                                <td>{{ $user->name }}</td>
-                                <td>{{ $user->email }}</td>
-                                <td>
-                                    @if (!empty($user->getRoleNames()))
-                                        @foreach ($user->getRoleNames() as $v)
-                                            <label class="badge badge-success bg-dark">{{ $v }}</label>
-                                        @endforeach
-                                    @endif
-                                </td>
-                                <td>
-                                    {{-- <a class="btn btn-info" href="{{ route('users.show', $user->id) }}">Show</a> --}}
-                                    <a class="btn btn-primary" href="{{ route('users.edit', $user->id) }}">Edit</a>
-                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                        data-bs-target="#deleteSuperAdminModal-{{ $user->id }}">
-                                        <i class="bi-trash"></i> Delete
-                                    </button>
-                                    <div class="modal fade" id="deleteSuperAdminModal-{{ $user->id }}" tabindex="-1"
-                                        aria-labelledby="deleteSuperAdminModal-{{ $user->id }}-label"
-                                        aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title"
-                                                        id="deleteSuperAdminModal-{{ $user->id }}-label">
-                                                        Confirm Delete Administrator</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p>Are you sure you want to delete this administrator?</p>
-                                                    <input type="text" class="form-control" id="name" name="name"
-                                                        value="{{ $user->name }}" readonly>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-bs-dismiss="modal">Cancel</button>
-                                                    <form action="{{ route('users.destroy', $user->id) }}" method="POST">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger">Delete</button>
-                                                    </form>
+                        <tbody class="text-bold">
+                            @foreach ($data as $key => $user)
+                                <?php
+                                $pageNumber = $data->currentPage();
+                                $resultsPerPage = $data->perPage();
+                                $start = ($pageNumber - 1) * $resultsPerPage;
+                                ?>
+                                <tr>
+                                    <?php $i = $start + $key + 1; ?>
+                                    <td>{{ $i }}</td>
+                                    <td>{{ $user->name }}</td>
+                                    <td>{{ $user->email }}</td>
+                                    <td>
+                                        @if (!empty($user->getRoleNames()))
+                                            @foreach ($user->getRoleNames() as $v)
+                                                <label class="badge badge-success bg-dark">{{ $v }}</label>
+                                            @endforeach
+                                        @endif
+                                    </td>
+                                    <td>
+                                        {{-- <a class="btn btn-info" href="{{ route('users.show', $user->id) }}">Show</a> --}}
+                                        <a class="btn btn-primary" href="{{ route('users.edit', $user->id) }}">Edit</a>
+                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                            data-bs-target="#deleteSuperAdminModal-{{ $user->id }}">
+                                            <i class="bi-trash"></i> Delete
+                                        </button>
+                                        <div class="modal fade" id="deleteSuperAdminModal-{{ $user->id }}"
+                                            tabindex="-1"
+                                            aria-labelledby="deleteSuperAdminModal-{{ $user->id }}-label"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title"
+                                                            id="deleteSuperAdminModal-{{ $user->id }}-label">
+                                                            Confirm Delete Administrator</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>Are you sure you want to delete this administrator?</p>
+                                                        <input type="text" class="form-control" id="name"
+                                                            name="name" value="{{ $user->name }}" readonly>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Cancel</button>
+                                                        <form action="{{ route('users.destroy', $user->id) }}"
+                                                            method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                                        </form>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        @endforeach
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
                     </table>
-                    {!! $data->render() !!}
 
                 </div>
             </div>
         </div>
+    </div>
+    <div class="d-flex justify-content-center">
+        <nav aria-label="users">
+            {{ $data->links('vendor.pagination.bootstrap-4') }}
+        </nav>
     </div>
     {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
 @section('script')
@@ -118,7 +128,7 @@
     <script>
         $(document).ready(function() {
             var table = $('#example').DataTable({
-                paging: true,
+                paging: false,
                 pageLength: 5
             });
 

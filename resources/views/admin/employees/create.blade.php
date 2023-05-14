@@ -32,6 +32,11 @@
                         </div>
                     </div>
                 </div>
+                <div class="pull-right">
+                    <a class="btn " style="color: #FFF;
+                    background-color: #4F46E5;"
+                        href="{{ route('admin.employees.index') }}">Back</a>
+                </div>
                 <hr>
                 <form method="POST" action="{{ route('admin.employees.store') }}" enctype="multipart/form-data"
                     class="row g-3">

@@ -1,4 +1,4 @@
-<html lang="en" class="semi-dark color-header headercolor5">
+<html lang="en" class="color-header headercolor2">
 
 <head>
     <!-- Required meta tags -->

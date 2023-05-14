@@ -12,7 +12,6 @@
 
     </div>
     <!--navigation-->
-
     <ul class="metismenu" id="menu">
         @can('list-statistics')
             <li>
@@ -100,7 +99,7 @@
                     @endcan
                     @can('list-roles')
                         <li> <a href="{{ route('roles.index') }}"><i class="bx bx-right-arrow-alt"></i><i
-                                    class='bx bxs-shield'></i>Permissions</a>
+                                    class='bx bxs-shield'></i>Roles Permissions</a>
                         </li>
                     @endcan
                 </ul>
@@ -159,8 +158,6 @@
                 </ul>
             </li>
         @endcan
-
-
         <!--end navigation-->
 </div>
 <!--end sidebar wrapper -->

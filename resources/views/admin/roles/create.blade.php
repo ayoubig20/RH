@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Employees')
+@section('title', 'Roles and permissions')
 
 @section('wrapper')
     <!--start page wrapper -->
@@ -15,56 +15,54 @@
                             <li class="breadcrumb-item"><a href="{{ route('admin.home.index') }}"><i
                                         class="bx bx-home-alt"></i></a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Data Cards Projects</li>
+                            <li class="breadcrumb-item active" aria-current="page">Data Roles and permissions</li>
                         </ol>
                     </nav>
                 </div>
             </div>
 
 
-            <div class="row">
-                <div class="col-lg-12 margin-tb">
-                    <div class="pull-left">
-                        <h2>Create New Role</h2>
-                    </div>
-                    <div class="pull-right">
-                        <a class="btn btn-primary" href="{{ route('roles.index') }}"> Back</a>
+            <div class="card">
+                <div class="col-12">
+                    <div class="text-center text-bold">
+                        <h3 class="page-title">Create New Roles and permissions
+                        </h3>
                     </div>
                 </div>
-            </div>
-            @if (count($errors) > 0)
-                <div class="alert alert-danger">
-                    <strong>Whoops!</strong> There were some problems with your input.<br><br>
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
+                @include('layouts.notify')
+
+                <div class="pull-right">
+                    <a class="btn " style="color: #FFF;
+                    background-color: #4F46E5;" href="{{ route('roles.index') }}"> Back</a>
                 </div>
-            @endif
-            {!! Form::open(['route' => 'roles.store', 'method' => 'POST']) !!}
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <strong>Name:</strong>
-                        {!! Form::text('name', null, ['placeholder' => 'Name', 'class' => 'form-control']) !!}
+
+                <form action="{{ route('roles.store') }}" method="POST">
+                    @csrf
+                    <div class="row m-auto">
+                        <div class="col-xs-12 col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <label for="name"><strong>Name:</strong></label>
+                                <input type="text" name="name" placeholder="Name" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <strong>Permission:</strong>
+                                <br />
+                                @foreach ($permission as $value)
+                                    <label><input type="checkbox" name="permission[]" value="{{ $value->id }}"
+                                            class="name">
+                                        {{ $value->name }}</label>
+                                    <br />
+                                @endforeach
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
                     </div>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <strong>Permission:</strong>
-                        <br />
-                        @foreach ($permission as $value)
-                            <label>{{ Form::checkbox('permission[]', $value->id, false, ['class' => 'name']) }}
-                                {{ $value->name }}</label>
-                            <br />
-                        @endforeach
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
+                </form>
+
             </div>
         </div>
-    </div>
-@endsection
+    @endsection

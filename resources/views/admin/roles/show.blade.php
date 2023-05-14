@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Employees')
+@section('title', 'Roles and permissions')
 
 @section('wrapper')
     <!--start page wrapper -->
@@ -15,45 +15,61 @@
                             <li class="breadcrumb-item"><a href="{{ route('admin.home.index') }}"><i
                                         class="bx bx-home-alt"></i></a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Data Cards Projects</li>
+                            <li class="breadcrumb-item active" aria-current="page">Data Roles and permissions</li>
                         </ol>
                     </nav>
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-lg-12 margin-tb">
-                    <div class="pull-left">
-                        <h2> Show Role</h2>
-                    </div>
-                    <div class="pull-right">
-                        <a class="btn btn-primary" href="{{ route('roles.index') }}"> Back</a>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <strong>Name:</strong>
-                        {{ $role->name }}
+
+            <div class="card">
+                <div class="col-12">
+                    <div class="text-center text-bold">
+                        <h3 class="page-title">Show Role and permission
+                        </h3>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <strong>Permissions:</strong>
-                        @if (!empty($rolePermissions))
-                            @foreach ($rolePermissions as $v)
-                                <label class="label label-success">{{ $v->name }},</label>
-                            @endforeach
+                @include('layouts.notify')
+
+                <div class="pull-right">
+                    <a class="btn " style="color: #FFF;
+                    background-color: #4F46E5;"
+                        href="{{ route('roles.index') }}">Back</a>
+                    <div></br></div>
+                </div>
+                <div class="row m-auto">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="form-group">
+                            <strong>Name:</strong>
+                           <strong>{{ $role->name }}</strong> 
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="form-group">
+                            <strong>Permissions:</strong>
+                            @if (!empty($rolePermissions))
+                                @php $count = 0; @endphp
+                                @foreach ($rolePermissions as $v)
+                                    @if ($count % 2 == 0)
+                                        <div class="row">
+                                    @endif
+                                    <div class="col-md-6">
+                                        <label class="label label-success">{{ $v->name }}</label>
+                                    </div>
+                                    @php $count++; @endphp
+                                    @if ($count % 2 == 0)
+                        </div>
                         @endif
+                        @endforeach
+                        @if ($count % 2 != 0)
                     </div>
+                    @endif
+                    @endif
                 </div>
+
             </div>
-
-
-
-
         </div>
     </div>
+ 
 
 @endsection
