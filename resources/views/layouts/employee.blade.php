@@ -43,7 +43,7 @@
         @include('layouts.employee.nav')
         <!--end navigation-->
         <!--start page wrapper -->
-        
+
         @yield('wrapper')
         <!--end page wrapper -->
         <!--start overlay-->
@@ -193,6 +193,7 @@
             $sidebar.toggleClass(storedColor);
         }
     </script>
+  
     <!--app JS-->
     @yield('script')
 </body>

@@ -170,8 +170,24 @@
                 <script src="{{ URL::asset('assets/plugins/metismenu/js/metisMenu.min.js') }}"></script>
                 <script src="{{ URL::asset('assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js') }}"></script>
                 <script src="{{ URL::asset('assets/js/app.js') }}"></script>
+                {{-- <script>
+                    setInterval(function() {
+                        $("#task-list-to do").load(window.location.href +
+                            " #task-list-to do");
+                        $("#task-list-in progress").load(window.location.href +
+                            " #task-list-in progress");
+                        $("#task-list-done").load(window.location.href +
+                            " #task-list-done");
+                        $("#no tasks to").load(window.location.href +
+                            " #no tasks to");
+                        $("#no tasks in").load(window.location.href +
+                            " #no tasks in");
+                        $("#no tasks do").load(window.location.href +
+                            " #no tasks do");
 
-
+                    }, 1000);
+                </script> --}}
+           
                 {{-- <script>
                     window.addEventListener('load', function() {
                         const preloader = document.querySelector('.preloader');

@@ -62,7 +62,7 @@
                     <li class="nav-item dropdown dropdown-large">
                         <a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative" href="#"
                             role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <span class="alert-count">
+                            <span class="alert-count" >
                                 @if (auth()->user()->unreadNotifications->count() > 0)
                                     {{ auth()->user()->unreadNotifications->count() }}
                                 @else
@@ -207,4 +207,10 @@
         </nav>
     </div>
 </header>
+{{-- <script>
+    setInterval(function() {
+        $("#notifications_count").load(window.location.href + " #notifications_count");
+        $("#unreadNotifications").load(window.location.href + " #unreadNotifications");
+    }, 1000);
+</script> --}}
 <!--end header -->

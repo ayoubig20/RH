@@ -89,7 +89,7 @@
                 <ul>
                     @can('list-category')
                         <li> <a href="{{ route('admin.category.index') }}"><i class="bx bx-right-arrow-alt"></i><i
-                                    class='bx bxs-briefcase'></i></i>Project Category</a>
+                                    class='bx bxs-briefcase'></i></i>Projects Category</a>
                         </li>
                     @endcan
                     @can('list-job')
@@ -116,12 +116,12 @@
                 <ul>
                     @can('archive-employee')
                         <li> <a href="{{ route('admin.archiveEmployees.index') }}""><i class="bx bx-right-arrow-alt"></i><i
-                                    class='bx bxs-group'></i>Archive Empolyes</a>
+                                    class='bx bxs-group'></i>Archive Empolyees</a>
                         </li>
                     @endcan
                     @can('archive-projects')
                         <li> <a href="{{ route('admin.archiveprojects.index') }}"><i class="bx bx-right-arrow-alt"></i><i
-                                    class='bx bx-atom'></i></i>Archive Project </a>
+                                    class='bx bx-atom'></i></i>Archive Projects </a>
                         </li>
                     @endcan
                 </ul>

@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', 'Employees')
+@section('title', 'Projects Category')
 @section('wrapper')
     <!--start page wrapper -->
     <div class="page-wrapper">

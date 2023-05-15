@@ -159,16 +159,16 @@
         <div class="content">
             <!-- Start Content-->
             <div class="container-fluid">
-                <div class="col-md-4 float-start">
+                <div class="col-md-4 float-start" id="tasks">
                     <div class="board">
-                        <div class="tasks" data-plugin="dragula"
+                        <div class="tasks" data-plugin="dragula" 
                             data-containers='["task-list-to do", "task-list-in progress", "task-list-done"]'>
                             <h4 class="card-header  task-header bg-secondary text-sm-center">To Do</h4>
                             <div id="task-list-to do" class="task-list-items ">
                                 @if ($viewData['tasks']->where('status', 'to do')->isEmpty())
                                     <!-- Render an empty div when there are no tasks -->
-                                    <div class="card ">
-                                        <div class="card-body p-3">
+                                    <div id='no tasks to' class="card ">
+                                        <div  class="card-body p-3">
                                             No tasks
                                         </div>
                                     </div>
@@ -409,8 +409,8 @@
                         <div id="task-list-in progress" class="task-list-items ">
                             @if ($viewData['tasks']->where('status', 'in progress')->isEmpty())
                                 <!-- Render an empty div when there are no tasks -->
-                                <div class="card">
-                                    <div class="card-body">
+                                <div id="no tasks in" class="card">
+                                    <div  class="card-body">
                                         No tasks
                                     </div>
                                 </div>
@@ -643,7 +643,7 @@
                         <div id="task-list-done" class="task-list-items">
                             @if ($viewData['tasks']->where('status', 'done')->isEmpty())
                                 <!-- Render an empty div when there are no tasks -->
-                                <div class="card ms-2">
+                                <div  id="no tasks do" class="card ms-2">
                                     <div class="card-body p-3">
                                         No tasks
                                     </div>

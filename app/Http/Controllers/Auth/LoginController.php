@@ -61,11 +61,8 @@ class LoginController extends Controller
     {
         if ($request->get('type') == 'user') {
             return view('auth.adminLogin');
-
         } else {
              return view('auth.login');
-            return $request;
-
         }
     }
 
@@ -88,7 +85,7 @@ class LoginController extends Controller
 
         if ($type === 'employee' && Auth::guard('employee')->attempt($credentials)) {
             Attendance::markAttendance($request);
-            return redirect()->intended('/employee');
+             return redirect()->intended('/employee');
             // return $request;
 
         }
