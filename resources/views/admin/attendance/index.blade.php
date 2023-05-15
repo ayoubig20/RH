@@ -19,7 +19,7 @@
                 </div>
 
             </div>
-            <div class="card">
+            <div class="card m-auto">
                 <!--end breadcrumb-->
                 @include('layouts.notify')
                 <div class="col-12">
@@ -33,8 +33,8 @@
                     </div>
                 </div>
                 </br>
-                <div class="table-responsive">
-                    <table id="example2" class="table table-bordered -mb-2 text-center table-hover">
+                <div class="table-responsive mx-2">
+                    <table id="example" class="table table-bordered -mb-2 text-center table-hover">
                         <thead class="table-light text-center text-primary ">
                             <tr>
                                 <th>#</th>
@@ -160,4 +160,20 @@
             </div>
         </div>
     </div>
+    @section('script')
+    <script src="{{ asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            var table = $('#example').DataTable({
+                paging: true,
+                pageLength: 10
+            });
+
+            table.buttons().container()
+                .appendTo('#example_wrapper .col-md-6:eq(0)');
+        });
+    </script>
+
+@endsection
 @endsection

@@ -23,17 +23,15 @@
     <div class="wrapper">
         <div class="section-authentication-signin d-flex align-items-center justify-content-center my-5 my-lg-0">
             <div class="container-fluid">
-                <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-3">
-
+                <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-3 ">
                     <div class="col mx-auto">
                         <div class="card shadow-lg rounded-1">
                             <div class="mb-4 text-center">
                                 <img src="{{ URL::asset('assets/images/logo-purple.png') }}" width="180"
                                     alt="" />
                             </div>
-
-                            {{-- <div class="card-body"> --}}
-                                {{-- <div class="border p-7 rounded"> --}}
+                            <div class="card-body">
+                                <div class="border p-7 rounded">
                                     <div class="card-body">
                                         <form method="POST" action="{{ route('login') }}">
                                             @csrf
@@ -74,16 +72,16 @@
                                                 </div>
                                             </div>
 
-                                            <div class="form-group row">
-                                                <label for="type" class="col-md-4 col-form-label text-md-right"
-                                                    hidden>{{ __('Login as') }}</label>
+                                            <div class="form-group row" hidden>
+                                                <label for="type"
+                                                    class="col-md-4 col-form-label text-md-right">{{ __('Login as') }}</label>
 
                                                 <div class="form-group mb-3">
-                                                    <select id="type"
+                                                    <select id="type" value="admin"
                                                         class="form-control @error('type') is-invalid @enderror"
                                                         name="type" hidden>
                                                         <option value="user">Admin</option>
-                                                        <option value="employee" selected>Employee</option>
+                                                        <option value="employee">Employee</option>
                                                     </select>
 
                                                     @error('type')

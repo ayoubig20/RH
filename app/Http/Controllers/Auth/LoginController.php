@@ -57,10 +57,16 @@ class LoginController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function showLoginForm()
+    public function showLoginForm(Request $request)
     {
+        if ($request->get('type') == 'user') {
+            return view('auth.adminLogin');
 
-        return view('auth.login');
+        } else {
+             return view('auth.login');
+            return $request;
+
+        }
     }
 
     /**
@@ -83,10 +89,14 @@ class LoginController extends Controller
         if ($type === 'employee' && Auth::guard('employee')->attempt($credentials)) {
             Attendance::markAttendance($request);
             return redirect()->intended('/employee');
+            // return $request;
+
         }
 
         if ($type === 'user' && Auth::guard()->attempt($credentials)) {
             return redirect()->intended('/admin');
+            // return $request;
+
         }
 
         // Check if email exists

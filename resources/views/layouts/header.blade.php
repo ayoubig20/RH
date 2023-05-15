@@ -61,30 +61,37 @@
                     </li>
                     <li class="nav-item dropdown dropdown-large">
                         <a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative" href="#"
-                            role="button" data-bs-toggle="dropdown" aria-expanded="false"> <span class="alert-count">
-                                {{ auth()->user()->unreadNotifications->count() }}
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="alert-count">
+                                @if (auth()->user()->unreadNotifications->count() > 0)
+                                    {{ auth()->user()->unreadNotifications->count() }}
+                                @else
+                                    &nbsp; 
+                                @endif
                             </span>
                             <i class='bx bx-bell'></i>
                         </a>
+
                         <div class="dropdown-menu dropdown-menu-end">
                             <a href="#">
                                 <div class="msg-header">
                                     <p class="msg-header-title">Notifications</p>
                                     <p class="msg-header-clear ms-auto">
                                         @if (auth()->guard('web')->check())
-                                        <form action="{{ url('/notifications/mark-as-read/admin') }}" method="POST">
-                                            @csrf
-                                            <button style="border:none" type="submit">Mark all notifications as
-                                                read</button>
-                                        </form>
-                                    @elseif (auth()->guard('employee')->check())
-                                    <form action="{{ url('/notifications/mark-as-read') }}" method="POST">
-                                        @csrf
-                                        <button style="border:none" type="submit">Mark all notifications as
-                                            read</button>
-                                    </form>
-                                    @endif
-                                    
+                                            <form action="{{ url('/notifications/mark-as-read/admin') }}"
+                                                method="POST">
+                                                @csrf
+                                                <button style="border:none" type="submit">Mark all notifications as
+                                                    read</button>
+                                            </form>
+                                        @elseif (auth()->guard('employee')->check())
+                                            <form action="{{ url('/notifications/mark-as-read') }}" method="POST">
+                                                @csrf
+                                                <button style="border:none" type="submit">Mark all notifications as
+                                                    read</button>
+                                            </form>
+                                        @endif
+
                                     </p>
                                 </div>
                                 <div class="header-notifications-list">
@@ -95,7 +102,7 @@
                                                     {{-- <a class="d-flex p-3 border-bottom"
                                                         href="{{ url('/employee/tasks') }}/{{ $notification->data['id'] }}">  --}}
                                                     <a class="d-flex p-3 border-bottom"
-                                                        href="{{$notification->data['url']}}">
+                                                        href="{{ $notification->data['url'] }}">
                                                         <div class="notifyimg bg-pink">
                                                             <i class="la la-file-alt text-white"></i>
                                                         </div>
