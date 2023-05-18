@@ -75,7 +75,7 @@
                 <a class="" href="{{ route('admin.department.index') }}">
                     <div class="parent-icon"> <i class="bx bx-buildings"></i>
                     </div>
-                    <div class="menu-title">Departement</div>
+                    <div class="menu-title">Departements</div>
                 </a>
             </li>
         @endcan
@@ -84,7 +84,7 @@
                 <a class="has-arrow" href="javascript:;">
                     <div class="parent-icon"> <i class='bx bxs-cog'></i>
                     </div>
-                    <div class="menu-title">Setting</div>
+                    <div class="menu-title">Settings</div>
                 </a>
                 <ul>
                     @can('list-category')
@@ -94,7 +94,7 @@
                     @endcan
                     @can('list-job')
                         <li> <a href="{{ route('admin.jobs.index') }}"><i class="bx bx-right-arrow-alt"></i><i
-                                    class='bx bxs-briefcase-alt-2'></i>list job</a>
+                                    class='bx bxs-briefcase-alt-2'></i>list jobs</a>
                         </li>
                     @endcan
                     @can('list-roles')
@@ -110,7 +110,7 @@
                 <a class="has-arrow" href="javascript:;">
                     <div class="parent-icon"> <i class='bx bxs-archive'></i>
                     </div>
-                    <div class="menu-title">Archive</div>
+                    <div class="menu-title">Archives</div>
                 </a>
 
                 <ul>
@@ -142,7 +142,7 @@
                 <a href="javascript:;" class="has-arrow">
                     <div class="parent-icon"><i class='bx bxs-file'></i>
                     </div>
-                    <div class="menu-title">Report</div>
+                    <div class="menu-title">Reports</div>
                 </a>
                 <ul>
                     @can('report-projects')

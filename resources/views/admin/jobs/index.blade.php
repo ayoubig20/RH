@@ -21,16 +21,7 @@
                     </nav>
                 </div>
             </div>
-            {{-- <div class="text-sm-end">
-                <div class="btn-group mb-3 d-none d-sm-inline-block">
-                    <a href="{{ route('admin.jobs.index', ['view' => 'card']) }}" class="btn btn-muted"
-                        style="{{ request()->get('view') == 'card' ? 'background-color: #6c757d;border-color: #6c757d;color: #fff;font-weight: bold;' : 'background-color: transparent;border-color: #6c757d;color: #6c757d;' }}"><i
-                            class='bx bxs-grid-alt'></i></a>
-                    <a href="{{ route('admin.jobs.index', ['view' => 'list']) }}" class="btn btn-muted"
-                        style="{{ request()->get('view') != 'card' ? 'background-color: #6c757d;border-color: #6c757d;color: #fff;font-weight: bold;' : 'background-color: transparent;border-color: #6c757d;color: #6c757d;' }}"><i
-                            class='bx bx-list-ul'></i></a>
-                </div>
-            </div> --}}
+           
             <!--end breadcrumb-->
             @include('layouts.notify')
             <!-- Button trigger modal -->
@@ -48,7 +39,7 @@
                         Job</button>
                 </div>
               
-                <!-- Modal -->
+                <!-- Modal add job -->
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
                     <div class="modal-dialog">

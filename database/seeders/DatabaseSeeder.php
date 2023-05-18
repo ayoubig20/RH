@@ -40,6 +40,5 @@ class DatabaseSeeder extends Seeder
         $this->call(CreateAdminUserSeeder::class);
         $this->call(HolidaysTableSeeder::class);
         Working_days::initializeWorkingDaysTable();
-
     }
 }

@@ -296,7 +296,7 @@
                         <h4>Freelancer</h4>
                         <p>
                             <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                            Overall, we're extremely satisfied with  employee management system, and we
+                            Overall, we're extremely satisfied with employee management system, and we
                             wouldn't hesitate to recommend it to any organization looking to modernize their HR practices
                             and achieve greater success.
                             <i class="bx bxs-quote-alt-right quote-icon-right"></i>
@@ -374,7 +374,8 @@
 
                 <div class="row mt-5 justify-content-center" data-aos="fade-up">
                     <div class="col-lg-10">
-                        <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+                        <form action="{{ route('home.contact') }}" method="post" role="form" class="php-email-form">
+                            @csrf
                             <div class="row">
                                 <div class="col-md-6 form-group">
                                     <input type="text" name="name" class="form-control" id="name"

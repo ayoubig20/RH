@@ -2,7 +2,7 @@
 @section('title', $viewData['title'])
 @section('style')
     <link href="assets/plugins/vectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
-    <link href="assets/plugins/highcharts/css/highcharts-white.css" rel="stylesheet" />
+  
 @endsection
 @section('wrapper')
     <div class="page-wrapper">
@@ -12,9 +12,8 @@
 
                 <div class="card-body">
                     <div class="row align-items-center">
-                        <div  style="background-color:#8971d0; background-size: cover; background-position: center; background-repeat: no-repeat;"
-                        {{-- <div style="background-image: url('{{ URL::asset('assets/images/bg-themes/5.png') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;" --}}
-                            class="card text-white text-center">
+                        <div style="background-color:#27104e; background-size: cover; background-position: center; background-repeat: no-repeat;"
+                            {{-- <div style="background-image: url('{{ URL::asset('assets/images/bg-themes/5.png') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;" --}} class="card text-white text-center">
                             <div class="card-body">
                                 @if (auth()->guard('web')->check())
                                     <strong>
@@ -35,7 +34,7 @@
 
                         <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4">
                             <div class="col">
-                                <div class="card radius-10 bg-primary bg-gradient">
+                                <div class="card radius-10 " style="background: #64379f"">
                                     <div class="card-body">
                                         <div class="d-flex align-items-center">
                                             <div>
@@ -51,7 +50,7 @@
                                 </div>
                             </div>
                             <div class="col">
-                                <div class="card radius-10 bg-danger bg-gradient">
+                                <div class="card radius-10  " style="background: #64379f"">
                                     <div class="card-body">
                                         <div class="d-flex align-items-center">
                                             <div>
@@ -67,7 +66,7 @@
                                 </div>
                             </div>
                             <div class="col">
-                                <div class="card radius-10 bg-warning bg-gradient">
+                                <div class="card radius-10 " style="background: #64379f">
                                     <div class="card-body">
                                         <div class="d-flex align-items-center">
                                             <div>
@@ -83,7 +82,7 @@
                                 </div>
                             </div>
                             <div class="col">
-                                <div class="card radius-10 bg-success bg-gradient">
+                                <div class="card radius-10 " style="background: #64379f"">
                                     <div class="card-body">
                                         <div class="d-flex align-items-center">
                                             <div>
@@ -110,12 +109,12 @@
                         <div class="card radius-10 w-100">
                             <div class="card-body">
                                 <div class="text-center">
-                                    <span class="badge m-auto text-center" style="background-color:#8971d0">
+                                    <span class="badge m-auto text-center" style="background-color:#27104e">
                                         <h4 class="mb-0 text-white text-center">Priority Projects</h4>
                                     </span>
                                 </div> </br>
                                 <div class="col">
-                                    <div class="card  text-white" style="background-color:#FF4858;">
+                                    <div class="card  text-white" style="background-color:#A16AE8;">
                                         <div class="card-body">
                                             <h3>High Priority Projects</h3>
                                             <strong>
@@ -125,7 +124,7 @@
                                     </div>
                                 </div>
                                 <div class="col">
-                                    <div class="card"style="background-color:rgb(255, 255, 141);">
+                                    <div class="card"style="background-color:#A16AE8;">
                                         <div class="card-body">
                                             <h3>Medium Priority Projects</h3>
                                             <strong>
@@ -138,7 +137,7 @@
                                 </div>
 
                                 <div class="col">
-                                    <div class="card  text-white" style="background-color: rgb(240, 248, 255);">
+                                    <div class="card  text-white" style="background-color: #A16AE8;">
                                         <div class="card-body">
                                             <h3>Low Priority Projects</h3>
                                             <strong>
@@ -162,7 +161,8 @@
                             </br>
                             <div class="text-center">
                                 <span class="badge m-auto text-center">
-                                    <h4 class="mb-0 text-white text-center" style="background-color:#8971d0;"> Projects status</h4>
+                                    <h4 class="mb-0 text-white text-center" style="background-color:#27104e;"> Projects
+                                        status</h4>
                                 </span>
                             </div> </br>
                             <div class="card-body">
@@ -174,9 +174,8 @@
                 </div>
 
                 <!--end row-->
-                <div style="background-color:#8971d0; background-size: cover; background-position: center; background-repeat: no-repeat;"
-                {{-- <div style="background-image: url('{{ URL::asset('assets/images/bg-themes/5.png') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;" --}}
-                    class="card text-white text-center">
+                <div style="background-color:#9c19a8; background-size: cover; background-position: center; background-repeat: no-repeat;"
+                    {{-- <div style="background-image: url('{{ URL::asset('assets/images/bg-themes/5.png') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;" --}} class="card text-white text-center">
                     <h1 class="text-white">Projects</h1>
                 </div>
                 <div class="card radius-10">
@@ -202,7 +201,8 @@
                                         <tr>
                                             <td><strong>{{ $i }}</td></strong>
                                             <td><a href="{{ route('admin.projects.show', $project->getId()) }}"><span
-                                                        class="badge  p-2" style="background-color:#8971d0;">{{ $project->getName() }}</span></a>
+                                                        class="badge  p-2"
+                                                        style="background-color:#27104e;">{{ $project->getName() }}</span></a>
                                             </td>
                                             <td style="padding: 5px;">
                                                 @if ($project->priority == 'high')
@@ -241,27 +241,16 @@
                                                         $employee = $tasksByEmployee->first()->employee;
                                                     @endphp
                                                     <div class="team-members text-nowrap">
-                                                        <a href="{{ route('admin.employees.show', $employee->getId()) }}"
-                                                            class="team-member-avatar"
-                                                            title="{{ $employee->firstName }} {{ $employee->lastName }}"
-                                                            data-toggle="tooltip">
-                                                            <img src="{{ asset('storage/assets/users/' . $employee->image) }}"
-                                                                class="user-img" alt="user avatar">
-                                                        </a>
-                                                        <div class="dropdown avatar-dropdown">
 
-                                                            <div class="dropdown-menu dropdown-menu-right"
-                                                                id="avatar-dropdown-{{ $employee->id }}">
-                                                                <div class="avatar-group">
-                                                                    @foreach ($tasksByEmployee as $task)
-                                                                        <a class="avatar avatar-xs" href="#"
-                                                                            title="{{ $task->name }}">
-                                                                            <img src="{{ asset('storage/assets/users/' . $task->employee->image) }}"
-                                                                                class="user-img" alt="user avatar">
-                                                                        </a>
-                                                                    @endforeach
-                                                                </div>
-                                                            </div>
+                                                        <div class="avatar-group">
+                                                            <a href="{{ route('admin.employees.show', $employee->getId()) }}"
+                                                                class="team-member-avatar"
+                                                                title="{{ $employee->firstName }} {{ $employee->lastName }}"
+                                                                data-toggle="tooltip">
+                                                                <img src="{{ asset('storage/assets/users/' . $employee->image) }}"
+                                                                    class="user-img" alt="user avatar">
+                                                            </a>
+                                    
                                                         </div>
                                                     </div>
                                                 @endforeach
@@ -273,9 +262,8 @@
                         </div>
                     </div>
                 </div>
-                <div style="background-color:#8971d0; background-size: cover; background-position: center; background-repeat: no-repeat;"
-                {{-- <div style="background-image: url('{{ URL::asset('assets/images/bg-themes/5.png') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;" --}}
-                    class="card text-white text-center">
+                <div style="background-color:#9c19a8; background-size: cover; background-position: center; background-repeat: no-repeat;"
+                    {{-- <div style="background-image: url('{{ URL::asset('assets/images/bg-themes/5.png') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;" --}} class="card text-white text-center">
                     <h1 class="text-white">Tasks</h1>
                 </div>
                 <div class="card radius-10">
@@ -304,9 +292,11 @@
                                                     @if ($task->getProject())
                                                         <a
                                                             href="{{ route('employee.projects.show', $task->getProject()->getId()) }}"><span
-                                                                class="badge  p-2" style="background-color:#8971d0;">{{ $task->getProject()->name }}</span></a>
+                                                                class="badge  p-2"
+                                                                style="background-color:#27104e;">{{ $task->getProject()->name }}</span></a>
                                                     @else
-                                                        <span class="badge  p-2" style="background-color:#a6acec">No project assigned</span>
+                                                        <span class="badge  p-2" style="background-color:#a6acec">No
+                                                            project assigned</span>
                                                     @endif
                                                     {{-- <a href="{{ route('admin.projects.show', $task->getProject()->getId()) }}"><span
                                           class="badge bg-dark p-2">{{ $task->getProject()->name }}</span></a></td> --}}
@@ -347,7 +337,7 @@
                                         backgroundColor: [
                                             '#17a2b8', // Completed Tasks
                                             '#007bff', // Tasks in Progress
-                                            '#28a745;' // Tasks to do
+                                            '#9c19a8', // Tasks to do
                                         ],
                                         data: [{{ $viewData['numCompletedTasks'] }}, {{ $viewData['numProgressTasks'] }},
                                             {{ $viewData['numToDOTasks'] }}
@@ -381,12 +371,12 @@
                                         {{ $viewData['numCompletedPoject'] }}
                                     ],
                                     backgroundColor: [
-                                        'rgb(97, 97, 97)', // gris
+                                        '#9c19a8', // 
                                         'rgb(79, 195, 247)', // bleu
                                         'rgb(105, 240, 174)' // vert
                                     ],
                                     hoverBackgroundColor: [
-                                        'rgb(97, 97, 97)', // gris
+                                        '#9c19a8', // 
                                         'rgb(79, 195, 247)', // bleu
                                         'rgb(105, 240, 174)' // vert
                                     ],

@@ -35,7 +35,8 @@ use App\Http\Controllers\Admin\ArchivePro\AdminProArchiveController;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name("home.index");
-Route::get('/about', [HomeController::class, 'about'])->name("home.about");
+// Route::get('/about', [HomeController::class, 'about'])->name("home.about");
+Route::post('/contact', [HomeController::class, 'contact'])->name("home.contact");
 
 // Route::get('/phpinfo', function() {
 //     return phpinfo();
@@ -79,7 +80,8 @@ Route::middleware('auth:web')->group(function () {
         'update' => 'admin.projects.update',
         'destroy' => 'admin.projects.destroy',
     ]);
-    Route::post('/admin/projects/{id}', [AdminProjectController::class, 'destroy'])->name('admin.projects.destroy');;
+    Route::post('/admin/projects/{id}', [AdminProjectController::class, 'destroy'])->name('admin.projects.destroy');
+    ;
     Route::resource('/admin/holidays', AdminHolidaysController::class)->names([
         'index' => 'admin.holidays.index',
         'create' => 'admin.holidays.create',
@@ -88,7 +90,8 @@ Route::middleware('auth:web')->group(function () {
         'edit' => 'admin.holidays.edit',
         'update' => 'admin.holidays.update',
         'destroy' => 'admin.holidays.destroy',
-    ]);;
+    ]);
+    ;
     Route::resource('/admin/tasks', AdminTaskController::class)->names([
         'index' => 'admin.tasks.index',
         'create' => 'admin.tasks.create',
@@ -142,6 +145,7 @@ Route::middleware('auth:web')->group(function () {
     ]);
     Route::get('/admin/report/projects', [ProjectsReportController::class, 'index'])->name('admin.report-projects.index');
     Route::get('/admin/report/attendances', [AttendancesReportController::class, 'index'])->name('admin.report-attendances.index');
+    Route::post('/admin/report/attendances', [AttendancesReportController::class, 'genrateAttendances'])->name('admin.report-attendances.genrateAttendances');
 
     Route::post('Search_project', [ProjectsReportController::class, 'SearchProjects']);
     Route::post('/notifications/mark-as-read/admin', function (Request $request) {

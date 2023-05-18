@@ -26,7 +26,6 @@
                 <div class="content">
                     <!-- Start Content-->
                     <div class="container-fluid">
-                        <div class="card">
                             <div class="row">
                                 <div class="col-12">
                                     <div class="text-center text-bold">

@@ -87,13 +87,11 @@ class LoginController extends Controller
             Attendance::markAttendance($request);
              return redirect()->intended('/employee');
             // return $request;
-
         }
 
         if ($type === 'user' && Auth::guard()->attempt($credentials)) {
             return redirect()->intended('/admin');
             // return $request;
-
         }
 
         // Check if email exists

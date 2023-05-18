@@ -1,4 +1,4 @@
-<html lang="en" class="color-header headercolor2">
+<html lang="en" class="color-sidebar sidebarcolor5">
 
 <head>
     <!-- Required meta tags -->
@@ -66,7 +66,7 @@
     </div>
     <!--end wrapper-->
     <!--start switcher-->
-    <div class="switcher-wrapper">
+    {{-- <div class="switcher-wrapper">
         <div class="switcher-btn"> <i class='bx bx-cog bx-spin'></i>
         </div>
         <div class="switcher-body">
@@ -159,7 +159,7 @@
                         <div class="indigator sidebarcolor8" id="sidebarcolor8"></div>
                     </div>
 
-                </div>
+                </div> --}}
 
                 <!--end switcher-->
                 <!-- Bootstrap JS -->

@@ -31,12 +31,12 @@
                 <input type="month" id="start" name="start" class="form-control">
             </div>
 
-            <table id="attendanceReportsTable" class="table table-bordered">
+            <table id="attendanceReportsTable">
                 <thead>
                     <tr>
-                        <th>Employee </th>
-                        <th>Working Days in month</th>
-                        <th>Missed Days </th>
+                        <th>Employee ID</th>
+                        <th>Working Days</th>
+                        <th>Missed Days</th>
                         <th>Missed Percentage</th>
                     </tr>
                 </thead>
@@ -54,8 +54,7 @@
                         type: 'POST',
                         data: {
                             _token: '{{ csrf_token() }}',
-                            month: monthYear.split('-')[1], // extract month from monthYear value
-                            year: monthYear.split('-')[0]
+                            monthYear: monthYear
                         },
                         success: function(data) {
                             // Clear existing table rows before generating new ones
@@ -64,14 +63,8 @@
                             // Generate new table rows using the returned data
                             $.each(data.attendanceReports, function(key, value) {
                                 var row = '<tr>' +
-
-                                    '<td>' +
-                                    '<a href="{{ route('admin.employees.show', '') }}/' + value
-                                    .employeeId + '">' + '<span class="badge p-2" style="background-color:#23067a">' + value
-                                    .employeeFirstName + ' ' + value.employeeLastName + '</span>' +
-                                    '</a>' +
-                                   
-                                    '</td>' + '<td>' + value.workingDays + '</td>' +
+                                    '<td>' + value.employeeId + '</td>' +
+                                    '<td>' + value.workingDays + '</td>' +
                                     '<td>' + value.missedDays + '</td>' +
                                     '<td>' + value.missedPercentage + '%</td>' +
                                     '</tr>';

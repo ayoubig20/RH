@@ -39,9 +39,8 @@ class PermissionTableSeeder extends Seeder
             'report-attendances',
             ];
             foreach ($permissions as $permission) {
-            Permission::create(['name' => $permission]);
-            }
+                Permission::create(['name' => $permission]);
             }
             }
     }
-
+}

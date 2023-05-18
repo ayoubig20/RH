@@ -61,7 +61,7 @@
                                     <td>{{ $i }}</td>
                                     <td>
                                         <a href="{{ route('admin.employees.show', $employee->getId()) }}">
-                                            <img src="{{ asset('storage/assets/users/' . $employee->image) }}"
+                                            <img src="{{ asset('storage/assets/users/' .$employee->image ) }}"
                                                 class="user-img" alt="user avatar"></br>
                                             <span class="badge p-2"
                                                 style="background-color:#23067a">{{ $employee ? $employee->firstName . ' ' . $employee->lastName : '' }}</span>

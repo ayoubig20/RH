@@ -19,8 +19,8 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::get("/employees",[ApiEmployeeController::class,'index']);
-Route::get("/employees/create",[ApiEmployeeController::class,'create']);
-Route::get("/employees/{id}/edit",[ApiEmployeeController::class,'edit']);
-Route::put("/employees/{id}/update",[ApiEmployeeController::class,'update']);
-Route::delete("/employees/{id}",[ApiEmployeeController::class,'destroy']);
+Route::get("/employees", [ApiEmployeeController::class,'index']);
+Route::get("/employees/create", [ApiEmployeeController::class,'create']);
+Route::get("/employees/{id}/edit", [ApiEmployeeController::class,'edit']);
+Route::put("/employees/{id}/update", [ApiEmployeeController::class,'update']);
+Route::delete("/employees/{id}", [ApiEmployeeController::class,'destroy']);
