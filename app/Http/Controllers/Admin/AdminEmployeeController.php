@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Job;
 use App\Models\Task;
 use App\Models\Employee;
 use App\Models\Department;
 use Laravolt\Avatar\Avatar;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Models\Job;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
+use Spatie\Permission\Models\Role;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class AdminEmployeeController extends Controller
 {
@@ -38,8 +39,12 @@ class AdminEmployeeController extends Controller
         $viewData["title"] = "create employee";
         $viewData['jobs'] = Job::all();
         $viewData['departments'] = Department::all();
-        return view('admin.employees.create')->with("viewData", $viewData);
-    }
+        $roles = Role::pluck('name', 'name')->all();
+
+        return view('admin.employees.create')->with([
+            "viewData" => $viewData,
+            "roles" => $roles
+        ]);    }
     public function show($id)
     {
         $employee = Employee::findOrFail($id);

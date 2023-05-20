@@ -14,7 +14,7 @@
                             <li class="breadcrumb-item"><a href="{{ route('admin.home.index') }}"><i
                                         class="bx bx-home-alt"></i></a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Data Table</li>
+                            <li class="breadcrumb-item active" aria-current="page">Data Table Projects</li>
                         </ol>
                     </nav>
                 </div>

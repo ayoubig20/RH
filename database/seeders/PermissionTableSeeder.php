@@ -37,6 +37,14 @@ class PermissionTableSeeder extends Seeder
             'Report',
             'report-projects',
             'report-attendances',
+            'add-Category-Project',
+            'edit-Category-Project',
+            'delete-Category-Project',
+            'add-Department',
+            'edit-Department',
+            'delete-Department',
+            
+
             ];
             foreach ($permissions as $permission) {
                 Permission::create(['name' => $permission]);

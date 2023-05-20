@@ -42,10 +42,12 @@
                             </div>
                         </div>
                     </div>
-                    <a href="{{ route('admin.employees.create') }}"> <button style="    color: #FFF;
-                        background-color: #4F46E5;" type="button" class="btn btn"
-                            data-bs-toggle="modal" >add
-                            New employee</button></a>                   <div></br></div>
+                    <a href="{{ route('admin.employees.create') }}"> <button
+                            style="    color: #FFF;
+                        background-color: #4F46E5;" type="button"
+                            class="btn btn" data-bs-toggle="modal">add
+                            New employee</button></a>
+                    <div></br></div>
 
                     <div class="table-responsive">
                         <table id="example2" class="table  text-center table-hover">
@@ -86,9 +88,10 @@
                                         <td>{{ $employee->getSalary() }}DH</td>
                                         <td>
                                             <div class="dropdown">
-                                                <button class="btn btn-outline-secondary dropdown-toggle btn bg-secondary text-white"
+                                                <button
+                                                    class="btn btn-outline-secondary dropdown-toggle btn bg-secondary text-white"
                                                     type="button" id="employeeActionsDropdown" data-bs-toggle="dropdown"
-                                                     aria-haspopup="true" aria-expanded="false">
+                                                    aria-haspopup="true" aria-expanded="false">
                                                     Actions
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="employeeActionsDropdown">

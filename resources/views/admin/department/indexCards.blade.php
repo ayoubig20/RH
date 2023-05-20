@@ -15,7 +15,7 @@
                             <li class="breadcrumb-item"><a href="{{ route('admin.home.index') }}"><i
                                         class="bx bx-home-alt"></i></a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Data Cards Department</li>
+                            <li class="breadcrumb-item active" aria-current="page">Data Cards Departments</li>
                         </ol>
                     </nav>
                 </div>
@@ -33,8 +33,11 @@
             <!--end breadcrumb-->
             @include('layouts.notify')
             <!-- Button trigger modal -->
-            <button style="color: #FFF; background-color: #4F46E5;" type="button" class="btn btn-primary"
-                data-bs-toggle="modal" data-bs-target="#exampleModal">Add Department</button>
+            @can('add-Department')
+                <button style="color: #FFF; background-color: #4F46E5;" type="button" class="btn btn-primary"
+                    data-bs-toggle="modal" data-bs-target="#exampleModal">Add Department</button>
+            @endcan
+
 
             <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -68,7 +71,7 @@
 
             <div class="card">
                 <div class="card-header display-flex text-center">
-                    <h3>Department List Cards</h3>
+                    <h3>Departments List Cards</h3>
                 </div>
                 <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
                     @foreach ($viewData['departments'] as $department)
@@ -102,19 +105,22 @@
 
                                     <div class="row">
                                         <div class="col">
+                                            @can('edit-Department')
+                                                <button type="button" class="btn btn-outline-success btn-sm me-2"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#editDepartment{{ $department->getId() }}">
+                                                    <i class="bx bxs-edit"></i> Edit
+                                                </button>
+                                            @endcan
 
-                                            <button type="button" class="btn btn-outline-success btn-sm me-2"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#editDepartment{{ $department->getId() }}">
-                                                <i class="bx bxs-edit"></i> Edit
-                                            </button>
+                                            @can('delete-Department')
+                                                <button type="button" class="btn btn-outline-danger btn-sm"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#deleteDepartmentModal{{ $department->getId() }}"> <i
+                                                        class='bx bxs-trash'></i>Delete
+                                                </button>
+                                            @endcan
 
-
-                                            <button type="button" class="btn btn-outline-danger btn-sm"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#deleteDepartmentModal{{ $department->getId() }}"> <i
-                                                    class='bx bxs-trash'></i>Delete
-                                            </button>
                                         </div>
                                     </div>
                                     <div class="d-flex flex-row justify-content-center mt-3">
@@ -198,9 +204,8 @@
                                                         <p>Are you sure you want
                                                             to delete this
                                                             Department?</p>
-                                                        <input type="text" class="form-control"
-                                                            id="name" name="name"
-                                                            value="{{ $department->name }}" readonly>
+                                                        <input type="text" class="form-control" id="name"
+                                                            name="name" value="{{ $department->name }}" readonly>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary"

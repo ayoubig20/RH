@@ -28,10 +28,13 @@
                             </strong></h3>
                     </div>
                 </div>
-                <button style="    color: #FFF;
+                @can('add-Category-Project')
+                    <button style="    color: #FFF;
                 background-color: #4F46E5;" type="button" class="btn btn"
-                    data-bs-toggle="modal" data-bs-target="#exampleModal">add
-                    Project Category</button>
+                        data-bs-toggle="modal" data-bs-target="#exampleModal">add
+                        Project Category</button>
+                @endcan
+
                 <!-- Modal -->
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
@@ -87,11 +90,14 @@
                                     <td>{{ $category->getName() }}</td>
                                     <td>
                                         <div class="d-flex flex-row">
+                                            @can('edit-Category-Project')  
                                             <button type="button" class="btn btn-outline-success btn-sm"
                                                 data-bs-toggle="modal"
                                                 data-bs-target="#editDepartment{{ $category->getId() }}">
                                                 <i class="bx bxs-edit"></i> Edit
                                             </button>
+                                            @endcan
+                                            {{-- Modal edit --}}
                                             <div class="modal fade" id="editDepartment{{ $category->getId() }}"
                                                 tabindex="-1" aria-labelledby="editDepartment{{ $category->getId() }}"
                                                 aria-hidden="true">
@@ -130,11 +136,12 @@
                                                 </div>
                                             </div>
 
-
+                                            @can('delete-Category-Project')
                                             <button type="button" class="btn btn-outline-danger btn-sm"
                                                 data-bs-toggle="modal" data-bs-target="#deleteDepartement">
                                                 <i class="bx bxs-trash"></i> Delete
                                             </button>
+                                            @endcan
                                             <div class="modal fade" id="deleteDepartement" tabindex="-1"
                                                 aria-labelledby="deleteDepartement" aria-hidden="true">
                                                 <div class="modal-dialog">

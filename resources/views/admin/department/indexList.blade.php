@@ -16,7 +16,7 @@
                             <li class="breadcrumb-item"><a href="{{ route('admin.home.index') }}"><i
                                         class="bx bx-home-alt"></i></a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Data Table Department</li>
+                            <li class="breadcrumb-item active" aria-current="page">Data Table Departments</li>
                         </ol>
                     </nav>
                 </div>
@@ -41,10 +41,13 @@
                 </div>
                 @include('layouts.notify')
                 <!-- Button trigger modal -->
+                @can('add-Department')
                 <button style="    color: #FFF;
                 background-color: #4F46E5;" type="button" class="btn btn"
                     data-bs-toggle="modal" data-bs-target="#exampleModal">add
                     Departement</button>
+                @endcan
+
                 <!-- Modal -->
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
@@ -120,12 +123,13 @@
 
                                     <td>
                                         <div class="d-flex flex-row inline-block">
+                                            @can('edit-Department')    
                                             <button type="button" class="btn btn-outline-success btn-sm"
                                                 data-bs-toggle="modal"
                                                 data-bs-target="#editDepartment{{ $department->getId() }}">
                                                 <i class="bx bxs-edit"></i> Edit
                                             </button>
-
+                                            @endcan
                                             <!-- Edit Modal -->
                                             <div class="modal fade" id="editDepartment{{ $department->getId() }}"
                                                 tabindex="-1" aria-labelledby="editDepartment{{ $department->getId() }}"
@@ -191,11 +195,14 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            @can('delete-Department')  
                                             <button type="button" class="btn btn-outline-danger btn-sm"
                                                 data-bs-toggle="modal"
                                                 data-bs-target="#deleteDepartement{{ $department->getId() }}">
                                                 <i class="bx bxs-trash"></i> Delete
                                             </button>
+                                            @endcan
+                                            {{-- delete Modal --}}
                                             <div class="modal fade" id="deleteDepartement{{ $department->getId() }}"
                                                 tabindex="-1" aria-labelledby="deleteDepartement" aria-hidden="true">
                                                 <div class="modal-dialog">

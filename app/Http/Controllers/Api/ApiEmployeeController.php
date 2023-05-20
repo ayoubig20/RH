@@ -82,7 +82,9 @@ class ApiEmployeeController extends Controller
 
     public function destroy(Employee $employee)
     {
-        $employee->delete();
+        $employee->forceDelete();
         return response()->json(['success' => true, 'message' => 'Employee deleted successfully!']);
     }
+    
+    
 }

@@ -34,7 +34,7 @@
                     <a class="nav-link " href="{{ route('login',['type'=>'employee']) }}">employee space</a>
                     {{-- <a class="nav-link" href="{{ route('register') }}">Register</a> --}}
                     
-                    <a class="nav-link " href="{{ route('login',['type'=>'user']) }}">administrator space</a>
+                    <a class="nav-link " href="{{ route('login',['type'=>'admin']) }}">administrator space</a>
                     {{-- <a class="nav-link" href="{{ route('register') }}">Register</a> --}}
                     @else
                     <form id="logout" action="{{ route('logout') }}" method="POST">

@@ -59,7 +59,7 @@ class LoginController extends Controller
      */
     public function showLoginForm(Request $request)
     {
-        if ($request->get('type') == 'user') {
+        if ($request->get('type') == 'admin') {
             return view('auth.adminLogin');
         } else {
              return view('auth.login');
