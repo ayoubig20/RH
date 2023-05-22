@@ -482,6 +482,8 @@
                     var table = $('#example').DataTable({
                         // paging: true,
                         // pageLength: 5
+                        buttons: ['copy', 'excel', 'colvis']
+
                     });
 
                     table.buttons().container()

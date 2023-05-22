@@ -12,7 +12,7 @@
 
                 <div class="card-body">
                     <div class="row align-items-center">
-                        <div style="background-color:#27104e; background-size: cover; background-position: center; background-repeat: no-repeat;"
+                        <div style="background-color:#5f2fb2; background-size: cover; background-position: center; background-repeat: no-repeat;"
                             {{-- <div style="background-image: url('{{ URL::asset('assets/images/bg-themes/5.png') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;" --}} class="card text-white text-center">
                             <div class="card-body">
                                 @if (auth()->guard('web')->check())
@@ -109,7 +109,7 @@
                         <div class="card radius-10 w-100">
                             <div class="card-body">
                                 <div class="text-center">
-                                    <span class="badge m-auto text-center" style="background-color:#27104e">
+                                    <span class="badge m-auto text-center" style="background-color:#5f2fb2">
                                         <h4 class="mb-0 text-white text-center">Priority Projects</h4>
                                     </span>
                                 </div> </br>
@@ -161,7 +161,7 @@
                             </br>
                             <div class="text-center">
                                 <span class="badge m-auto text-center">
-                                    <h4 class="mb-0 text-white text-center" style="background-color:#27104e;"> Projects
+                                    <h4 class="mb-0 text-white text-center" style="background-color:#5f2fb2;"> Projects
                                         status</h4>
                                 </span>
                             </div> </br>
@@ -174,7 +174,7 @@
                 </div>
 
                 <!--end row-->
-                <div style="background-color:#9c19a8; background-size: cover; background-position: center; background-repeat: no-repeat;"
+                <div style="background-color:#5f2fb2; background-size: cover; background-position: center; background-repeat: no-repeat;"
                     {{-- <div style="background-image: url('{{ URL::asset('assets/images/bg-themes/5.png') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;" --}} class="card text-white text-center">
                     <h1 class="text-white">Projects</h1>
                 </div>
@@ -202,7 +202,7 @@
                                             <td><strong>{{ $i }}</td></strong>
                                             <td><a href="{{ route('admin.projects.show', $project->getId()) }}"><span
                                                         class="badge  p-2"
-                                                        style="background-color:#27104e;">{{ $project->getName() }}</span></a>
+                                                        style="background-color:#5f2fb2;">{{ $project->getName() }}</span></a>
                                             </td>
                                             <td style="padding: 5px;">
                                                 @if ($project->priority == 'high')
@@ -262,7 +262,7 @@
                         </div>
                     </div>
                 </div>
-                <div style="background-color:#9c19a8; background-size: cover; background-position: center; background-repeat: no-repeat;"
+                <div style="background-color:#5f2fb2; background-size: cover; background-position: center; background-repeat: no-repeat;"
                     {{-- <div style="background-image: url('{{ URL::asset('assets/images/bg-themes/5.png') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;" --}} class="card text-white text-center">
                     <h1 class="text-white">Tasks</h1>
                 </div>
@@ -293,7 +293,7 @@
                                                         <a
                                                             href="{{ route('employee.projects.show', $task->getProject()->getId()) }}"><span
                                                                 class="badge  p-2"
-                                                                style="background-color:#27104e;">{{ $task->getProject()->name }}</span></a>
+                                                                style="background-color:#5f2fb2;">{{ $task->getProject()->name }}</span></a>
                                                     @else
                                                         <span class="badge  p-2" style="background-color:#a6acec">No
                                                             project assigned</span>
@@ -337,7 +337,7 @@
                                         backgroundColor: [
                                             '#17a2b8', // Completed Tasks
                                             '#007bff', // Tasks in Progress
-                                            '#9c19a8', // Tasks to do
+                                            '#5f2fb2', // Tasks to do
                                         ],
                                         data: [{{ $viewData['numCompletedTasks'] }}, {{ $viewData['numProgressTasks'] }},
                                             {{ $viewData['numToDOTasks'] }}
@@ -371,12 +371,12 @@
                                         {{ $viewData['numCompletedPoject'] }}
                                     ],
                                     backgroundColor: [
-                                        '#9c19a8', // 
+                                        '#5f2fb2', // 
                                         'rgb(79, 195, 247)', // bleu
                                         'rgb(105, 240, 174)' // vert
                                     ],
                                     hoverBackgroundColor: [
-                                        '#9c19a8', // 
+                                        '#5f2fb2', // 
                                         'rgb(79, 195, 247)', // bleu
                                         'rgb(105, 240, 174)' // vert
                                     ],

@@ -167,13 +167,16 @@
         $(document).ready(function() {
             var table = $('#example').DataTable({
                 paging: true,
-                pageLength: 10
+                pageLength: 10,
+                buttons: ['copy', 'excel', 'pdf', 'colvis']
             });
 
             table.buttons().container()
                 .appendTo('#example_wrapper .col-md-6:eq(0)');
         });
     </script>
+   
+
 
 @endsection
 @endsection

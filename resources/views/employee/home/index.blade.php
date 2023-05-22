@@ -67,7 +67,7 @@
                                                     <h4 class="mb-0 text-white text-center"> Tasks Priority</h4>
                                                 </span>
                                             </div> </br>
-                                            <div class="card  text-white" style="background-color:#FF4858;">
+                                            <div class="card  text-white" style="background-color:#8665db;">
 
                                                 <div class="card-body">
                                                     <h3>High Priority Tasks</h3>
@@ -80,7 +80,7 @@
                                         </div>
 
                                         <div class="col">
-                                            <div class="card"style="background-color: #FFEC5C;">
+                                            <div class="card"style="background-color: #8665db;">
                                                 <div class="card-body">
                                                     <h3>Medium Priority tasks</h3>
                                                     <strong>
@@ -92,7 +92,7 @@
                                         </div>
 
                                         <div class="col">
-                                            <div class="card  text-white" style="background-color: rgb(240, 248, 255);">
+                                            <div class="card  text-white" style="background-color:#8665db;">
                                                 <div class="card-body">
                                                     <h3>Low Priority Tasks</h3>
                                                     <strong>

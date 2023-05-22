@@ -43,12 +43,13 @@
                 height: 100%;
             }
 
+            
             .background-radial-gradient {
-                background: linear-gradient(to bottom, #460865, #f8c538);
-                background-image: radial-gradient(circle at top left, #2a0641, #b845e6 50%, #ffffff);
+                background: linear-gradient(to bottom, #840ebf, #f8c538);
+                background-image: radial-gradient(circle at top left, #3d0461, #9e2dca 50%, #ffffffd9);
             }
 
-            #radius-shape-1 {
+            /* #radius-shape-1 {
                 height: 220px;
                 width: 220px;
                 top: -60px;
@@ -65,7 +66,7 @@
                 height: 300px;
                 background: radial-gradient(#44006b, #ad1fff);
                 overflow: hidden;
-            }
+            } */
 
             .bg-glass {
                 background-color: hsla(0, 0%, 100%, 0.9) !important;

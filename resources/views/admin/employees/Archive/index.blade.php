@@ -41,7 +41,7 @@
                                 <tr>
                                     <th><input type="checkbox" id="select-all" onclick="CheckAll('box1', this)"></th>
                                     <th>#</th>
-                                    <th>image</th>
+                                    {{-- <th>image</th> --}}
                                     <th>Name</th>
                                     <th>Age</th>
                                     {{-- <th>Email</th> --}}
@@ -63,12 +63,12 @@
                                                 class="box1"></td>
 
                                         <td>{{ $i }}</td>
-                                        <td>
-                                            <img src="{{ asset('storage/assets/users/' . $employee->image) }}"
-                                                class="user-img" alt="user avatar">
+                                        <td class="text-center">
+                                                <img src="{{ asset('storage/assets/users/' . $employee->image) }}"
+                                                    class="user-img" alt="user avatar"></br>
+                                                <span class="badge p-2"
+                                                    style="background-color:#23067a">{{ $employee ? $employee->firstName . ' ' . $employee->lastName : '' }}</span>
                                         </td>
-
-                                        <td>{{ $employee->getFirstName() }} {{ $employee->getLastName() }}</td>
                                         <td>{{ $employee->getAge() }}</td>
                                         {{-- <td>{{ $employee->getEmail() }}</td> --}}
                                         <td>{{ $employee->getPhone() }}</td>
@@ -302,6 +302,8 @@
             $(document).ready(function() {
                 var table = $('#example').DataTable({
                     paging: true,
+                    buttons: ['copy','pdf','excel', 'colvis']
+
                 });
 
                 table.buttons().container()

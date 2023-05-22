@@ -63,7 +63,7 @@ class AdminEmployeeController extends Controller
             if ($request->input('gender') == 'Female') {
                 $data['image'] = 'default-avatar-female.jpeg';
             } else {
-                $data['image'] = 'default-avatar.png';
+                $data['image'] = 'default-avatar.jpg';
             }
         } else {
             // Save the uploaded image to storage
@@ -124,7 +124,7 @@ class AdminEmployeeController extends Controller
             'job_id' => 'required|string|max:255',
             'martialStatus' => 'required|string|max:255',
             'fatteningDate' => 'required|date',
-            'DateOfBirth' => 'required|date',
+            'DateOfBirth' => ['required', 'date', 'before:' . date('Y-m-d', strtotime('-18 years'))],
             'salary' => 'required|numeric|gt:0',
             'department_id' => 'required',
             'role' => 'required',
@@ -134,8 +134,12 @@ class AdminEmployeeController extends Controller
         ]);
 
         if (!$request->hasFile('image')) {
-            $validatedData['image'] = 'default-avatar.png';
-        } else {
+            if ($request->input('gender') == 'Female') {
+                $validatedData['image'] = 'default-avatar-female.jpeg';
+            } else {
+                $validatedData['image'] = 'default-avatar.jpg';
+            }
+        }else {
             // Save the uploaded image to storage
             $imageName = uniqid() . '.' . $request->file('image')->extension();
             Storage::disk('public')->put(

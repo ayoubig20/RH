@@ -129,7 +129,9 @@
         $(document).ready(function() {
             var table = $('#example').DataTable({
                 paging: false,
-                pageLength: 5
+                pageLength: 5,
+                buttons: ['copy','pdf','excel', 'colvis']
+
             });
 
             table.buttons().container()

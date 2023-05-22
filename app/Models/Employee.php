@@ -45,7 +45,7 @@ class Employee extends Authenticatable
             'job_id' => 'required|string|max:255',
             'martialStatus' => 'required|string|max:255',
             'fatteningDate' => 'required|date',
-            'DateOfBirth' => 'required|date',
+            'DateOfBirth' => ['required', 'date', 'before:' . date('Y-m-d', strtotime('-18 years'))],
             'salary' => 'required|numeric|gt:0',
             'department_id' => 'required',
             'role' => 'required',

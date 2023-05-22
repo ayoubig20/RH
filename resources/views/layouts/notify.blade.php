@@ -126,7 +126,7 @@
     <script>
         setTimeout(function() {
             $('#success-alert').alert('close');
-        }, 2000);
+        }, 5000);
     </script>
 
     {{-- <div class="alert alert-primary border-0 bg-primary alert-dismissible fade show py-2">

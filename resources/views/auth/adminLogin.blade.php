@@ -44,28 +44,28 @@
             }
 
             .background-radial-gradient {
-                background: linear-gradient(to bottom, #460865, #f8c538);
-                background-image: radial-gradient(circle at top left, #2a0641, #b845e6 50%, #ffffff);
+                background: linear-gradient(to bottom, #840ebf, #f8c538);
+                background-image: radial-gradient(circle at top left, #3d0461, #9e2dca 50%, #ffffffd9);
             }
 
-            #radius-shape-1 {
+            /* #radius-shape-1 {
                 height: 220px;
                 width: 220px;
                 top: -60px;
                 left: -130px;
-                background: radial-gradient(#44006b, #ad1fff);
+                background: radial-gradient(#690f93, #a84fdb);
                 overflow: hidden;
-            }
+            } */
 
-            #radius-shape-2 {
+            /* #radius-shape-2 {
                 border-radius: 38% 62% 63% 37% / 70% 33% 67% 30%;
                 bottom: -60px;
                 right: -110px;
                 width: 300px;
                 height: 300px;
-                background: radial-gradient(#44006b, #ad1fff);
+                background: radial-gradient(#8c21ca, #ad1fff);
                 overflow: hidden;
-            }
+            } */
 
             .bg-glass {
                 background-color: hsla(0, 0%, 100%, 0.9) !important;
