@@ -81,3 +81,19 @@
     </div>
 
 @endsection
+@section('script')
+    <script src="{{ asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            var table = $('#attendanceReportsTable').DataTable({
+                lengthChange: false,
+                buttons: ['copy', 'excel', 'pdf', 'colvis']
+            });
+
+            table.buttons().container()
+                .appendTo('#attendanceReportsTable.col-md-6:eq(0)');
+        });
+    </script>
+
+@endsection

@@ -65,8 +65,8 @@
                                                     class="box1"></td>
 
                                             <td>{{ $i }}</td>
-                                            <td>
-                                                <span class="badge bg-dark p-2">{{ $project->getName() }}</span>
+                                            <td><a href="{{ route('admin.projects.show', $project->getId()) }}"><span
+                                                        class="badge bg-dark p-2">{{ $project->getName() }}</span></a>
                                             </td>
 
                                             <td>
@@ -311,7 +311,7 @@
             }
         }
     </script>
-@section('script')
+{{-- @section('script')
 
     <script src="{{ asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script>
@@ -327,5 +327,5 @@
         });
     </script>
 
-@endsection
+@endsection --}}
 @endsection

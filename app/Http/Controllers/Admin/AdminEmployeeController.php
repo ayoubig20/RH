@@ -45,13 +45,14 @@ class AdminEmployeeController extends Controller
             "viewData" => $viewData,
             "roles" => $roles
         ]);    }
-    public function show($id)
-    {
-        $employee = Employee::findOrFail($id);
-
-        $tasks = Task::where('assigned_to', '=', $employee->id)->get();
-        return view('admin.employees.show', compact('employee', 'tasks'));
-    }
+        public function show($id)
+        {
+            $employee = Employee::withTrashed()->findOrFail($id);
+        
+            $tasks = Task::where('assigned_to', '=', $employee->id)->get();
+            return view('admin.employees.show', compact('employee', 'tasks'));
+        }
+        
     public function store(Request $request)
     {
         Employee::validate($request);

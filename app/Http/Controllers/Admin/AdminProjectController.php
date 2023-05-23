@@ -43,7 +43,7 @@ class AdminProjectController extends Controller
     {
         $viewData = [];
 
-        $project = Project::findOrFail($id);
+        $project = Project::withTrashed()->findOrFail($id);
         $attachments = ProjectsAttachmnets::where('project_id', $project->id)->get();
 
 

@@ -31,11 +31,13 @@
                 <input type="month" id="start" name="start" class="form-control">
             </div>
 
-            <table id="attendanceReportsTable" class="table table-bordered">
+            <table id="attendanceReportsTable" class="table tabale-responsive table-bordered text-center">
                 <thead>
                     <tr>
                         <th>Employee </th>
-                        <th>Working Days in month</th>
+                        <th>N.Days working in month</th>
+                        <th>holidays in month</th>
+                        <th>present Days</th>
                         <th>Missed Days </th>
                         <th>Missed Percentage</th>
                     </tr>
@@ -67,12 +69,17 @@
 
                                     '<td>' +
                                     '<a href="{{ route('admin.employees.show', '') }}/' + value
-                                    .employeeId + '">' + '<span class="badge p-2" style="background-color:#23067a">' + value
+                                    .employeeId + '">' +
+                                    '<span class="badge p-2" style="background-color:#23067a">' + value
                                     .employeeFirstName + ' ' + value.employeeLastName + '</span>' +
                                     '</a>' +
-                                   
+
                                     '</td>' + '<td>' + value.workingDays + '</td>' +
-                                    '<td>' + value.missedDays + '</td>' +
+                                    '</td>' + '<td>' + value.holidays + '</td>' +
+                                    '</td>' + '<td>' + '<span class="badge bg-success ">' + value
+                                    .presentDays + '</span>' + '</td>' +
+                                    '<td>' + '<span class="badge bg-danger ">' + value.missedDays +
+                                    '</span>' + '</td>' +
                                     '<td>' + value.missedPercentage + '%</td>' +
                                     '</tr>';
                                 $('#attendanceReportsTable tbody').append(row);
@@ -89,5 +96,20 @@
 
         </div>
     </div>
+@section('script')
+    <script src="{{ asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            var table = $('#attendanceReportsTable').DataTable({
+                lengthChange: false,
+                buttons: ['copy', 'excel', 'pdf', 'colvis']
+            });
 
+            table.buttons().container()
+                .appendTo('#attendanceReportsTable .col-md-6:eq(0)');
+        });
+    </script>
+
+@endsection
 @endsection

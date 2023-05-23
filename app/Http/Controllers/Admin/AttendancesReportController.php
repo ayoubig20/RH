@@ -22,6 +22,15 @@ class AttendancesReportController extends Controller
         $month = $request->input('month');
         $year = $request->input('year');
 
+        // Check if the selected month is in the future
+        $currentYear = date('Y');
+        $currentMonth = date('m');
+        if ($year > $currentYear || ($year == $currentYear && $month > $currentMonth)) {
+            return response()->json([
+                'error' => 'Selected month is in the future.',
+            ]);
+        }
+
         // Get a list of all employees
         $employees = Employee::all();
 
@@ -29,32 +38,46 @@ class AttendancesReportController extends Controller
 
         // Loop through each employee and generate an attendance report
         foreach ($employees as $employee) {
-            // Calculate the total number of working days for the selected month
-            $totalWorkingDays = $this->getWorkingDaysForMonth($year, $month);
+            // Calculate the total number of working days, holidays, and Sundays for the selected month
+            $workingDays = Working_days::where('year', $year)->where('month', $month)->value('working_days');
+            $holidays = Working_days::where('year', $year)->where('month', $month)->value('holidays');
+            $sundays = Working_days::where('year', $year)->where('month', $month)->value('sundays');
 
-            // Calculate the total number of missed days for the selected month
-            $missedDays = 0;
-            $attendances = Attendance::where('employee_id', $employee->id)->whereYear('created_at', $year)->whereMonth('created_at', $month)->get();
-            if ($attendances->isEmpty()) {
-                $missedDays = $totalWorkingDays; // no attendance records, so set missed days to 0
-            }
-            else {
-                foreach ($attendances as $attendance) {
-                    if ($attendance) {
-                        $missedDays++;
-                    }
+            // Calculate the total number of present days for the selected month
+            $presentDays =0;
+
+            // If the current month hasn't ended yet, calculate missed days until the current date
+            if ($year == $currentYear && $month == $currentMonth) {
+                $today = Carbon::today();
+                $missedDays = max($workingDays - $presentDays, 0);
+                for ($day = 1; $day <= $today->day; $day++) {
+                    $date = Carbon::create($year, $month, $day);
+                        if (Attendance::where('employee_id', $employee->id)
+                            ->whereDate('created_at', $date)
+                            ->exists()
+                        ) {
+                            $presentDays++;
+                        }
+                        $missedDays = max($workingDays - $presentDays, 0); 
                 }
+            } else {
+                // Calculate the total number of missed days for the selected month
+                $missedDays = max($workingDays - $presentDays, 0);
             }
+
             // Calculate the missed percentage
-            $missedPercentage = $totalWorkingDays > 0 ? round(($missedDays / $totalWorkingDays) * 100, 2) : 0;
+            $missedPercentage = $workingDays > 0 ? round(($missedDays / $workingDays) * 100, 2) : 0;
 
             // Store the attendance report data for the employee in an array
             $attendanceReports[] = [
                 'employeeId' => $employee->id,
                 'employeeFirstName' => $employee->firstName,
                 'employeeLastName' => $employee->lastName,
-                'workingDays' => $totalWorkingDays,
+                'workingDays' => $workingDays,
+                'holidays' => $holidays,
+                'sundays' => $sundays,
                 'missedDays' => $missedDays,
+                'presentDays' => $presentDays,
                 'missedPercentage' => $missedPercentage,
             ];
         }
@@ -63,18 +86,5 @@ class AttendancesReportController extends Controller
         return response()->json([
             'attendanceReports' => $attendanceReports,
         ]);
-    }
-
-    private function getWorkingDaysForMonth($year, $month)
-    {
-        $workingDays = 0;
-        $totalDays = Working_days::getWorkingDaysInMonth($year, $month);
-        for ($i = 1; $i <= $totalDays; $i++) {
-            $date = sprintf('%04d-%02d-%02d', $year, $month, $i);
-            if (date('N', strtotime($date)) < 6) {
-                $workingDays++;
-            }
-        }
-        return $workingDays;
     }
 }

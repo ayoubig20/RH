@@ -17,14 +17,14 @@ class ProjectsReportController extends Controller
     public function searchProjects(Request $request)
     {
         $rdio = $request->rdio;
-    
+
         // case search by status of project
         if ($rdio == 1) {
             // case if don't select date
             if ($request->type != 'all') {
-                $projects = Project::select('*')->where('status', '=', $request->type)->get();
+                $projects = Project::select('*')->where('status', '=', $request->type)->withTrashed()->get();
             } else {
-                $projects = Project::all();
+                $projects = Project::withTrashed()->get();
             }
             $type = $request->type;
             return view('admin.report-projects.index', compact('type'))->withDetails($projects);
@@ -34,15 +34,16 @@ class ProjectsReportController extends Controller
                 $start_at = date($request->start_at);
                 $end_at = date($request->end_at);
                 $type = $request->type;
-    
+
                 $projects = Project::whereBetween('start_date', [$start_at, $end_at])
-                            ->where('status', '=', $request->type)
-                            ->get();
-    
+                    ->where('status', '=', $request->type)
+                    ->withTrashed()
+                    ->get();
+
                 return view('admin.report-projects.index', compact('type', 'start_at', 'end_at'))->withDetails($projects);
             } else {
                 // case search by id
-                $projects = Project::select('*')->where('id', '=', $request->projectId)->get();
+                $projects = Project::select('*')->where('id', '=', $request->projectId)->withTrashed()->get();
                 return view('admin.report-projects.index')->withDetails($projects);
             }
         }
