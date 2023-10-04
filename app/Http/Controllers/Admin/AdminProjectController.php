@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Carbon\Carbon;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Models\CategoryProject;
+use App\Jobs\DeleteExpiredProject;
 use App\Models\ProjectsAttachmnets;
 use App\Http\Controllers\Controller;
+
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
-
 use Illuminate\Support\Facades\Storage;
 
 class AdminProjectController extends Controller
@@ -144,56 +146,57 @@ class AdminProjectController extends Controller
 
 
     public function update(Request $request, Project $project)
-    {
-        $validatedData = $request->validate([
-            'name' => 'required|max:255',
-            'category_id' => 'required',
-            'budget' => 'nullable',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'document' => 'nullable|mimes:pdf,doc,docx|max:2048',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date|after:start_date',
-            'description' => 'nullable',
-        ]);
+{
+    $validatedData = $request->validate([
+        'name' => 'required|max:255',
+        'category_id' => 'required',
+        'budget' => 'nullable',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'document' => 'nullable|mimes:pdf,doc,docx|max:2048',
+        'start_date' => 'required|date',
+        'end_date' => 'required|date|after:start_date',
+        'description' => 'nullable',
+    ]);
 
-        // // Find the project
-        // $project = Project::findOrFail($project);
+    // Update the project details
+    $project->fill($validatedData);
 
-        $project->name = $request->input('name');
-        $project->category_id = $request->input('category_id');
-        $project->start_date = $request->input('start_date');
-        $project->end_date = $request->input('end_date');
-        $project->budget = $request->input('budget');
-        $project->description = $request->input('description');
-
-        // Handle image upload
-        if ($request->hasFile('image')) {
-            $imageName = $project->getId() . "." . $request->file('image')->getClientOriginalExtension();
-            $request->file('image')->storeAs('public', $imageName);
-            $project->setImage($imageName);
-        }
-
-        // Handle document upload
-        if ($request->hasFile('document')) {
-            $project_id = Project::latest()->first()->id;
-            $document = $request->file('document');
-            if ($document->isValid()) {
-                $extension = $document->getClientOriginalExtension();
-                $filename = time() . '_' . uniqid() . '.' . $extension;
-                $document->move(public_path('Attachments/' . $project_id), $filename);
-
-                $attachments = new ProjectsAttachmnets();
-                $attachments->file_name = $filename; // use the new filename instead of the original filename
-                $attachments->Created_by = Auth::user()->name;
-                $attachments->project_id = $project_id;
-                $attachments->save();
-            }
-        }
-
-        $project->update($validatedData);
-
-        return redirect()->route('admin.projects.index')->with('success', 'Project updated successfully.');
+    // Handle image upload
+    if ($request->hasFile('image')) {
+        $imageName = $project->getId() . "." . $request->file('image')->getClientOriginalExtension();
+        $request->file('image')->storeAs('public', $imageName);
+        $project->setImage($imageName);
     }
+
+    // Handle document upload
+    if ($request->hasFile('document')) {
+        $document = $request->file('document');
+        if ($document->isValid()) {
+            $extension = $document->getClientOriginalExtension();
+            $filename = time() . '_' . uniqid() . '.' . $extension;
+            $document->move(public_path('Attachments/' . $project->getId()), $filename);
+
+            $attachment = new ProjectsAttachmnets();
+            $attachment->file_name = $filename; // use the new filename instead of the original filename
+            $attachment->Created_by = Auth::user()->name;
+            $attachment->project_id = $project->getId();
+            $attachment->save();
+        }
+    }
+
+    // Check if the project status is updated to "Finshed"
+    if ($request->status === 'Finshed') {
+        $project->delete_deadline = Carbon::now()->addDays(3); // set delete deadline to 3 days from now
+        $project->save();
+
+        // Queue the job to delete the project and its associated files after the delete deadline
+        DeleteExpiredProject::dispatch($project)->delay($project->delete_deadline);
+    }
+
+    $project->save();
+
+    return redirect()->route('admin.projects.index')->with('success', 'Project updated successfully.');
+}
 
     public function destroy(Project $project, Request $request)
     {
@@ -236,12 +239,23 @@ class AdminProjectController extends Controller
         return response()->file($path);
     }
     public function statusUpdate($id, Request $request)
-    {
-        $project = Project::findOrFail($id);
-        $project->update([
-            'status' => $request->status,
-        ]);
-        session()->flash('Status_Update', 'Status updated successfully');
-        return back();
+{
+    $project = Project::findOrFail($id);
+
+    // Check if the project status is updated to "Finshed"
+    if ($request->status === 'Finshed') {
+        $project->delete_deadline = Carbon::now()->addDays(3); // set delete deadline to 3 days from now
+        $project->save();
+
+        // Queue the job to delete the project and its associated files after the delete deadline
+        DeleteExpiredProject::dispatch($project)->delay($project->delete_deadline);
     }
+
+    $project->update([
+        'status' => $request->status,
+    ]);
+
+    session()->flash('Status_Update', 'Status updated successfully');
+    return back();
+}
 }

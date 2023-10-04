@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\employee;
 
-use App\Http\Controllers\Controller;
+use App\Models\Project;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class EmployeeCalendarController extends Controller
 {
@@ -13,7 +14,7 @@ public function index()
 {
     $projects = Project::where('assigned_to', $employeeId);
 
-    $event_list = [];
+    $project_list = [];
     foreach ($projects as $project) {
         $project_list[] = Calendar::event(
             $project->title,
@@ -22,12 +23,12 @@ public function index()
             new \DateTime($project->end_date.' +1 day'),
             null,
             [
-                'description' => $event->description,
+                'description' =>$project->description,
             ]
         );
     }
 
-    $calendar_details = Calendar::addEvents($event_list);
+    $calendar_details = Calendar::addEvents($project_list);
 
     return view('calendar.index', compact('calendar_details'));
 }

@@ -3,77 +3,13 @@
 @section('content')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <section id="hero">
-        <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
-
-            <div class="carousel-inner" role="listbox">
-
-                <!-- Slide 1 -->
-                <div class="carousel-item active" style="background-image: url(assets/img/slide/slide-1.jpg);">
-                    <div class="carousel-container">
-                        <div class="carousel-content animate__animated animate__fadeInUp">
-                            <h2>Welcome to <span>Employee Mangement Systeme</span></h2>
-                            <p>Looking to streamline your HR processes and manage your employees more efficiently? Look no
-                                further than our cutting-edge employee management system!
-
-                                Our software application is designed to help you easily track your employees' attendance,
-                                schedules, performance, and other important information. With features like employee
-                                self-service, your employees can access their own information and make requests, freeing up
-                                valuable time for your HR team.</p>
-                            {{-- <div class="text-center"><a href="" class="btn-get-started">Read More</a></div> --}}
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Slide 2 -->
-                <div class="carousel-item" style="background-image: url(assets/img/slide/slide-2.jpg);">
-                    <div class="carousel-container">
-                        <div class="carousel-content animate__animated animate__fadeInUp">
-                            <h2>Employee Mangement Systeme</h2>
-                            <p>Our system is user-friendly and can be customized to meet your specific business needs.
-                                Whether you're a small business owner or managing a large enterprise, our employee
-                                management system can help you streamline your HR processes and save time and money.
-
-                                Plus, with our reporting capabilities, you can generate detailed reports on attendance,
-                                performance, and more, giving you the data you need to make informed decisions about your
-                                workforce.</p>
-                            {{-- <div class="text-center"><a href="" class="btn-get-started">Read More</a></div> --}}
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Slide 3 -->
-                <div class="carousel-item" style="background-image: url(assets/img/slide/slide-3.jpg);">
-                    <div class="carousel-container">
-                        <div class="carousel-content animate__animated animate__fadeInUp">
-                            <h2>EMS</h2>
-                            <p>Invest in your business's success with our reliable and intuitive employee management system.
-                            </p>
-                            {{-- <div class="text-center"><a href="" class="btn-get-started">Read More</a></div> --}}
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon bx bx-chevron-left" aria-hidden="true"></span>
-            </a>
-
-            <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
-                <span class="carousel-control-next-icon bx bx-chevron-right" aria-hidden="true"></span>
-            </a>
-
-            <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
-
-        </div>
-    </section><!-- End Hero -->
+<!-- End Hero -->
 
     <section id="team" class="team section-bg">
         <div class="container">
 
             <div class="section-title" data-aos="fade-up">
-                <h2>Our <strong>Team</strong></h2>
+                <h2 style="padding-top:20%;">Our <strong>Team</strong></h2>
                 <p>By partnering with our team, businesses can benefit from faster time-to-market, improved efficiency,
                     reduced costs, and enhanced customer experiences. our team's ability to collaborate, communicate, and
                     deliver results can help companies stay ahead of their competition and achieve their strategic

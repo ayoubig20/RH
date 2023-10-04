@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="color-header headercolor6
+ ">
 
 <head>
     <meta charset="utf-8" />
@@ -15,14 +16,14 @@
 </head>
 
 <body>
- 
+
     <header id="header" class="fixed-top">
         <div class="container d-flex align-items-center">
 
-            <a href="{{ route('home.index') }}" class="logo me-auto me-lg-0"><img src="{{ asset('assets/images/logo-purple.png') }}"
-                    alt="" class="img-fluid"></a>
+            <a href="{{ route('home.index') }}" class="logo me-auto me-lg-0"><img
+                    src="{{ asset('assets/images/logo-purple.png') }}" alt="" class="img-fluid"></a>
 
-            <h1 class="logo me-auto"><a href="{{ route('home.index') }}"><span>Employee</span>Mangement Systeme</a></h1>
+            <h1 class="logo me-auto"><a href="{{ route('home.index') }}"><span>HR</span>Partner</a></h1>
 
             <nav id="navbar" class="navbar order-last order-lg-0">
                 <ul>
@@ -31,17 +32,17 @@
                     <li><a href="#team">Team</a></li>
                     {{-- <li><a href="services.html">Services</a></li> --}}
                     @guest
-                    <a class="nav-link " href="{{ route('login',['type'=>'employee']) }}">employee space</a>
-                    {{-- <a class="nav-link" href="{{ route('register') }}">Register</a> --}}
-                    
-                    <a class="nav-link " href="{{ route('login',['type'=>'admin']) }}">administrator space</a>
-                    {{-- <a class="nav-link" href="{{ route('register') }}">Register</a> --}}
+                        <a class="nav-link " href="{{ route('login', ['type' => 'employee']) }}">employee space</a>
+                        {{-- <a class="nav-link" href="{{ route('register') }}">Register</a> --}}
+
+                        <a class="nav-link " href="{{ route('login', ['type' => 'admin']) }}">administrator space</a>
+                        {{-- <a class="nav-link" href="{{ route('register') }}">Register</a> --}}
                     @else
-                    <form id="logout" action="{{ route('logout') }}" method="POST">
-                    <a role="button" class="nav-link active"
-                    onclick="document.getElementById('logout').submit();">Logout</a>
-                    @csrf
-                    </form>
+                        <form id="logout" action="{{ route('logout') }}" method="POST">
+                            <a role="button" class="nav-link active"
+                                onclick="document.getElementById('logout').submit();">Logout</a>
+                            @csrf
+                        </form>
 
                     @endguest
                     <li><a href="#contact">Contact</a></li>
@@ -49,7 +50,6 @@
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
-
             <div class="header-social-links d-flex">
                 <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
                 <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>

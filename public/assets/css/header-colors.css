@@ -49,7 +49,7 @@ html.color-header .mobile-toggle-menu {
 	background: #412077!important
 }
 .switcher-body .headercolor6 {
-	background: #795548!important
+	background: #1c0054!important
 }
 .switcher-body .headercolor7 {
 	background: #d3094e!important
@@ -58,10 +58,10 @@ html.color-header .mobile-toggle-menu {
 	background: #ff9800!important
 }
 html.headercolor1 .topbar {
-	background: #0727d7
+	background: hsl(226, 64%, 37%)
 }
 html.headercolor2 .topbar {
-	background: #23282c
+	background: #17191acb
 }
 html.headercolor3 .topbar {
 	background: #e10a1f
@@ -70,7 +70,7 @@ html.headercolor4 .topbar {
 	background: #157d4c
 }
 html.headercolor5 .topbar {
-	background: #412077 
+	background: #412077
 }
 html.headercolor6 .topbar {
 	background: #795548

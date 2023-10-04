@@ -15,6 +15,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <link href="assets/css/app.css" rel="stylesheet">
     <link href="assets/css/icons.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;500&family=Roboto&family=Source+Code+Pro:wght@300&display=swap"
+        rel="stylesheet">
+
+
     <title>Employee Mangement systeme</title>
     <style>
         .bg-image-vertical {
@@ -23,6 +30,10 @@
             background-repeat: no-repeat;
             background-position: right center;
             background-size: auto 100%;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
         }
 
         @media (min-width: 1025px) {
@@ -44,8 +55,9 @@
             }
 
             .background-radial-gradient {
-                background: linear-gradient(to bottom, #840ebf, #f8c538);
-                background-image: radial-gradient(circle at top left, #3d0461, #9e2dca 50%, #ffffffd9);
+                background: linear-gradient(to bottom, #512B81, #f8c538);
+                background-image: radial-gradient(circle at top left, #3d0461, #592697c6 50%, #9561a8b7);
+                z-index: 1000;
             }
 
             /* #radius-shape-1 {
@@ -72,36 +84,55 @@
                 backdrop-filter: saturate(200%) blur(25px);
             }
 
+            @media screen and (min-width: 984px) {
+                body {
+                    background: linear-gradient(to bottom, #512B81, #f8c538);
+                    background-image: radial-gradient(circle at top left, #3d0461, #592697c6 50%, #9561a8b7);
+                    z-index: 1000;
+                }
+            }
+
+            #email {
+
+                background-image: url("assets/images/enveloppe.png");
+                background-size: 20px;
+                padding-right: 30px;
+                background-repeat: no-repeat;
+                background-size: 20px 20px;
+                background-position: right center;
+            }
+
         }
     </style>
 </head>
 
 <body>
     <!-- Section: Design Block -->
-    <section class="background-radial-gradient overflow-hidden">
+    <section class="background-radial-gradient overflow-hidden h-100 bg-primary d-flex align-items-center">
 
+        <div class="container text-center text-lg-start p-0">
 
-        <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5 ">
-            <div class="row gx-lg-5 align-items-center mb-5">
-                <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
+            <div class="row align-items-center p-0">
+                <div class="col-lg-4 col-sm-4 col-md-4">
                     <h1 class="my-5 display-5 fw-bold ls-tight" style="color: hsl(218, 81%, 95%)">
-                        Employee <br />
-                        <span style="color: hsl(218, 81%, 75%)">Mangment Systeme</span>
+                        HR<br />
+                        <span style="color: hsl(199.8, 59.5%, 71%)">PLATFORM</span>
                     </h1>
-                    <h2 class="mb-4 opacity-70" style="color: hsl(240, 5%, 4%)">
-                        Invest in your business's success with our reliable and intuitive employee management system.
+                    <h2 class="mb-4 opacity-70" style="color: hsl(240, 33%, 88%)">
+                        makes your work easier
                     </h2>
                 </div>
 
-                <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
+                <div class="col-lg-4 col-sm-4 col-md-4 position-relative">
                     <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
                     <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div>
 
                     <div class="card bg-glass ">
                         <div class="card-body px-4 py-5 px-md-5">
                             <div class="mb-4 text-center">
-                                <img src="{{ URL::asset('assets/images/logo-purple.png') }}" width="40%"
+                                <img src="{{ URL::asset('assets/images/logo-purple.png') }}" width="100%"
                                     alt="" />
+                                <h3>Cod<span style="color: hsl(240, 86%, 60%)">Partner</span> </h3>
                             </div>
                             <form method="POST" action="{{ route('login') }}">
                                 @csrf
@@ -111,10 +142,11 @@
                                         class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                                     <div class="form-group mb-3">
+
                                         <input id="email" type="email"
                                             class="form-control @error('email') is-invalid @enderror" name="email"
-                                            value="{{ old('email') }}" required autocomplete="email" autofocus>
-
+                                            value="{{ old('email') }}" required autocomplete="email" autofocus
+                                            placeholder="Enter Email">
                                         @error('email')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -142,8 +174,8 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="type"
-                                        class="col-md-4 col-form-label text-md-right" hidden>{{ __('Login as') }}</label>
+                                    <label for="type" class="col-md-4 col-form-label text-md-right"
+                                        hidden>{{ __('Login as') }}</label>
 
                                     <div class="form-group mb-3">
                                         <select id="type" value="user"
@@ -160,7 +192,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                
+
                                 <div class="form-group row mb-3">
                                     <button type="submit" class="btn btn-primary">
                                         {{ __('Login') }}
@@ -175,6 +207,10 @@
                             </form>
                         </div>
                     </div>
+                </div>
+                <div class="col-lg-4 col-sm-4 col-md-4 position-relative">
+                    <img src="{{ URL::asset('assets/images/image.png') }}" style="margin-left:0;" alt="icon"
+                        width="100%">
                 </div>
             </div>
         </div>

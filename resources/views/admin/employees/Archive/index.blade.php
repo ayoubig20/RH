@@ -186,7 +186,7 @@
                             aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
-                    Are you sure you want to delete the selected projects?
+                    Are you sure you want to delete the selected Employees?
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>

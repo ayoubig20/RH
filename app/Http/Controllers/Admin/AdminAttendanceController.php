@@ -26,7 +26,7 @@ class AdminAttendanceController extends Controller
         $viewData["title"] = "List attendance employees";
         $viewData['employees']= Employee::all();
         // $viewData['attendances']=Attendance::all();
-        $viewData['attendances'] = Attendance::whereDate('created_at', '=', \Carbon\Carbon::today()->toDateString())->get();
+        $viewData['attendances'] = Attendance::whereDate('created_at', '=',Carbon::today()->toDateString())->get();
 
         return view("admin.attendance.index")->with("viewData", $viewData);
     }

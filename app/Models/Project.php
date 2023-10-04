@@ -28,7 +28,8 @@ class Project extends Model
         'priority',
         'description',
         'progression',
-        'status'
+        'status',
+        'delete_deadline'
     ];
 
     protected $casts = [

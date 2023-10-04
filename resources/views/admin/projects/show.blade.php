@@ -20,6 +20,11 @@
             </div>
             <!--end breadcrumb-->
             @include('layouts.notify')
+            <div class="pull-right">
+                <a class="btn" style="color: #FFF;
+                background-color: #4F46E5;"
+                    href="{{ route('admin.projects.index') }}"> Back</a>
+            </div>
 
             <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">

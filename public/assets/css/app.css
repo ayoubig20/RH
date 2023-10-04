@@ -237,7 +237,7 @@ a {
 	border-width: 1.2px 0 0 1.2px;
 	border-color: initial;
 	right: 15px;
-	transform: rotate(-45deg) translateY(-50%);
+	transform: rotate(135deg) translateY(-50%);
 	transform-origin: top;
 	top: 50%;
 	transition: all .3s ease-out
@@ -2675,4 +2675,3 @@ input.search-control-2::placeholder {
 	filter: alpha(opacity=20)
 }
 
-  

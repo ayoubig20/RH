@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('image')->nullable();
-            // $table->string('document')->nullable();
+            $table->date('delete_deadline')->nullable();
             $table->dateTime('start_date');
             $table->dateTime('end_date');
             $table->unsignedBigInteger('budget')->nullable();

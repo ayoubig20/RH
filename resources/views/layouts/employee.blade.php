@@ -1,4 +1,3 @@
-<html lang="en" class="color-header headercolor2">
 <html lang="en">
 
 <head>
@@ -193,7 +192,7 @@
             $sidebar.toggleClass(storedColor);
         }
     </script>
-  
+
     <!--app JS-->
     @yield('script')
 </body>

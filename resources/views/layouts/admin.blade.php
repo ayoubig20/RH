@@ -1,4 +1,4 @@
-<html lang="en" class=" ">
+<html lang="en" class="color-header headercolor9 ">
 
 <head>
     <!-- Required meta tags -->
@@ -161,16 +161,16 @@
 
                 </div> --}}
 
-                <!--end switcher-->
-                <!-- Bootstrap JS -->
-                <script src="{{ URL::asset('assets/js/bootstrap.bundle.min.js') }}"></script>
-                <!--plugins-->
-                <script src="{{ URL::asset('assets/js/jquery.min.js') }}"></script>
-                <script src="{{ URL::asset('assets/plugins/simplebar/js/simplebar.min.js') }}"></script>
-                <script src="{{ URL::asset('assets/plugins/metismenu/js/metisMenu.min.js') }}"></script>
-                <script src="{{ URL::asset('assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js') }}"></script>
-                <script src="{{ URL::asset('assets/js/app.js') }}"></script>
-                {{-- <script>
+    <!--end switcher-->
+    <!-- Bootstrap JS -->
+    <script src="{{ URL::asset('assets/js/bootstrap.bundle.min.js') }}"></script>
+    <!--plugins-->
+    <script src="{{ URL::asset('assets/js/jquery.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/simplebar/js/simplebar.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/metismenu/js/metisMenu.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js') }}"></script>
+    <script src="{{ URL::asset('assets/js/app.js') }}"></script>
+    {{-- <script>
                     setInterval(function() {
                         $("#task-list-to do").load(window.location.href +
                             " #task-list-to do");
@@ -187,16 +187,16 @@
 
                     }, 1000);
                 </script> --}}
-           
-                {{-- <script>
+
+    {{-- <script>
                     window.addEventListener('load', function() {
                         const preloader = document.querySelector('.preloader');
                         preloader.classList.add('hide-preloader');
                     })
                 </script> --}}
 
-            </div>
-        </div>
+    </div>
+    </div>
     </div>
     @yield('script')
 

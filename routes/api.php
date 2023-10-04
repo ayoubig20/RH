@@ -20,7 +20,15 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get("/employees", [ApiEmployeeController::class,'index']);
-Route::get("/employees/create", [ApiEmployeeController::class,'create']);
+Route::post("/employees/store", [ApiEmployeeController::class,'store']);
 Route::get("/employees/{id}/edit", [ApiEmployeeController::class,'edit']);
 Route::put("/employees/{id}/update", [ApiEmployeeController::class,'update']);
 Route::delete("/employees/{id}", [ApiEmployeeController::class,'destroy']);
+Route::get("/employees/create", [ApiEmployeeController::class,'create']);
+// Route::get('/departments', 'ApiDepartmentController@index');
+// Route::post('/departments', 'ApiDepartmentController@store');
+// Route::get('/departments/create', 'ApiDepartmentController@create');
+// Route::get('/departments/{id}/edit', 'ApiDepartmentController@edit');
+// Route::put('/departments/{id}', 'ApiDepartmentController@update');
+// Route::delete('/departments/{id}', 'ApiDepartmentController@destroy');
+
