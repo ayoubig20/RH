@@ -11,28 +11,9 @@
             <div class="card shadow-none bg-transparent border-bottom border-2">
                 <div class="card-body">
                     <div class="row align-items-center">
-                        <div style="background-image: url('{{ URL::asset('assets/images/bg-themes/5.png') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;"
-                            class="card text-white text-center">
-                            <div class="card-body">
-                                @if (auth()->guard('web')->check())
-                                    <strong>
-                                        <h1 class="text-white">Welcome {{ auth()->guard('web')->user()->name }} <img
-                                                src="{{ URL::asset('assets/images/logo.png') }}" class="logo-icon"
-                                                alt="logo icon">
-                                        </h1>
-                                    </strong>
-                                @else
-                                    <strong>
-                                        <h1 class="text-white">Welcome
-                                            {{ auth()->guard('employee')->user()->firstName }}
-                                        </h1>
-                                    </strong>
-                                @endif
-                            </div>
-                        </div>
                         <!--end row-->
                         <div class="row row-cols-1 row-cols-md-2 row-cols-xl-2">
-                            <div class="col">
+                            {{-- <div class="col">
                                 <div style="background-color: rgb(123, 104, 238);" class="card text-white text-center">
                                     <div class="card-body">
                                         <h3 class="text-white">Total Tasks</h3>
@@ -42,8 +23,57 @@
                                     </div>
                                 </div>
 
+                            </div> --}}
+                            <div class="col-xl-6 col-md-6 mb-4">
+                                <div class="card border-left-success shadow h-100 p-0">
+                                    <div class="card-body d-flex justify-content-start align-items-center p-0 m-0">
+                                        <div class="container py-2 mx-2 d-flex justify-content-between  align-items-end">
+                                            <div class=" mr-2">
+                                                <h6>
+                                                    <p class="mb-3  bold text-success text-uppercase">Total Tasks</p>
+                                                </h6>
+                                                <span class="h5 mt-3 font-weight-bold text-secondary">
+                                                    {{ $viewData['numTasks'] }}
+                                                </span>
+                                            </div>
+                                            <div class="col-auto">
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                    height="50px"style="fill-opacity:30%;fill:#15ca20;" stroke-width="10"
+                                                    viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                                                    <path
+                                                        d="M280 64h40c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128C0 92.7 28.7 64 64 64h40 9.6C121 27.5 153.3 0 192 0s71 27.5 78.4 64H280zM64 112c-8.8 0-16 7.2-16 16V448c0 8.8 7.2 16 16 16H320c8.8 0 16-7.2 16-16V128c0-8.8-7.2-16-16-16H304v24c0 13.3-10.7 24-24 24H192 104c-13.3 0-24-10.7-24-24V112H64zm128-8a24 24 0 1 0 0-48 24 24 0 1 0 0 48z" />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col">
+                            <div class="col-xl-6 col-md-6 mb-4 ">
+                                <div class="card border-left-primary shadow h-100 p-0">
+                                    <div class="card-body d-flex justify-content-start align-items-center p-0 m-0">
+                                        <div class="container py-2 mx-2 d-flex justify-content-between  align-items-end">
+                                            <div class=" mr-2">
+                                                <h6>
+                                                    <p class="mb-3  bold text-primary text-uppercase">Total Projects</p>
+                                                    <span class="h5 mt-3 font-weight-bold text-secondary">
+                                                        {{ $viewData['numProject'] }}
+                                                    </span>
+                                                </h6>
+                                            </div>
+                                            <div class="col-auto">
+                                                {{-- <i class="fas fa-atom fa-2xl text-perso"></i> --}}
+                                                <svg xmlns="http://www.w3.org/2000/svg" height="50px"
+                                                    style="fill-opacity:30%;fill:#008cff;"
+                                                    viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                                                    <path
+                                                        d="M184 48H328c4.4 0 8 3.6 8 8V96H176V56c0-4.4 3.6-8 8-8zm-56 8V96H64C28.7 96 0 124.7 0 160v96H192 320 512V160c0-35.3-28.7-64-64-64H384V56c0-30.9-25.1-56-56-56H184c-30.9 0-56 25.1-56 56zM512 288H320v32c0 17.7-14.3 32-32 32H224c-17.7 0-32-14.3-32-32V288H0V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V288z" />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {{-- <div class="col">
                                 <div style="background-color: rgb(123, 104, 238);" class="card text-white text-center">
                                     <div class="card-body">
                                         <h3 class="text-white">Total Projects</h3>
@@ -52,7 +82,7 @@
                                         </strong>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
 
                         <!--end row-->
@@ -63,7 +93,7 @@
                                     <div class="card-body">
                                         <div class="col">
                                             <div class="text-center">
-                                                <span class="badge  m-auto text-center"  style="background-color:#8971d0">
+                                                <span class="badge  m-auto text-center" style="background-color:#8971d0">
                                                     <h4 class="mb-0 text-white text-center"> Tasks Priority</h4>
                                                 </span>
                                             </div> </br>
@@ -108,7 +138,7 @@
                                 <div class="card radius-10 w-100">
                                     </br>
                                     <div class="text-center">
-                                        <span class="badge  m-auto text-center"  style="background-color:#8971d0">
+                                        <span class="badge  m-auto text-center" style="background-color:#8971d0">
                                             <h4 class="mb-0 text-white text-center"> Tasks status</h4>
                                         </span>
                                     </div>
@@ -123,7 +153,7 @@
                                 <div class="card radius-10 w-100">
                                     </br>
                                     <div class="text-center">
-                                        <span class="badge  m-auto text-center"  style="background-color:#8971d0">
+                                        <span class="badge  m-auto text-center" style="background-color:#8971d0">
                                             <h4 class="mb-0 text-white text-center"> Projects status</h4>
                                         </span>
                                     </div>
@@ -162,9 +192,11 @@
                                                     @if ($task->getProject())
                                                         <a
                                                             href="{{ route('employee.projects.show', $task->getProject()->getId()) }}"><span
-                                                                class="badge p-2"  style="background-color:#8971d0">{{ $task->getProject()->name }}</span></a>
+                                                                class="badge p-2"
+                                                                style="background-color:#8971d0">{{ $task->getProject()->name }}</span></a>
                                                     @else
-                                                        <span class="badge p-2" style="background-color:#a6acec">No project assigned</span>
+                                                        <span class="badge p-2" style="background-color:#a6acec">No project
+                                                            assigned</span>
                                                     @endif
                                                     {{-- <a href="{{ route('admin.projects.show', $task->getProject()->getId()) }}"><span
                                                     class="badge bg-dark p-2">{{ $task->getProject()->name }}</span></a></td> --}}
@@ -242,12 +274,12 @@
                             {{ $viewData['numCompletedPoject'] }}
                         ],
                         backgroundColor: [
-                            'rgb(186, 85, 211)', // 
+                            'rgb(186, 85, 211)', //
                             'rgb(255, 255, 0)', // yellow
                             'rgb(124, 252, 0)' // green
                         ],
                         hoverBackgroundColor: [
-                            'rgb(186, 85, 211)', // 
+                            'rgb(186, 85, 211)', //
                             'rgb(255, 255, 0)', // yellow
                             'rgb(124, 252, 0)' // green
                         ],

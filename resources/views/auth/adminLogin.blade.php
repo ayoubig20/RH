@@ -132,7 +132,7 @@
                             <div class="mb-4 text-center">
                                 <img src="{{ URL::asset('assets/images/logo-purple.png') }}" width="100%"
                                     alt="" />
-                                <h3>Cod<span style="color: hsl(240, 86%, 60%)">Partner</span> </h3>
+                                <img src="{{ URL::asset('assets/images/cod1.png') }}" alt="">
                             </div>
                             <form method="POST" action="{{ route('login') }}">
                                 @csrf
@@ -194,7 +194,8 @@
                                 </div>
 
                                 <div class="form-group row mb-3">
-                                    <button type="submit" class="btn btn-primary">
+                                    <button type="submit" class="btn text-white"
+                                        style="background-color: hsl(245, 51%, 56%)">
                                         {{ __('Login') }}
                                     </button>
 
